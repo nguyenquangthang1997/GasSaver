@@ -1,0 +1,27 @@
+{
+  "name": "thesis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nguyenquangthang1997/thesis.git"
+  },
+  "author": "nguyenquangthang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nguyenquangthang1997/thesis/issues"
+  },
+  "homepage": "https://github.com/nguyenquangthang1997/thesis#readme",
+  "dependencies": {
+    "@solidity-parser/parser": "^0.12.1",
+    "fs": "*"
+  },
+  "devDependencies": {
+    "prettier": "^2.2.1",
+    "prettier-plugin-solidity": "*"
+  }
+}
