@@ -25,22 +25,38 @@ Bài toán:
 + Input: Cho 1 tập các số tượng trưng cho các bits để biểu diễn dữ liệu
 + Output: Số tập 32 bytes biểu diễn được nó.    
 
-### 2.4 Thay đổi assert = require. Assert sẽ tiêu thụ hết lượng gas cho phép thực hiện đoạn code đó, còn require thì sẽ trả lại
-  + Nếu có assert => chuyển nó sang require
+Ok
+
+[comment]: <> (### 2.4 Thay đổi assert = require. Assert sẽ tiêu thụ hết lượng gas cho phép thực hiện đoạn code đó, còn require thì sẽ trả lại)
+
+[comment]: <> (  + Nếu có assert => chuyển nó sang require)
 ### 2.5 External function làm giảm gas thực hiện hơn public nếu tham số đầu vào là mảng hoặc là struct
   + Nếu fuction có param là array hoặc struct và hàm đó không có lời gọi internal thì để nó là external thay vì public
-### 2.6 Modifier có thể không hiệu quả vì nó sẽ làm tăng lượng phí khi thực hiện triển khai
-  + Cần xem xét kỹ các xem có nên chuyển từ modifier sang hàm hay không?
-### 2.7 Không cần set các biến = giá trị mặc định 
-  + Nếu state set các gia trị mặc định => xoá đi.
-### 2.8 Sử dụng các reason trong require ngắn hơn
-  + Tự sửa các reason sang ngắn hơn + tạo 1 comment mapping từ  các kí hiệu required sang  string cũ.
+OK
+
+[comment]: <> (### 2.6 Modifier có thể không hiệu quả vì nó sẽ làm tăng lượng phí khi thực hiện triển khai)
+
+[comment]: <> (  + Cần xem xét kỹ các xem có nên chuyển từ modifier sang hàm hay không?)
+
+[comment]: <> (### 2.7 Không cần set các biến = giá trị mặc định )
+
+[comment]: <> (  + Nếu state set các gia trị mặc định => xoá đi.)
+
+[comment]: <> (### 2.8 Sử dụng các reason trong require ngắn hơn)
+
+[comment]: <> (  + Tự sửa các reason sang ngắn hơn + tạo 1 comment mapping từ  các kí hiệu required sang  string cũ.)
+
 ### 2.9 Tránh việc check code nhiều lần ở nhiều hàm khác nhau
 ### 2.10 Sử dụng ít hàm hơn có thể tốt hơn
 ### 2.11 Xoá các biến không cần sử dụng để được nhận lại lượng gas
 ### 2.12 Dùng hàm delete thay vì set biến = 0;
-### 2.13 Hạn chế thay đổi các biến storage  (có thể dùng 1biến trung gian để tính toán và lưu lại vào lần cuối cùng)
-### 2.14 Hạn chế thay đổi các biến storage  (có thể dùng 1biến trung gian đọc)
+### 2.13 Hạn chế thay đổi các biến storage (có thể dùng 1biến trung gian để tính toán và lưu lại vào lần cuối cùng)
+Nếu trong hàm có phép gán dữ liệu vào biến storage với số lân > 2 thì dùng 1 biến trung gian để lưu giá trị trước 
+khi lưu (cần tránh việc các biến storage bị biến đổi )
+### 2.14 Hạn chế đọc các biến storage
+Nếu trong hàm có đọc đến biến storage với số lần >2 thì lưu biến cần đọc đó ra 1 giá trị trung gian rồi thực hiện đọc.
+(cần tránh việc các biến storage bị biến đổi )
+
 
 https://github.com/ethereum/solidity/issues/6075#issuecomment-472622304
 
