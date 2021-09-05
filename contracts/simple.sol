@@ -1,9 +1,24 @@
-contract ERC20Basic {
-    uint256 public totalSupply;
+pragma solidity ^0.5.16;
 
-    function balanceOf(address who) constant returns (uint256);
+contract ERC20Detailed {
+    string private _name;
+    string private _symbol;
+    uint8 private _decimals;
+    constructor (string memory name, string memory symbol, uint8 decimals) public {
+        _name = name;
+        _symbol = symbol;
+        _decimals = decimals;
+    }
+    function name() public view returns (string memory) {
+        return _name;
+    }
 
-    function transfer(address to, uint256 value) returns (bool);
+    function symbol() public view returns (string memory) {
+        return _symbol;
+    }
 
-    event Transfer(address indexed from, address indexed to, uint256 value);
+    function decimals() public view returns (uint8) {
+        return _decimals;
+    }
 }
+

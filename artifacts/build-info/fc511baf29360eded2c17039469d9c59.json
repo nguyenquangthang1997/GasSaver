@@ -1,0 +1,168 @@
+{
+  "id": "fc511baf29360eded2c17039469d9c59",
+  "_format": "hh-sol-build-info-1",
+  "solcVersion": "0.6.12",
+  "solcLongVersion": "0.6.12+commit.27d51765",
+  "input": {
+    "language": "Solidity",
+    "sources": {
+      "contracts/test.sol": {
+        "content": "contract C {function f() public {}}"
+      }
+    },
+    "settings": {
+      "evmVersion": "istanbul",
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "outputSelection": {
+        "*": {
+          "*": [
+            "abi",
+            "evm.bytecode",
+            "evm.deployedBytecode",
+            "evm.methodIdentifiers"
+          ],
+          "": [
+            "ast"
+          ]
+        }
+      }
+    }
+  },
+  "output": {
+    "contracts": {
+      "contracts/test.sol": {
+        "C": {
+          "abi": [
+            {
+              "inputs": [],
+              "name": "f",
+              "outputs": [],
+              "stateMutability": "nonpayable",
+              "type": "function"
+            }
+          ],
+          "evm": {
+            "bytecode": {
+              "linkReferences": {},
+              "object": "6080604052348015600f57600080fd5b50606d80601d6000396000f3fe6080604052348015600f57600080fd5b506004361060285760003560e01c806326121ff014602d575b600080fd5b60336035565b005b56fea2646970667358221220e512bcfc1a10df2b17984b8d2f6f9db22503fb8cc2003934b4fce78c33ba9c8a64736f6c634300060c0033",
+              "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH1 0xF JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x6D DUP1 PUSH1 0x1D PUSH1 0x0 CODECOPY PUSH1 0x0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH1 0xF JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH1 0x28 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x26121FF0 EQ PUSH1 0x2D JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH1 0x33 PUSH1 0x35 JUMP JUMPDEST STOP JUMPDEST JUMP INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xE5 SLT 0xBC 0xFC BYTE LT 0xDF 0x2B OR SWAP9 0x4B DUP14 0x2F PUSH16 0x9DB22503FB8CC2003934B4FCE78C33BA SWAP13 DUP11 PUSH5 0x736F6C6343 STOP MOD 0xC STOP CALLER ",
+              "sourceMap": "0:35:0:-:0;;;;;;;;;;;;;;;;;;;"
+            },
+            "deployedBytecode": {
+              "immutableReferences": {},
+              "linkReferences": {},
+              "object": "6080604052348015600f57600080fd5b506004361060285760003560e01c806326121ff014602d575b600080fd5b60336035565b005b56fea2646970667358221220e512bcfc1a10df2b17984b8d2f6f9db22503fb8cc2003934b4fce78c33ba9c8a64736f6c634300060c0033",
+              "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH1 0xF JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH1 0x28 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x26121FF0 EQ PUSH1 0x2D JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH1 0x33 PUSH1 0x35 JUMP JUMPDEST STOP JUMPDEST JUMP INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xE5 SLT 0xBC 0xFC BYTE LT 0xDF 0x2B OR SWAP9 0x4B DUP14 0x2F PUSH16 0x9DB22503FB8CC2003934B4FCE78C33BA SWAP13 DUP11 PUSH5 0x736F6C6343 STOP MOD 0xC STOP CALLER ",
+              "sourceMap": "0:35:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;12:22;;;:::i;:::-;;;:::o"
+            },
+            "methodIdentifiers": {
+              "f()": "26121ff0"
+            }
+          }
+        }
+      }
+    },
+    "errors": [
+      {
+        "component": "general",
+        "errorCode": "1878",
+        "formattedMessage": "contracts/test.sol: Warning: SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing \"SPDX-License-Identifier: <SPDX-License>\" to each source file. Use \"SPDX-License-Identifier: UNLICENSED\" for non-open-source code. Please see https://spdx.org for more information.\n",
+        "message": "SPDX license identifier not provided in source file. Before publishing, consider adding a comment containing \"SPDX-License-Identifier: <SPDX-License>\" to each source file. Use \"SPDX-License-Identifier: UNLICENSED\" for non-open-source code. Please see https://spdx.org for more information.",
+        "severity": "warning",
+        "sourceLocation": {
+          "end": -1,
+          "file": "contracts/test.sol",
+          "start": -1
+        },
+        "type": "Warning"
+      },
+      {
+        "component": "general",
+        "errorCode": "3420",
+        "formattedMessage": "contracts/test.sol: Warning: Source file does not specify required compiler version! Consider adding \"pragma solidity ^0.6.12;\"\n",
+        "message": "Source file does not specify required compiler version! Consider adding \"pragma solidity ^0.6.12;\"",
+        "severity": "warning",
+        "sourceLocation": {
+          "end": -1,
+          "file": "contracts/test.sol",
+          "start": -1
+        },
+        "type": "Warning"
+      }
+    ],
+    "sources": {
+      "contracts/test.sol": {
+        "ast": {
+          "absolutePath": "contracts/test.sol",
+          "exportedSymbols": {
+            "C": [
+              5
+            ]
+          },
+          "id": 6,
+          "license": null,
+          "nodeType": "SourceUnit",
+          "nodes": [
+            {
+              "abstract": false,
+              "baseContracts": [],
+              "contractDependencies": [],
+              "contractKind": "contract",
+              "documentation": null,
+              "fullyImplemented": true,
+              "id": 5,
+              "linearizedBaseContracts": [
+                5
+              ],
+              "name": "C",
+              "nodeType": "ContractDefinition",
+              "nodes": [
+                {
+                  "body": {
+                    "id": 3,
+                    "nodeType": "Block",
+                    "src": "32:2:0",
+                    "statements": []
+                  },
+                  "documentation": null,
+                  "functionSelector": "26121ff0",
+                  "id": 4,
+                  "implemented": true,
+                  "kind": "function",
+                  "modifiers": [],
+                  "name": "f",
+                  "nodeType": "FunctionDefinition",
+                  "overrides": null,
+                  "parameters": {
+                    "id": 1,
+                    "nodeType": "ParameterList",
+                    "parameters": [],
+                    "src": "22:2:0"
+                  },
+                  "returnParameters": {
+                    "id": 2,
+                    "nodeType": "ParameterList",
+                    "parameters": [],
+                    "src": "32:0:0"
+                  },
+                  "scope": 5,
+                  "src": "12:22:0",
+                  "stateMutability": "nonpayable",
+                  "virtual": false,
+                  "visibility": "public"
+                }
+              ],
+              "scope": 6,
+              "src": "0:35:0"
+            }
+          ],
+          "src": "0:35:0"
+        },
+        "id": 0
+      }
+    }
+  }
+}
