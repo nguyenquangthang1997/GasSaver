@@ -99,7 +99,7 @@ const typeRepresentation = {
     'bytes30': 240,
     'bytes31': 248,
     'bytes32': 256,
-    'address': 256,
+    'address': 160,
     'bool': 8,
     'string': 256,
     "default": 256,
