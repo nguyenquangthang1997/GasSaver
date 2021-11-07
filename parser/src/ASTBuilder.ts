@@ -1,12 +1,12 @@
-import { ParserRuleContext } from 'antlr4ts'
-import { AbstractParseTreeVisitor } from 'antlr4ts/tree/AbstractParseTreeVisitor'
-import { ParseTree } from 'antlr4ts/tree/ParseTree'
+import {ParserRuleContext} from 'antlr4ts'
+import {AbstractParseTreeVisitor} from 'antlr4ts/tree/AbstractParseTreeVisitor'
+import {ParseTree} from 'antlr4ts/tree/ParseTree'
 import * as SP from './antlr/SolidityParser'
 
-import { SolidityVisitor } from './antlr/SolidityVisitor'
-import { ParseOptions } from './types'
+import {SolidityVisitor} from './antlr/SolidityVisitor'
+import {ParseOptions} from './types'
 import * as AST from './ast-types'
-import { ErrorNode } from 'antlr4ts/tree/ErrorNode'
+import {ErrorNode} from 'antlr4ts/tree/ErrorNode'
 
 interface SourceLocation {
   start: {
@@ -65,18 +65,19 @@ export class ASTBuilder
   public visitContractDefinition(
     ctx: SP.ContractDefinitionContext
   ): AST.ContractDefinition & WithMeta {
-    const name = this._toText(ctx.identifier())
-    const kind = this._toText(ctx.getChild(0))
+    const name = ASTBuilder._toText(ctx.identifier())
+    const kind = ASTBuilder._toText(ctx.getChild(0))
 
     this._currentContract = name
-
+    const subNodes = ctx.contractPart().map((x) => this.visit(x))
     const node: AST.ContractDefinition = {
       type: 'ContractDefinition',
       name,
       baseContracts: ctx
         .inheritanceSpecifier()
         .map((x) => this.visitInheritanceSpecifier(x)),
-      subNodes: ctx.contractPart().map((x) => this.visit(x)),
+      subNodes: subNodes,
+      stateVariable: subNodes.filter(node=>node.type==="StateVariableDeclaration"),
       kind,
     }
 
@@ -88,7 +89,7 @@ export class ASTBuilder
   ) {
     const type = this.visitTypeName(ctx.typeName())
     const iden = ctx.identifier()
-    const name = this._toText(iden)
+    const name = ASTBuilder._toText(iden)
 
     let expression: AST.Expression | null = null
     const ctxExpression = ctx.expression()
@@ -155,7 +156,7 @@ export class ASTBuilder
     let storageLocation: string | null = null
     const ctxStorageLocation = ctx.storageLocation()
     if (ctxStorageLocation) {
-      storageLocation = this._toText(ctxStorageLocation)
+      storageLocation = ASTBuilder._toText(ctxStorageLocation)
     }
 
     const identifierCtx = ctx.identifier()
@@ -163,7 +164,7 @@ export class ASTBuilder
     const node: AST.VariableDeclaration = {
       type: 'VariableDeclaration',
       typeName: this.visitTypeName(ctx.typeName()),
-      name: this._toText(identifierCtx),
+      name: ASTBuilder._toText(identifierCtx),
       identifier: this.visitIdentifier(identifierCtx),
       storageLocation,
       isStateVar: false,
@@ -221,7 +222,7 @@ export class ASTBuilder
         let name: string | null = null
         const paramCtxIdentifier = paramCtx.identifier()
         if (paramCtxIdentifier) {
-          name = this._toText(paramCtxIdentifier)
+          name = ASTBuilder._toText(paramCtxIdentifier)
         }
 
         const node: AST.VariableDeclaration = {
@@ -242,7 +243,7 @@ export class ASTBuilder
 
     const node: AST.EventDefinition = {
       type: 'EventDefinition',
-      name: this._toText(ctx.identifier()),
+      name: ASTBuilder._toText(ctx.identifier()),
       parameters,
       isAnonymous: ctx.AnonymousKeyword() !== undefined,
     }
@@ -263,13 +264,13 @@ export class ASTBuilder
     let storageLocation: string | null = null
     const ctxStorageLocation = ctx.storageLocation()
     if (ctxStorageLocation !== undefined) {
-      storageLocation = this._toText(ctxStorageLocation)
+      storageLocation = ASTBuilder._toText(ctxStorageLocation)
     }
 
     let name: string | null = null
     const ctxIdentifier = ctx.identifier()
     if (ctxIdentifier !== undefined) {
-      name = this._toText(ctxIdentifier)
+      name = ASTBuilder._toText(ctxIdentifier)
     }
 
     const node: AST.VariableDeclaration = {
@@ -314,14 +315,14 @@ export class ASTBuilder
 
     let stateMutability = null
     if (ctx.modifierList().stateMutability().length > 0) {
-      stateMutability = this._stateMutabilityToText(
+      stateMutability = ASTBuilder._stateMutabilityToText(
         ctx.modifierList().stateMutability(0)
       )
     }
 
     // see what type of function we're dealing with
     const ctxReturnParameters = ctx.returnParameters()
-    switch (this._toText(ctx.functionDescriptor().getChild(0))) {
+    switch (ASTBuilder._toText(ctx.functionDescriptor().getChild(0))) {
       case 'constructor':
         parameters = ctx
           .parameterList()
@@ -349,7 +350,7 @@ export class ASTBuilder
         break
       case 'function': {
         const identifier = ctx.functionDescriptor().identifier()
-        name = identifier !== undefined ? this._toText(identifier) : ''
+        name = identifier !== undefined ? ASTBuilder._toText(identifier) : ''
 
         parameters = ctx
           .parameterList()
@@ -416,7 +417,7 @@ export class ASTBuilder
   ): AST.EnumDefinition & WithMeta {
     const node: AST.EnumDefinition = {
       type: 'EnumDefinition',
-      name: this._toText(ctx.identifier()),
+      name: ASTBuilder._toText(ctx.identifier()),
       members: ctx.enumValue().map((x) => this.visitEnumValue(x)),
     }
 
@@ -426,7 +427,7 @@ export class ASTBuilder
   public visitEnumValue(ctx: SP.EnumValueContext): AST.EnumValue & WithMeta {
     const node: AST.EnumValue = {
       type: 'EnumValue',
-      name: this._toText(ctx.identifier()),
+      name: ASTBuilder._toText(ctx.identifier()),
     }
     return this._addMeta(node, ctx)
   }
@@ -436,7 +437,7 @@ export class ASTBuilder
   ): AST.ElementaryTypeName & WithMeta {
     const node: AST.ElementaryTypeName = {
       type: 'ElementaryTypeName',
-      name: this._toText(ctx),
+      name: ASTBuilder._toText(ctx),
       stateMutability: null,
     }
 
@@ -446,7 +447,7 @@ export class ASTBuilder
   public visitIdentifier(ctx: SP.IdentifierContext): AST.Identifier & WithMeta {
     const node: AST.Identifier = {
       type: 'Identifier',
-      name: this._toText(ctx),
+      name: ASTBuilder._toText(ctx),
     }
     return this._addMeta(node, ctx)
   }
@@ -478,8 +479,8 @@ export class ASTBuilder
     if (ctx.children?.length === 2) {
       const node: AST.ElementaryTypeName = {
         type: 'ElementaryTypeName',
-        name: this._toText(ctx.getChild(0)),
-        stateMutability: this._toText(ctx.getChild(1)),
+        name: ASTBuilder._toText(ctx.getChild(0)),
+        stateMutability: ASTBuilder._toText(ctx.getChild(1)),
       }
 
       return this._addMeta(node, ctx)
@@ -509,7 +510,7 @@ export class ASTBuilder
   ): AST.UserDefinedTypeName & WithMeta {
     const node: AST.UserDefinedTypeName = {
       type: 'UserDefinedTypeName',
-      namePath: this._toText(ctx),
+      namePath: ASTBuilder._toText(ctx),
     }
 
     return this._addMeta(node, ctx)
@@ -527,7 +528,7 @@ export class ASTBuilder
     const node: AST.UsingForDeclaration = {
       type: 'UsingForDeclaration',
       typeName,
-      libraryName: this._toText(ctx.identifier()),
+      libraryName: ASTBuilder._toText(ctx.identifier()),
     }
 
     return this._addMeta(node, ctx)
@@ -540,14 +541,14 @@ export class ASTBuilder
     // in >=0.5.0 <0.7.0
     const versionContext = ctx.pragmaValue().version()
 
-    let value = this._toText(ctx.pragmaValue())
+    let value = ASTBuilder._toText(ctx.pragmaValue())
     if (versionContext?.children !== undefined) {
-      value = versionContext.children.map((x) => this._toText(x)).join(' ')
+      value = versionContext.children.map((x) => ASTBuilder._toText(x)).join(' ')
     }
 
     const node: AST.PragmaDirective = {
       type: 'PragmaDirective',
-      name: this._toText(ctx.pragmaName()),
+      name: ASTBuilder._toText(ctx.pragmaName()),
       value,
     }
 
@@ -588,7 +589,7 @@ export class ASTBuilder
 
     const node: AST.ModifierInvocation = {
       type: 'ModifierInvocation',
-      name: this._toText(ctx.identifier()),
+      name: ASTBuilder._toText(ctx.identifier()),
       arguments: args,
     }
     return this._addMeta(node, ctx)
@@ -644,7 +645,7 @@ export class ASTBuilder
 
     let stateMutability = null
     if (ctx.stateMutability().length > 0) {
-      stateMutability = this._toText(ctx.stateMutability(0))
+      stateMutability = ASTBuilder._toText(ctx.stateMutability(0))
     }
 
     const node: AST.FunctionTypeName = {
@@ -663,7 +664,7 @@ export class ASTBuilder
   ): AST.VariableDeclaration & WithMeta {
     let storageLocation = null
     if (ctx.storageLocation()) {
-      storageLocation = this._toText(ctx.storageLocation()!)
+      storageLocation = ASTBuilder._toText(ctx.storageLocation()!)
     }
 
     const node: AST.VariableDeclaration = {
@@ -723,7 +724,7 @@ export class ASTBuilder
   ): AST.CustomErrorDefinition & WithMeta {
     const node: AST.CustomErrorDefinition = {
       type: 'CustomErrorDefinition',
-      name: this._toText(ctx.identifier()),
+      name: ASTBuilder._toText(ctx.identifier()),
       parameters: this.visitParameterList(ctx.parameterList()),
     }
 
@@ -735,7 +736,7 @@ export class ASTBuilder
   ): AST.TypeDefinition & WithMeta {
     const node: AST.TypeDefinition = {
       type: 'TypeDefinition',
-      name: this._toText(ctx.identifier()),
+      name: ASTBuilder._toText(ctx.identifier()),
       definition: this.visitElementaryTypeName(ctx.elementaryTypeName())
     }
 
@@ -770,7 +771,7 @@ export class ASTBuilder
     } else if (ctxArgsNameValueList) {
       for (const nameValue of ctxArgsNameValueList.nameValue()) {
         args.push(this.visitExpression(nameValue.expression()))
-        names.push(this._toText(nameValue.identifier()))
+        names.push(ASTBuilder._toText(nameValue.identifier()))
         identifiers.push(this.visitIdentifier(nameValue.identifier()))
       }
     }
@@ -791,7 +792,7 @@ export class ASTBuilder
   ): AST.StructDefinition & WithMeta {
     const node: AST.StructDefinition = {
       type: 'StructDefinition',
-      name: this._toText(ctx.identifier()),
+      name: ASTBuilder._toText(ctx.identifier()),
       members: ctx
         .variableDeclaration()
         .map((x) => this.visitVariableDeclaration(x)),
@@ -878,8 +879,8 @@ export class ASTBuilder
 
     if (
       ctx.identifier() &&
-      this._toText(ctx.identifier()!) !== 'Error' &&
-      this._toText(ctx.identifier()!) !== 'Panic'
+      ASTBuilder._toText(ctx.identifier()!) !== 'Error' &&
+      ASTBuilder._toText(ctx.identifier()!) !== 'Panic'
     ) {
       throw new Error('Expected "Error" or "Panic" identifier in catch clause')
     }
@@ -887,7 +888,7 @@ export class ASTBuilder
     let kind = null
     const ctxIdentifier = ctx.identifier()
     if (ctxIdentifier !== undefined) {
-      kind = this._toText(ctxIdentifier)
+      kind = ASTBuilder._toText(ctxIdentifier)
     }
 
     const node: AST.CatchClause = {
@@ -919,11 +920,11 @@ export class ASTBuilder
   public visitNumberLiteral(
     ctx: SP.NumberLiteralContext
   ): AST.NumberLiteral & WithMeta {
-    const number = this._toText(ctx.getChild(0))
+    const number = ASTBuilder._toText(ctx.getChild(0))
     let subdenomination = null
 
     if (ctx.children?.length === 2) {
-      subdenomination = this._toText(ctx.getChild(1))
+      subdenomination = ASTBuilder._toText(ctx.getChild(1))
     }
 
     const node: AST.NumberLiteral = {
@@ -991,7 +992,7 @@ export class ASTBuilder
 
     const node: AST.ModifierDefinition = {
       type: 'ModifierDefinition',
-      name: this._toText(ctx.identifier()),
+      name: ASTBuilder._toText(ctx.identifier()),
       parameters,
       body,
       isVirtual,
@@ -1030,7 +1031,7 @@ export class ASTBuilder
         return this.visitPrimaryExpression(primaryExpressionCtx)
       }
       case 2:
-        op = this._toText(ctx.getChild(0))
+        op = ASTBuilder._toText(ctx.getChild(0))
 
         // new expression
         if (op === 'new') {
@@ -1054,7 +1055,7 @@ export class ASTBuilder
           return this._addMeta(node, ctx)
         }
 
-        op = this._toText(ctx.getChild(1))!
+        op = ASTBuilder._toText(ctx.getChild(1))!
 
         // postfix operators
         if (['++', '--'].includes(op)) {
@@ -1073,8 +1074,8 @@ export class ASTBuilder
       case 3:
         // treat parenthesis as no-op
         if (
-          this._toText(ctx.getChild(0)) === '(' &&
-          this._toText(ctx.getChild(2)) === ')'
+          ASTBuilder._toText(ctx.getChild(0)) === '(' &&
+          ASTBuilder._toText(ctx.getChild(2)) === ')'
         ) {
           const node: AST.TupleExpression = {
             type: 'TupleExpression',
@@ -1086,14 +1087,14 @@ export class ASTBuilder
           return this._addMeta(node, ctx)
         }
 
-        op = this._toText(ctx.getChild(1))!
+        op = ASTBuilder._toText(ctx.getChild(1))!
 
         // member access
         if (op === '.') {
           const node: AST.MemberAccess = {
             type: 'MemberAccess',
             expression: this.visitExpression(ctx.expression(0)),
-            memberName: this._toText(ctx.identifier()!),
+            memberName: ASTBuilder._toText(ctx.identifier()!),
           }
           return this._addMeta(node, ctx)
         }
@@ -1112,8 +1113,8 @@ export class ASTBuilder
       case 4:
         // function call
         if (
-          this._toText(ctx.getChild(1)) === '(' &&
-          this._toText(ctx.getChild(3)) === ')'
+          ASTBuilder._toText(ctx.getChild(1)) === '(' &&
+          ASTBuilder._toText(ctx.getChild(3)) === ')'
         ) {
           let args: AST.Expression[] = []
           const names = []
@@ -1128,7 +1129,7 @@ export class ASTBuilder
           } else if (ctxArgs.nameValueList()) {
             for (const nameValue of ctxArgs.nameValueList()!.nameValue()) {
               args.push(this.visitExpression(nameValue.expression()))
-              names.push(this._toText(nameValue.identifier()))
+              names.push(ASTBuilder._toText(nameValue.identifier()))
               identifiers.push(this.visitIdentifier(nameValue.identifier()))
             }
           }
@@ -1146,8 +1147,8 @@ export class ASTBuilder
 
         // index access
         if (
-          this._toText(ctx.getChild(1)) === '[' &&
-          this._toText(ctx.getChild(3)) === ']'
+          ASTBuilder._toText(ctx.getChild(1)) === '[' &&
+          ASTBuilder._toText(ctx.getChild(3)) === ']'
         ) {
           if (ctx.getChild(2).text === ':') {
             const node: AST.IndexRangeAccess = {
@@ -1169,8 +1170,8 @@ export class ASTBuilder
 
         // expression with nameValueList
         if (
-          this._toText(ctx.getChild(1)) === '{' &&
-          this._toText(ctx.getChild(3)) === '}'
+          ASTBuilder._toText(ctx.getChild(1)) === '{' &&
+          ASTBuilder._toText(ctx.getChild(3)) === '}'
         ) {
           const node: AST.NameValueExpression = {
             type: 'NameValueExpression',
@@ -1186,8 +1187,8 @@ export class ASTBuilder
       case 5:
         // ternary operator
         if (
-          this._toText(ctx.getChild(1)) === '?' &&
-          this._toText(ctx.getChild(3)) === ':'
+          ASTBuilder._toText(ctx.getChild(1)) === '?' &&
+          ASTBuilder._toText(ctx.getChild(3)) === ':'
         ) {
           const node: AST.Conditional = {
             type: 'Conditional',
@@ -1201,9 +1202,9 @@ export class ASTBuilder
 
         // index range access
         if (
-          this._toText(ctx.getChild(1)) === '[' &&
-          this._toText(ctx.getChild(2)) === ':' &&
-          this._toText(ctx.getChild(4)) === ']'
+          ASTBuilder._toText(ctx.getChild(1)) === '[' &&
+          ASTBuilder._toText(ctx.getChild(2)) === ':' &&
+          ASTBuilder._toText(ctx.getChild(4)) === ']'
         ) {
           const node: AST.IndexRangeAccess = {
             type: 'IndexRangeAccess',
@@ -1213,9 +1214,9 @@ export class ASTBuilder
 
           return this._addMeta(node, ctx)
         } else if (
-          this._toText(ctx.getChild(1)) === '[' &&
-          this._toText(ctx.getChild(3)) === ':' &&
-          this._toText(ctx.getChild(4)) === ']'
+          ASTBuilder._toText(ctx.getChild(1)) === '[' &&
+          ASTBuilder._toText(ctx.getChild(3)) === ':' &&
+          ASTBuilder._toText(ctx.getChild(4)) === ']'
         ) {
           const node: AST.IndexRangeAccess = {
             type: 'IndexRangeAccess',
@@ -1230,9 +1231,9 @@ export class ASTBuilder
       case 6:
         // index range access
         if (
-          this._toText(ctx.getChild(1)) === '[' &&
-          this._toText(ctx.getChild(3)) === ':' &&
-          this._toText(ctx.getChild(5)) === ']'
+          ASTBuilder._toText(ctx.getChild(1)) === '[' &&
+          ASTBuilder._toText(ctx.getChild(3)) === ':' &&
+          ASTBuilder._toText(ctx.getChild(5)) === ']'
         ) {
           const node: AST.IndexRangeAccess = {
             type: 'IndexRangeAccess',
@@ -1257,7 +1258,7 @@ export class ASTBuilder
     const args: AST.Expression[] = []
 
     for (const nameValue of ctx.nameValue()) {
-      names.push(this._toText(nameValue.identifier()))
+      names.push(ASTBuilder._toText(nameValue.identifier()))
       identifiers.push(this.visitIdentifier(nameValue.identifier()))
       args.push(this.visitExpression(nameValue.expression()))
     }
@@ -1275,7 +1276,7 @@ export class ASTBuilder
   public visitFileLevelConstant(ctx: SP.FileLevelConstantContext) {
     const type = this.visitTypeName(ctx.typeName())
     const iden = ctx.identifier()
-    const name = this._toText(iden)
+    const name = ASTBuilder._toText(iden)
 
     const expression = this.visitExpression(ctx.expression())
 
@@ -1320,7 +1321,7 @@ export class ASTBuilder
   public visitHexLiteral(ctx: SP.HexLiteralContext) {
     const parts = ctx
       .HexLiteralFragment()
-      .map((x) => this._toText(x))
+      .map((x) => ASTBuilder._toText(x))
       .map((x) => x.substring(4, x.length - 1))
 
     const node: AST.HexLiteral = {
@@ -1338,7 +1339,7 @@ export class ASTBuilder
     if (ctx.BooleanLiteral()) {
       const node: AST.BooleanLiteral = {
         type: 'BooleanLiteral',
-        value: this._toText(ctx.BooleanLiteral()!) === 'true',
+        value: ASTBuilder._toText(ctx.BooleanLiteral()!) === 'true',
       }
 
       return this._addMeta(node, ctx)
@@ -1353,7 +1354,7 @@ export class ASTBuilder
         .stringLiteral()!
         .StringLiteralFragment()
         .map((stringLiteralFragmentCtx: any) => {
-          let text = this._toText(stringLiteralFragmentCtx)!
+          let text = ASTBuilder._toText(stringLiteralFragmentCtx)!
 
           const isUnicode = text.slice(0, 7) === 'unicode'
           if (isUnicode) {
@@ -1395,8 +1396,8 @@ export class ASTBuilder
 
     if (
       ctx.children!.length == 3 &&
-      this._toText(ctx.getChild(1)) === '[' &&
-      this._toText(ctx.getChild(2)) === ']'
+      ASTBuilder._toText(ctx.getChild(1)) === '[' &&
+      ASTBuilder._toText(ctx.getChild(2)) === ']'
     ) {
       let node: any = this.visit(ctx.getChild(0))
       if (node.type === 'Identifier') {
@@ -1409,7 +1410,7 @@ export class ASTBuilder
       } else {
         node = {
           type: 'ElementaryTypeName',
-          name: this._toText(ctx.getChild(0)),
+          name: ASTBuilder._toText(ctx.getChild(0)),
         }
       }
 
@@ -1435,7 +1436,7 @@ export class ASTBuilder
   ): AST.TupleExpression & WithMeta {
     // remove parentheses
     const children = ctx.children!.slice(1, -1)
-    const components = this._mapCommasToNulls(children).map((expr) => {
+    const components = ASTBuilder._mapCommasToNulls(children).map((expr) => {
       // add a null for each empty value
       if (expr === null) {
         return null
@@ -1446,7 +1447,7 @@ export class ASTBuilder
     const node: AST.TupleExpression = {
       type: 'TupleExpression',
       components,
-      isArray: this._toText(ctx.getChild(0)) === '[',
+      isArray: ASTBuilder._toText(ctx.getChild(0)) === '[',
     }
 
     return this._addMeta(node, ctx)
@@ -1457,7 +1458,7 @@ export class ASTBuilder
     const children = ctx.children!.slice(1, -1)
     const identifiers = ctx.identifier()
     let i = 0
-    return this._mapCommasToNulls(children).map((idenOrNull) => {
+    return ASTBuilder._mapCommasToNulls(children).map((idenOrNull) => {
       // add a null for each empty value
       if (!idenOrNull) {
         return null
@@ -1468,7 +1469,7 @@ export class ASTBuilder
 
       const node: AST.VariableDeclaration = {
         type: 'VariableDeclaration',
-        name: this._toText(iden),
+        name: ASTBuilder._toText(iden),
         identifier: this.visitIdentifier(iden),
         isStateVar: false,
         isIndexed: false,
@@ -1488,7 +1489,7 @@ export class ASTBuilder
 
     const variableDeclarations = ctx.variableDeclaration()
     let i = 0
-    return this._mapCommasToNulls(ctx.children!).map((declOrNull) => {
+    return ASTBuilder._mapCommasToNulls(ctx.children!).map((declOrNull) => {
       // add a null for each empty value
       if (!declOrNull) {
         return null
@@ -1499,14 +1500,14 @@ export class ASTBuilder
 
       let storageLocation: string | null = null
       if (decl.storageLocation()) {
-        storageLocation = this._toText(decl.storageLocation()!)
+        storageLocation = ASTBuilder._toText(decl.storageLocation()!)
       }
 
       const identifierCtx = decl.identifier()
 
       const result: AST.VariableDeclaration = {
         type: 'VariableDeclaration',
-        name: this._toText(identifierCtx),
+        name: ASTBuilder._toText(identifierCtx),
         identifier: this.visitIdentifier(identifierCtx),
         typeName: this.visitTypeName(decl.typeName()),
         storageLocation,
@@ -1520,7 +1521,7 @@ export class ASTBuilder
   }
 
   public visitImportDirective(ctx: SP.ImportDirectiveContext) {
-    const pathString = this._toText(ctx.importPath())
+    const pathString = ASTBuilder._toText(ctx.importPath())
     let unitAlias = null
     let unitAliasIdentifier = null
     let symbolAliases = null
@@ -1528,10 +1529,10 @@ export class ASTBuilder
 
     if (ctx.importDeclaration().length > 0) {
       symbolAliases = ctx.importDeclaration().map((decl) => {
-        const symbol = this._toText(decl.identifier(0))
+        const symbol = ASTBuilder._toText(decl.identifier(0))
         let alias = null
         if (decl.identifier().length > 1) {
-          alias = this._toText(decl.identifier(1))
+          alias = ASTBuilder._toText(decl.identifier(1))
         }
         return [symbol, alias] as [string, string | null]
       })
@@ -1552,11 +1553,11 @@ export class ASTBuilder
         // nothing to do
       } else if (identifierCtxList.length === 1) {
         const aliasIdentifierCtx = ctx.identifier(0)
-        unitAlias = this._toText(aliasIdentifierCtx)
+        unitAlias = ASTBuilder._toText(aliasIdentifierCtx)
         unitAliasIdentifier = this.visitIdentifier(aliasIdentifierCtx)
       } else if (identifierCtxList.length === 2) {
         const aliasIdentifierCtx = ctx.identifier(1)
-        unitAlias = this._toText(aliasIdentifierCtx)
+        unitAlias = ASTBuilder._toText(aliasIdentifierCtx)
         unitAliasIdentifier = this.visitIdentifier(aliasIdentifierCtx)
       } else {
         throw new Error(
@@ -1592,7 +1593,7 @@ export class ASTBuilder
       const type = this.visit(paramCtx.typeName())
       let name = null
       if (paramCtx.identifier()) {
-        name = this._toText(paramCtx.identifier())
+        name = ASTBuilder._toText(paramCtx.identifier())
       }
 
       return {
@@ -1620,7 +1621,7 @@ export class ASTBuilder
   public visitInlineAssemblyStatement(ctx: SP.InlineAssemblyStatementContext) {
     let language: string | null = null
     if (ctx.StringLiteralFragment()) {
-      language = this._toText(ctx.StringLiteralFragment()!)!
+      language = ASTBuilder._toText(ctx.StringLiteralFragment()!)!
       language = language.substring(1, language.length - 1)
     }
 
@@ -1658,7 +1659,7 @@ export class ASTBuilder
     }
 
     if (ctx.stringLiteral()) {
-      text = this._toText(ctx.stringLiteral()!)!
+      text = ASTBuilder._toText(ctx.stringLiteral()!)!
       const value = text.substring(1, text.length - 1)
       const node: AST.StringLiteral = {
         type: 'StringLiteral',
@@ -1694,7 +1695,7 @@ export class ASTBuilder
   }
 
   public visitAssemblyCall(ctx: SP.AssemblyCallContext) {
-    const functionName = this._toText(ctx.getChild(0))
+    const functionName = ASTBuilder._toText(ctx.getChild(0))
     const args = ctx
       .assemblyExpression()
       .map((assemblyExpr) => this.visitAssemblyExpression(assemblyExpr))
@@ -1714,7 +1715,7 @@ export class ASTBuilder
     let text
 
     if (ctx.stringLiteral()) {
-      text = this._toText(ctx)!
+      text = ASTBuilder._toText(ctx)!
       const value = text.substring(1, text.length - 1)
       const node: AST.StringLiteral = {
         type: 'StringLiteral',
@@ -1729,7 +1730,7 @@ export class ASTBuilder
     if (ctx.DecimalNumber()) {
       const node: AST.DecimalNumber = {
         type: 'DecimalNumber',
-        value: this._toText(ctx),
+        value: ASTBuilder._toText(ctx),
       }
 
       return this._addMeta(node, ctx)
@@ -1738,7 +1739,7 @@ export class ASTBuilder
     if (ctx.HexNumber()) {
       const node: AST.HexNumber = {
         type: 'HexNumber',
-        value: this._toText(ctx),
+        value: ASTBuilder._toText(ctx),
       }
 
       return this._addMeta(node, ctx)
@@ -1765,7 +1766,7 @@ export class ASTBuilder
     ctx: SP.AssemblyCaseContext
   ): AST.AssemblyCase & WithMeta {
     let value = null
-    if (this._toText(ctx.getChild(0)) === 'case') {
+    if (ASTBuilder._toText(ctx.getChild(0)) === 'case') {
       value = this.visitAssemblyLiteral(ctx.assemblyLiteral()!)
     }
 
@@ -1832,7 +1833,7 @@ export class ASTBuilder
 
     const node: AST.AssemblyFunctionDefinition = {
       type: 'AssemblyFunctionDefinition',
-      name: this._toText(ctx.identifier()),
+      name: ASTBuilder._toText(ctx.identifier()),
       arguments: args,
       returnArguments: returnArgs,
       body: this.visitAssemblyBlock(ctx.assemblyBlock()),
@@ -1882,7 +1883,7 @@ export class ASTBuilder
   public visitLabelDefinition(ctx: SP.LabelDefinitionContext) {
     const node: AST.LabelDefinition = {
       type: 'LabelDefinition',
-      name: this._toText(ctx.identifier()),
+      name: ASTBuilder._toText(ctx.identifier()),
     }
 
     return this._addMeta(node, ctx)
@@ -1891,7 +1892,7 @@ export class ASTBuilder
   public visitAssemblyStackAssignment(ctx: SP.AssemblyStackAssignmentContext) {
     const node: AST.AssemblyStackAssignment = {
       type: 'AssemblyStackAssignment',
-      name: this._toText(ctx.identifier()),
+      name: ASTBuilder._toText(ctx.identifier()),
     }
 
     return this._addMeta(node, ctx)
@@ -1944,7 +1945,7 @@ export class ASTBuilder
     return this._addMeta(node, ctx)
   }
 
-  private _toText(ctx: ParserRuleContext | ParseTree): string {
+  private static _toText(ctx: ParserRuleContext | ParseTree): string {
     const text = ctx.text
     if (text === undefined) {
       throw new Error('Assertion error: text should never be undefiend')
@@ -1953,7 +1954,7 @@ export class ASTBuilder
     return text
   }
 
-  private _stateMutabilityToText(
+  private static _stateMutabilityToText(
     ctx: SP.StateMutabilityContext
   ): AST.FunctionDefinition['stateMutability'] {
     if (ctx.PureKeyword() !== undefined) {
@@ -1972,8 +1973,8 @@ export class ASTBuilder
     throw new Error('Assertion error: non-exhaustive stateMutability check')
   }
 
-  private _loc(ctx: ParserRuleContext): SourceLocation {
-    const sourceLocation: SourceLocation = {
+  private static _loc(ctx: ParserRuleContext): SourceLocation {
+    return {
       start: {
         line: ctx.start.line,
         column: ctx.start.charPositionInLine,
@@ -1981,11 +1982,10 @@ export class ASTBuilder
       end: {
         line: ctx.stop ? ctx.stop.line : ctx.start.line,
         column: ctx.stop
-          ? ctx.stop.charPositionInLine
-          : ctx.start.charPositionInLine,
+            ? ctx.stop.charPositionInLine
+            : ctx.start.charPositionInLine,
       },
     }
-    return sourceLocation
   }
 
   _range(ctx: ParserRuleContext): [number, number] {
@@ -2001,7 +2001,7 @@ export class ASTBuilder
     }
 
     if (this.options.loc === true) {
-      node.loc = this._loc(ctx)
+      node.loc = ASTBuilder._loc(ctx)
     }
     if (this.options.range === true) {
       node.range = this._range(ctx)
@@ -2013,7 +2013,7 @@ export class ASTBuilder
     } as T & WithMeta
   }
 
-  private _mapCommasToNulls(children: ParseTree[]) {
+  private static _mapCommasToNulls(children: ParseTree[]) {
     if (children.length === 0) {
       return []
     }
@@ -2023,14 +2023,14 @@ export class ASTBuilder
 
     for (const el of children) {
       if (comma) {
-        if (this._toText(el) === ',') {
+        if (ASTBuilder._toText(el) === ',') {
           values.push(null)
         } else {
           values.push(el)
           comma = false
         }
       } else {
-        if (this._toText(el) !== ',') {
+        if (ASTBuilder._toText(el) !== ',') {
           throw new Error('expected comma')
         }
         comma = true

@@ -31,6 +31,7 @@ export interface ContractDefinition extends BaseASTNode {
   baseContracts: InheritanceSpecifier[]
   kind: string
   subNodes: BaseASTNode[]
+  stateVariable: BaseASTNode[]
 }
 
 export interface InheritanceSpecifier extends BaseASTNode {

@@ -1,4 +1,5 @@
 import { Token, AntlrToken, TokenizeOptions } from './types'
+// @ts-ignore
 import untypedTokens from './tokens-string'
 
 const tokens = untypedTokens as string
