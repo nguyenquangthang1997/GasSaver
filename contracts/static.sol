@@ -4,53 +4,64 @@ pragma experimental ABIEncoderV2;
 
 contract Static1 {
     uint128 kqjd;
-    uint256 dd;
+    uint256[] dd;
     uint128 kjd;
 
+//    function a() public {
+//        if(dd>0){
+//            c = 1;
+//        }
+//    }
+
     modifier validRecipient() {
-        //        dd++;
+                dd++;
         _;
     }
 
     modifier validRecipient1() {
-
+        uint256 d;
         _;
     }
 
-    function statistics(uint128 a, string memory b, uint128 c) public validRecipient validRecipient1 {
-        uint256[] storage e = new uint256[](6);
-
-        uint256 h = (a + c)+1;
-        a = 1;
-        c = a == 1 ? 0 : h;
-    }
-
-    function statistics1(uint128[] memory a, uint256 b, uint128 c) public {
-        uint256 e = c;
-    }
-
-    function statistics2(string memory a, uint256 b, uint128 c) public {
-        uint256 e = c;
-    }
-
-    function statistics3(bytes memory a, uint256 b, uint128 c) public {
-        uint256 e = c;
-    }
-
-    function statistics4(bytes32 a, uint256 b, uint128 c) public {
+    //    modifier validRecipient1() {
+//
+//        _;
+//    }
+//
+//    function statistics(uint128 a, string memory b, uint128 c) public validRecipient validRecipient1 {
+//        uint256[] storage e = new uint256[](6);
+//
+//        uint256 h = (a + c)+1;
+//        a = 1;
+//        c = a == 1 ? 0 : h;
+//    }
+//
+//    function statistics1(uint128[] memory a, uint256 b, uint128 c) public {
+//        uint256 e = c;
+//    }
+//
+//    function statistics2(string memory a, uint256 b, uint128 c) public {
+//        uint256 e = c;
+//    }
+//
+//    function statistics3(bytes memory a, uint256 b, uint128 c) public {
+//        uint256 e = c;
+//    }
+//
+    function statistics4(bytes32 a, uint256 b, uint128 c) public validRecipient {
         uint256 e = c;
     }
 
 
 }
 
-contract Static2 {
-
-    function statistics(string  memory b, uint128 a, uint128 c) public {
-        uint256 e = a + c;
-    }
-
-}
+//contract Static2 {
+//
+//    function statistics(string  memory b, uint128 a, uint128 c) public {
+//        uint256 e = a + c;
+//    }
+//
+//}
 
 //contract Static1 {
 //    uint256 a;

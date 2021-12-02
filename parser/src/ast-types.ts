@@ -169,11 +169,15 @@ export interface ModifierDefinition extends BaseASTNode {
   isVirtual: boolean
   override: null | UserDefinedTypeName[]
   body: Block | null
+  identifiers: Identifier[]
+
 }
 export interface ModifierInvocation extends BaseASTNode {
   type: 'ModifierInvocation'
   name: string
   arguments: Expression[] | null
+  identifiers: Identifier[]
+
 }
 export interface FunctionDefinition extends BaseASTNode {
   type: 'FunctionDefinition'
@@ -189,6 +193,7 @@ export interface FunctionDefinition extends BaseASTNode {
   isReceiveEther: boolean
   isFallback: boolean
   isVirtual: boolean
+  identifiers: Identifier[]
 }
 
 export interface CustomErrorDefinition extends BaseASTNode {
@@ -206,6 +211,7 @@ export interface TypeDefinition extends BaseASTNode {
 export interface RevertStatement extends BaseASTNode {
   type: 'RevertStatement'
   revertCall: FunctionCall
+  identifiers: Identifier[]
 }
 export interface EventDefinition extends BaseASTNode {
   type: 'EventDefinition'
@@ -259,20 +265,25 @@ export interface FunctionTypeName extends BaseASTNode {
 export interface Block extends BaseASTNode {
   type: 'Block'
   statements: BaseASTNode[]
+  identifiers: Identifier[]
+
 }
 export interface ExpressionStatement extends BaseASTNode {
   type: 'ExpressionStatement'
   expression: Expression | null
+  identifiers: Identifier[]
 }
 export interface IfStatement extends BaseASTNode {
   type: 'IfStatement'
   condition: Expression
   trueBody: Statement
   falseBody: Statement | null
+  identifiers: Identifier[]
 }
 export interface UncheckedStatement extends BaseASTNode {
   type: 'UncheckedStatement'
   block: Block
+  identifiers: Identifier[]
 }
 export interface TryStatement extends BaseASTNode {
   type: 'TryStatement'
@@ -280,6 +291,7 @@ export interface TryStatement extends BaseASTNode {
   returnParameters: VariableDeclaration[] | null
   body: Block
   catchClauses: CatchClause[]
+  identifiers: Identifier[]
 }
 export interface CatchClause extends BaseASTNode {
   type: 'CatchClause'
@@ -287,11 +299,13 @@ export interface CatchClause extends BaseASTNode {
   kind: string | null
   parameters: VariableDeclaration[] | null
   body: Block
+  identifiers: Identifier[]
 }
 export interface WhileStatement extends BaseASTNode {
   type: 'WhileStatement'
   condition: Expression
   body: Statement
+  identifiers: Identifier[]
 }
 export interface ForStatement extends BaseASTNode {
   type: 'ForStatement'
@@ -299,19 +313,26 @@ export interface ForStatement extends BaseASTNode {
   conditionExpression?: Expression
   loopExpression: ExpressionStatement
   body: Statement
+  identifiers: Identifier[]
 }
 export interface InlineAssemblyStatement extends BaseASTNode {
   type: 'InlineAssemblyStatement'
   language: string | null
   body: AssemblyBlock
+  identifiers: Identifier[]
+
 }
 export interface DoWhileStatement extends BaseASTNode {
   type: 'DoWhileStatement'
   condition: Expression
   body: Statement
+  identifiers: Identifier[]
+
 }
 export interface ContinueStatement extends BaseASTNode {
   type: 'ContinueStatement'
+  identifiers: Identifier[]
+
 }
 export interface Break extends BaseASTNode {
   type: 'Break'
@@ -321,22 +342,28 @@ export interface Continue extends BaseASTNode {
 }
 export interface BreakStatement extends BaseASTNode {
   type: 'BreakStatement'
+  identifiers: Identifier[]
+
 }
 export interface ReturnStatement extends BaseASTNode {
   type: 'ReturnStatement'
   expression: Expression | null
+  identifiers: Identifier[]
 }
 export interface EmitStatement extends BaseASTNode {
   type: 'EmitStatement'
   eventCall: FunctionCall
+  identifiers: Identifier[]
 }
 export interface ThrowStatement extends BaseASTNode {
   type: 'ThrowStatement'
+  identifiers: Identifier[]
 }
 export interface VariableDeclarationStatement extends BaseASTNode {
   type: 'VariableDeclarationStatement'
   variables: Array<BaseASTNode | null>
   initialValue: Expression | null
+  identifiers: Identifier[]
 }
 export interface ElementaryTypeName extends BaseASTNode {
   type: 'ElementaryTypeName'
@@ -426,20 +453,24 @@ export interface AssemblyMemberAccess extends BaseASTNode {
 export interface NewExpression extends BaseASTNode {
   type: 'NewExpression'
   typeName: TypeName
+  identifiers: Identifier[]
 }
 export interface TupleExpression extends BaseASTNode {
   type: 'TupleExpression'
   components: Array<BaseASTNode | null>
   isArray: boolean
+  identifiers: Identifier[]
 }
 export interface TypeNameExpression extends BaseASTNode {
   type: 'TypeNameExpression'
   typeName: ElementaryTypeName | UserDefinedTypeName | ArrayTypeName
+  identifiers: Identifier[]
 }
 export interface NameValueExpression extends BaseASTNode {
   type: 'NameValueExpression'
   expression: Expression
   arguments: NameValueList
+  identifiers: Identifier[]
 }
 export interface NumberLiteral extends BaseASTNode {
   type: 'NumberLiteral'
@@ -456,25 +487,31 @@ export interface NumberLiteral extends BaseASTNode {
     | 'days'
     | 'weeks'
     | 'years'
+  identifiers: Identifier[]
 }
 export interface BooleanLiteral extends BaseASTNode {
   type: 'BooleanLiteral'
   value: boolean
+  identifiers: Identifier[]
 }
 export interface HexLiteral extends BaseASTNode {
   type: 'HexLiteral'
   value: string
   parts: string[]
+  identifiers: Identifier[]
 }
 export interface StringLiteral extends BaseASTNode {
   type: 'StringLiteral'
   value: string
   parts: string[]
   isUnicode: boolean[]
+  identifiers: Identifier[]
 }
 export interface Identifier extends BaseASTNode {
   type: 'Identifier'
   name: string
+  identifiers: Identifier[]
+  isDeclare?: boolean
 }
 
 export const binaryOpValues = [
@@ -531,34 +568,40 @@ export interface BinaryOperation extends BaseASTNode {
   left: Expression
   right: Expression
   operator: BinOp
+  identifiers: Identifier[]
 }
 export interface UnaryOperation extends BaseASTNode {
   type: 'UnaryOperation'
   operator: UnaryOp
   subExpression: Expression
   isPrefix: boolean
+  identifiers: Identifier[]
 }
 export interface Conditional extends BaseASTNode {
   type: 'Conditional'
   condition: Expression
   trueExpression: Expression
   falseExpression: Expression
+  identifiers: Identifier[]
 }
 export interface IndexAccess extends BaseASTNode {
   type: 'IndexAccess'
   base: Expression
   index: Expression
+  identifiers: Identifier[]
 }
 export interface IndexRangeAccess extends BaseASTNode {
   type: 'IndexRangeAccess'
   base: Expression
   indexStart?: Expression
   indexEnd?: Expression
+  identifiers: Identifier[]
 }
 export interface MemberAccess extends BaseASTNode {
   type: 'MemberAccess'
   expression: Expression
   memberName: string
+  identifiers: Identifier[]
 }
 export interface HexNumber extends BaseASTNode {
   type: 'HexNumber'

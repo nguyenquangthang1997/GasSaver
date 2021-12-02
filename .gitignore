@@ -1,5 +1,5 @@
 .idea
-package-lock.json
 node_modules
 artifacts
 cache
+script.js
