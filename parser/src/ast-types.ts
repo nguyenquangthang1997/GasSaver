@@ -4,747 +4,828 @@
 //    Xiao Liang <https://github.com/yxliang01>
 
 interface Location {
-  start: {
-    line: number
-    column: number
-  }
-  end: {
-    line: number
-    column: number
-  }
+    start: {
+        line: number
+        column: number
+    }
+    end: {
+        line: number
+        column: number
+    }
 }
 
 export interface BaseASTNode {
-  type: ASTNodeTypeString
-  range?: [number, number]
-  loc?: Location
+    type: ASTNodeTypeString
+    range?: [number, number]
+    loc?: Location
 }
 
 export interface SourceUnit extends BaseASTNode {
-  type: 'SourceUnit'
-  children: ASTNode[]
+    type: 'SourceUnit'
+    children: ASTNode[]
 }
 
 export interface ContractDefinition extends BaseASTNode {
-  type: 'ContractDefinition'
-  name: string
-  baseContracts: InheritanceSpecifier[]
-  kind: string
-  subNodes: BaseASTNode[]
-  stateVariable: BaseASTNode[]
+    type: 'ContractDefinition'
+    name: string
+    baseContracts: InheritanceSpecifier[]
+    kind: string
+    subNodes: BaseASTNode[]
+    stateVariable: BaseASTNode[]
 }
 
 export interface InheritanceSpecifier extends BaseASTNode {
-  type: 'InheritanceSpecifier'
-  baseName: UserDefinedTypeName
-  arguments: Expression[]
+    type: 'InheritanceSpecifier'
+    baseName: UserDefinedTypeName
+    arguments: Expression[]
 }
 
 export interface UserDefinedTypeName extends BaseASTNode {
-  type: 'UserDefinedTypeName'
-  namePath: string
+    type: 'UserDefinedTypeName'
+    namePath: string
 }
 
 export const astNodeTypes = [
-  'SourceUnit',
-  'PragmaDirective',
-  'ImportDirective',
-  'ContractDefinition',
-  'InheritanceSpecifier',
-  'StateVariableDeclaration',
-  'UsingForDeclaration',
-  'StructDefinition',
-  'ModifierDefinition',
-  'ModifierInvocation',
-  'FunctionDefinition',
-  'EventDefinition',
-  'CustomErrorDefinition',
-  'RevertStatement',
-  'EnumValue',
-  'EnumDefinition',
-  'VariableDeclaration',
-  'UserDefinedTypeName',
-  'Mapping',
-  'ArrayTypeName',
-  'FunctionTypeName',
-  'Block',
-  'ExpressionStatement',
-  'IfStatement',
-  'WhileStatement',
-  'ForStatement',
-  'InlineAssemblyStatement',
-  'DoWhileStatement',
-  'ContinueStatement',
-  'Break',
-  'Continue',
-  'BreakStatement',
-  'ReturnStatement',
-  'EmitStatement',
-  'ThrowStatement',
-  'VariableDeclarationStatement',
-  'ElementaryTypeName',
-  'FunctionCall',
-  'AssemblyBlock',
-  'AssemblyCall',
-  'AssemblyLocalDefinition',
-  'AssemblyAssignment',
-  'AssemblyStackAssignment',
-  'LabelDefinition',
-  'AssemblySwitch',
-  'AssemblyCase',
-  'AssemblyFunctionDefinition',
-  'AssemblyFunctionReturns',
-  'AssemblyFor',
-  'AssemblyIf',
-  'SubAssembly',
-  'TupleExpression',
-  'TypeNameExpression',
-  'NameValueExpression',
-  'BooleanLiteral',
-  'NumberLiteral',
-  'Identifier',
-  'BinaryOperation',
-  'UnaryOperation',
-  'NewExpression',
-  'Conditional',
-  'StringLiteral',
-  'HexLiteral',
-  'HexNumber',
-  'DecimalNumber',
-  'MemberAccess',
-  'IndexAccess',
-  'IndexRangeAccess',
-  'NameValueList',
-  'UncheckedStatement',
-  'TryStatement',
-  'CatchClause',
-  'FileLevelConstant',
-  'AssemblyMemberAccess',
-  'TypeDefinition'
+    'SourceUnit',
+    'PragmaDirective',
+    'ImportDirective',
+    'ContractDefinition',
+    'InheritanceSpecifier',
+    'StateVariableDeclaration',
+    'UsingForDeclaration',
+    'StructDefinition',
+    'ModifierDefinition',
+    'ModifierInvocation',
+    'FunctionDefinition',
+    'EventDefinition',
+    'CustomErrorDefinition',
+    'RevertStatement',
+    'EnumValue',
+    'EnumDefinition',
+    'VariableDeclaration',
+    'UserDefinedTypeName',
+    'Mapping',
+    'ArrayTypeName',
+    'FunctionTypeName',
+    'Block',
+    'ExpressionStatement',
+    'IfStatement',
+    'WhileStatement',
+    'ForStatement',
+    'InlineAssemblyStatement',
+    'DoWhileStatement',
+    'ContinueStatement',
+    'Break',
+    'Continue',
+    'BreakStatement',
+    'ReturnStatement',
+    'EmitStatement',
+    'ThrowStatement',
+    'VariableDeclarationStatement',
+    'ElementaryTypeName',
+    'FunctionCall',
+    'AssemblyBlock',
+    'AssemblyCall',
+    'AssemblyLocalDefinition',
+    'AssemblyAssignment',
+    'AssemblyStackAssignment',
+    'LabelDefinition',
+    'AssemblySwitch',
+    'AssemblyCase',
+    'AssemblyFunctionDefinition',
+    'AssemblyFunctionReturns',
+    'AssemblyFor',
+    'AssemblyIf',
+    'SubAssembly',
+    'TupleExpression',
+    'TypeNameExpression',
+    'NameValueExpression',
+    'BooleanLiteral',
+    'NumberLiteral',
+    'Identifier',
+    'BinaryOperation',
+    'UnaryOperation',
+    'NewExpression',
+    'Conditional',
+    'StringLiteral',
+    'HexLiteral',
+    'HexNumber',
+    'DecimalNumber',
+    'MemberAccess',
+    'IndexAccess',
+    'IndexRangeAccess',
+    'NameValueList',
+    'UncheckedStatement',
+    'TryStatement',
+    'CatchClause',
+    'FileLevelConstant',
+    'AssemblyMemberAccess',
+    'TypeDefinition'
 ] as const
 
 export type ASTNodeTypeString = typeof astNodeTypes[number]
 
 export interface PragmaDirective extends BaseASTNode {
-  type: 'PragmaDirective'
-  name: string
-  value: string
+    type: 'PragmaDirective'
+    name: string
+    value: string
 }
+
 export interface ImportDirective extends BaseASTNode {
-  type: 'ImportDirective'
-  path: string
-  pathLiteral: StringLiteral
-  unitAlias: string | null
-  unitAliasIdentifier: Identifier | null
-  symbolAliases: Array<[string, string | null]> | null
-  symbolAliasesIdentifiers: Array<[Identifier, Identifier | null]> | null
+    type: 'ImportDirective'
+    path: string
+    pathLiteral: StringLiteral
+    unitAlias: string | null
+    unitAliasIdentifier: Identifier | null
+    symbolAliases: Array<[string, string | null]> | null
+    symbolAliasesIdentifiers: Array<[Identifier, Identifier | null]> | null
 }
+
 export interface StateVariableDeclaration extends BaseASTNode {
-  type: 'StateVariableDeclaration'
-  variables: StateVariableDeclarationVariable[]
-  initialValue: Expression | null
+    type: 'StateVariableDeclaration'
+    variables: StateVariableDeclarationVariable[]
+    initialValue: Expression | null
 }
+
 export interface FileLevelConstant extends BaseASTNode {
-  type: 'FileLevelConstant'
-  typeName: TypeName
-  name: string
-  initialValue: Expression
-  isDeclaredConst: boolean
-  isImmutable: boolean
+    type: 'FileLevelConstant'
+    typeName: TypeName
+    name: string
+    initialValue: Expression
+    isDeclaredConst: boolean
+    isImmutable: boolean
 }
+
 export interface UsingForDeclaration extends BaseASTNode {
-  type: 'UsingForDeclaration'
-  typeName: TypeName | null
-  libraryName: string
+    type: 'UsingForDeclaration'
+    typeName: TypeName | null
+    libraryName: string
 }
+
 export interface StructDefinition extends BaseASTNode {
-  type: 'StructDefinition'
-  name: string
-  members: VariableDeclaration[]
+    type: 'StructDefinition'
+    name: string
+    members: VariableDeclaration[]
 }
+
 export interface ModifierDefinition extends BaseASTNode {
-  type: 'ModifierDefinition'
-  name: string
-  parameters: null | VariableDeclaration[]
-  isVirtual: boolean
-  override: null | UserDefinedTypeName[]
-  body: Block | null
-  identifiers: Identifier[]
+    type: 'ModifierDefinition'
+    name: string
+    parameters: null | VariableDeclaration[]
+    isVirtual: boolean
+    override: null | UserDefinedTypeName[]
+    body: Block | null
+    identifiers: Identifier[]
 
 }
+
 export interface ModifierInvocation extends BaseASTNode {
-  type: 'ModifierInvocation'
-  name: string
-  arguments: Expression[] | null
-  identifiers: Identifier[]
+    type: 'ModifierInvocation'
+    name: string
+    arguments: Expression[] | null
+    identifiers: Identifier[]
 
 }
+
 export interface FunctionDefinition extends BaseASTNode {
-  type: 'FunctionDefinition'
-  name: string | null
-  parameters: VariableDeclaration[]
-  modifiers: ModifierInvocation[]
-  stateMutability: 'pure' | 'constant' | 'payable' | 'view' | null
-  visibility: 'default' | 'external' | 'internal' | 'public' | 'private'
-  returnParameters: VariableDeclaration[] | null
-  body: Block | null
-  override: UserDefinedTypeName[] | null
-  isConstructor: boolean
-  isReceiveEther: boolean
-  isFallback: boolean
-  isVirtual: boolean
-  identifiers: Identifier[]
+    type: 'FunctionDefinition'
+    name: string | null
+    parameters: VariableDeclaration[]
+    modifiers: ModifierInvocation[]
+    stateMutability: 'pure' | 'constant' | 'payable' | 'view' | null
+    visibility: 'default' | 'external' | 'internal' | 'public' | 'private'
+    returnParameters: VariableDeclaration[] | null
+    body: Block | null
+    override: UserDefinedTypeName[] | null
+    isConstructor: boolean
+    isReceiveEther: boolean
+    isFallback: boolean
+    isVirtual: boolean
+    identifiers: Identifier[]
 }
 
 export interface CustomErrorDefinition extends BaseASTNode {
-  type: 'CustomErrorDefinition'
-  name: string
-  parameters: VariableDeclaration[]
+    type: 'CustomErrorDefinition'
+    name: string
+    parameters: VariableDeclaration[]
 }
 
 export interface TypeDefinition extends BaseASTNode {
-  type: 'TypeDefinition'
-  name: string
-  definition: ElementaryTypeName
+    type: 'TypeDefinition'
+    name: string
+    definition: ElementaryTypeName
 }
 
 export interface RevertStatement extends BaseASTNode {
-  type: 'RevertStatement'
-  revertCall: FunctionCall
-  identifiers: Identifier[]
+    type: 'RevertStatement'
+    revertCall: FunctionCall
+    identifiers: Identifier[]
 }
+
 export interface EventDefinition extends BaseASTNode {
-  type: 'EventDefinition'
-  name: string
-  parameters: VariableDeclaration[]
-  isAnonymous: boolean
+    type: 'EventDefinition'
+    name: string
+    parameters: VariableDeclaration[]
+    isAnonymous: boolean
 }
+
 export interface EnumValue extends BaseASTNode {
-  type: 'EnumValue'
-  name: string
+    type: 'EnumValue'
+    name: string
 }
+
 export interface EnumDefinition extends BaseASTNode {
-  type: 'EnumDefinition'
-  name: string
-  members: EnumValue[]
+    type: 'EnumDefinition'
+    name: string
+    members: EnumValue[]
 }
+
 export interface VariableDeclaration extends BaseASTNode {
-  type: 'VariableDeclaration'
-  isIndexed: boolean
-  isStateVar: boolean
-  typeName: TypeName | null
-  name: string | null
-  identifier: Identifier | null
-  isDeclaredConst?: boolean
-  storageLocation: string | null
-  expression: Expression | null
-  visibility?: 'public' | 'private' | 'internal' | 'default'
+    type: 'VariableDeclaration'
+    isIndexed: boolean
+    isStateVar: boolean
+    typeName: TypeName | null
+    name: string | null
+    identifier: Identifier | null
+    isDeclaredConst?: boolean
+    storageLocation: string | null
+    expression: Expression | null
+    visibility?: 'public' | 'private' | 'internal' | 'default'
 }
+
 export interface StateVariableDeclarationVariable extends VariableDeclaration {
-  override: null | UserDefinedTypeName[]
-  isImmutable: boolean
+    override: null | UserDefinedTypeName[]
+    isImmutable: boolean
 }
+
 export interface ArrayTypeName extends BaseASTNode {
-  type: 'ArrayTypeName'
-  baseTypeName: TypeName
-  length: Expression | null
+    type: 'ArrayTypeName'
+    baseTypeName: TypeName
+    length: Expression | null
 }
+
 export interface Mapping extends BaseASTNode {
-  type: 'Mapping'
-  keyType: ElementaryTypeName | UserDefinedTypeName
-  valueType: TypeName
+    type: 'Mapping'
+    keyType: ElementaryTypeName | UserDefinedTypeName
+    valueType: TypeName
 }
+
 export interface FunctionTypeName extends BaseASTNode {
-  type: 'FunctionTypeName'
-  parameterTypes: VariableDeclaration[]
-  returnTypes: VariableDeclaration[]
-  visibility: string
-  stateMutability: string | null
+    type: 'FunctionTypeName'
+    parameterTypes: VariableDeclaration[]
+    returnTypes: VariableDeclaration[]
+    visibility: string
+    stateMutability: string | null
 }
 
 export interface Block extends BaseASTNode {
-  type: 'Block'
-  statements: BaseASTNode[]
-  identifiers: Identifier[]
+    type: 'Block'
+    statements: BaseASTNode[]
+    identifiers: Identifier[]
 
 }
+
 export interface ExpressionStatement extends BaseASTNode {
-  type: 'ExpressionStatement'
-  expression: Expression | null
-  identifiers: Identifier[]
+    type: 'ExpressionStatement'
+    expression: Expression | null
+    identifiers: Identifier[]
 }
+
 export interface IfStatement extends BaseASTNode {
-  type: 'IfStatement'
-  condition: Expression
-  trueBody: Statement
-  falseBody: Statement | null
-  identifiers: Identifier[]
+    type: 'IfStatement'
+    condition: Expression
+    trueBody: Statement
+    falseBody: Statement | null
+    identifiers: Identifier[]
 }
+
 export interface UncheckedStatement extends BaseASTNode {
-  type: 'UncheckedStatement'
-  block: Block
-  identifiers: Identifier[]
+    type: 'UncheckedStatement'
+    block: Block
+    identifiers: Identifier[]
 }
+
 export interface TryStatement extends BaseASTNode {
-  type: 'TryStatement'
-  expression: Expression
-  returnParameters: VariableDeclaration[] | null
-  body: Block
-  catchClauses: CatchClause[]
-  identifiers: Identifier[]
+    type: 'TryStatement'
+    expression: Expression
+    returnParameters: VariableDeclaration[] | null
+    body: Block
+    catchClauses: CatchClause[]
+    identifiers: Identifier[]
 }
+
 export interface CatchClause extends BaseASTNode {
-  type: 'CatchClause'
-  isReasonStringType: boolean
-  kind: string | null
-  parameters: VariableDeclaration[] | null
-  body: Block
-  identifiers: Identifier[]
+    type: 'CatchClause'
+    isReasonStringType: boolean
+    kind: string | null
+    parameters: VariableDeclaration[] | null
+    body: Block
+    identifiers: Identifier[]
 }
+
 export interface WhileStatement extends BaseASTNode {
-  type: 'WhileStatement'
-  condition: Expression
-  body: Statement
-  identifiers: Identifier[]
+    type: 'WhileStatement'
+    condition: Expression
+    body: Statement
+    identifiers: Identifier[]
 }
+
 export interface ForStatement extends BaseASTNode {
-  type: 'ForStatement'
-  initExpression: SimpleStatement | null
-  conditionExpression?: Expression
-  loopExpression: ExpressionStatement
-  body: Statement
-  identifiers: Identifier[]
+    type: 'ForStatement'
+    initExpression: SimpleStatement | null
+    conditionExpression?: Expression
+    loopExpression: ExpressionStatement
+    body: Statement
+    identifiers: Identifier[]
 }
+
 export interface InlineAssemblyStatement extends BaseASTNode {
-  type: 'InlineAssemblyStatement'
-  language: string | null
-  body: AssemblyBlock
-  identifiers: Identifier[]
+    type: 'InlineAssemblyStatement'
+    language: string | null
+    body: AssemblyBlock
+    identifiers: Identifier[]
 
 }
+
 export interface DoWhileStatement extends BaseASTNode {
-  type: 'DoWhileStatement'
-  condition: Expression
-  body: Statement
-  identifiers: Identifier[]
+    type: 'DoWhileStatement'
+    condition: Expression
+    body: Statement
+    identifiers: Identifier[]
 
 }
+
 export interface ContinueStatement extends BaseASTNode {
-  type: 'ContinueStatement'
-  identifiers: Identifier[]
+    type: 'ContinueStatement'
+    identifiers: Identifier[]
 
 }
+
 export interface Break extends BaseASTNode {
-  type: 'Break'
+    type: 'Break'
 }
+
 export interface Continue extends BaseASTNode {
-  type: 'Continue'
+    type: 'Continue'
 }
+
 export interface BreakStatement extends BaseASTNode {
-  type: 'BreakStatement'
-  identifiers: Identifier[]
+    type: 'BreakStatement'
+    identifiers: Identifier[]
 
 }
+
 export interface ReturnStatement extends BaseASTNode {
-  type: 'ReturnStatement'
-  expression: Expression | null
-  identifiers: Identifier[]
+    type: 'ReturnStatement'
+    expression: Expression | null
+    identifiers: Identifier[]
 }
+
 export interface EmitStatement extends BaseASTNode {
-  type: 'EmitStatement'
-  eventCall: FunctionCall
-  identifiers: Identifier[]
+    type: 'EmitStatement'
+    eventCall: FunctionCall
+    identifiers: Identifier[]
 }
+
 export interface ThrowStatement extends BaseASTNode {
-  type: 'ThrowStatement'
-  identifiers: Identifier[]
+    type: 'ThrowStatement'
+    identifiers: Identifier[]
 }
+
 export interface VariableDeclarationStatement extends BaseASTNode {
-  type: 'VariableDeclarationStatement'
-  variables: Array<BaseASTNode | null>
-  initialValue: Expression | null
-  identifiers: Identifier[]
+    type: 'VariableDeclarationStatement'
+    variables: Array<BaseASTNode | null>
+    initialValue: Expression | null
+    identifiers: Identifier[]
 }
+
 export interface ElementaryTypeName extends BaseASTNode {
-  type: 'ElementaryTypeName'
-  name: string
-  stateMutability: string | null
+    type: 'ElementaryTypeName'
+    name: string
+    stateMutability: string | null
 }
+
 export interface FunctionCall extends BaseASTNode {
-  type: 'FunctionCall'
-  expression: Expression
-  arguments: Expression[]
-  names: string[]
-  identifiers: Identifier[]
+    type: 'FunctionCall'
+    expression: Expression
+    arguments: Expression[]
+    names: string[]
+    identifiers: Identifier[]
 }
+
 export interface AssemblyBlock extends BaseASTNode {
-  type: 'AssemblyBlock'
-  operations: AssemblyItem[]
+    type: 'AssemblyBlock'
+    operations: AssemblyItem[]
 }
+
 export interface AssemblyCall extends BaseASTNode {
-  type: 'AssemblyCall'
-  functionName: string
-  arguments: AssemblyExpression[]
+    type: 'AssemblyCall'
+    functionName: string
+    arguments: AssemblyExpression[]
 }
+
 export interface AssemblyLocalDefinition extends BaseASTNode {
-  type: 'AssemblyLocalDefinition'
-  names: Identifier[] | AssemblyMemberAccess[]
-  expression: AssemblyExpression | null
+    type: 'AssemblyLocalDefinition'
+    names: Identifier[] | AssemblyMemberAccess[]
+    expression: AssemblyExpression | null
 }
+
 export interface AssemblyAssignment extends BaseASTNode {
-  type: 'AssemblyAssignment'
-  names: Identifier[] | AssemblyMemberAccess[]
-  expression: AssemblyExpression
+    type: 'AssemblyAssignment'
+    names: Identifier[] | AssemblyMemberAccess[]
+    expression: AssemblyExpression
 }
+
 export interface AssemblyStackAssignment extends BaseASTNode {
-  type: 'AssemblyStackAssignment'
-  name: string
+    type: 'AssemblyStackAssignment'
+    name: string
 }
+
 export interface LabelDefinition extends BaseASTNode {
-  type: 'LabelDefinition'
-  name: string
+    type: 'LabelDefinition'
+    name: string
 }
+
 export interface AssemblySwitch extends BaseASTNode {
-  type: 'AssemblySwitch'
-  expression: AssemblyExpression
-  cases: AssemblyCase[]
+    type: 'AssemblySwitch'
+    expression: AssemblyExpression
+    cases: AssemblyCase[]
 }
+
 export interface AssemblyCase extends BaseASTNode {
-  type: 'AssemblyCase'
-  value: AssemblyLiteral | null
-  block: AssemblyBlock
-  default: boolean
+    type: 'AssemblyCase'
+    value: AssemblyLiteral | null
+    block: AssemblyBlock
+    default: boolean
 }
+
 export interface AssemblyFunctionDefinition extends BaseASTNode {
-  type: 'AssemblyFunctionDefinition'
-  name: string
-  arguments: Identifier[]
-  returnArguments: Identifier[]
-  body: AssemblyBlock
+    type: 'AssemblyFunctionDefinition'
+    name: string
+    arguments: Identifier[]
+    returnArguments: Identifier[]
+    body: AssemblyBlock
 }
+
 export interface AssemblyFunctionReturns extends BaseASTNode {
-  type: 'AssemblyFunctionReturns'
+    type: 'AssemblyFunctionReturns'
 }
+
 export interface AssemblyFor extends BaseASTNode {
-  type: 'AssemblyFor'
-  pre: AssemblyBlock | AssemblyExpression
-  condition: AssemblyExpression
-  post: AssemblyBlock | AssemblyExpression
-  body: AssemblyBlock
+    type: 'AssemblyFor'
+    pre: AssemblyBlock | AssemblyExpression
+    condition: AssemblyExpression
+    post: AssemblyBlock | AssemblyExpression
+    body: AssemblyBlock
 }
+
 export interface AssemblyIf extends BaseASTNode {
-  type: 'AssemblyIf'
-  condition: AssemblyExpression
-  body: AssemblyBlock
+    type: 'AssemblyIf'
+    condition: AssemblyExpression
+    body: AssemblyBlock
 }
+
 export type AssemblyLiteral =
-  | StringLiteral
-  | DecimalNumber
-  | HexNumber
-  | HexLiteral
+    | StringLiteral
+    | DecimalNumber
+    | HexNumber
+    | HexLiteral
+
 export interface SubAssembly extends BaseASTNode {
-  type: 'SubAssembly'
+    type: 'SubAssembly'
 }
+
 export interface AssemblyMemberAccess extends BaseASTNode {
-  type: 'AssemblyMemberAccess'
-  expression: Identifier
-  memberName: Identifier
+    type: 'AssemblyMemberAccess'
+    expression: Identifier
+    memberName: Identifier
 }
+
 export interface NewExpression extends BaseASTNode {
-  type: 'NewExpression'
-  typeName: TypeName
-  identifiers: Identifier[]
+    type: 'NewExpression'
+    typeName: TypeName
+    identifiers: Identifier[]
 }
+
 export interface TupleExpression extends BaseASTNode {
-  type: 'TupleExpression'
-  components: Array<BaseASTNode | null>
-  isArray: boolean
-  identifiers: Identifier[]
+    type: 'TupleExpression'
+    components: Array<BaseASTNode | null>
+    isArray: boolean
+    identifiers: Identifier[]
 }
+
 export interface TypeNameExpression extends BaseASTNode {
-  type: 'TypeNameExpression'
-  typeName: ElementaryTypeName | UserDefinedTypeName | ArrayTypeName
-  identifiers: Identifier[]
+    type: 'TypeNameExpression'
+    typeName: ElementaryTypeName | UserDefinedTypeName | ArrayTypeName
+    identifiers: Identifier[]
 }
+
 export interface NameValueExpression extends BaseASTNode {
-  type: 'NameValueExpression'
-  expression: Expression
-  arguments: NameValueList
-  identifiers: Identifier[]
+    type: 'NameValueExpression'
+    expression: Expression
+    arguments: NameValueList
+    identifiers: Identifier[]
 }
+
 export interface NumberLiteral extends BaseASTNode {
-  type: 'NumberLiteral'
-  number: string
-  subdenomination:
-    | null
-    | 'wei'
-    | 'szabo'
-    | 'finney'
-    | 'ether'
-    | 'seconds'
-    | 'minutes'
-    | 'hours'
-    | 'days'
-    | 'weeks'
-    | 'years'
-  identifiers: Identifier[]
+    type: 'NumberLiteral'
+    number: string
+    subdenomination:
+        | null
+        | 'wei'
+        | 'szabo'
+        | 'finney'
+        | 'ether'
+        | 'seconds'
+        | 'minutes'
+        | 'hours'
+        | 'days'
+        | 'weeks'
+        | 'years'
+    identifiers: Identifier[]
 }
+
 export interface BooleanLiteral extends BaseASTNode {
-  type: 'BooleanLiteral'
-  value: boolean
-  identifiers: Identifier[]
+    type: 'BooleanLiteral'
+    value: boolean
+    identifiers: Identifier[]
 }
+
 export interface HexLiteral extends BaseASTNode {
-  type: 'HexLiteral'
-  value: string
-  parts: string[]
-  identifiers: Identifier[]
+    type: 'HexLiteral'
+    value: string
+    parts: string[]
+    identifiers: Identifier[]
 }
+
 export interface StringLiteral extends BaseASTNode {
-  type: 'StringLiteral'
-  value: string
-  parts: string[]
-  isUnicode: boolean[]
-  identifiers: Identifier[]
+    type: 'StringLiteral'
+    value: string
+    parts: string[]
+    isUnicode: boolean[]
+    identifiers: Identifier[]
 }
+
 export interface Identifier extends BaseASTNode {
-  type: 'Identifier'
-  name: string
-  identifiers: Identifier[]
-  isDeclare?: boolean
+    type: 'Identifier'
+    name: string
+    identifiers: Identifier[]
+    isDeclare?: boolean
+    isReadOperation?: boolean
+    isWriteOperation?: boolean
+    subIdentifier: CommonType | IndexRangeAccess | IndexAccess | MemberAccess
+}
+
+export interface CommonType {
+    type: "Common"
+    identifiers: Identifier[]
 }
 
 export const binaryOpValues = [
-  '+',
-  '-',
-  '*',
-  '/',
-  '**',
-  '%',
-  '<<',
-  '>>',
-  '&&',
-  '||',
-  ',,',
-  '&',
-  ',',
-  '^',
-  '<',
-  '>',
-  '<=',
-  '>=',
-  '==',
-  '!=',
-  '=',
-  ',=',
-  '^=',
-  '&=',
-  '<<=',
-  '>>=',
-  '+=',
-  '-=',
-  '*=',
-  '/=',
-  '%=',
-  '|',
-  '|=',
+    '+',
+    '-',
+    '*',
+    '/',
+    '**',
+    '%',
+    '<<',
+    '>>',
+    '&&',
+    '||',
+    ',,',
+    '&',
+    ',',
+    '^',
+    '<',
+    '>',
+    '<=',
+    '>=',
+    '==',
+    '!=',
+    '=',
+    ',=',
+    '^=',
+    '&=',
+    '<<=',
+    '>>=',
+    '+=',
+    '-=',
+    '*=',
+    '/=',
+    '%=',
+    '|',
+    '|=',
 ] as const
 export type BinOp = typeof binaryOpValues[number]
 
+export const assignmentOpValues = [
+    "=", "|=", "^=", "&=", "<<=", ">>=", "+=", "-=", "*=", "/=", "%="
+] as const
+export type AssignmentOp = typeof assignmentOpValues[number]
+
 export const unaryOpValues = [
-  '-',
-  '+',
-  '++',
-  '--',
-  '~',
-  'after',
-  'delete',
-  '!',
+    '-',
+    '+',
+    '++',
+    '--',
+    '~',
+    'after',
+    'delete',
+    '!',
 ] as const
 export type UnaryOp = typeof unaryOpValues[number]
 
 export interface BinaryOperation extends BaseASTNode {
-  type: 'BinaryOperation'
-  left: Expression
-  right: Expression
-  operator: BinOp
-  identifiers: Identifier[]
+    type: 'BinaryOperation'
+    left: Expression
+    right: Expression
+    operator: BinOp
+    identifiers: Identifier[]
 }
+
 export interface UnaryOperation extends BaseASTNode {
-  type: 'UnaryOperation'
-  operator: UnaryOp
-  subExpression: Expression
-  isPrefix: boolean
-  identifiers: Identifier[]
+    type: 'UnaryOperation'
+    operator: UnaryOp
+    subExpression: Expression
+    isPrefix: boolean
+    identifiers: Identifier[]
 }
+
 export interface Conditional extends BaseASTNode {
-  type: 'Conditional'
-  condition: Expression
-  trueExpression: Expression
-  falseExpression: Expression
-  identifiers: Identifier[]
+    type: 'Conditional'
+    condition: Expression
+    trueExpression: Expression
+    falseExpression: Expression
+    identifiers: Identifier[]
 }
+
 export interface IndexAccess extends BaseASTNode {
-  type: 'IndexAccess'
-  base: Expression
-  index: Expression
-  identifiers: Identifier[]
+    type: 'IndexAccess'
+    base: Expression
+    index: Expression
+    identifiers: Identifier[]
 }
+
 export interface IndexRangeAccess extends BaseASTNode {
-  type: 'IndexRangeAccess'
-  base: Expression
-  indexStart?: Expression
-  indexEnd?: Expression
-  identifiers: Identifier[]
+    type: 'IndexRangeAccess'
+    base: Expression
+    indexStart?: Expression
+    indexEnd?: Expression
+    identifiers: Identifier[]
 }
+
 export interface MemberAccess extends BaseASTNode {
-  type: 'MemberAccess'
-  expression: Expression
-  memberName: string
-  identifiers: Identifier[]
+    type: 'MemberAccess'
+    expression: Expression
+    memberName: string
+    identifiers: Identifier[]
 }
+
 export interface HexNumber extends BaseASTNode {
-  type: 'HexNumber'
-  value: string
+    type: 'HexNumber'
+    value: string
 }
+
 export interface DecimalNumber extends BaseASTNode {
-  type: 'DecimalNumber'
-  value: string
+    type: 'DecimalNumber'
+    value: string
 }
+
 export interface NameValueList extends BaseASTNode {
-  type: 'NameValueList'
-  names: string[]
-  identifiers: Identifier[]
-  arguments: Expression[]
+    type: 'NameValueList'
+    names: string[]
+    identifiers: Identifier[]
+    arguments: Expression[]
 }
+
 export type ASTNode =
-  | SourceUnit
-  | PragmaDirective
-  | ImportDirective
-  | ContractDefinition
-  | InheritanceSpecifier
-  | StateVariableDeclaration
-  | UsingForDeclaration
-  | StructDefinition
-  | ModifierDefinition
-  | ModifierInvocation
-  | FunctionDefinition
-  | EventDefinition
-  | CustomErrorDefinition
-  | EnumValue
-  | EnumDefinition
-  | VariableDeclaration
-  | TypeName
-  | UserDefinedTypeName
-  | Mapping
-  | FunctionTypeName
-  | Block
-  | Statement
-  | ElementaryTypeName
-  | AssemblyBlock
-  | AssemblyCall
-  | AssemblyLocalDefinition
-  | AssemblyAssignment
-  | AssemblyStackAssignment
-  | LabelDefinition
-  | AssemblySwitch
-  | AssemblyCase
-  | AssemblyFunctionDefinition
-  | AssemblyFunctionReturns
-  | AssemblyFor
-  | AssemblyIf
-  | AssemblyLiteral
-  | SubAssembly
-  | TupleExpression
-  | TypeNameExpression
-  | BinaryOperation
-  | Conditional
-  | IndexAccess
-  | IndexRangeAccess
-  | AssemblyItem
-  | Expression
-  | NameValueList
-  | AssemblyMemberAccess
-  | CatchClause
-  | FileLevelConstant
-  | TypeDefinition
+    | SourceUnit
+    | PragmaDirective
+    | ImportDirective
+    | ContractDefinition
+    | InheritanceSpecifier
+    | StateVariableDeclaration
+    | UsingForDeclaration
+    | StructDefinition
+    | ModifierDefinition
+    | ModifierInvocation
+    | FunctionDefinition
+    | EventDefinition
+    | CustomErrorDefinition
+    | EnumValue
+    | EnumDefinition
+    | VariableDeclaration
+    | TypeName
+    | UserDefinedTypeName
+    | Mapping
+    | FunctionTypeName
+    | Block
+    | Statement
+    | ElementaryTypeName
+    | AssemblyBlock
+    | AssemblyCall
+    | AssemblyLocalDefinition
+    | AssemblyAssignment
+    | AssemblyStackAssignment
+    | LabelDefinition
+    | AssemblySwitch
+    | AssemblyCase
+    | AssemblyFunctionDefinition
+    | AssemblyFunctionReturns
+    | AssemblyFor
+    | AssemblyIf
+    | AssemblyLiteral
+    | SubAssembly
+    | TupleExpression
+    | TypeNameExpression
+    | BinaryOperation
+    | Conditional
+    | IndexAccess
+    | IndexRangeAccess
+    | AssemblyItem
+    | Expression
+    | NameValueList
+    | AssemblyMemberAccess
+    | CatchClause
+    | FileLevelConstant
+    | TypeDefinition
 
 export type AssemblyItem =
-  | Identifier
-  | AssemblyBlock
-  | AssemblyExpression
-  | AssemblyLocalDefinition
-  | AssemblyAssignment
-  | AssemblyStackAssignment
-  | LabelDefinition
-  | AssemblySwitch
-  | AssemblyFunctionDefinition
-  | AssemblyFor
-  | AssemblyIf
-  | Break
-  | Continue
-  | SubAssembly
-  | NumberLiteral
-  | StringLiteral
-  | HexNumber
-  | HexLiteral
-  | DecimalNumber
+    | Identifier
+    | AssemblyBlock
+    | AssemblyExpression
+    | AssemblyLocalDefinition
+    | AssemblyAssignment
+    | AssemblyStackAssignment
+    | LabelDefinition
+    | AssemblySwitch
+    | AssemblyFunctionDefinition
+    | AssemblyFor
+    | AssemblyIf
+    | Break
+    | Continue
+    | SubAssembly
+    | NumberLiteral
+    | StringLiteral
+    | HexNumber
+    | HexLiteral
+    | DecimalNumber
 export type AssemblyExpression = AssemblyCall | AssemblyLiteral
 export type Expression =
-  | IndexAccess
-  | IndexRangeAccess
-  | TupleExpression
-  | BinaryOperation
-  | Conditional
-  | MemberAccess
-  | FunctionCall
-  | UnaryOperation
-  | NewExpression
-  | PrimaryExpression
-  | NameValueExpression
+    | IndexAccess
+    | IndexRangeAccess
+    | TupleExpression
+    | BinaryOperation
+    | Conditional
+    | MemberAccess
+    | FunctionCall
+    | UnaryOperation
+    | NewExpression
+    | PrimaryExpression
+    | NameValueExpression
 export type PrimaryExpression =
-  | BooleanLiteral
-  | HexLiteral
-  | StringLiteral
-  | NumberLiteral
-  | Identifier
-  | TupleExpression
-  | TypeNameExpression
+    | BooleanLiteral
+    | HexLiteral
+    | StringLiteral
+    | NumberLiteral
+    | Identifier
+    | TupleExpression
+    | TypeNameExpression
 export type SimpleStatement = VariableDeclarationStatement | ExpressionStatement
 export type TypeName =
-  | ElementaryTypeName
-  | UserDefinedTypeName
-  | Mapping
-  | ArrayTypeName
-  | FunctionTypeName
+    | ElementaryTypeName
+    | UserDefinedTypeName
+    | Mapping
+    | ArrayTypeName
+    | FunctionTypeName
 export type Statement =
-  | IfStatement
-  | WhileStatement
-  | ForStatement
-  | Block
-  | InlineAssemblyStatement
-  | DoWhileStatement
-  | ContinueStatement
-  | BreakStatement
-  | ReturnStatement
-  | EmitStatement
-  | ThrowStatement
-  | SimpleStatement
-  | VariableDeclarationStatement
-  | UncheckedStatement
-  | TryStatement
-  | RevertStatement
+    | IfStatement
+    | WhileStatement
+    | ForStatement
+    | Block
+    | InlineAssemblyStatement
+    | DoWhileStatement
+    | ContinueStatement
+    | BreakStatement
+    | ReturnStatement
+    | EmitStatement
+    | ThrowStatement
+    | SimpleStatement
+    | VariableDeclarationStatement
+    | UncheckedStatement
+    | TryStatement
+    | RevertStatement
 
 type ASTMap<U> = { [K in ASTNodeTypeString]: U extends { type: K } ? U : never }
 type ASTTypeMap = ASTMap<ASTNode>
 type ASTVisitorEnter = {
-  [K in keyof ASTTypeMap]?: (ast: ASTTypeMap[K], parent?: ASTNode) => any
+    [K in keyof ASTTypeMap]?: (ast: ASTTypeMap[K], parent?: ASTNode) => any
 }
 type ASTVisitorExit = {
-  [K in keyof ASTTypeMap as `${K}:exit`]?: (
-    ast: ASTTypeMap[K],
-    parent?: ASTNode
-  ) => any
+    [K in keyof ASTTypeMap as `${K}:exit`]?: (
+        ast: ASTTypeMap[K],
+        parent?: ASTNode
+    ) => any
 }
 
 export type ASTVisitor = ASTVisitorEnter & ASTVisitorExit
@@ -761,38 +842,39 @@ export type ASTVisitor = ASTVisitorEnter & ASTVisitorExit
  * from others.
  */
 function checkTypes() {
-  const astNodeType: ASTNode['type'] = '' as any
-  const astNodeTypeString: ASTNodeTypeString = '' as any
-  const astVisitorEnterKey: keyof ASTVisitorEnter = '' as any
+    const astNodeType: ASTNode['type'] = '' as any
+    const astNodeTypeString: ASTNodeTypeString = '' as any
+    const astVisitorEnterKey: keyof ASTVisitorEnter = '' as any
 
-  let assignAstNodeType: ASTNode['type'] = astNodeTypeString
-  assignAstNodeType = astVisitorEnterKey
+    let assignAstNodeType: ASTNode['type'] = astNodeTypeString
+    assignAstNodeType = astVisitorEnterKey
 
-  let assignAstNodeTyeString: ASTNodeTypeString = astNodeType
-  assignAstNodeTyeString = astVisitorEnterKey
+    let assignAstNodeTyeString: ASTNodeTypeString = astNodeType
+    assignAstNodeTyeString = astVisitorEnterKey
 
-  let assignAstVisitorEnterKey: keyof ASTVisitorEnter = astNodeType
-  assignAstVisitorEnterKey = astNodeTypeString
+    let assignAstVisitorEnterKey: keyof ASTVisitorEnter = astNodeType
+    assignAstVisitorEnterKey = astNodeTypeString
 
-  const astNodeTypeExit: `${ASTNode['type']}:exit` = '' as any
-  const astNodeTypeStringExit: `${ASTNodeTypeString}:exit` = '' as any
-  const astVisitorEnterKeyExit: `${keyof ASTVisitorEnter}:exit` = '' as any
-  const astVisitorExitKey: keyof ASTVisitorExit = '' as any
+    const astNodeTypeExit: `${ASTNode['type']}:exit` = '' as any
+    const astNodeTypeStringExit: `${ASTNodeTypeString}:exit` = '' as any
+    const astVisitorEnterKeyExit: `${keyof ASTVisitorEnter}:exit` = '' as any
+    const astVisitorExitKey: keyof ASTVisitorExit = '' as any
 
-  let letAstNodeTypeExit: `${ASTNode['type']}:exit` = astNodeTypeStringExit
-  letAstNodeTypeExit = astVisitorEnterKeyExit
-  letAstNodeTypeExit = astVisitorExitKey
+    let letAstNodeTypeExit: `${ASTNode['type']}:exit` = astNodeTypeStringExit
+    letAstNodeTypeExit = astVisitorEnterKeyExit
+    letAstNodeTypeExit = astVisitorExitKey
 
-  let assignAstNodeTypeStringExit: `${ASTNodeTypeString}:exit` = astNodeTypeExit
-  assignAstNodeTypeStringExit = astVisitorEnterKeyExit
-  assignAstNodeTypeStringExit = astVisitorExitKey
+    let assignAstNodeTypeStringExit: `${ASTNodeTypeString}:exit` = astNodeTypeExit
+    assignAstNodeTypeStringExit = astVisitorEnterKeyExit
+    assignAstNodeTypeStringExit = astVisitorExitKey
 
-  let assignAstVisitorEnterKeyExit: `${keyof ASTVisitorEnter}:exit` = astNodeTypeExit
-  assignAstVisitorEnterKeyExit = astNodeTypeStringExit
-  assignAstVisitorEnterKeyExit = astVisitorExitKey
+    let assignAstVisitorEnterKeyExit: `${keyof ASTVisitorEnter}:exit` = astNodeTypeExit
+    assignAstVisitorEnterKeyExit = astNodeTypeStringExit
+    assignAstVisitorEnterKeyExit = astVisitorExitKey
 
-  let assignAstVisitorExitKey: keyof ASTVisitorExit = astNodeTypeExit
-  assignAstVisitorExitKey = astNodeTypeStringExit
-  assignAstVisitorExitKey = astVisitorEnterKeyExit
+    let assignAstVisitorExitKey: keyof ASTVisitorExit = astNodeTypeExit
+    assignAstVisitorExitKey = astNodeTypeStringExit
+    assignAstVisitorExitKey = astVisitorEnterKeyExit
 }
+
 /* eslint-enable @typescript-eslint/no-unused-vars */

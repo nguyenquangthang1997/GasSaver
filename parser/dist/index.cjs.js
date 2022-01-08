@@ -35724,6 +35724,19 @@ var binaryOpValues = [
   "|",
   "|="
 ];
+var assignmentOpValues = [
+  "=",
+  "|=",
+  "^=",
+  "&=",
+  "<<=",
+  ">>=",
+  "+=",
+  "-=",
+  "*=",
+  "/=",
+  "%="
+];
 var unaryOpValues = [
   "-",
   "+",
@@ -36087,8 +36100,16 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
       identifiers: [{
         type: "Identifier",
         name: ASTBuilder._toText(ctx),
+        identifiers: [],
+        subIdentifier: {
+          type: "Common",
+          identifiers: []
+        }
+      }],
+      subIdentifier: {
+        type: "Common",
         identifiers: []
-      }]
+      }
     };
     return this._addMeta(node, ctx);
   }
@@ -36313,22 +36334,31 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
   visitFunctionCall(ctx) {
     let args = [];
     const names = [];
-    const identifiers = [];
+    let identifiers = [];
     const ctxArgs = ctx.functionCallArguments();
     const ctxArgsExpressionList = ctxArgs.expressionList();
     const ctxArgsNameValueList = ctxArgs.nameValueList();
     if (ctxArgsExpressionList) {
-      args = ctxArgsExpressionList.expression().map((exprCtx) => this.visitExpression(exprCtx));
+      args = ctxArgsExpressionList.expression().map((exprCtx) => {
+        let temp = this.visitExpression(exprCtx);
+        identifiers.push(...temp.identifiers);
+        return temp;
+      });
     } else if (ctxArgsNameValueList) {
       for (const nameValue of ctxArgsNameValueList.nameValue()) {
-        args.push(this.visitExpression(nameValue.expression()));
+        let temp = this.visitExpression(nameValue.expression());
+        args.push(temp);
         names.push(ASTBuilder._toText(nameValue.identifier()));
-        identifiers.push(this.visitIdentifier(nameValue.identifier()));
+        identifiers.push(...temp.identifiers);
       }
+    }
+    let expression = this.visitExpression(ctx.expression());
+    if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
+      identifiers = [...expression.subIdentifier.identifiers, ...identifiers];
     }
     const node = {
       type: "FunctionCall",
-      expression: this.visitExpression(ctx.expression()),
+      expression,
       arguments: args,
       names,
       identifiers
@@ -36368,7 +36398,7 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
   visitIfStatement(ctx) {
     const trueBody = this.visitStatement(ctx.statement(0));
     let condition = this.visitExpression(ctx.expression());
-    let identifiers = [...trueBody.identifiers, ...condition.identifiers];
+    let identifiers = [...condition.identifiers, ...trueBody.identifiers];
     let falseBody = null;
     if (ctx.statement().length > 1) {
       falseBody = this.visitStatement(ctx.statement(1));
@@ -36406,7 +36436,7 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
       returnParameters,
       body,
       catchClauses,
-      identifiers: [...identifiers, ...expression.identifiers, ...body.identifiers]
+      identifiers
     };
     return this._addMeta(node, ctx);
   }
@@ -36446,7 +36476,7 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
     const node = {
       type: "ExpressionStatement",
       expression: this.visitExpression(ctx.expression()),
-      identifiers: expression.identifiers
+      identifiers: expression.type === "Identifier" ? [expression] : expression.identifiers
     };
     return this._addMeta(node, ctx);
   }
@@ -36548,17 +36578,53 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
         }
         const subExpression = this.visitExpression(ctx.getRuleContext(0, ExpressionContext));
         if (unaryOpValues.includes(op)) {
+          let identifiers = [];
+          if (subExpression.type !== "Identifier") {
+            subExpression.identifiers.forEach((id) => {
+              if (["++", "--", "delete"].includes(op)) {
+                identifiers.push(__spreadProps(__spreadValues({}, id), {
+                  isReadOperation: false,
+                  isWriteOperation: true
+                }));
+              }
+            });
+          } else {
+            if (["++", "--", "delete"].includes(op)) {
+              identifiers.push(__spreadProps(__spreadValues({}, subExpression), {
+                isReadOperation: false,
+                isWriteOperation: true
+              }));
+            }
+          }
           const node = {
             type: "UnaryOperation",
             operator: op,
             subExpression,
             isPrefix: true,
-            identifiers: subExpression.identifiers
+            identifiers
           };
           return this._addMeta(node, ctx);
         }
         op = ASTBuilder._toText(ctx.getChild(1));
         if (["++", "--"].includes(op)) {
+          let identifiers = [];
+          if (subExpression.type !== "Identifier") {
+            subExpression.identifiers.forEach((id) => {
+              if (["++", "--", "delete"].includes(op)) {
+                identifiers.push(__spreadProps(__spreadValues({}, id), {
+                  isReadOperation: false,
+                  isWriteOperation: true
+                }));
+              }
+            });
+          } else {
+            if (["++", "--", "delete"].includes(op)) {
+              identifiers.push(__spreadProps(__spreadValues({}, subExpression), {
+                isReadOperation: false,
+                isWriteOperation: true
+              }));
+            }
+          }
           const node = {
             type: "UnaryOperation",
             operator: op,
@@ -36584,22 +36650,69 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
         if (op === ".") {
           const expression = this.visitExpression(ctx.expression(0));
           const node = {
-            type: "MemberAccess",
-            expression,
-            memberName: ASTBuilder._toText(ctx.identifier()),
-            identifiers: expression.identifiers
+            subIdentifier: {
+              type: "MemberAccess",
+              expression,
+              memberName: ASTBuilder._toText(ctx.identifier()),
+              identifiers: expression.identifiers
+            },
+            type: "Identifier",
+            name: "",
+            identifiers: [
+              {
+                subIdentifier: {
+                  type: "MemberAccess",
+                  expression,
+                  memberName: ASTBuilder._toText(ctx.identifier()),
+                  identifiers: expression.identifiers
+                },
+                type: "Identifier",
+                name: "",
+                identifiers: expression.identifiers
+              }
+            ]
           };
           return this._addMeta(node, ctx);
         }
         if (isBinOp(op)) {
           let left = this.visitExpression(ctx.expression(0));
           let right = this.visitExpression(ctx.expression(1));
+          let identifiers = [];
+          if (isAssignmentOp(op)) {
+            if (left.type === "Identifier") {
+              identifiers.push(__spreadProps(__spreadValues({}, left), {isReadOperation: false, isWriteOperation: true}));
+            } else {
+              left.identifiers.forEach((id) => {
+                identifiers.push(id);
+              });
+              if (identifiers.length > 0) {
+                identifiers[0].isReadOperation = false;
+                identifiers[0].isWriteOperation = true;
+              }
+            }
+            if (right.type === "Identifier") {
+              identifiers.push(__spreadProps(__spreadValues({}, right), {
+                isReadOperation: true,
+                isWriteOperation: right.isWriteOperation === void 0 ? false : right.isWriteOperation
+              }));
+            } else {
+              right.identifiers.forEach((el) => {
+                el.isReadOperation = true;
+                if (el.isWriteOperation === void 0) {
+                  el.isWriteOperation = false;
+                }
+              });
+              identifiers.push(...right.identifiers);
+            }
+          } else {
+            identifiers = [...left.identifiers, ...right.identifiers];
+          }
           const node = {
             type: "BinaryOperation",
             operator: op,
             left,
             right,
-            identifiers: [...left.identifiers, ...right.identifiers]
+            identifiers
           };
           return this._addMeta(node, ctx);
         }
@@ -36608,20 +36721,29 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
         if (ASTBuilder._toText(ctx.getChild(1)) === "(" && ASTBuilder._toText(ctx.getChild(3)) === ")") {
           let args = [];
           const names = [];
-          const identifiers = [];
+          let identifiers = [];
           const ctxArgs = ctx.functionCallArguments();
           if (ctxArgs.expressionList()) {
-            args = ctxArgs.expressionList().expression().map((exprCtx) => this.visitExpression(exprCtx));
+            args = ctxArgs.expressionList().expression().map((exprCtx) => {
+              let temp = this.visitExpression(exprCtx);
+              identifiers.push(...temp.identifiers);
+              return temp;
+            });
           } else if (ctxArgs.nameValueList()) {
             for (const nameValue of ctxArgs.nameValueList().nameValue()) {
-              args.push(this.visitExpression(nameValue.expression()));
+              let temp = this.visitExpression(nameValue.expression());
+              args.push(temp);
               names.push(ASTBuilder._toText(nameValue.identifier()));
-              identifiers.push(this.visitIdentifier(nameValue.identifier()));
+              identifiers.push(...temp.identifiers);
             }
+          }
+          let expression = this.visitExpression(ctx.expression(0));
+          if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
+            identifiers = [...expression.subIdentifier.identifiers, ...identifiers];
           }
           const node = {
             type: "FunctionCall",
-            expression: this.visitExpression(ctx.expression(0)),
+            expression,
             arguments: args,
             names,
             identifiers
@@ -36632,18 +36754,49 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
           const base2 = this.visitExpression(ctx.expression(0));
           if (ctx.getChild(2).text === ":") {
             const node2 = {
-              type: "IndexRangeAccess",
-              base: base2,
-              identifiers: base2.identifiers
+              subIdentifier: {
+                type: "IndexRangeAccess",
+                base: base2,
+                identifiers: base2.identifiers
+              },
+              type: "Identifier",
+              name: "",
+              identifiers: [{
+                subIdentifier: {
+                  type: "IndexRangeAccess",
+                  base: base2,
+                  identifiers: base2.identifiers
+                },
+                type: "Identifier",
+                name: "",
+                identifiers: base2.identifiers
+              }]
             };
             return this._addMeta(node2, ctx);
           }
           const index2 = this.visitExpression(ctx.expression(1));
           const node = {
-            type: "IndexAccess",
-            base: base2,
-            index: index2,
-            identifiers: [...base2.identifiers, ...index2.identifiers]
+            subIdentifier: {
+              type: "IndexAccess",
+              base: base2,
+              index: index2,
+              identifiers: [...base2.identifiers, ...index2.identifiers]
+            },
+            type: "Identifier",
+            name: "",
+            identifiers: [
+              {
+                subIdentifier: {
+                  type: "IndexAccess",
+                  base: base2,
+                  index: index2,
+                  identifiers: [...base2.identifiers, ...index2.identifiers]
+                },
+                type: "Identifier",
+                name: "",
+                identifiers: [...base2.identifiers, ...index2.identifiers]
+              }
+            ]
           };
           return this._addMeta(node, ctx);
         }
@@ -36677,18 +36830,48 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
         const index = this.visitExpression(ctx.expression(1));
         if (ASTBuilder._toText(ctx.getChild(1)) === "[" && ASTBuilder._toText(ctx.getChild(2)) === ":" && ASTBuilder._toText(ctx.getChild(4)) === "]") {
           const node = {
-            type: "IndexRangeAccess",
-            base,
-            indexEnd: index,
-            identifiers: [...base.identifiers, ...index.identifiers]
+            subIdentifier: {
+              type: "IndexRangeAccess",
+              base,
+              indexEnd: index,
+              identifiers: [...base.identifiers, ...index.identifiers]
+            },
+            type: "Identifier",
+            name: "",
+            identifiers: [{
+              subIdentifier: {
+                type: "IndexRangeAccess",
+                base,
+                indexEnd: index,
+                identifiers: [...base.identifiers, ...index.identifiers]
+              },
+              type: "Identifier",
+              name: "",
+              identifiers: [...base.identifiers, ...index.identifiers]
+            }]
           };
           return this._addMeta(node, ctx);
         } else if (ASTBuilder._toText(ctx.getChild(1)) === "[" && ASTBuilder._toText(ctx.getChild(3)) === ":" && ASTBuilder._toText(ctx.getChild(4)) === "]") {
           const node = {
-            type: "IndexRangeAccess",
-            base,
-            indexStart: index,
-            identifiers: [...base.identifiers, ...index.identifiers]
+            subIdentifier: {
+              type: "IndexRangeAccess",
+              base,
+              indexStart: index,
+              identifiers: [...base.identifiers, ...index.identifiers]
+            },
+            type: "Identifier",
+            name: "",
+            identifiers: [{
+              subIdentifier: {
+                type: "IndexRangeAccess",
+                base,
+                indexStart: index,
+                identifiers: [...base.identifiers, ...index.identifiers]
+              },
+              type: "Identifier",
+              name: "",
+              identifiers: [...base.identifiers, ...index.identifiers]
+            }, ...base.identifiers, ...index.identifiers]
           };
           return this._addMeta(node, ctx);
         }
@@ -36699,11 +36882,27 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
           const indexStart = this.visitExpression(ctx.expression(1));
           const indexEnd = this.visitExpression(ctx.expression(2));
           const node = {
-            type: "IndexRangeAccess",
-            base: base2,
-            indexStart,
-            indexEnd,
-            identifiers: [...base2.identifiers, ...indexStart.identifiers, ...indexEnd.identifiers]
+            subIdentifier: {
+              type: "IndexRangeAccess",
+              base: base2,
+              indexStart,
+              indexEnd,
+              identifiers: [...base2.identifiers, ...indexStart.identifiers, ...indexEnd.identifiers]
+            },
+            type: "Identifier",
+            name: "",
+            identifiers: [{
+              subIdentifier: {
+                type: "IndexRangeAccess",
+                base: base2,
+                indexStart,
+                indexEnd,
+                identifiers: [...base2.identifiers, ...indexStart.identifiers, ...indexEnd.identifiers]
+              },
+              type: "Identifier",
+              name: "",
+              identifiers: [...base2.identifiers, ...indexStart.identifiers, ...indexEnd.identifiers]
+            }, ...base2.identifiers, ...indexStart.identifiers, ...indexEnd.identifiers]
           };
           return this._addMeta(node, ctx);
         }
@@ -36744,14 +36943,13 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
     return this._addMeta(node, ctx);
   }
   visitForStatement(ctx) {
-    let identifiers = [];
     let conditionExpression = this.visitExpressionStatement(ctx.expressionStatement());
+    let initExpression = ctx.simpleStatement() ? this.visitSimpleStatement(ctx.simpleStatement()) : null;
+    let identifiers = initExpression !== null ? [...initExpression.identifiers] : [];
     if (conditionExpression) {
       conditionExpression = conditionExpression.expression;
       identifiers.push(...conditionExpression.identifiers);
     }
-    let initExpression = ctx.simpleStatement() ? this.visitSimpleStatement(ctx.simpleStatement()) : null;
-    identifiers = initExpression !== null ? [...identifiers, ...initExpression.identifiers] : identifiers;
     let loopExpression = ctx.expression() !== void 0 ? this.visitExpression(ctx.expression()) : null;
     if (loopExpression !== null) {
       identifiers.push(...loopExpression.identifiers);
@@ -36822,7 +37020,11 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
       const node = {
         type: "Identifier",
         name: "type",
-        identifiers: []
+        identifiers: [],
+        subIdentifier: {
+          type: "Common",
+          identifiers: []
+        }
       };
       return this._addMeta(node, ctx);
     }
@@ -36865,11 +37067,17 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
       }
       return this.visit(expr);
     });
+    let identifiers = [];
+    components.forEach((el) => {
+      if (el.type === "Identifier") {
+        identifiers.push(el);
+      }
+    });
     const node = {
       type: "TupleExpression",
       components,
       isArray: ASTBuilder._toText(ctx.getChild(0)) === "[",
-      identifiers: []
+      identifiers
     };
     return this._addMeta(node, ctx);
   }
@@ -37312,6 +37520,9 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
 };
 function isBinOp(op) {
   return binaryOpValues.includes(op);
+}
+function isAssignmentOp(op) {
+  return assignmentOpValues.includes(op);
 }
 
 // src/ErrorListener.ts

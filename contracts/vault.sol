@@ -774,7 +774,7 @@ contract ERC20 is IERC20 {
      * All three of these values are immutable: they can only be set once during
      * construction.
      */
-    //    constructor() public {}
+        constructor() public {}
 
 
     /**
@@ -1148,6 +1148,7 @@ contract NFT20Vault is ERC20, IERC721Receiver, IERC1155Receiver {
         }
         require(nftFactory.length > 0, "At least 1 NFT must be deposit");
         require(sum == 10000 * 10 ** 18, "The total price of NFT Deposit must be equal to 10000 token");
+
         for (uint256 i = 0; i < nftFactory.length; i++) {
             require(nftType[i] == 721 || nftType[i] == 1155, "NFT must be ERC771 or ERC1155 token");
             transferNft(nftFactory[i], nftType[i], msg.sender, address(this), nftTokenId[i]);

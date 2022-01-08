@@ -21,7 +21,7 @@ function logDataRepresentation(rangeBefore, rangeAfter, data) {
     }
 }
 
-function logDataTypeFunctionCalldata(rangeBefore, endChange, timeReplace,data, visibility) {
+function logDataTypeFunctionCalldata(rangeBefore, endChange, timeReplace, data, visibility) {
     let _before = data.slice(rangeBefore[0], rangeBefore[1] + 1).toString();
     let _after = data.slice(rangeBefore[0], endChange + 1).toString();
     for (let i = 0; i < timeReplace; i++) {
@@ -48,6 +48,23 @@ function logStateVariable(range, data, name) {
 
 }
 
+function traceIdentifier(identifier) {
+    if (identifier.type === "Identifier") {
+        if (identifier.subIdentifier.type === "IndexAccess") {
+            return traceIdentifier(identifier.subIdentifier.base)
+        } else if (identifier.subIdentifier.type === "MemberAccess") {
+            return traceIdentifier(identifier.subIdentifier.expression)
+        } else if (identifier.subIdentifier.type === "IndexRangeAccess") {
+            return traceIdentifier(identifier.subIdentifier.base)
+        } else if (identifier.subIdentifier.type === "Common") {
+            return identifier.name
+        }
+    } else {
+        console.log(identifier)
+        throw Error("Un-handle")
+    }
+}
+
 async function optimized(path) {
     const data = await fs.readFile(path);
     const ast = parser.parse(data.toString(), {tokens: true, tolerant: true, range: true});
@@ -57,30 +74,21 @@ async function optimized(path) {
     ast.children.forEach((item, index) => {
         if (item.type === "ContractDefinition") {
 
-            // if (item.baseContracts.length !== 0) {
-            //     // listFunction = {...listFunction,...optimized()}
-            // }
             let listStateInContract = item.subNodes.filter(item => item.type === "StateVariableDeclaration")
             let result = wastedInDataRepresentation(listStateInContract.map(item => item.variables[0]))
             if (result.status === true) {
                 results.push(logDataRepresentation(result.rangeBefore, result.rangeAfter, data))
             }
+
             let listStructDefinition = item.subNodes.filter(item => item.type === "StructDefinition")
             listStructDefinition.map(item => wastedInDataRepresentation(item.members)).forEach(item => {
                 if (item.status === true) results.push(logDataRepresentation(item.rangeBefore, item.rangeAfter, data))
             })
 
+
             let listFunction = item.subNodes.filter(item => item.type === "FunctionDefinition")
-            listFunction.forEach((item, index) => {
-                item.stateUsed = []
-                let newVariables = {}
-                for (let iden of item.identifiers) {
-                    if (iden.isDeclare === true) newVariables[iden.name] = true
-                }
-                for (let iden of item.identifiers) {
-                    if (iden.isDeclare !== true && !(iden.name in newVariables)) item.stateUsed.push(iden)
-                }
-            })
+
+            // memory => calldata
             listFunctions[item.name] = listFunction.map(item => {
                 let changTypeDataRanges = []
                 for (let parameter of item.parameters) {
@@ -91,6 +99,20 @@ async function optimized(path) {
                 if ((item.visibility === "public" || item.visibility === "external") && changTypeDataRanges.length > 0)
                     results.push(logDataTypeFunctionCalldata(item.range, item.parameters[item.parameters.length - 1].range[1], changTypeDataRanges.length, data, item.visibility))
             })
+
+            // check const
+            listFunction.forEach((item, index) => {
+                item.stateUsed = []
+                let newVariables = {}
+                for (let iden of item.identifiers) {
+                    if (iden.isDeclare === true) newVariables[iden.name] = true
+                }
+                for (let iden of item.identifiers) {
+                    // không phải là biến được khai  báo, k phải biến trong hàm, và bị thay đổi giá trị
+                    if (iden.isDeclare !== true && !(iden.name in newVariables) && iden.isWriteOperation === true) item.stateUsed.push(iden)
+                }
+            })
+
             let listModifier = item.subNodes.filter(item => item.type === "ModifierDefinition")
             listModifier.forEach((item, index) => {
                 item.stateUsed = []
@@ -99,7 +121,7 @@ async function optimized(path) {
                     if (iden.isDeclare === true) newVariables[iden.name] = true
                 }
                 for (let iden of item.identifiers) {
-                    if (iden.isDeclare !== true && !(iden.name in newVariables) && iden.name !== "_") item.stateUsed.push(iden)
+                    if (iden.isDeclare !== true && !(iden.name in newVariables) && iden.name !== "_" && iden.isWriteOperation === true) item.stateUsed.push(iden)
                 }
             })
 
@@ -107,8 +129,10 @@ async function optimized(path) {
             for (let i of item.subNodes) {
                 if (i.type === "FunctionDefinition" || i.type === "ModifierDefinition") {
                     for (let stateUsed of i.stateUsed) {
-                        if (!(stateUsed.name in stateUseds)) {
-                            stateUseds[stateUsed.name] = stateUsed
+                        // TODO WITH EACH TYPE
+                        let stateUsedName = traceIdentifier(stateUsed)
+                        if (!(stateUsedName in stateUseds)) {
+                            stateUseds[stateUsedName] = stateUsed
                         }
                     }
                 }
@@ -120,6 +144,25 @@ async function optimized(path) {
                     results.push(logStateVariable(item.range, data, item.variables[0].name))
                 }
             })
+            // listFunction.forEach(item => {
+            //     item.stateUsed = item.stateUsed.filter(identifier => identifier.subIdentifier.type === "Common")
+            //     if (item.stateUsed.length > 1) {
+            //         let analyticIdentifier = {}
+            //         item.stateUsed.forEach(iden => {
+            //             if (analyticIdentifier[iden.name] === undefined) {
+            //                 analyticIdentifier[iden.name] = [iden]
+            //             } else {
+            //                 analyticIdentifier[iden.name].push(iden)
+            //             }
+            //         })
+            //         for(let state in analyticIdentifier){
+            //             if(analyticIdentifier[state].length>1){
+            //                 let c = 1;
+            //             }
+            //         }
+            //     }
+            // })
+
         }
     })
     for (let res of results) {
@@ -130,4 +173,4 @@ async function optimized(path) {
     }
 }
 
-optimized("contracts/vault.sol")
+optimized("contracts/test.sol")

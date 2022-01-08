@@ -7,7 +7,7 @@ import {SolidityVisitor} from './antlr/SolidityVisitor'
 import {ParseOptions} from './types'
 import * as AST from './ast-types'
 import {ErrorNode} from 'antlr4ts/tree/ErrorNode'
-import {Identifier} from "./ast-types";
+import {AssignmentOp, assignmentOpValues, Identifier} from "./ast-types";
 
 interface SourceLocation {
     start: {
@@ -180,7 +180,7 @@ export class ASTBuilder
         ctx: SP.VariableDeclarationStatementContext
     ): AST.VariableDeclarationStatement & WithMeta {
         let identifiers = []
-        let variables: Array<AST.BaseASTNode | null> = []
+        let variables: Array<AST.VariableDeclaration | null> = []
         const ctxVariableDeclaration = ctx.variableDeclaration()
         const ctxIdentifierList = ctx.identifierList()
         const ctxVariableDeclarationList = ctx.variableDeclarationList()
@@ -483,8 +483,16 @@ export class ASTBuilder
             identifiers: [{
                 type: 'Identifier',
                 name: ASTBuilder._toText(ctx),
+                identifiers: [],
+                subIdentifier: {
+                    type: "Common",
+                    identifiers: []
+                }
+            }],
+            subIdentifier: {
+                type: "Common",
                 identifiers: []
-            }]
+            }
         }
         return this._addMeta(node, ctx)
     }
@@ -806,7 +814,7 @@ export class ASTBuilder
     ): AST.FunctionCall & WithMeta {
         let args: AST.Expression[] = []
         const names = []
-        const identifiers = []
+        let identifiers = []
 
         const ctxArgs = ctx.functionCallArguments()
         const ctxArgsExpressionList = ctxArgs.expressionList()
@@ -814,18 +822,27 @@ export class ASTBuilder
         if (ctxArgsExpressionList) {
             args = ctxArgsExpressionList
                 .expression()
-                .map((exprCtx) => this.visitExpression(exprCtx))
+                .map((exprCtx) => {
+                    let temp = this.visitExpression(exprCtx)
+                    identifiers.push(...temp.identifiers)
+                    return temp
+                })
         } else if (ctxArgsNameValueList) {
             for (const nameValue of ctxArgsNameValueList.nameValue()) {
-                args.push(this.visitExpression(nameValue.expression()))
+                let temp = this.visitExpression(nameValue.expression())
+                args.push(temp)
                 names.push(ASTBuilder._toText(nameValue.identifier()))
-                identifiers.push(this.visitIdentifier(nameValue.identifier()))
+                identifiers.push(...temp.identifiers)
             }
+        }
+        let expression = this.visitExpression(ctx.expression())
+        if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
+            identifiers = [...expression.subIdentifier.identifiers, ...identifiers]
         }
 
         const node: AST.FunctionCall = {
             type: 'FunctionCall',
-            expression: this.visitExpression(ctx.expression()),
+            expression,
             arguments: args,
             names,
             identifiers,
@@ -885,7 +902,7 @@ export class ASTBuilder
 
         const trueBody = this.visitStatement(ctx.statement(0))
         let condition = this.visitExpression(ctx.expression())
-        let identifiers = [...trueBody.identifiers, ...condition.identifiers]
+        let identifiers = [...condition.identifiers, ...trueBody.identifiers]
         let falseBody = null
         if (ctx.statement().length > 1) {
             falseBody = this.visitStatement(ctx.statement(1))
@@ -932,7 +949,7 @@ export class ASTBuilder
             returnParameters,
             body,
             catchClauses,
-            identifiers: [...identifiers, ...expression.identifiers, ...body.identifiers]
+            identifiers
         }
 
         return this._addMeta(node, ctx)
@@ -987,7 +1004,7 @@ export class ASTBuilder
         const node: AST.ExpressionStatement = {
             type: 'ExpressionStatement',
             expression: this.visitExpression(ctx.expression()),
-            identifiers: expression.identifiers
+            identifiers: expression.type === "Identifier" ? [expression] : expression.identifiers
         }
 
         return this._addMeta(node, ctx)
@@ -1129,12 +1146,33 @@ export class ASTBuilder
                 const subExpression = this.visitExpression(ctx.getRuleContext(0, SP.ExpressionContext))
                 // prefix operators
                 if (AST.unaryOpValues.includes(op as AST.UnaryOp)) {
+                    let identifiers = []
+
+                    if (subExpression.type !== "Identifier") {
+                        subExpression.identifiers.forEach(id => {
+                            if (['++', '--', 'delete',].includes(op as AST.UnaryOp)) {
+                                identifiers.push({
+                                    ...id,
+                                    isReadOperation: false,
+                                    isWriteOperation: true
+                                })
+                            }
+                        })
+                    } else {
+                        if (['++', '--', 'delete',].includes(op as AST.UnaryOp)) {
+                            identifiers.push({
+                                ...subExpression,
+                                isReadOperation: false,
+                                isWriteOperation: true
+                            })
+                        }
+                    }
                     const node: AST.UnaryOperation = {
                         type: 'UnaryOperation',
                         operator: op as AST.UnaryOp,
                         subExpression: subExpression,
                         isPrefix: true,
-                        identifiers: subExpression.identifiers
+                        identifiers
 
                     }
                     return this._addMeta(node, ctx)
@@ -1144,6 +1182,28 @@ export class ASTBuilder
 
                 // postfix operators
                 if (['++', '--'].includes(op)) {
+                    let identifiers = []
+                    // todo
+
+                    if (subExpression.type !== "Identifier") {
+                        subExpression.identifiers.forEach(id => {
+                            if (['++', '--', 'delete',].includes(op as AST.UnaryOp)) {
+                                identifiers.push({
+                                    ...id,
+                                    isReadOperation: false,
+                                    isWriteOperation: true
+                                })
+                            }
+                        })
+                    } else {
+                        if (['++', '--', 'delete',].includes(op as AST.UnaryOp)) {
+                            identifiers.push({
+                                ...subExpression,
+                                isReadOperation: false,
+                                isWriteOperation: true
+                            })
+                        }
+                    }
                     const node: AST.UnaryOperation = {
                         type: 'UnaryOperation',
                         operator: op as AST.UnaryOp,
@@ -1176,11 +1236,28 @@ export class ASTBuilder
                 // member access
                 if (op === '.') {
                     const expression = this.visitExpression(ctx.expression(0))
-                    const node: AST.MemberAccess = {
-                        type: 'MemberAccess',
-                        expression,
-                        memberName: ASTBuilder._toText(ctx.identifier()!),
-                        identifiers: expression.identifiers
+                    const node: AST.Identifier = {
+                        subIdentifier: {
+                            type: 'MemberAccess',
+                            expression,
+                            memberName: ASTBuilder._toText(ctx.identifier()!),
+                            identifiers: expression.identifiers
+                        },
+                        type: 'Identifier',
+                        name: "",
+                        identifiers: [
+                            {
+                                subIdentifier: {
+                                    type: 'MemberAccess',
+                                    expression,
+                                    memberName: ASTBuilder._toText(ctx.identifier()!),
+                                    identifiers: expression.identifiers
+                                },
+                                type: 'Identifier',
+                                name: "",
+                                identifiers: expression.identifiers
+                            }]
+                        // ...expression.identifiers]
                     }
                     return this._addMeta(node, ctx)
                 }
@@ -1188,12 +1265,45 @@ export class ASTBuilder
                 if (isBinOp(op)) {
                     let left = this.visitExpression(ctx.expression(0))
                     let right = this.visitExpression(ctx.expression(1))
+                    let identifiers = []
+                    if (isAssignmentOp(op)) {
+                        if (left.type === "Identifier") {
+                            identifiers.push({...left, isReadOperation: false, isWriteOperation: true})
+                        } else {
+                            left.identifiers.forEach(id => {
+                                identifiers.push(id)
+                            })
+                            if (identifiers.length > 0) {
+                                identifiers[0].isReadOperation = false
+                                identifiers[0].isWriteOperation = true
+                            }
+
+                        }
+                        if (right.type === "Identifier") {
+                            identifiers.push({
+                                ...right,
+                                isReadOperation: true,
+                                isWriteOperation: right.isWriteOperation === undefined ? false : right.isWriteOperation
+                            })
+                        } else {
+                            right.identifiers.forEach(el => {
+                                el.isReadOperation = true
+                                if (el.isWriteOperation === undefined) {
+                                    el.isWriteOperation = false
+                                }
+                            })
+                            identifiers.push(...right.identifiers)
+                        }
+
+                    }else  {
+                        identifiers = [...left.identifiers,...right.identifiers]
+                    }
                     const node: AST.BinaryOperation = {
                         type: 'BinaryOperation',
                         operator: op,
                         left,
                         right,
-                        identifiers: [...left.identifiers, ...right.identifiers]
+                        identifiers
 
                     }
                     return this._addMeta(node, ctx)
@@ -1208,25 +1318,34 @@ export class ASTBuilder
                 ) {
                     let args: AST.Expression[] = []
                     const names = []
-                    const identifiers = []
+                    let identifiers = []
 
                     const ctxArgs = ctx.functionCallArguments()!
                     if (ctxArgs.expressionList()) {
                         args = ctxArgs
                             .expressionList()!
                             .expression()
-                            .map((exprCtx) => this.visitExpression(exprCtx))
+                            .map((exprCtx) => {
+                                let temp = this.visitExpression(exprCtx)
+                                identifiers.push(...temp.identifiers)
+                                return temp
+                            })
                     } else if (ctxArgs.nameValueList()) {
                         for (const nameValue of ctxArgs.nameValueList()!.nameValue()) {
-                            args.push(this.visitExpression(nameValue.expression()))
+                            let temp = this.visitExpression(nameValue.expression())
+                            args.push(temp)
                             names.push(ASTBuilder._toText(nameValue.identifier()))
-                            identifiers.push(this.visitIdentifier(nameValue.identifier()))
+                            identifiers.push(...temp.identifiers)
                         }
                     }
 
+                    let expression = this.visitExpression(ctx.expression(0))
+                    if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
+                        identifiers = [...expression.subIdentifier.identifiers, ...identifiers]
+                    }
                     const node: AST.FunctionCall = {
                         type: 'FunctionCall',
-                        expression: this.visitExpression(ctx.expression(0)),
+                        expression,
                         arguments: args,
                         names,
                         identifiers,
@@ -1243,22 +1362,54 @@ export class ASTBuilder
                     const base = this.visitExpression(ctx.expression(0))
                     if (ctx.getChild(2).text === ':') {
 
-                        const node: AST.IndexRangeAccess = {
-                            type: 'IndexRangeAccess',
-                            base,
-                            identifiers: base.identifiers
+                        const node: AST.Identifier = {
+                            subIdentifier: {
+                                type: 'IndexRangeAccess',
+                                base,
+                                identifiers: base.identifiers
+                            },
+                            type: 'Identifier',
+                            name: "",
+                            identifiers: [{
+                                subIdentifier: {
+                                    type: 'IndexRangeAccess',
+                                    base,
+                                    identifiers: base.identifiers
+                                },
+                                type: 'Identifier',
+                                name: "",
+                                identifiers: base.identifiers
+                            }]
+                            // , ...base.identifiers]
                         }
+
                         return this._addMeta(node, ctx)
                     }
 
                     const index = this.visitExpression(ctx.expression(1))
-                    const node: AST.IndexAccess = {
-                        type: 'IndexAccess',
-                        base,
-                        index,
-                        identifiers: [...base.identifiers, ...index.identifiers]
+                    const node: AST.Identifier = {
+                        subIdentifier: {
+                            type: 'IndexAccess',
+                            base,
+                            index,
+                            identifiers: [...base.identifiers, ...index.identifiers]
+                        },
+                        type: 'Identifier',
+                        name: "",
+                        identifiers: [
+                            {
+                                subIdentifier: {
+                                    type: 'IndexAccess',
+                                    base,
+                                    index,
+                                    identifiers: [...base.identifiers, ...index.identifiers]
+                                },
+                                type: 'Identifier',
+                                name: "",
+                                identifiers: [...base.identifiers, ...index.identifiers]
+                            }]
+                        // ...base.identifiers, ...index.identifiers]
                     }
-
                     return this._addMeta(node, ctx)
                 }
 
@@ -1309,12 +1460,29 @@ export class ASTBuilder
                     ASTBuilder._toText(ctx.getChild(2)) === ':' &&
                     ASTBuilder._toText(ctx.getChild(4)) === ']'
                 ) {
-                    const node: AST.IndexRangeAccess = {
-                        type: 'IndexRangeAccess',
-                        base,
-                        indexEnd: index,
-                        identifiers: [...base.identifiers, ...index.identifiers]
+                    const node: AST.Identifier = {
+                        subIdentifier: {
+                            type: 'IndexRangeAccess',
+                            base,
+                            indexEnd: index,
+                            identifiers: [...base.identifiers, ...index.identifiers]
+                        },
+                        type: 'Identifier',
+                        name: "",
+                        identifiers: [{
+                            subIdentifier: {
+                                type: 'IndexRangeAccess',
+                                base,
+                                indexEnd: index,
+                                identifiers: [...base.identifiers, ...index.identifiers]
+                            },
+                            type: 'Identifier',
+                            name: "",
+                            identifiers: [...base.identifiers, ...index.identifiers]
+                        }]
+                        // , ...base.identifiers, ...index.identifiers]
                     }
+
 
                     return this._addMeta(node, ctx)
                 } else if (
@@ -1323,12 +1491,28 @@ export class ASTBuilder
                     ASTBuilder._toText(ctx.getChild(4)) === ']'
                 ) {
 
-                    const node: AST.IndexRangeAccess = {
-                        type: 'IndexRangeAccess',
-                        base,
-                        indexStart: index,
-                        identifiers: [...base.identifiers, ...index.identifiers]
+                    const node: AST.Identifier = {
+                        subIdentifier: {
+                            type: 'IndexRangeAccess',
+                            base,
+                            indexStart: index,
+                            identifiers: [...base.identifiers, ...index.identifiers]
+                        },
+                        type: 'Identifier',
+                        name: "",
+                        identifiers: [{
+                            subIdentifier: {
+                                type: 'IndexRangeAccess',
+                                base,
+                                indexStart: index,
+                                identifiers: [...base.identifiers, ...index.identifiers]
+                            },
+                            type: 'Identifier',
+                            name: "",
+                            identifiers: [...base.identifiers, ...index.identifiers]
+                        }, ...base.identifiers, ...index.identifiers]
                     }
+
 
                     return this._addMeta(node, ctx)
                 }
@@ -1344,13 +1528,30 @@ export class ASTBuilder
                     const base = this.visitExpression(ctx.expression(0))
                     const indexStart = this.visitExpression(ctx.expression(1))
                     const indexEnd = this.visitExpression(ctx.expression(2))
-                    const node: AST.IndexRangeAccess = {
-                        type: 'IndexRangeAccess',
-                        base,
-                        indexStart,
-                        indexEnd,
-                        identifiers: [...base.identifiers, ...indexStart.identifiers, ...indexEnd.identifiers]
+                    const node: AST.Identifier = {
+                        subIdentifier: {
+                            type: 'IndexRangeAccess',
+                            base,
+                            indexStart,
+                            indexEnd,
+                            identifiers: [...base.identifiers, ...indexStart.identifiers, ...indexEnd.identifiers]
+                        },
+                        type: 'Identifier',
+                        name: "",
+                        identifiers: [{
+                            subIdentifier: {
+                                type: 'IndexRangeAccess',
+                                base,
+                                indexStart,
+                                indexEnd,
+                                identifiers: [...base.identifiers, ...indexStart.identifiers, ...indexEnd.identifiers]
+                            },
+                            type: 'Identifier',
+                            name: "",
+                            identifiers: [...base.identifiers, ...indexStart.identifiers, ...indexEnd.identifiers]
+                        }, ...base.identifiers, ...indexStart.identifiers, ...indexEnd.identifiers]
                     }
+
 
                     return this._addMeta(node, ctx)
                 }
@@ -1403,18 +1604,18 @@ export class ASTBuilder
     }
 
     public visitForStatement(ctx: SP.ForStatementContext) {
-        let identifiers = []
         let conditionExpression: any = this.visitExpressionStatement(
             ctx.expressionStatement()!
         )
+        let initExpression = ctx.simpleStatement()
+            ? this.visitSimpleStatement(ctx.simpleStatement()!)
+            : null;
+
+        let identifiers = initExpression !== null ? [...initExpression.identifiers] : []
         if (conditionExpression) {
             conditionExpression = conditionExpression.expression
             identifiers.push(...conditionExpression.identifiers)
         }
-        let initExpression = ctx.simpleStatement()
-            ? this.visitSimpleStatement(ctx.simpleStatement()!)
-            : null;
-        identifiers = initExpression !== null ? [...identifiers, ...initExpression.identifiers] : identifiers
         let loopExpression = ctx.expression() !== undefined ? this.visitExpression(ctx.expression()!) : null
         if (loopExpression !== null) {
             identifiers.push(...loopExpression.identifiers)
@@ -1510,7 +1711,11 @@ export class ASTBuilder
             const node: AST.Identifier = {
                 type: 'Identifier',
                 name: 'type',
-                identifiers: []
+                identifiers: [],
+                subIdentifier: {
+                    type: "Common",
+                    identifiers: []
+                }
             }
 
             return this._addMeta(node, ctx)
@@ -1569,11 +1774,18 @@ export class ASTBuilder
             return this.visit(expr)
         })
 
+        let identifiers = []
+        components.forEach(el => {
+            if (el.type === "Identifier") {
+                identifiers.push(el)
+            }
+        })
+
         const node: AST.TupleExpression = {
             type: 'TupleExpression',
             components,
             isArray: ASTBuilder._toText(ctx.getChild(0)) === '[',
-            identifiers: []
+            identifiers
         }
 
         return this._addMeta(node, ctx)
@@ -2179,4 +2391,8 @@ export class ASTBuilder
 
 function isBinOp(op: string): op is AST.BinOp {
     return AST.binaryOpValues.includes(op as AST.BinOp)
+}
+
+function isAssignmentOp(op: string): op is AST.AssignmentOp {
+    return AST.assignmentOpValues.includes(op as AST.AssignmentOp)
 }
