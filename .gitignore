@@ -3,3 +3,4 @@ node_modules
 artifacts
 cache
 script.js
+.DS_Store

@@ -48,6 +48,15 @@ function logStateVariable(range, data, name) {
 
 }
 
+function logDemorgan(range, data, loc) {
+    let _before = data.slice(range[0], range[1] + 1).toString();
+    let _after = "!(" + data.slice(range[0], range[1] + 1).toString().replace("!", "").replace("!", "") + ")";
+    return {
+        type: "de-morgan ", before: _before, after: _after, loc
+    }
+
+}
+
 function traceIdentifier(identifier) {
     if (identifier.type === "Identifier") {
         if (identifier.subIdentifier.type === "IndexAccess") {
@@ -73,7 +82,11 @@ async function optimized(path) {
     let results = [];
     ast.children.forEach((item, index) => {
         if (item.type === "ContractDefinition") {
-
+            item.vulnerabilities.forEach(item => {
+                if (item.type === "de-morgan") {
+                    results.push(logDemorgan(item.range, data, item.loc))
+                }
+            })
             let listStateInContract = item.subNodes.filter(item => item.type === "StateVariableDeclaration")
             let result = wastedInDataRepresentation(listStateInContract.map(item => item.variables[0]))
             if (result.status === true) {
@@ -163,11 +176,15 @@ async function optimized(path) {
             //     }
             // })
 
+
+            // de morgan
+
+
         }
     })
     for (let res of results) {
         console.log("\n============================================================\n")
-        console.log(res.type, "\n-------------------------------------------------------------------\n", res.before, "\n-------------------------------------------------------------------\n", res.after, "\n")
+        console.log(res.type, res.loc!==undefined?res.loc:"", "\n-------------------------------------------------------------------\n", res.before, "\n-------------------------------------------------------------------\n", res.after, "\n")
         console.log("\n============================================================\n")
 
     }

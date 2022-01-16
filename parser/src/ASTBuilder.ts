@@ -7,7 +7,7 @@ import {SolidityVisitor} from './antlr/SolidityVisitor'
 import {ParseOptions} from './types'
 import * as AST from './ast-types'
 import {ErrorNode} from 'antlr4ts/tree/ErrorNode'
-import {AssignmentOp, assignmentOpValues, Identifier} from "./ast-types";
+import {AssignmentOp, assignmentOpValues, Identifier, Vulnerability} from "./ast-types";
 
 interface SourceLocation {
     start: {
@@ -53,7 +53,9 @@ export class ASTBuilder
             type: 'SourceUnit',
             children: children.slice(0, -1).map((child) => this.visit(child)),
         }
-        const result = this._addMeta(node, ctx)
+        let vulnerabilities = []
+        node.children.forEach(item => vulnerabilities.push(...item.vulnerabilities))
+        const result = this._addMeta(node, ctx, vulnerabilities)
         this.result = result
 
         return result
@@ -81,8 +83,10 @@ export class ASTBuilder
             stateVariable: subNodes.filter(node => node.type === "StateVariableDeclaration"),
             kind,
         }
-
-        return this._addMeta(node, ctx)
+        let vulnerabilities = []
+        node.baseContracts.forEach(item => vulnerabilities.push(...item.vulnerabilities))
+        subNodes.forEach(item => vulnerabilities.push(...item.vulnerabilities))
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitStateVariableDeclaration(
@@ -90,12 +94,15 @@ export class ASTBuilder
     ) {
         const type = this.visitTypeName(ctx.typeName())
         const iden = ctx.identifier()
+        let identifier = this.visitIdentifier(iden)
+        let vulnerabilities = [...type.vulnerabilities, ...identifier.vulnerabilities]
         const name = ASTBuilder._toText(iden)
 
         let expression: AST.Expression | null = null
         const ctxExpression = ctx.expression()
         if (ctxExpression) {
             expression = this.visitExpression(ctxExpression)
+            vulnerabilities.push(...expression.vulnerabilities)
         }
 
         let visibility: AST.VariableDeclaration['visibility'] = 'default'
@@ -120,18 +127,18 @@ export class ASTBuilder
             override = overrideSpecifier[0]
                 .userDefinedTypeName()
                 .map((x) => this.visitUserDefinedTypeName(x))
+            vulnerabilities.push(...override.vulnerabilities)
         }
 
         let isImmutable = false
         if (ctx.ImmutableKeyword().length > 0) {
             isImmutable = true
         }
-
         const decl: AST.StateVariableDeclarationVariable = {
             type: 'VariableDeclaration',
             typeName: type,
             name,
-            identifier: this.visitIdentifier(iden),
+            identifier,
             expression,
             visibility,
             isStateVar: true,
@@ -141,14 +148,13 @@ export class ASTBuilder
             override,
             storageLocation: null,
         }
-
         const node: AST.StateVariableDeclaration = {
             type: 'StateVariableDeclaration',
-            variables: [this._addMeta(decl, ctx)],
+            variables: [this._addMeta(decl, ctx, vulnerabilities)],
             initialValue: expression,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitVariableDeclaration(
@@ -173,13 +179,14 @@ export class ASTBuilder
             expression: null,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [...node.typeName.vulnerabilities, ...node.identifier.vulnerabilities])
     }
 
     public visitVariableDeclarationStatement(
         ctx: SP.VariableDeclarationStatementContext
     ): AST.VariableDeclarationStatement & WithMeta {
         let identifiers = []
+        let vulnerabilites = []
         let variables: Array<AST.VariableDeclaration | null> = []
         const ctxVariableDeclaration = ctx.variableDeclaration()
         const ctxIdentifierList = ctx.identifierList()
@@ -194,6 +201,7 @@ export class ASTBuilder
         variables.forEach(el => {
             try {
                 identifiers.push({...el.identifier, isDeclare: true});
+                vulnerabilites.push(...el.vulnerabilities)
             } catch (e) {
                 console.log(e)
             }
@@ -203,6 +211,7 @@ export class ASTBuilder
         const ctxExpression = ctx.expression()
         if (ctxExpression) {
             initialValue = this.visitExpression(ctxExpression)
+            vulnerabilites.push(...initialValue.vulnerabilities)
             identifiers.push(...initialValue.identifiers)
         }
         const node: AST.VariableDeclarationStatement = {
@@ -212,7 +221,7 @@ export class ASTBuilder
             identifiers
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilites)
     }
 
     public visitStatement(ctx: SP.StatementContext) {
@@ -248,24 +257,32 @@ export class ASTBuilder
                     storageLocation: null,
                     expression: null,
                 }
-                return this._addMeta(node, paramCtx)
+                let vulnerabilities
+                if (node.identifier === null) {
+                    vulnerabilities = [...node.typeName.vulnerabilities]
+                } else {
+                    vulnerabilities = [...node.typeName.vulnerabilities, ...node.identifier.vulnerabilities]
+                }
+                return this._addMeta(node, paramCtx, vulnerabilities)
             })
-
         const node: AST.EventDefinition = {
             type: 'EventDefinition',
             name: ASTBuilder._toText(ctx.identifier()),
             parameters,
             isAnonymous: ctx.AnonymousKeyword() !== undefined,
         }
-
-        return this._addMeta(node, ctx)
+        let vulnerabilities = []
+        parameters.forEach(item => vulnerabilities.push(...item.vulnerabilities))
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitBlock(ctx: SP.BlockContext): AST.Block & WithMeta {
         let statements = ctx.statement().map((x) => this.visitStatement(x));
         let identifiers = []
+        let vulnerabilities = []
         statements.forEach(el => {
             identifiers.push(...el.identifiers)
+            vulnerabilities.push(...el.vulnerabilities)
         })
         const node: AST.Block = {
             type: 'Block',
@@ -273,7 +290,7 @@ export class ASTBuilder
             identifiers
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitParameter(ctx: SP.ParameterContext) {
@@ -302,8 +319,9 @@ export class ASTBuilder
             isIndexed: false,
             expression: null,
         }
-
-        return this._addMeta(node, ctx)
+        let vulnerabilities = [...node.typeName.vulnerabilities]
+        if (node.identifier !== null) vulnerabilities.push(...node.identifier.vulnerabilities)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitFunctionDefinition(
@@ -440,8 +458,13 @@ export class ASTBuilder
             stateMutability,
             identifiers
         }
-
-        return this._addMeta(node, ctx)
+        let vulnerabilities = []
+        parameters.forEach(item => vulnerabilities.push(...item.vulnerabilities))
+        modifiers.forEach(item => vulnerabilities.push(...item.vulnerabilities))
+        if (returnParameters !== null) returnParameters.forEach(item => vulnerabilities.push(...item.vulnerabilities))
+        if (block !== null) vulnerabilities.push(...block.vulnerabilities)
+        if (override !== null) override.forEach(item => vulnerabilities.push(...item.vulnerabilities))
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitEnumDefinition(
@@ -453,7 +476,7 @@ export class ASTBuilder
             members: ctx.enumValue().map((x) => this.visitEnumValue(x)),
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitEnumValue(ctx: SP.EnumValueContext): AST.EnumValue & WithMeta {
@@ -461,7 +484,7 @@ export class ASTBuilder
             type: 'EnumValue',
             name: ASTBuilder._toText(ctx.identifier()),
         }
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitElementaryTypeName(
@@ -473,7 +496,7 @@ export class ASTBuilder
             stateMutability: null,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitIdentifier(ctx: SP.IdentifierContext): AST.Identifier & WithMeta {
@@ -494,11 +517,12 @@ export class ASTBuilder
                 identifiers: []
             }
         }
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitTypeName(ctx: SP.TypeNameContext): AST.TypeName & WithMeta {
         if (ctx.children !== undefined && ctx.children.length > 2) {
+            let vulnerabilities = []
             let length = null
             if (ctx.children.length === 4) {
                 const expression = ctx.expression()
@@ -508,6 +532,7 @@ export class ASTBuilder
                     )
                 }
                 length = this.visitExpression(expression)
+                vulnerabilities.push(...length.vulnerabilities)
             }
 
             const ctxTypeName = ctx.typeName()
@@ -517,8 +542,8 @@ export class ASTBuilder
                 baseTypeName: this.visitTypeName(ctxTypeName!),
                 length,
             }
-
-            return this._addMeta(node, ctx)
+            vulnerabilities.push(...node.baseTypeName.vulnerabilities)
+            return this._addMeta(node, ctx, vulnerabilities)
         }
 
         if (ctx.children?.length === 2) {
@@ -528,7 +553,7 @@ export class ASTBuilder
                 stateMutability: ASTBuilder._toText(ctx.getChild(1)),
             }
 
-            return this._addMeta(node, ctx)
+            return this._addMeta(node, ctx, [])
         }
 
         if (ctx.elementaryTypeName() !== undefined) {
@@ -558,16 +583,18 @@ export class ASTBuilder
             namePath: ASTBuilder._toText(ctx),
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitUsingForDeclaration(
         ctx: SP.UsingForDeclarationContext
     ): AST.UsingForDeclaration & WithMeta {
         let typeName = null
+        let vulnerabilities = []
         const ctxTypeName = ctx.typeName()
         if (ctxTypeName !== undefined) {
             typeName = this.visitTypeName(ctxTypeName)
+            vulnerabilities.push(...typeName.vulnerabilities)
         }
 
         const node: AST.UsingForDeclaration = {
@@ -576,7 +603,7 @@ export class ASTBuilder
             libraryName: ASTBuilder._toText(ctx.identifier()),
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitPragmaDirective(
@@ -597,7 +624,7 @@ export class ASTBuilder
             value,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitInheritanceSpecifier(
@@ -614,8 +641,10 @@ export class ASTBuilder
             baseName: this.visitUserDefinedTypeName(ctx.userDefinedTypeName()),
             arguments: args,
         }
+        let vulnerabilities = []
+        args.forEach(item => vulnerabilities.push(...item.vulnerabilities))
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitModifierInvocation(
@@ -624,10 +653,14 @@ export class ASTBuilder
         const exprList = ctx.expressionList()
 
         let args
+        let vulnerabilities = []
         let identifiers = []
         if (exprList != null) {
             args = exprList.expression().map((x) => this.visit(x))
-            args.forEach(el => identifiers.push(...el.identifiers))
+            args.forEach(el => {
+                identifiers.push(...el.identifiers)
+                vulnerabilities.push(...el.vulnerabilities)
+            })
         } else if (ctx.children !== undefined && ctx.children.length > 1) {
             args = []
         } else {
@@ -640,7 +673,7 @@ export class ASTBuilder
             arguments: args,
             identifiers
         }
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitTypeNameExpression(
@@ -666,7 +699,7 @@ export class ASTBuilder
             identifiers: []
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [...typeName.vulnerabilities])
     }
 
     public visitFunctionTypeName(
@@ -704,8 +737,10 @@ export class ASTBuilder
             visibility,
             stateMutability,
         }
-
-        return this._addMeta(node, ctx)
+        let vulnerabilities = []
+        parameterTypes.forEach(item => vulnerabilities.push(...item.vulnerabilities))
+        returnTypes.forEach(item => vulnerabilities.push(...item.vulnerabilities))
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitFunctionTypeParameter(
@@ -727,7 +762,7 @@ export class ASTBuilder
             expression: null,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [...node.typeName.vulnerabilities])
     }
 
     public visitThrowStatement(
@@ -738,7 +773,7 @@ export class ASTBuilder
             identifiers: []
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitReturnStatement(
@@ -747,9 +782,11 @@ export class ASTBuilder
         let expression = null
         const ctxExpression = ctx.expression()
         let identifiers = []
+        let vulnerabilities = []
         if (ctxExpression) {
             expression = this.visitExpression(ctxExpression)
             identifiers.push(...expression.identifiers)
+            vulnerabilities.push(...expression.vulnerabilities)
         }
 
         const node: AST.ReturnStatement = {
@@ -758,7 +795,7 @@ export class ASTBuilder
             identifiers
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitEmitStatement(
@@ -770,7 +807,7 @@ export class ASTBuilder
             identifiers: []
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [...node.eventCall.vulnerabilities])
     }
 
     public visitCustomErrorDefinition(
@@ -781,8 +818,9 @@ export class ASTBuilder
             name: ASTBuilder._toText(ctx.identifier()),
             parameters: this.visitParameterList(ctx.parameterList()),
         }
-
-        return this._addMeta(node, ctx)
+        let vulnerabilities = []
+        node.parameters.forEach(item => vulnerabilities.push(...item.vulnerabilities))
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitTypeDefinition(
@@ -794,7 +832,7 @@ export class ASTBuilder
             definition: this.visitElementaryTypeName(ctx.elementaryTypeName())
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitRevertStatement(
@@ -805,8 +843,7 @@ export class ASTBuilder
             revertCall: this.visitFunctionCall(ctx.functionCall()),
             identifiers: []
         }
-
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [...node.revertCall.vulnerabilities])
     }
 
     public visitFunctionCall(
@@ -815,6 +852,7 @@ export class ASTBuilder
         let args: AST.Expression[] = []
         const names = []
         let identifiers = []
+        let vulnerabilities = []
 
         const ctxArgs = ctx.functionCallArguments()
         const ctxArgsExpressionList = ctxArgs.expressionList()
@@ -825,17 +863,21 @@ export class ASTBuilder
                 .map((exprCtx) => {
                     let temp = this.visitExpression(exprCtx)
                     identifiers.push(...temp.identifiers)
+                    vulnerabilities.push(...temp.vulnerabilities)
                     return temp
                 })
+
         } else if (ctxArgsNameValueList) {
             for (const nameValue of ctxArgsNameValueList.nameValue()) {
                 let temp = this.visitExpression(nameValue.expression())
                 args.push(temp)
                 names.push(ASTBuilder._toText(nameValue.identifier()))
                 identifiers.push(...temp.identifiers)
+                vulnerabilities.push(...temp.vulnerabilities)
             }
         }
         let expression = this.visitExpression(ctx.expression())
+        vulnerabilities.push(...expression.vulnerabilities)
         if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
             identifiers = [...expression.subIdentifier.identifiers, ...identifiers]
         }
@@ -848,7 +890,7 @@ export class ASTBuilder
             identifiers,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitStructDefinition(
@@ -861,8 +903,10 @@ export class ASTBuilder
                 .variableDeclaration()
                 .map((x) => this.visitVariableDeclaration(x)),
         }
+        let vulnerabilities = []
+        node.members.forEach(item => vulnerabilities.push(...item.vulnerabilities))
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitWhileStatement(
@@ -878,7 +922,7 @@ export class ASTBuilder
             identifiers: [...condition.identifiers, ...body.identifiers]
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [...condition.vulnerabilities, ...body.vulnerabilities])
     }
 
     public visitDoWhileStatement(
@@ -893,7 +937,7 @@ export class ASTBuilder
             identifiers: [...condition.identifiers, ...body.identifiers]
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [...condition.vulnerabilities, ...body.vulnerabilities])
     }
 
     public visitIfStatement(
@@ -917,20 +961,27 @@ export class ASTBuilder
             falseBody,
             identifiers
         }
+        let vulnerabilities = [...condition.vulnerabilities, ...trueBody.vulnerabilities]
+        if (falseBody !== null) {
+            vulnerabilities.push(...falseBody.vulnerabilities)
+        }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitTryStatement(
         ctx: SP.TryStatementContext
     ): AST.TryStatement & WithMeta {
         let identifiers = []
+        let vulnerabilities = []
         let returnParameters = null
         const ctxReturnParameters = ctx.returnParameters()
         if (ctxReturnParameters !== undefined) {
             returnParameters = this.visitReturnParameters(ctxReturnParameters)
             returnParameters.forEach(el => {
                 identifiers.push(el.identifier)
+                vulnerabilities.push(...el.vulnerabilities)
+
             })
         }
 
@@ -939,10 +990,13 @@ export class ASTBuilder
             .map((exprCtx) => {
                 let catchClause = this.visitCatchClause(exprCtx)
                 identifiers.push(...catchClause.identifiers)
+                vulnerabilities.push(...catchClause.vulnerabilities)
                 return catchClause
             })
         let expression = this.visitExpression(ctx.expression())
+        vulnerabilities.push(...expression.vulnerabilities)
         let body = this.visitBlock(ctx.block())
+        vulnerabilities.push(...body.vulnerabilities)
         const node: AST.TryStatement = {
             type: 'TryStatement',
             expression,
@@ -952,7 +1006,7 @@ export class ASTBuilder
             identifiers
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitCatchClause(
@@ -960,10 +1014,12 @@ export class ASTBuilder
     ): AST.CatchClause & WithMeta {
         let parameters = null
         let identifiers = []
+        let vulnerabilities = []
         if (ctx.parameterList()) {
             parameters = this.visitParameterList(ctx.parameterList()!)
             parameters.forEach(el => {
                 identifiers.push(el.identifier)
+                vulnerabilities.push(...el.vulnerabilities)
             })
         }
 
@@ -981,6 +1037,7 @@ export class ASTBuilder
             kind = ASTBuilder._toText(ctxIdentifier)
         }
         let body = this.visitBlock(ctx.block())
+        vulnerabilities.push(...body.vulnerabilities)
         const node: AST.CatchClause = {
             type: 'CatchClause',
             // deprecated, use the `kind` property instead,
@@ -991,7 +1048,7 @@ export class ASTBuilder
             identifiers: [...identifiers, ...body.identifiers]
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitExpressionStatement(
@@ -1003,11 +1060,10 @@ export class ASTBuilder
         let expression = this.visitExpression(ctx.expression())
         const node: AST.ExpressionStatement = {
             type: 'ExpressionStatement',
-            expression: this.visitExpression(ctx.expression()),
+            expression,
             identifiers: expression.type === "Identifier" ? [expression] : expression.identifiers
         }
-
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [...expression.vulnerabilities])
     }
 
     public visitNumberLiteral(
@@ -1027,7 +1083,7 @@ export class ASTBuilder
             identifiers: []
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitMappingKey(
@@ -1052,7 +1108,7 @@ export class ASTBuilder
             valueType: this.visitTypeName(ctx.typeName()),
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [...node.valueType.vulnerabilities])
     }
 
     public visitModifierDefinition(
@@ -1060,9 +1116,14 @@ export class ASTBuilder
     ): AST.ModifierDefinition & WithMeta {
         let parameters = null
         let identifiers = []
+        let vulnerabilities = []
+
         if (ctx.parameterList()) {
             parameters = this.visitParameterList(ctx.parameterList()!)
-            parameters.forEach(el => identifiers.push(el.identifier))
+            parameters.forEach(el => {
+                identifiers.push(el.identifier)
+                vulnerabilities.push(...el.vulnerabilities)
+            })
         }
 
         let isVirtual = false
@@ -1085,6 +1146,7 @@ export class ASTBuilder
         if (blockCtx !== undefined) {
             body = this.visitBlock(blockCtx)
             identifiers.push(...body.identifiers)
+            vulnerabilities.push(...body.vulnerabilities)
         }
 
         const node: AST.ModifierDefinition = {
@@ -1097,7 +1159,7 @@ export class ASTBuilder
             identifiers
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitUncheckedStatement(
@@ -1110,7 +1172,7 @@ export class ASTBuilder
             identifiers: block.identifiers
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [...block.vulnerabilities])
     }
 
     public visitExpression(ctx: SP.ExpressionContext): AST.Expression & WithMeta {
@@ -1140,7 +1202,7 @@ export class ASTBuilder
                         typeName: this.visitTypeName(ctx.typeName()!),
                         identifiers: []
                     }
-                    return this._addMeta(node, ctx)
+                    return this._addMeta(node, ctx, [...node.typeName.vulnerabilities])
                 }
 
                 const subExpression = this.visitExpression(ctx.getRuleContext(0, SP.ExpressionContext))
@@ -1175,7 +1237,7 @@ export class ASTBuilder
                         identifiers
 
                     }
-                    return this._addMeta(node, ctx)
+                    return this._addMeta(node, ctx, [...subExpression.vulnerabilities])
                 }
 
                 op = ASTBuilder._toText(ctx.getChild(1))!
@@ -1211,7 +1273,7 @@ export class ASTBuilder
                         isPrefix: false,
                         identifiers: subExpression.identifiers
                     }
-                    return this._addMeta(node, ctx)
+                    return this._addMeta(node, ctx, [...subExpression.vulnerabilities])
                 }
                 break
 
@@ -1228,7 +1290,7 @@ export class ASTBuilder
                         isArray: false,
                         identifiers: components[0].identifiers
                     }
-                    return this._addMeta(node, ctx)
+                    return this._addMeta(node, ctx, [...components[0].vulnerabilities])
                 }
 
                 op = ASTBuilder._toText(ctx.getChild(1))!
@@ -1259,7 +1321,7 @@ export class ASTBuilder
                             }]
                         // ...expression.identifiers]
                     }
-                    return this._addMeta(node, ctx)
+                    return this._addMeta(node, ctx, [...expression.vulnerabilities])
                 }
 
                 if (isBinOp(op)) {
@@ -1295,18 +1357,27 @@ export class ASTBuilder
                             identifiers.push(...right.identifiers)
                         }
 
-                    }else  {
-                        identifiers = [...left.identifiers,...right.identifiers]
+                    } else {
+                        identifiers = [...left.identifiers, ...right.identifiers]
                     }
+                    let vulnerabilities = [];
+                    if (left.type === "UnaryOperation" && left.operator === "!" && right.type === "UnaryOperation" && right.operator === "!" && (op === "&&" || op === "||")) {
+                        vulnerabilities.push({
+                            type: "de-morgan",
+                            range: this._range(ctx),
+                            loc: ASTBuilder._loc(ctx)
+                        })
+                    }
+                    vulnerabilities.push(...left.vulnerabilities)
+                    vulnerabilities.push(...right.vulnerabilities)
                     const node: AST.BinaryOperation = {
                         type: 'BinaryOperation',
                         operator: op,
                         left,
                         right,
                         identifiers
-
                     }
-                    return this._addMeta(node, ctx)
+                    return this._addMeta(node, ctx, vulnerabilities)
                 }
                 break
 
@@ -1319,6 +1390,7 @@ export class ASTBuilder
                     let args: AST.Expression[] = []
                     const names = []
                     let identifiers = []
+                    let vulnerabilities = []
 
                     const ctxArgs = ctx.functionCallArguments()!
                     if (ctxArgs.expressionList()) {
@@ -1328,6 +1400,7 @@ export class ASTBuilder
                             .map((exprCtx) => {
                                 let temp = this.visitExpression(exprCtx)
                                 identifiers.push(...temp.identifiers)
+                                vulnerabilities.push(...temp.vulnerabilities)
                                 return temp
                             })
                     } else if (ctxArgs.nameValueList()) {
@@ -1336,6 +1409,7 @@ export class ASTBuilder
                             args.push(temp)
                             names.push(ASTBuilder._toText(nameValue.identifier()))
                             identifiers.push(...temp.identifiers)
+                            vulnerabilities.push(...temp.vulnerabilities)
                         }
                     }
 
@@ -1343,6 +1417,7 @@ export class ASTBuilder
                     if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
                         identifiers = [...expression.subIdentifier.identifiers, ...identifiers]
                     }
+                    vulnerabilities.push(...expression.vulnerabilities)
                     const node: AST.FunctionCall = {
                         type: 'FunctionCall',
                         expression,
@@ -1351,7 +1426,7 @@ export class ASTBuilder
                         identifiers,
                     }
 
-                    return this._addMeta(node, ctx)
+                    return this._addMeta(node, ctx, vulnerabilities)
                 }
 
                 // index access
@@ -1383,7 +1458,7 @@ export class ASTBuilder
                             // , ...base.identifiers]
                         }
 
-                        return this._addMeta(node, ctx)
+                        return this._addMeta(node, ctx, [...base.vulnerabilities])
                     }
 
                     const index = this.visitExpression(ctx.expression(1))
@@ -1410,7 +1485,7 @@ export class ASTBuilder
                             }]
                         // ...base.identifiers, ...index.identifiers]
                     }
-                    return this._addMeta(node, ctx)
+                    return this._addMeta(node, ctx, [...base.vulnerabilities, ...index.vulnerabilities])
                 }
 
                 // expression with nameValueList
@@ -1427,7 +1502,7 @@ export class ASTBuilder
                         identifiers: [...expression.identifiers, ...arguments_.identifiers]
                     }
 
-                    return this._addMeta(node, ctx)
+                    return this._addMeta(node, ctx, [...expression.vulnerabilities, ...arguments_.vulnerabilities])
                 }
 
                 break
@@ -1449,7 +1524,7 @@ export class ASTBuilder
                         identifiers: [...condition.identifiers, ...trueExpression.identifiers, ...falseExpression.identifiers]
                     }
 
-                    return this._addMeta(node, ctx)
+                    return this._addMeta(node, ctx, [...condition.vulnerabilities, ...trueExpression.vulnerabilities, ...falseExpression.vulnerabilities])
                 }
 
                 const base = this.visitExpression(ctx.expression(0))
@@ -1484,7 +1559,7 @@ export class ASTBuilder
                     }
 
 
-                    return this._addMeta(node, ctx)
+                    return this._addMeta(node, ctx, [...base.vulnerabilities, ...index.vulnerabilities])
                 } else if (
                     ASTBuilder._toText(ctx.getChild(1)) === '[' &&
                     ASTBuilder._toText(ctx.getChild(3)) === ':' &&
@@ -1514,7 +1589,7 @@ export class ASTBuilder
                     }
 
 
-                    return this._addMeta(node, ctx)
+                    return this._addMeta(node, ctx, [...base.vulnerabilities, ...index.vulnerabilities])
                 }
                 break
 
@@ -1553,7 +1628,7 @@ export class ASTBuilder
                     }
 
 
-                    return this._addMeta(node, ctx)
+                    return this._addMeta(node, ctx, [...base.vulnerabilities, ...indexStart.vulnerabilities, ...indexEnd.vulnerabilities])
                 }
                 break
         }
@@ -1567,11 +1642,15 @@ export class ASTBuilder
         const names: string[] = []
         const identifiers: AST.Identifier[] = []
         const args: AST.Expression[] = []
+        let vulnerabilities = []
 
         for (const nameValue of ctx.nameValue()) {
             names.push(ASTBuilder._toText(nameValue.identifier()))
             identifiers.push(this.visitIdentifier(nameValue.identifier()))
-            args.push(this.visitExpression(nameValue.expression()))
+            let expression = this.visitExpression(nameValue.expression())
+            args.push(expression)
+            vulnerabilities.push(...expression.vulnerabilities)
+
         }
 
         const node: AST.NameValueList = {
@@ -1581,7 +1660,7 @@ export class ASTBuilder
             arguments: args,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitFileLevelConstant(ctx: SP.FileLevelConstantContext) {
@@ -1600,27 +1679,33 @@ export class ASTBuilder
             isImmutable: false,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [...type.vulnerabilities, ...expression.vulnerabilities])
     }
 
     public visitForStatement(ctx: SP.ForStatementContext) {
         let conditionExpression: any = this.visitExpressionStatement(
             ctx.expressionStatement()!
         )
+        let vulnerabilities = []
+
         let initExpression = ctx.simpleStatement()
             ? this.visitSimpleStatement(ctx.simpleStatement()!)
             : null;
+        if (initExpression !== null) vulnerabilities.push(...initExpression.vulnerabilities)
 
         let identifiers = initExpression !== null ? [...initExpression.identifiers] : []
         if (conditionExpression) {
             conditionExpression = conditionExpression.expression
             identifiers.push(...conditionExpression.identifiers)
+            vulnerabilities.push(...conditionExpression.vulnerabilities)
         }
         let loopExpression = ctx.expression() !== undefined ? this.visitExpression(ctx.expression()!) : null
         if (loopExpression !== null) {
             identifiers.push(...loopExpression.identifiers)
+            vulnerabilities.push(...loopExpression.vulnerabilities)
         }
         let body = this.visitStatement(ctx.statement());
+        vulnerabilities.push(...body.vulnerabilities)
         const node: AST.ForStatement = {
             type: 'ForStatement',
             initExpression,
@@ -1634,7 +1719,7 @@ export class ASTBuilder
             identifiers: [...identifiers, ...body.identifiers]
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public visitHexLiteral(ctx: SP.HexLiteralContext) {
@@ -1650,7 +1735,7 @@ export class ASTBuilder
             identifiers: []
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitPrimaryExpression(
@@ -1663,7 +1748,7 @@ export class ASTBuilder
                 identifiers: []
             }
 
-            return this._addMeta(node, ctx)
+            return this._addMeta(node, ctx, [])
         }
 
         if (ctx.hexLiteral()) {
@@ -1700,7 +1785,7 @@ export class ASTBuilder
                 identifiers: []
             }
 
-            return this._addMeta(node, ctx)
+            return this._addMeta(node, ctx, [])
         }
 
         if (ctx.numberLiteral()) {
@@ -1718,7 +1803,7 @@ export class ASTBuilder
                 }
             }
 
-            return this._addMeta(node, ctx)
+            return this._addMeta(node, ctx, [])
         }
 
         if (
@@ -1745,17 +1830,17 @@ export class ASTBuilder
 
             const typeName: AST.ArrayTypeName = {
                 type: 'ArrayTypeName',
-                baseTypeName: this._addMeta(node, ctx),
+                baseTypeName: this._addMeta(node, ctx, []),
                 length: null,
             }
 
             const result: AST.TypeNameExpression = {
                 type: 'TypeNameExpression',
-                typeName: this._addMeta(typeName, ctx),
+                typeName: this._addMeta(typeName, ctx, []),
                 identifiers
             }
 
-            return this._addMeta(result, ctx)
+            return this._addMeta(result, ctx, [])
         }
 
         return this.visit(ctx.getChild(0)) as any
@@ -1775,9 +1860,11 @@ export class ASTBuilder
         })
 
         let identifiers = []
+        let vulnerabilities = []
         components.forEach(el => {
             if (el.type === "Identifier") {
                 identifiers.push(el)
+                vulnerabilities.push(...el.vulnerabilities)
             }
         })
 
@@ -1788,7 +1875,7 @@ export class ASTBuilder
             identifiers
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, vulnerabilities)
     }
 
     public buildIdentifierList(ctx: SP.IdentifierListContext) {
@@ -1816,7 +1903,7 @@ export class ASTBuilder
                 expression: null,
             }
 
-            return this._addMeta(node, iden)
+            return this._addMeta(node, iden, [])
         })
     }
 
@@ -1854,7 +1941,7 @@ export class ASTBuilder
                 expression: null,
             }
 
-            return this._addMeta(result, decl)
+            return this._addMeta(result, decl, [...result.typeName.vulnerabilities])
         })
     }
 
@@ -1917,14 +2004,14 @@ export class ASTBuilder
         const node: AST.ImportDirective = {
             type: 'ImportDirective',
             path,
-            pathLiteral: this._addMeta(pathLiteral, ctx.importPath()),
+            pathLiteral: this._addMeta(pathLiteral, ctx.importPath(), []),
             unitAlias,
             unitAliasIdentifier,
             symbolAliases,
             symbolAliasesIdentifiers,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public buildEventParameterList(ctx: SP.EventParameterListContext) {
@@ -1971,7 +2058,7 @@ export class ASTBuilder
             identifiers: []
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitAssemblyBlock(
@@ -1986,7 +2073,7 @@ export class ASTBuilder
             operations,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitAssemblyItem(
@@ -2009,7 +2096,7 @@ export class ASTBuilder
                 identifiers: []
             }
 
-            return this._addMeta(node, ctx)
+            return this._addMeta(node, ctx, [])
         }
 
         if (ctx.BreakKeyword()) {
@@ -2017,7 +2104,7 @@ export class ASTBuilder
                 type: 'Break',
             }
 
-            return this._addMeta(node, ctx)
+            return this._addMeta(node, ctx, [])
         }
 
         if (ctx.ContinueKeyword()) {
@@ -2025,7 +2112,7 @@ export class ASTBuilder
                 type: 'Continue',
             }
 
-            return this._addMeta(node, ctx)
+            return this._addMeta(node, ctx, [])
         }
 
         return this.visit(ctx.getChild(0)) as AST.AssemblyItem & WithMeta
@@ -2047,7 +2134,7 @@ export class ASTBuilder
             arguments: args,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitAssemblyLiteral(
@@ -2066,7 +2153,7 @@ export class ASTBuilder
                 identifiers: []
             }
 
-            return this._addMeta(node, ctx)
+            return this._addMeta(node, ctx, [])
         }
 
         if (ctx.DecimalNumber()) {
@@ -2075,7 +2162,7 @@ export class ASTBuilder
                 value: ASTBuilder._toText(ctx),
             }
 
-            return this._addMeta(node, ctx)
+            return this._addMeta(node, ctx, [])
         }
 
         if (ctx.HexNumber()) {
@@ -2084,7 +2171,7 @@ export class ASTBuilder
                 value: ASTBuilder._toText(ctx),
             }
 
-            return this._addMeta(node, ctx)
+            return this._addMeta(node, ctx, [])
         }
 
         if (ctx.hexLiteral()) {
@@ -2101,7 +2188,7 @@ export class ASTBuilder
             cases: ctx.assemblyCase().map((c) => this.visitAssemblyCase(c)),
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitAssemblyCase(
@@ -2119,7 +2206,7 @@ export class ASTBuilder
             default: value === null,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitAssemblyLocalDefinition(
@@ -2151,7 +2238,7 @@ export class ASTBuilder
             expression,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitAssemblyFunctionDefinition(
@@ -2181,7 +2268,7 @@ export class ASTBuilder
             body: this.visitAssemblyBlock(ctx.assemblyBlock()),
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitAssemblyAssignment(ctx: SP.AssemblyAssignmentContext) {
@@ -2206,7 +2293,7 @@ export class ASTBuilder
             expression: this.visitAssemblyExpression(ctx.assemblyExpression()),
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitAssemblyMember(
@@ -2219,7 +2306,7 @@ export class ASTBuilder
             memberName: this.visitIdentifier(member),
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitLabelDefinition(ctx: SP.LabelDefinitionContext) {
@@ -2228,7 +2315,7 @@ export class ASTBuilder
             name: ASTBuilder._toText(ctx.identifier()),
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitAssemblyStackAssignment(ctx: SP.AssemblyStackAssignmentContext) {
@@ -2237,7 +2324,7 @@ export class ASTBuilder
             name: ASTBuilder._toText(ctx.identifier()),
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitAssemblyFor(ctx: SP.AssemblyForContext) {
@@ -2254,7 +2341,7 @@ export class ASTBuilder
             body: this.visit(ctx.getChild(4)) as AST.AssemblyBlock,
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitAssemblyIf(ctx: SP.AssemblyIfContext) {
@@ -2264,7 +2351,7 @@ export class ASTBuilder
             body: this.visitAssemblyBlock(ctx.assemblyBlock()),
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitContinueStatement(
@@ -2275,7 +2362,7 @@ export class ASTBuilder
             identifiers: []
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     public visitBreakStatement(
@@ -2286,7 +2373,7 @@ export class ASTBuilder
             identifiers: []
         }
 
-        return this._addMeta(node, ctx)
+        return this._addMeta(node, ctx, [])
     }
 
     private static _toText(ctx: ParserRuleContext | ParseTree): string {
@@ -2338,7 +2425,8 @@ export class ASTBuilder
 
     private _addMeta<T extends AST.BaseASTNode>(
         node: T,
-        ctx: ParserRuleContext
+        ctx: ParserRuleContext,
+        vulnerabilities: AST.Vulnerability[]
     ): T & WithMeta {
         const nodeWithMeta: AST.BaseASTNode = {
             type: node.type,
@@ -2350,7 +2438,7 @@ export class ASTBuilder
         if (this.options.range === true) {
             node.range = this._range(ctx)
         }
-
+        node.vulnerabilities = vulnerabilities
         return {
             ...nodeWithMeta,
             ...node,

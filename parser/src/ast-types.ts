@@ -14,10 +14,17 @@ interface Location {
     }
 }
 
+export interface Vulnerability {
+    type: string,
+    range: [number, number]
+    loc: Location
+}
+
 export interface BaseASTNode {
     type: ASTNodeTypeString
     range?: [number, number]
     loc?: Location
+    vulnerabilities?: Vulnerability[]
 }
 
 export interface SourceUnit extends BaseASTNode {
