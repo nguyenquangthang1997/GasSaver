@@ -200,7 +200,7 @@ export class ASTBuilder
         }
         variables.forEach(el => {
             try {
-                identifiers.push({...el.identifier, isDeclare: true});
+                identifiers.push({...el.identifier, isDeclare: true, isWriteOperation: true});
                 vulnerabilites.push(...el.vulnerabilities)
             } catch (e) {
                 console.log(e)
@@ -1705,7 +1705,68 @@ export class ASTBuilder
             vulnerabilities.push(...loopExpression.vulnerabilities)
         }
         let body = this.visitStatement(ctx.statement());
+        if (body.type === "Block") {
+            for (let i = 0; i < body.statements.length; i++) {
+                let statement = body.statements[i]
+                if (statement.type === "VariableDeclarationStatement") {
+                    let listVariableDeclarationStatement = []
+                    // @ts-ignore
+                    for (let variable of statement.variables) {
+                        listVariableDeclarationStatement.push(variable.name)
+                    }
+                    // @ts-ignore
+                    listVariableDeclarationStatement.push(...statement.initialValue.identifiers)
+                    let variableContainLoopVariable = false
+                    let idenLoopExression = loopExpression.identifiers.filter(item => item.isWriteOperation === true)
+                    // @ts-ignore
+                    for (let item of statement.initialValue.identifiers) {
+                        // @ts-ignore
+                        for (let iden of idenLoopExression) {
+                            if (item.name === iden.name) {
+                                variableContainLoopVariable = true
+                                break
+                            }
+                        }
+                        if (variableContainLoopVariable === true) break
+                    }
+                    let variableModifiers = false
+                    for (let j = i + 1; j < body.statements.length; j++) {
+                        // @ts-ignore
+                        for (let iden of body.statements[i].identifiers) {
+                            if (iden.isWriteOperation === true) {
+                                iden = traceIdentifier(iden)
+                                for (let variable of listVariableDeclarationStatement) {
+                                    if (iden === variable) {
+                                        variableModifiers = true
+                                        break
+                                    }
+                                }
+                                if (variableModifiers === true) break
+                            }
+                        }
+                        if (variableModifiers === true) break
+                    }
+                    if (variableModifiers === false && variableContainLoopVariable === false) {
+                        let vulnerability = {
+                            type: "repeated-calculate",
+                            range: statement.range,
+                            loc: statement.loc
+                        }
+                        // @ts-ignore
+                        if (statement.initialValue.type === "FunctionCall" && statement.initialValue.expression.type==="Identifier") {
+                            // @ts-ignore
+                            vulnerability.functionCall = statement.initialValue.expression.name
+                        }
+                        vulnerabilities.push(vulnerability)
+                    }
+                }
+            }
+        }
         vulnerabilities.push(...body.vulnerabilities)
+
+        //todo change for-> do while
+
+
         const node: AST.ForStatement = {
             type: 'ForStatement',
             initExpression,
@@ -2483,4 +2544,21 @@ function isBinOp(op: string): op is AST.BinOp {
 
 function isAssignmentOp(op: string): op is AST.AssignmentOp {
     return AST.assignmentOpValues.includes(op as AST.AssignmentOp)
+}
+
+function traceIdentifier(identifier) {
+    if (identifier.type === "Identifier") {
+        if (identifier.subIdentifier.type === "IndexAccess") {
+            return traceIdentifier(identifier.subIdentifier.base)
+        } else if (identifier.subIdentifier.type === "MemberAccess") {
+            return traceIdentifier(identifier.subIdentifier.expression)
+        } else if (identifier.subIdentifier.type === "IndexRangeAccess") {
+            return traceIdentifier(identifier.subIdentifier.base)
+        } else if (identifier.subIdentifier.type === "Common") {
+            return identifier.name
+        }
+    } else {
+        console.log(identifier)
+        throw Error("Un-handle")
+    }
 }

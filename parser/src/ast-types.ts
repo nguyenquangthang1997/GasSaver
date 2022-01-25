@@ -13,11 +13,18 @@ interface Location {
         column: number
     }
 }
-
-export interface Vulnerability {
-    type: string,
+export type Vulnerability = DeMorgan|RepeatedCalculate
+export interface DeMorgan {
+    type: "de-morgan",
     range: [number, number]
-    loc: Location
+    loc: Location,
+}
+
+export interface RepeatedCalculate {
+    type: "repeated-calculate",
+    range: [number, number]
+    loc: Location,
+    functionCall: string
 }
 
 export interface BaseASTNode {

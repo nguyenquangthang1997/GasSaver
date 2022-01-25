@@ -57,6 +57,15 @@ function logDemorgan(range, data, loc) {
 
 }
 
+function logRepeatedCalculate(range, data, loc) {
+    let _before = data.slice(range[0], range[1] + 1).toString();
+    let _after = "// move outside for loop\n" + _before;
+    return {
+        type: "repeated-calculate ", before: _before, after: _after, loc
+    }
+
+}
+
 function traceIdentifier(identifier) {
     if (identifier.type === "Identifier") {
         if (identifier.subIdentifier.type === "IndexAccess") {
@@ -74,17 +83,46 @@ function traceIdentifier(identifier) {
     }
 }
 
+function getAllFunction(ast, contract) {
+    let listFunctions = []
+    ast.children.forEach(item => {
+        if (item.type === 'ContractDefinition' && item.name === contract) {
+            let listFunction = item.subNodes.filter(item => item.type === "FunctionDefinition")
+            listFunctions.push(...listFunction)
+            for (let cntr of item.baseContracts) {
+                let listFunctionCntr = getAllFunction(ast, cntr.baseName.namePath)
+                listFunctions.push(...listFunctionCntr)
+            }
+        }
+    })
+    return listFunctions
+}
+
 async function optimized(path) {
     const data = await fs.readFile(path);
-    const ast = parser.parse(data.toString(), {tokens: true, tolerant: true, range: true});
+    const ast = parser.parse(data.toString(), {tokens: true, tolerant: true, range: true, loc: true});
     let listFunctions = {}
     let contracts = {}
     let results = [];
     ast.children.forEach((item, index) => {
         if (item.type === "ContractDefinition") {
-            item.vulnerabilities.forEach(item => {
-                if (item.type === "de-morgan") {
-                    results.push(logDemorgan(item.range, data, item.loc))
+            item.vulnerabilities.forEach(vul => {
+                if (vul.type === "de-morgan") {
+                    results.push(logDemorgan(vul.range, data, vul.loc))
+                }
+                if (vul.type === "repeated-calculate") {
+                    if (vul.functionCall.length !== 0) {
+                        let listFunction = getAllFunction(ast, item.name)
+                        for (let func of listFunction) {
+                            if (vul.functionCall === func.name) {
+                                let isVul = func.stateMutability === "pure" ? true : false
+                                if (isVul) {
+                                    results.push(logRepeatedCalculate(vul.range, data, vul.loc))
+                                }
+                            }
+                        }
+
+                    } else results.push(logRepeatedCalculate(vul.range, data, vul.loc))
                 }
             })
             let listStateInContract = item.subNodes.filter(item => item.type === "StateVariableDeclaration")
@@ -142,7 +180,6 @@ async function optimized(path) {
             for (let i of item.subNodes) {
                 if (i.type === "FunctionDefinition" || i.type === "ModifierDefinition") {
                     for (let stateUsed of i.stateUsed) {
-                        // TODO WITH EACH TYPE
                         let stateUsedName = traceIdentifier(stateUsed)
                         if (!(stateUsedName in stateUseds)) {
                             stateUseds[stateUsedName] = stateUsed
@@ -184,7 +221,7 @@ async function optimized(path) {
     })
     for (let res of results) {
         console.log("\n============================================================\n")
-        console.log(res.type, res.loc!==undefined?res.loc:"", "\n-------------------------------------------------------------------\n", res.before, "\n-------------------------------------------------------------------\n", res.after, "\n")
+        console.log(res.type, res.loc !== undefined ? res.loc : "", "\n-------------------------------------------------------------------\n", res.before, "\n-------------------------------------------------------------------\n", res.after, "\n")
         console.log("\n============================================================\n")
 
     }
