@@ -66,6 +66,18 @@ function logRepeatedCalculate(range, data, loc) {
 
 }
 
+function logMergedLoop(ranges, data, locs) {
+    let _before = "";
+    for (let i in ranges) {
+        _before += `\nstart line ${locs[i].start.line} column ${locs[i].start.column}, end line ${locs[i].end.line} column ${locs[i].end.column}\n` + data.slice(ranges[i][0], ranges[i][1] + 1).toString()
+    }
+    let _after = "// merge loop\n" + _before;
+    return {
+        type: "merge-loop", before: _before, after: _after
+    }
+
+}
+
 function traceIdentifier(identifier) {
     if (identifier.type === "Identifier") {
         if (identifier.subIdentifier.type === "IndexAccess") {
@@ -109,8 +121,7 @@ async function optimized(path) {
             item.vulnerabilities.forEach(vul => {
                 if (vul.type === "de-morgan") {
                     results.push(logDemorgan(vul.range, data, vul.loc))
-                }
-                if (vul.type === "repeated-calculate") {
+                } else if (vul.type === "repeated-calculate") {
                     if (vul.functionCall.length !== 0) {
                         let listFunction = getAllFunction(ast, item.name)
                         for (let func of listFunction) {
@@ -123,6 +134,25 @@ async function optimized(path) {
                         }
 
                     } else results.push(logRepeatedCalculate(vul.range, data, vul.loc))
+                } else if (vul.type === "merge-loop") {
+                    let listLoop = {}
+                    for (let i in vul.initExpressionRange) {
+                        let loopString = data.slice(vul.initExpressionRange[i][0], vul.initExpressionRange[i][1] + 1) + data.slice(vul.conditionExpressionRange[i][0], vul.conditionExpressionRange[i][1] + 1) + data.slice(vul.loopExpressionRange[i][0], vul.loopExpressionRange[i][1] + 1)
+                        if (listLoop[loopString] === undefined) {
+                            listLoop[loopString] = {
+                                range: [vul.range[i]],
+                                loc: [vul.loc[i]]
+                            }
+                        } else {
+                            listLoop[loopString].range.push(vul.range[i]);
+                            listLoop[loopString].loc.push(vul.loc[i]);
+                        }
+                    }
+                    Object.entries(listLoop).forEach(([key, value]) => {
+                        if (value.range.length > 1) {
+                            results.push(logMergedLoop(value.range, data, value.loc))
+                        }
+                    })
                 }
             })
             let listStateInContract = item.subNodes.filter(item => item.type === "StateVariableDeclaration")

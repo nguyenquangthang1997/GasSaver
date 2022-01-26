@@ -13,7 +13,9 @@ interface Location {
         column: number
     }
 }
-export type Vulnerability = DeMorgan|RepeatedCalculate
+
+export type Vulnerability = DeMorgan | RepeatedCalculate | MergeLoop
+
 export interface DeMorgan {
     type: "de-morgan",
     range: [number, number]
@@ -22,9 +24,18 @@ export interface DeMorgan {
 
 export interface RepeatedCalculate {
     type: "repeated-calculate",
-    range: [number, number]
+    range: [number, number],
     loc: Location,
     functionCall: string
+}
+
+export interface MergeLoop {
+    type: "merge-loop",
+    range: [number, number][],
+    initExpressionRange: [number, number][],
+    conditionExpressionRange: [number, number][],
+    loopExpressionRange: [number, number][],
+    loc: Location[]
 }
 
 export interface BaseASTNode {
@@ -294,7 +305,7 @@ export interface FunctionTypeName extends BaseASTNode {
 
 export interface Block extends BaseASTNode {
     type: 'Block'
-    statements: BaseASTNode[]
+    statements: Statement[]
     identifiers: Identifier[]
 
 }
@@ -408,7 +419,7 @@ export interface ThrowStatement extends BaseASTNode {
 
 export interface VariableDeclarationStatement extends BaseASTNode {
     type: 'VariableDeclarationStatement'
-    variables: Array<BaseASTNode | null>
+    variables: Array<VariableDeclaration | null>
     initialValue: Expression | null
     identifiers: Identifier[]
 }

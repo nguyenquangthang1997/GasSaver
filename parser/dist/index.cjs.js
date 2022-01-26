@@ -35956,10 +35956,28 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
     let statements = ctx.statement().map((x) => this.visitStatement(x));
     let identifiers = [];
     let vulnerabilities = [];
+    let mergeLoopVulnerability = {
+      type: "merge-loop",
+      range: [],
+      initExpressionRange: [],
+      conditionExpressionRange: [],
+      loopExpressionRange: [],
+      loc: []
+    };
     statements.forEach((el) => {
+      if (el.type === "ForStatement") {
+        mergeLoopVulnerability.loc.push(el.loc);
+        mergeLoopVulnerability.range.push(el.range);
+        mergeLoopVulnerability.initExpressionRange.push(el.initExpression.range);
+        mergeLoopVulnerability.conditionExpressionRange.push(el.conditionExpression.range);
+        mergeLoopVulnerability.loopExpressionRange.push(el.loopExpression.range);
+      }
       identifiers.push(...el.identifiers);
       vulnerabilities.push(...el.vulnerabilities);
     });
+    if (mergeLoopVulnerability.range.length > 1) {
+      vulnerabilities.push(mergeLoopVulnerability);
+    }
     const node = {
       type: "Block",
       statements,
@@ -37056,52 +37074,9 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
       for (let i = 0; i < body.statements.length; i++) {
         let statement = body.statements[i];
         if (statement.type === "VariableDeclarationStatement") {
-          let listVariableDeclarationStatement = [];
-          for (let variable of statement.variables) {
-            listVariableDeclarationStatement.push(variable.name);
-          }
-          listVariableDeclarationStatement.push(...statement.initialValue.identifiers);
-          let variableContainLoopVariable = false;
-          let idenLoopExression = loopExpression.identifiers.filter((item) => item.isWriteOperation === true);
-          for (let item of statement.initialValue.identifiers) {
-            for (let iden of idenLoopExression) {
-              if (item.name === iden.name) {
-                variableContainLoopVariable = true;
-                break;
-              }
-            }
-            if (variableContainLoopVariable === true)
-              break;
-          }
-          let variableModifiers = false;
-          for (let j = i + 1; j < body.statements.length; j++) {
-            for (let iden of body.statements[i].identifiers) {
-              if (iden.isWriteOperation === true) {
-                iden = traceIdentifier(iden);
-                for (let variable of listVariableDeclarationStatement) {
-                  if (iden === variable) {
-                    variableModifiers = true;
-                    break;
-                  }
-                }
-                if (variableModifiers === true)
-                  break;
-              }
-            }
-            if (variableModifiers === true)
-              break;
-          }
-          if (variableModifiers === false && variableContainLoopVariable === false) {
-            let vulnerability = {
-              type: "repeated-calculate",
-              range: statement.range,
-              loc: statement.loc
-            };
-            if (statement.initialValue.type === "FunctionCall" && statement.initialValue.expression.type === "Identifier") {
-              vulnerability.functionCall = statement.initialValue.expression.name;
-            }
+          let vulnerability = repeatedCalculate(body, statement, loopExpression, i);
+          if (vulnerability !== null)
             vulnerabilities.push(vulnerability);
-          }
         }
       }
     }
@@ -37113,7 +37088,8 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
       loopExpression: {
         type: "ExpressionStatement",
         expression: loopExpression,
-        identifiers: loopExpression.identifiers
+        identifiers: loopExpression.identifiers,
+        range: loopExpression.range
       },
       body,
       identifiers: [...identifiers, ...body.identifiers]
@@ -37693,6 +37669,55 @@ function traceIdentifier(identifier) {
     console.log(identifier);
     throw Error("Un-handle");
   }
+}
+function repeatedCalculate(body, statement, loopExpression, index) {
+  let vulnerability = null;
+  let variableContainLoopVariable = false;
+  let idenLoopVariable = loopExpression.identifiers.filter((item) => item.isWriteOperation === true);
+  for (let item of statement.initialValue.identifiers) {
+    for (let iden of idenLoopVariable) {
+      if (item.name === iden.name) {
+        variableContainLoopVariable = true;
+        break;
+      }
+    }
+    if (variableContainLoopVariable === true)
+      break;
+  }
+  let listVariableDeclarationStatement = [];
+  for (let variable of statement.variables) {
+    listVariableDeclarationStatement.push(variable.name);
+  }
+  listVariableDeclarationStatement.push(...statement.initialValue.identifiers);
+  let variableModifiers = false;
+  for (let j = index + 1; j < body.statements.length; j++) {
+    for (let iden of body.statements[index].identifiers) {
+      if (iden.isWriteOperation === true) {
+        iden = traceIdentifier(iden);
+        for (let variable of listVariableDeclarationStatement) {
+          if (iden === variable) {
+            variableModifiers = true;
+            break;
+          }
+        }
+        if (variableModifiers === true)
+          break;
+      }
+    }
+    if (variableModifiers === true)
+      break;
+  }
+  if (variableModifiers === false && variableContainLoopVariable === false) {
+    vulnerability = {
+      type: "repeated-calculate",
+      range: statement.range,
+      loc: statement.loc
+    };
+    if (statement.initialValue.type === "FunctionCall" && statement.initialValue.expression.type === "Identifier") {
+      vulnerability.functionCall = statement.initialValue.expression.name;
+    }
+  }
+  return vulnerability;
 }
 
 // src/ErrorListener.ts

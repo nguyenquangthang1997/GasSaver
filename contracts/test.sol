@@ -16,13 +16,21 @@ contract test is test1 {
         uint256 aa;
     }
 
-    function thang() public pure {
 
-    }
 
     function doSomething() public {
         for (uint256 i = 0; i < 1000; i = i + 1) {
             b memory aaa = thang();
+            //            aaa.aa = c;
+        }
+
+        for (uint256 i = 0; i < 1000; i = i + 1) {
+            b memory aaa1 = thang();
+            //            aaa.aa = c;
+        }
+
+        for (uint256 i = 0; i < 1000; i = i + 1) {
+            b memory aaa1 = thang();
             //            aaa.aa = c;
         }
     }
