@@ -1,0 +1,1 @@
+{"time":68,"results":[{"type":"state-data-arrangement ","before":"\naddress public cubePool;\nstring public spotSymbol;\nbool public inverse;","after":"string public spotSymbol;\naddress public cubePool;\nbool public inverse;\n","contract":"CubeToken","time":0}]}

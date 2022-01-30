@@ -14,7 +14,7 @@ interface Location {
     }
 }
 
-export type Vulnerability = DeMorgan | RepeatedCalculate | MergeLoop
+export type Vulnerability = DeMorgan | RepeatedCalculate | MergeLoop | ListFunctionCall
 
 export interface DeMorgan {
     type: "de-morgan",
@@ -26,6 +26,11 @@ export interface RepeatedCalculate {
     type: "repeated-calculate",
     range: [number, number],
     loc: Location,
+    functionCall: string
+}
+
+export interface ListFunctionCall {
+    type: "list-function-call",
     functionCall: string
 }
 

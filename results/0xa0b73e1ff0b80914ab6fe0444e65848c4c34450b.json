@@ -1,0 +1,1 @@
+{"time":87,"results":[{"type":"state-data-arrangement ","before":"\naddress public upgradeMaster;\nUpgradeAgent public upgradeAgent;\nuint256 public totalUpgraded;\nbool canUpgrade_ = true;","after":"UpgradeAgent public upgradeAgent;\nuint256 public totalUpgraded;\naddress public upgradeMaster;\nbool canUpgrade_ = true;\n","contract":"UpgradeableToken","time":0}]}

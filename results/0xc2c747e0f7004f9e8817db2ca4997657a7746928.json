@@ -1,0 +1,1 @@
+{"time":228,"results":[{"type":"de-morgan-condition ","before":"!(char >= 0x30 && char <= 0x39) && //9-0\n            !(char >= 0x41 && char <= 0x5A)","after":"!((char >= 0x30 && char <= 0x39) && //9-0\n            (char >= 0x41 && char <= 0x5A))","loc":{"start":{"line":1630,"column":16},"end":{"line":1631,"column":42}},"contract":"Masks","time":0}]}

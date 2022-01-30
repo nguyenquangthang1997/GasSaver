@@ -1,0 +1,1 @@
+{"time":492,"results":[{"type":"state-data-arrangement ","before":"\nuint8 private constant _decimals = 18;\nuint256 private constant _supply = 10000000;\naddress public author;","after":"uint256 private constant _supply = 10000000;\naddress public author;\nuint8 private constant _decimals = 18;\n","contract":"Property","time":0}]}

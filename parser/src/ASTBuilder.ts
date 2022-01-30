@@ -127,7 +127,9 @@ export class ASTBuilder
             override = overrideSpecifier[0]
                 .userDefinedTypeName()
                 .map((x) => this.visitUserDefinedTypeName(x))
-            vulnerabilities.push(...override.vulnerabilities)
+            if (override.length > 1) {
+                vulnerabilities.push(...override.vulnerabilities)
+            }
         }
 
         let isImmutable = false
@@ -203,7 +205,7 @@ export class ASTBuilder
                 identifiers.push({...el.identifier, isDeclare: true, isWriteOperation: true});
                 vulnerabilites.push(...el.vulnerabilities)
             } catch (e) {
-                console.log(e)
+                // console.log(e)
             }
         })
 
@@ -292,8 +294,8 @@ export class ASTBuilder
             if (el.type === "ForStatement") {
                 mergeLoopVulnerability.loc.push(el.loc)
                 mergeLoopVulnerability.range.push(el.range)
-                mergeLoopVulnerability.initExpressionRange.push(el.initExpression.range)
-                mergeLoopVulnerability.conditionExpressionRange.push(el.conditionExpression.range)
+                if (el.initExpression !== null) mergeLoopVulnerability.initExpressionRange.push(el.initExpression.range)
+                if (el.conditionExpression !== null) mergeLoopVulnerability.conditionExpressionRange.push(el.conditionExpression.range)
                 mergeLoopVulnerability.loopExpressionRange.push(el.loopExpression.range)
 
             }
@@ -900,7 +902,9 @@ export class ASTBuilder
         if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
             identifiers = [...expression.subIdentifier.identifiers, ...identifiers]
         }
-
+        if (expression.type === "Identifier") {
+            let c = 1
+        }
         const node: AST.FunctionCall = {
             type: 'FunctionCall',
             expression,
@@ -998,7 +1002,7 @@ export class ASTBuilder
         if (ctxReturnParameters !== undefined) {
             returnParameters = this.visitReturnParameters(ctxReturnParameters)
             returnParameters.forEach(el => {
-                identifiers.push(el.identifier)
+                if (el.identifier !== null) identifiers.push(el.identifier)
                 vulnerabilities.push(...el.vulnerabilities)
 
             })
@@ -1037,7 +1041,7 @@ export class ASTBuilder
         if (ctx.parameterList()) {
             parameters = this.visitParameterList(ctx.parameterList()!)
             parameters.forEach(el => {
-                identifiers.push(el.identifier)
+                if (el.identifier !== null) identifiers.push(el.identifier)
                 vulnerabilities.push(...el.vulnerabilities)
             })
         }
@@ -1140,7 +1144,7 @@ export class ASTBuilder
         if (ctx.parameterList()) {
             parameters = this.visitParameterList(ctx.parameterList()!)
             parameters.forEach(el => {
-                identifiers.push(el.identifier)
+                if (el.identifier !== null) identifiers.push(el.identifier)
                 vulnerabilities.push(...el.vulnerabilities)
             })
         }
@@ -1431,12 +1435,17 @@ export class ASTBuilder
                             vulnerabilities.push(...temp.vulnerabilities)
                         }
                     }
-
                     let expression = this.visitExpression(ctx.expression(0))
                     if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
                         identifiers = [...expression.subIdentifier.identifiers, ...identifiers]
                     }
                     vulnerabilities.push(...expression.vulnerabilities)
+                    if (expression.type === "Identifier" && expression.subIdentifier.type === "Common") {
+                        vulnerabilities.push({
+                            type: "list-function-call",
+                            functionCall: expression.name
+                        })
+                    }
                     const node: AST.FunctionCall = {
                         type: 'FunctionCall',
                         expression,
@@ -1444,6 +1453,7 @@ export class ASTBuilder
                         names,
                         identifiers,
                     }
+
 
                     return this._addMeta(node, ctx, vulnerabilities)
                 }
@@ -1736,7 +1746,6 @@ export class ASTBuilder
         }
         vulnerabilities.push(...body.vulnerabilities)
 
-
         const node: AST.ForStatement = {
             type: 'ForStatement',
             initExpression,
@@ -1744,8 +1753,8 @@ export class ASTBuilder
             loopExpression: {
                 type: 'ExpressionStatement',
                 expression: loopExpression,
-                identifiers: loopExpression.identifiers,
-                range:loopExpression.range
+                identifiers: loopExpression !== null ? loopExpression.identifiers : [],
+                range: loopExpression !== null ? loopExpression.range : [-1, -1]
             },
             body,
             identifiers: [...identifiers, ...body.identifiers]
@@ -1894,7 +1903,7 @@ export class ASTBuilder
         let identifiers = []
         let vulnerabilities = []
         components.forEach(el => {
-            if (el.type === "Identifier") {
+            if (el !== null && el.type === "Identifier") {
                 identifiers.push(el)
                 vulnerabilities.push(...el.vulnerabilities)
             }
@@ -2538,24 +2547,31 @@ function repeatedCalculate(body: AST.Block, statement: AST.VariableDeclarationSt
     let vulnerability = null
     // check whether initialValue contain loop variable or not
     let variableContainLoopVariable = false
-    let idenLoopVariable = loopExpression.identifiers.filter(item => item.isWriteOperation === true)
-    for (let item of statement.initialValue.identifiers) {
-        for (let iden of idenLoopVariable) {
-            if (item.name === iden.name) {
-                variableContainLoopVariable = true
-                break
-            }
-        }
-        if (variableContainLoopVariable === true) break
+    let idenLoopVariable;
+    if (loopExpression === null) {
+        idenLoopVariable = []
+    } else {
+        idenLoopVariable = loopExpression.identifiers.filter(item => item.isWriteOperation === true)
     }
-
     // check whether initialValue, variable are modified or not
     let listVariableDeclarationStatement = []
     // get declared Variable list
     for (let variable of statement.variables) {
-        listVariableDeclarationStatement.push(variable.name)
+        if (variable !== null) listVariableDeclarationStatement.push(variable.name)
     }
-    listVariableDeclarationStatement.push(...statement.initialValue.identifiers)
+    if (statement.initialValue !== null) {
+        for (let item of statement.initialValue.identifiers) {
+            for (let iden of idenLoopVariable) {
+                if (item.name === iden.name) {
+                    variableContainLoopVariable = true
+                    break
+                }
+            }
+            if (variableContainLoopVariable === true) break
+        }
+        listVariableDeclarationStatement.push(...statement.initialValue.identifiers)
+
+    }
 
     let variableModifiers = false
     for (let j = index + 1; j < body.statements.length; j++) {

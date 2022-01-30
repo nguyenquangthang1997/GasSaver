@@ -1,0 +1,1 @@
+{"time":155,"results":[{"type":"de-morgan-condition ","before":"!_isExcluded[sender] && !_isExcluded[recipient]","after":"!(_isExcluded[sender] && _isExcluded[recipient])","loc":{"start":{"line":1135,"column":19},"end":{"line":1135,"column":65}},"contract":"BezosEarth","time":0}]}

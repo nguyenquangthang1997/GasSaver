@@ -1,0 +1,1 @@
+{"time":206,"results":[{"type":"de-morgan-condition ","before":"!inverse.frozenAtUpperLimit && !inverse.frozenAtLowerLimit","after":"!(inverse.frozenAtUpperLimit && inverse.frozenAtLowerLimit)","loc":{"start":{"line":1387,"column":16},"end":{"line":1387,"column":56}},"contract":"ExchangeRates","time":0}]}

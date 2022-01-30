@@ -1,0 +1,1 @@
+{"time":392,"results":[{"type":"state-data-arrangement ","before":"\nbool initialized = false;\naddress public user;\nProxyRegistry public registry;\nbool public revoked;","after":"ProxyRegistry public registry;\naddress public user;\nbool initialized = false;\nbool public revoked;\n","contract":"AuthenticatedProxy","time":0}]}

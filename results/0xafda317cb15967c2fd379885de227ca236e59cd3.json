@@ -1,0 +1,1 @@
+{"time":542,"results":[{"type":"de-morgan-condition ","before":"uire(!dataRequested[oracleId][timestamp] && !dataExist[oracleId][times","after":"!(uire(dataRequested[oracleId][timestamp] && dataExist[oracleId][times)","loc":{"start":{"line":4217,"column":16},"end":{"line":4217,"column":85}},"contract":"OracleAggregator","time":0}]}

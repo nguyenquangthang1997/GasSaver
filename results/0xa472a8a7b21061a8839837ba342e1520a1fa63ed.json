@@ -1,0 +1,1 @@
+{"time":144,"results":[{"type":"de-morgan-condition ","before":"!isAllowedUniswapPoolOne && !isAllowedUniswapPoolTwo","after":"!(isAllowedUniswapPoolOne && isAllowedUniswapPoolTwo)","loc":{"start":{"line":3441,"column":12},"end":{"line":3441,"column":41}},"contract":"UniswapPairPriceAdapter","time":0}]}

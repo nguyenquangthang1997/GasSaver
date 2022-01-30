@@ -1,0 +1,1 @@
+{"time":1821,"results":[{"type":"de-morgan-condition ","before":"f (!isAllowed || !succ","after":"!(f (isAllowed || succ)","loc":{"start":{"line":8542,"column":12},"end":{"line":8542,"column":27}},"contract":"OVM_ExecutionManager","time":0}]}

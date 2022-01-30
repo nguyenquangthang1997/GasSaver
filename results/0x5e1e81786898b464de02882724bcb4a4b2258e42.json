@@ -1,0 +1,1 @@
+{"time":86,"results":[{"type":"de-morgan-condition ","before":"!stopped && !hidden","after":"!(stopped && hidden)","loc":{"start":{"line":2398,"column":15},"end":{"line":2398,"column":28}},"contract":"KeyPurchaser","time":0}]}

@@ -1,0 +1,1 @@
+{"time":277,"results":[{"type":"state-data-arrangement ","before":"\nbytes4 private constant _INTERFACE_ID_FEES = 0xb7799584;\nuint public buyerFee = 0;\naddress payable public beneficiary;","after":"uint public buyerFee = 0;\naddress payable public beneficiary;\nbytes4 private constant _INTERFACE_ID_FEES = 0xb7799584;\n","contract":"AbstractSale","time":0}]}

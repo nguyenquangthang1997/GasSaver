@@ -35827,7 +35827,9 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
       override = null;
     } else {
       override = overrideSpecifier[0].userDefinedTypeName().map((x) => this.visitUserDefinedTypeName(x));
-      vulnerabilities.push(...override.vulnerabilities);
+      if (override.length > 1) {
+        vulnerabilities.push(...override.vulnerabilities);
+      }
     }
     let isImmutable = false;
     if (ctx.ImmutableKeyword().length > 0) {
@@ -35892,7 +35894,6 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
         identifiers.push(__spreadProps(__spreadValues({}, el.identifier), {isDeclare: true, isWriteOperation: true}));
         vulnerabilites.push(...el.vulnerabilities);
       } catch (e) {
-        console.log(e);
       }
     });
     let initialValue = null;
@@ -35968,8 +35969,10 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
       if (el.type === "ForStatement") {
         mergeLoopVulnerability.loc.push(el.loc);
         mergeLoopVulnerability.range.push(el.range);
-        mergeLoopVulnerability.initExpressionRange.push(el.initExpression.range);
-        mergeLoopVulnerability.conditionExpressionRange.push(el.conditionExpression.range);
+        if (el.initExpression !== null)
+          mergeLoopVulnerability.initExpressionRange.push(el.initExpression.range);
+        if (el.conditionExpression !== null)
+          mergeLoopVulnerability.conditionExpressionRange.push(el.conditionExpression.range);
         mergeLoopVulnerability.loopExpressionRange.push(el.loopExpression.range);
       }
       identifiers.push(...el.identifiers);
@@ -36430,6 +36433,9 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
     if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
       identifiers = [...expression.subIdentifier.identifiers, ...identifiers];
     }
+    if (expression.type === "Identifier") {
+      let c = 1;
+    }
     const node = {
       type: "FunctionCall",
       expression,
@@ -36501,7 +36507,8 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
     if (ctxReturnParameters !== void 0) {
       returnParameters = this.visitReturnParameters(ctxReturnParameters);
       returnParameters.forEach((el) => {
-        identifiers.push(el.identifier);
+        if (el.identifier !== null)
+          identifiers.push(el.identifier);
         vulnerabilities.push(...el.vulnerabilities);
       });
     }
@@ -36532,7 +36539,8 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
     if (ctx.parameterList()) {
       parameters = this.visitParameterList(ctx.parameterList());
       parameters.forEach((el) => {
-        identifiers.push(el.identifier);
+        if (el.identifier !== null)
+          identifiers.push(el.identifier);
         vulnerabilities.push(...el.vulnerabilities);
       });
     }
@@ -36607,7 +36615,8 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
     if (ctx.parameterList()) {
       parameters = this.visitParameterList(ctx.parameterList());
       parameters.forEach((el) => {
-        identifiers.push(el.identifier);
+        if (el.identifier !== null)
+          identifiers.push(el.identifier);
         vulnerabilities.push(...el.vulnerabilities);
       });
     }
@@ -36848,6 +36857,12 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
             identifiers = [...expression.subIdentifier.identifiers, ...identifiers];
           }
           vulnerabilities.push(...expression.vulnerabilities);
+          if (expression.type === "Identifier" && expression.subIdentifier.type === "Common") {
+            vulnerabilities.push({
+              type: "list-function-call",
+              functionCall: expression.name
+            });
+          }
           const node = {
             type: "FunctionCall",
             expression,
@@ -37088,8 +37103,8 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
       loopExpression: {
         type: "ExpressionStatement",
         expression: loopExpression,
-        identifiers: loopExpression.identifiers,
-        range: loopExpression.range
+        identifiers: loopExpression !== null ? loopExpression.identifiers : [],
+        range: loopExpression !== null ? loopExpression.range : [-1, -1]
       },
       body,
       identifiers: [...identifiers, ...body.identifiers]
@@ -37197,7 +37212,7 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
     let identifiers = [];
     let vulnerabilities = [];
     components.forEach((el) => {
-      if (el.type === "Identifier") {
+      if (el !== null && el.type === "Identifier") {
         identifiers.push(el);
         vulnerabilities.push(...el.vulnerabilities);
       }
@@ -37673,22 +37688,30 @@ function traceIdentifier(identifier) {
 function repeatedCalculate(body, statement, loopExpression, index) {
   let vulnerability = null;
   let variableContainLoopVariable = false;
-  let idenLoopVariable = loopExpression.identifiers.filter((item) => item.isWriteOperation === true);
-  for (let item of statement.initialValue.identifiers) {
-    for (let iden of idenLoopVariable) {
-      if (item.name === iden.name) {
-        variableContainLoopVariable = true;
-        break;
-      }
-    }
-    if (variableContainLoopVariable === true)
-      break;
+  let idenLoopVariable;
+  if (loopExpression === null) {
+    idenLoopVariable = [];
+  } else {
+    idenLoopVariable = loopExpression.identifiers.filter((item) => item.isWriteOperation === true);
   }
   let listVariableDeclarationStatement = [];
   for (let variable of statement.variables) {
-    listVariableDeclarationStatement.push(variable.name);
+    if (variable !== null)
+      listVariableDeclarationStatement.push(variable.name);
   }
-  listVariableDeclarationStatement.push(...statement.initialValue.identifiers);
+  if (statement.initialValue !== null) {
+    for (let item of statement.initialValue.identifiers) {
+      for (let iden of idenLoopVariable) {
+        if (item.name === iden.name) {
+          variableContainLoopVariable = true;
+          break;
+        }
+      }
+      if (variableContainLoopVariable === true)
+        break;
+    }
+    listVariableDeclarationStatement.push(...statement.initialValue.identifiers);
+  }
   let variableModifiers = false;
   for (let j = index + 1; j < body.statements.length; j++) {
     for (let iden of body.statements[index].identifiers) {

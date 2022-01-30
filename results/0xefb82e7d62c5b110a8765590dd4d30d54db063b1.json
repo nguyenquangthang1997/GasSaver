@@ -1,0 +1,1 @@
+{"time":158,"results":[{"type":"de-morgan-condition ","before":"(!round.hasPaid[uint(Party.Requester)] || !round.hasPaid[uint(Party.Challenger)","after":"!((round.hasPaid[uint(Party.Requester)] || round.hasPaid[uint(Party.Challenger))","loc":{"start":{"line":1184,"column":12},"end":{"line":1184,"column":90}},"contract":"GeneralizedTCR","time":0}]}

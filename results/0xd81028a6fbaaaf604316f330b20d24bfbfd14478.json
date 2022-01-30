@@ -1,0 +1,1 @@
+{"time":882,"results":[{"type":"de-morgan-condition ","before":"f (!lookup.isAvailable && !queryIndices[identifier][time].isVa","after":"!(f (lookup.isAvailable && queryIndices[identifier][time].isVa)","loc":{"start":{"line":3872,"column":12},"end":{"line":3872,"column":67}},"contract":"MockOracle","time":0}]}

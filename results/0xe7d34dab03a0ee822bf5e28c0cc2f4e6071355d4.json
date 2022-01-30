@@ -1,0 +1,1 @@
+{"time":551,"results":[{"type":"de-morgan-condition ","before":"!updateFrom && !updateTo","after":"!(updateFrom && updateTo)","loc":{"start":{"line":1739,"column":12},"end":{"line":1739,"column":28}},"contract":"MooniswapGovernance","time":0}]}

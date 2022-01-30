@@ -1,0 +1,1 @@
+{"time":262,"results":[{"type":"de-morgan-condition ","before":"!proposal.flags[4] && !proposal.flags[5]","after":"!(proposal.flags[4] && proposal.flags[5])","loc":{"start":{"line":887,"column":16},"end":{"line":887,"column":55}},"contract":"Moloch","time":0}]}
