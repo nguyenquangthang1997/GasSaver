@@ -1,0 +1,1 @@
+{"time":92,"results":[{"type":"immutable-restrict-modification ","before":"address public rewardToken;","after":"address public immutable rewardToken;","contract":"RewardVault","time":1}]}

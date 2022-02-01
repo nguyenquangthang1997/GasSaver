@@ -1,0 +1,1 @@
+{"time":57,"results":[{"type":"struct-data-arrangement ","before":"\naddress sender\naddress receiver\naddress token\nuint256 amount\nbytes32 hashlock\nuint64 timelock\nTransferStatus status","after":"uint256 amount\nbytes32 hashlock\nTransferStatus status\naddress sender\naddress receiver\naddress token\nuint64 timelock\n","contract":"CBridge","time":0}]}

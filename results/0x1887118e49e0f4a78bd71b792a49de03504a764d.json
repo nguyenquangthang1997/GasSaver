@@ -1,0 +1,1 @@
+{"time":16,"results":[{"type":"immutable-restrict-modification ","before":"bool public canAdminOverwrite;","after":"bool public immutable canAdminOverwrite;","contract":"MasterPriceOracle","time":0}]}

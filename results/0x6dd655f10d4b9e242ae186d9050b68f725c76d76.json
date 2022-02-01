@@ -1,0 +1,1 @@
+{"time":185,"results":[{"type":"immutable-restrict-modification ","before":"address private deployer;","after":"address private immutable deployer;","contract":"Api3Pool","time":0}]}

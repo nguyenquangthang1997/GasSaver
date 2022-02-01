@@ -1,0 +1,1 @@
+{"time":179,"results":[{"type":"constant-restrict-modification  ","before":"uint32 public lastDripTimestamp;","after":"uint32 public constant lastDripTimestamp;","contract":"TokenDrop","time":0}]}

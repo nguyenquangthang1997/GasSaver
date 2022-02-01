@@ -1,1 +1,19 @@
-{"time":85,"results":[{"type":"state-data-arrangement ","before":"\nstring public name;\nuint8 public decimals;\nstring public symbol;\nuint256 public totalSupply;\nuint256 public tradeBurnRatio;\nuint256 public tradeFeeRatio;\naddress public team;\nbool public isMintable;\nmapping(address => uint256) balances;\nmapping(address => mapping(address => uint256)) internal allowed;","after":"string public name;\nstring public symbol;\nuint256 public totalSupply;\nuint256 public tradeBurnRatio;\nuint256 public tradeFeeRatio;\nmapping(address => uint256) balances;\nmapping(address => mapping(address => uint256)) internal allowed;\naddress public team;\nuint8 public decimals;\nbool public isMintable;\n","contract":"CustomERC20","time":0}]}
+{
+  "time": 75,
+  "results": [
+    {
+      "type": "state-data-arrangement ",
+      "before": "\nstring public name;\nuint8 public decimals;\nstring public symbol;\nuint256 public totalSupply;\nuint256 public tradeBurnRatio;\nuint256 public tradeFeeRatio;\naddress public team;\nbool public isMintable;\nmapping(address => uint256) balances;\nmapping(address => mapping(address => uint256)) internal allowed;",
+      "after": "string public name;\nstring public symbol;\nuint256 public totalSupply;\nuint256 public tradeBurnRatio;\nuint256 public tradeFeeRatio;\nmapping(address => uint256) balances;\nmapping(address => mapping(address => uint256)) internal allowed;\naddress public team;\nuint8 public decimals;\nbool public isMintable;\n",
+      "contract": "CustomERC20",
+      "time": 0
+    },
+    {
+      "type": "external-function ",
+      "before": "function init(\n\n        address _creator,\n\n        uint256 _initSupply,\n\n        string memory _name,\n\n        string memory _symbol,\n\n        uint8 _decimals,\n\n        uint256 _tradeBurnRatio,\n\n        uint256 _tradeFeeRatio,\n\n        address _team,\n\n        bool _isMintable\n\n    ) public {\n\n        initOwner(_creator);\n\n        name = _name;\n\n        symbol = _symbol;\n\n        decimals = _decimals;\n\n        totalSupply = _initSupply;\n\n        balances[_creator] = _initSupply;\n\n        require(_tradeBurnRatio >= 0 && _tradeBurnRatio <= 5000, \"TRADE_BURN_RATIO_INVALID\");\n\n        require(_tradeFeeRatio >= 0 && _tradeFeeRatio <= 5000, \"TRADE_FEE_RATIO_INVALID\");\n\n        tradeBurnRatio = _tradeBurnRatio;\n\n        tradeFeeRatio = _tradeFeeRatio;\n\n        team = _team;\n\n        isMintable = _isMintable;\n\n        emit Transfer(address(0), _creator, _initSupply);\n\n    }",
+      "after": "function init(\n\n        address _creator,\n\n        uint256 _initSupply,\n\n        string calldata _name,\n\n        string calldata _symbol,\n\n        uint8 _decimals,\n\n        uint256 _tradeBurnRatio,\n\n        uint256 _tradeFeeRatio,\n\n        address _team,\n\n        bool _isMintable\n\n    ) public {\n\n        initOwner(_creator);\n\n        name = _name;\n\n        symbol = _symbol;\n\n        decimals = _decimals;\n\n        totalSupply = _initSupply;\n\n        balances[_creator] = _initSupply;\n\n        require(_tradeBurnRatio >= 0 && _tradeBurnRatio <= 5000, \"TRADE_BURN_RATIO_INVALID\");\n\n        require(_tradeFeeRatio >= 0 && _tradeFeeRatio <= 5000, \"TRADE_FEE_RATIO_INVALID\");\n\n        tradeBurnRatio = _tradeBurnRatio;\n\n        tradeFeeRatio = _tradeFeeRatio;\n\n        team = _team;\n\n        isMintable = _isMintable;\n\n        emit Transfer(address(0), _creator, _initSupply);\n\n    }",
+      "contract": "CustomERC20",
+      "time": 0
+    }
+  ]
+}

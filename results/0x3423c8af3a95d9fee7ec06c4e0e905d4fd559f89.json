@@ -1,0 +1,1 @@
+{"time":158,"results":[{"type":"loop-calculation","before":"User memory user = users[lpToken][msg.sender];","after":"// move outside for loop\nUser memory user = users[lpToken][msg.sender];","loc":{"start":{"line":186,"column":12},"end":{"line":186,"column":57}},"contract":"BonusRewards","time":0}]}

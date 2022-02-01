@@ -1,0 +1,1 @@
+{"time":14,"results":[{"type":"immutable-restrict-modification ","before":"address public zappee;","after":"address public immutable zappee;","contract":"WrapNZap","time":0}]}

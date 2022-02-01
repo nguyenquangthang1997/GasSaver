@@ -1,0 +1,1 @@
+{"time":40,"results":[{"type":"immutable-restrict-modification ","before":"bytes32 public rootNode;","after":"bytes32 public immutable rootNode;","contract":"StealthKeyFIFSRegistrar","time":0}]}

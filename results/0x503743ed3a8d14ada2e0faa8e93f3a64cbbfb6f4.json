@@ -1,0 +1,1 @@
+{"time":50,"results":[{"type":"constant-restrict-modification  ","before":"address public underlying;","after":"address public constant underlying;","contract":"CErc20","time":0}]}

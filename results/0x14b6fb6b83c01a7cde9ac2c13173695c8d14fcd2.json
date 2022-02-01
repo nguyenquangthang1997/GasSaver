@@ -1,0 +1,1 @@
+{"time":134,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public startWindow;","after":"uint256 public immutable startWindow;","contract":"MintingCeremony","time":0},{"type":"immutable-restrict-modification ","before":"uint256 public endWindow;","after":"uint256 public immutable endWindow;","contract":"MintingCeremony","time":0}]}

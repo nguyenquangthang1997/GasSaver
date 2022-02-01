@@ -1,0 +1,1 @@
+{"time":10,"results":[{"type":"external-function ","before":"function setURI(string memory newUri) public onlyOwner {\n        uri = newUri;\n    }","after":"function setURI(string calldata newUri) public onlyOwner {\n        uri = newUri;\n    }","contract":"FujiMapping","time":0}]}

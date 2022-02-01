@@ -1,0 +1,1 @@
+{"time":55,"results":[{"type":"struct-data-arrangement ","before":"\naddress seller\nuint256 startPrice\nuint256 endPrice\nuint16 period\nuint256 created\nbool isGold","after":"uint256 startPrice\nuint256 endPrice\nuint256 created\naddress seller\nuint16 period\nbool isGold\n","contract":"Marketplace","time":0}]}

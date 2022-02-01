@@ -1,0 +1,1 @@
+{"time":72,"results":[{"type":"immutable-restrict-modification ","before":"address                   public safeEngine;","after":"address                   public immutable safeEngine;","contract":"GebSafeManager","time":0}]}

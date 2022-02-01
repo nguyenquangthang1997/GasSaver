@@ -1,0 +1,1 @@
+{"time":108,"results":[{"type":"immutable-restrict-modification ","before":"address public _owner;","after":"address public immutable _owner;","contract":"AaveCollateralVault","time":0}]}

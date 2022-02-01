@@ -1,0 +1,1 @@
+{"time":51,"results":[{"type":"immutable-restrict-modification ","before":"address public wallet;","after":"address public immutable wallet;","contract":"ERC20EthManager","time":1}]}

@@ -1,0 +1,1 @@
+{"time":67,"results":[{"type":"immutable-restrict-modification ","before":"uint256 private _releaseTime;","after":"uint256 private immutable _releaseTime;","contract":"SimpleTimelock","time":0}]}

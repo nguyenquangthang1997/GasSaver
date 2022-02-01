@@ -1,0 +1,1 @@
+{"time":21,"results":[{"type":"immutable-restrict-modification ","before":"address public token;","after":"address public immutable token;","contract":"OSMedianizer","time":0}]}

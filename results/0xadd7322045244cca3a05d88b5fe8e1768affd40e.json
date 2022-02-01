@@ -1,0 +1,1 @@
+{"time":58,"results":[{"type":"external-function ","before":"function migrateBaseURI(string memory _base) public onlyOwner {\n        hegexoption.migrateBaseURI(_base);\n    }","after":"function migrateBaseURI(string calldata _base) public onlyOwner {\n        hegexoption.migrateBaseURI(_base);\n    }","contract":"OptionChef","time":0}]}

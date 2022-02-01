@@ -1,0 +1,1 @@
+{"time":13,"results":[{"type":"immutable-restrict-modification ","before":"bytes32 public targetContractId;","after":"bytes32 public immutable targetContractId;","contract":"ManagerProxy","time":0}]}

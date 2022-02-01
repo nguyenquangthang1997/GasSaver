@@ -1,0 +1,1 @@
+{"time":116,"results":[{"type":"immutable-restrict-modification ","before":"uint256 internal _startTime;","after":"uint256 internal immutable _startTime;","contract":"CpFarm","time":0}]}

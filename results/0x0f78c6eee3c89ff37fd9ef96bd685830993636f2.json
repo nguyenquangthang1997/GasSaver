@@ -1,0 +1,54 @@
+{
+  "time": 175,
+  "results": [
+    {
+      "type": "external-function ",
+      "before": "function setBaseURI(string memory _baseURI) public onlyOwner {\n        baseURI = _baseURI;\n    }",
+      "after": "function setBaseURI(string calldata _baseURI) public onlyOwner {\n        baseURI = _baseURI;\n    }",
+      "contract": "NuclearNerds",
+      "time": 0
+    },
+    {
+      "type": "external-function ",
+      "before": "function getAllowance(string memory allowance, bytes32[] calldata proof) public view returns (string memory) {\n        string memory payload = string(abi.encodePacked(_msgSender()));\n        require(_verify(_leaf(allowance, payload), proof), \"Invalid Merkle Tree proof supplied.\");\n        return allowance;\n    }",
+      "after": "function getAllowance(string calldata allowance, bytes32[] calldata proof) public view returns (string memory) {\n        string memory payload = string(abi.encodePacked(_msgSender()));\n        require(_verify(_leaf(allowance, payload), proof), \"Invalid Merkle Tree proof supplied.\");\n        return allowance;\n    }",
+      "contract": "NuclearNerds",
+      "time": 0
+    },
+    {
+      "type": "external-function ",
+      "before": "function batchTransferFrom(address _from, address _to, uint256[] memory _tokenIds) public {\n        for (uint256 i = 0; i < _tokenIds.length; i++) {\n            transferFrom(_from, _to, _tokenIds[i]);\n        }\n    }",
+      "after": "function batchTransferFrom(address _from, address _to, uint256[] calldata _tokenIds) public {\n        for (uint256 i = 0; i < _tokenIds.length; i++) {\n            transferFrom(_from, _to, _tokenIds[i]);\n        }\n    }",
+      "contract": "NuclearNerds",
+      "time": 0
+    },
+    {
+      "type": "external-function ",
+      "before": "function batchSafeTransferFrom(address _from, address _to, uint256[] memory _tokenIds, bytes memory data_) public {\n        for (uint256 i = 0; i < _tokenIds.length; i++) {\n            safeTransferFrom(_from, _to, _tokenIds[i], data_);\n        }\n    }",
+      "after": "function batchSafeTransferFrom(address _from, address _to, uint256[] calldata _tokenIds, bytes calldata data_) public {\n        for (uint256 i = 0; i < _tokenIds.length; i++) {\n            safeTransferFrom(_from, _to, _tokenIds[i], data_);\n        }\n    }",
+      "contract": "NuclearNerds",
+      "time": 0
+    },
+    {
+      "type": "immutable-restrict-modification ",
+      "before": "address public              jeffFromAccounting;",
+      "after": "address public              immutable jeffFromAccounting;",
+      "contract": "NuclearNerds",
+      "time": 1
+    },
+    {
+      "type": "immutable-restrict-modification ",
+      "before": "string private _name;",
+      "after": "string private immutable _name;",
+      "contract": "NuclearNerds",
+      "time": 1
+    },
+    {
+      "type": "immutable-restrict-modification ",
+      "before": "string private _symbol;",
+      "after": "string private immutable _symbol;",
+      "contract": "NuclearNerds",
+      "time": 1
+    }
+  ]
+}

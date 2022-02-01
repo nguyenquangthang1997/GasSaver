@@ -1,0 +1,1 @@
+{"time":167,"results":[{"type":"constant-restrict-modification  ","before":"address public WETH;","after":"address public constant WETH;","contract":"ChainlinkedKeydonixOracleMainAssetAbstract","time":0},{"type":"immutable-restrict-modification ","before":"address payable public vault;","after":"address payable public immutable vault;","contract":"VaultParameters","time":0}]}

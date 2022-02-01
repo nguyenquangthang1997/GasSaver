@@ -1,0 +1,1 @@
+{"time":146,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public cap;","after":"uint256 public immutable cap;","contract":"BTU","time":0}]}

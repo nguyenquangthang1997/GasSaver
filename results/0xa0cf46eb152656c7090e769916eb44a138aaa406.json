@@ -1,0 +1,1 @@
+{"time":56,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public cap;","after":"uint256 public immutable cap;","contract":"SpheroidToken","time":0}]}

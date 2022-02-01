@@ -1,0 +1,1 @@
+{"time":70,"results":[{"type":"immutable-restrict-modification ","before":"address public rewards;","after":"address public immutable rewards;","contract":"Controller","time":0}]}

@@ -1,0 +1,1 @@
+{"time":170,"results":[{"type":"immutable-restrict-modification ","before":"address public factory;","after":"address public immutable factory;","contract":"SwapPair","time":1},{"type":"immutable-restrict-modification ","before":"bytes32 public DOMAIN_SEPARATOR;","after":"bytes32 public immutable DOMAIN_SEPARATOR;","contract":"SwapPair","time":1}]}

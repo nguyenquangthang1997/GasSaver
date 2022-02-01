@@ -1,0 +1,1 @@
+{"time":42,"results":[{"type":"immutable-restrict-modification ","before":"string public dataDescription;","after":"string public immutable dataDescription;","contract":"YearnVaultOracle","time":0}]}

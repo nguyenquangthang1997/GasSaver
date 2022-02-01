@@ -1,0 +1,1 @@
+{"time":58,"results":[{"type":"immutable-restrict-modification ","before":"bytes32 public   ilk;","after":"bytes32 public   immutable ilk;","contract":"Flipper","time":0}]}

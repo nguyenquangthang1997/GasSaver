@@ -1,0 +1,1 @@
+{"time":93,"results":[{"type":"immutable-restrict-modification ","before":"address public dex;","after":"address public immutable dex;","contract":"StrategyCurveEURVoterProxy","time":1}]}

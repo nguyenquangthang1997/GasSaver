@@ -1,0 +1,1 @@
+{"time":66,"results":[{"type":"immutable-restrict-modification ","before":"address implementation;","after":"address immutable implementation;","contract":"Proxy","time":0},{"type":"immutable-restrict-modification ","before":"address public walletImplementation;","after":"address public immutable walletImplementation;","contract":"WalletFactory","time":1}]}

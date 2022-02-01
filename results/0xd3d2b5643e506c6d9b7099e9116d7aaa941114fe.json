@@ -1,0 +1,1 @@
+{"time":188,"results":[{"type":"immutable-restrict-modification ","before":"address public daoOperator;","after":"address public immutable daoOperator;","contract":"KyberFeeHandler","time":0}]}

@@ -1,0 +1,1 @@
+{"time":244,"results":[{"type":"immutable-restrict-modification ","before":"string internal _name;","after":"string internal immutable _name;","contract":"StakedTokenV2Rev3","time":0},{"type":"immutable-restrict-modification ","before":"string internal _symbol;","after":"string internal immutable _symbol;","contract":"StakedTokenV2Rev3","time":0}]}

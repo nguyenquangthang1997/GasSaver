@@ -1,0 +1,1 @@
+{"time":165,"results":[{"type":"immutable-restrict-modification ","before":"address public swapRouter;","after":"address public immutable swapRouter;","contract":"USEMasterChefPool","time":0},{"type":"immutable-restrict-modification ","before":"address public communityaddr;","after":"address public immutable communityaddr;","contract":"USEMasterChefPool","time":0}]}

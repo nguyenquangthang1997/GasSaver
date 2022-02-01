@@ -1,0 +1,1 @@
+{"time":30,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public LOCK_START_TIME;","after":"uint256 public immutable LOCK_START_TIME;","contract":"Lockdrop","time":0},{"type":"immutable-restrict-modification ","before":"uint256 public LOCK_END_TIME;","after":"uint256 public immutable LOCK_END_TIME;","contract":"Lockdrop","time":0}]}

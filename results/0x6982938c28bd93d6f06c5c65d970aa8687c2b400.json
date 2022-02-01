@@ -1,0 +1,1 @@
+{"time":160,"results":[{"type":"struct-data-arrangement ","before":"\nbool initialized\nuint256 cumulative\nuint256 pegCumulative\nuint32 timestamp\nuint32 pegTimestamp","after":"uint256 cumulative\nuint256 pegCumulative\nuint32 timestamp\nuint32 pegTimestamp\nbool initialized\n","contract":"Storage","time":0}]}

@@ -1,0 +1,1 @@
+{"time":17,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public rsiTimePeriod;","after":"uint256 public immutable rsiTimePeriod;","contract":"RSITrendingTrigger","time":0}]}

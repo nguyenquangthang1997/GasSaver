@@ -1,0 +1,1 @@
+{"time":95,"results":[{"type":"constant-restrict-modification  ","before":"bool public donothing = true;","after":"bool public constant donothing = true;","contract":"ProviderDYDX","time":0}]}

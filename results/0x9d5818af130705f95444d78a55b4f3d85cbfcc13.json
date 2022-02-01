@@ -1,0 +1,1 @@
+{"time":177,"results":[{"type":"constant-restrict-modification  ","before":"address internal _newOwner;","after":"address internal constant _newOwner;","contract":"AsgardTreasury","time":0}]}

@@ -1,0 +1,1 @@
+{"time":112,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public rewardPerTokenStoredGdao = 0;","after":"uint256 public constant rewardPerTokenStoredGdao = 0;","contract":"GOFPoolV2","time":1}]}

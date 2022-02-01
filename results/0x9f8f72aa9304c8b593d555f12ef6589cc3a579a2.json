@@ -1,0 +1,1 @@
+{"time":69,"results":[{"type":"immutable-restrict-modification ","before":"bytes32  public  symbol;","after":"bytes32  public  immutable symbol;","contract":"DSToken","time":1},{"type":"constant-restrict-modification  ","before":"uint256  public  decimals = 18;","after":"uint256  public  constant decimals = 18;","contract":"DSToken","time":1}]}

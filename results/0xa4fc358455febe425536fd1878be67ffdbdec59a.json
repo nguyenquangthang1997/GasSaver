@@ -1,0 +1,1 @@
+{"time":234,"results":[{"type":"immutable-restrict-modification ","before":" uint256 public nextStreamId","after":" uint256 public immutable nextStreamId","contract":"Sablier","time":1}]}

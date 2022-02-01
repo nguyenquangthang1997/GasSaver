@@ -1,0 +1,1 @@
+{"time":83,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public expiryCount;","after":"uint256 public constant expiryCount;","contract":"UtilizationFarm","time":0}]}

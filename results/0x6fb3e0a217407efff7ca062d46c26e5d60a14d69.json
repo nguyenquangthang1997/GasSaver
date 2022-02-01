@@ -1,0 +1,1 @@
+{"time":49,"results":[{"type":"immutable-restrict-modification ","before":"uint256 totalSupply_;","after":"uint256 immutable totalSupply_;","contract":"IoTeXNetwork","time":0}]}

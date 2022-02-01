@@ -2,6 +2,8 @@ const {traceIdentifier} = require("../services/handleData");
 const {addLog, logExternalFunction} = require("../log");
 
 function externalFunction(item, listAllFunction, data) {
+    if(item.name ==="NFT1155V0"){
+    let c = 1}
     let listCallFunction = {}
     listAllFunction.forEach(el => {
         if (el.type === "FunctionDefinition") {

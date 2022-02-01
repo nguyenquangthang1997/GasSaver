@@ -1,0 +1,1 @@
+{"time":53,"results":[{"type":"immutable-restrict-modification ","before":"address private owner;","after":"address private immutable owner;","contract":"Presale","time":0}]}

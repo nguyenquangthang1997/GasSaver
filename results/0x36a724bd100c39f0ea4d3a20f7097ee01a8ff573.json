@@ -1,0 +1,1 @@
+{"time":75,"results":[{"type":"immutable-restrict-modification ","before":"address                   public vat;","after":"address                   public immutable vat;","contract":"DssCdpManager","time":0}]}

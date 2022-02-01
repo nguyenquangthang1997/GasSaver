@@ -1,0 +1,1 @@
+{"time":183,"results":[{"type":"immutable-restrict-modification ","before":"address public owner;","after":"address public immutable owner;","contract":"CapWhitelist","time":1},{"type":"constant-restrict-modification  ","before":"string public version = \"1.0\";","after":"string public constant version = \"1.0\";","contract":"RCNToken","time":0}]}

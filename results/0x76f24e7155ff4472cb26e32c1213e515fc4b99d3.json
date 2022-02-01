@@ -1,0 +1,1 @@
+{"time":117,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public maxSecondsBeforePriceIsStale;","after":"uint256 public immutable maxSecondsBeforePriceIsStale;","contract":"ChainlinkPriceOracle","time":0}]}

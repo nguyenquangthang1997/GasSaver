@@ -1,0 +1,1 @@
+{"time":164,"results":[{"type":"immutable-restrict-modification ","before":"address payable public vault;","after":"address payable public immutable vault;","contract":"VaultParameters","time":0}]}

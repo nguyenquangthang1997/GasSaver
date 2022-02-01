@@ -1,0 +1,1 @@
+{"time":228,"results":[{"type":"immutable-restrict-modification ","before":"uint64 public close_time;","after":"uint64 public immutable close_time;","contract":"MatchingMarket","time":1}]}

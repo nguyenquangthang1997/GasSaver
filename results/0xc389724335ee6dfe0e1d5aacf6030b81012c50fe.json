@@ -1,0 +1,1 @@
+{"time":43,"results":[{"type":"immutable-restrict-modification ","before":"address public owner;","after":"address public immutable owner;","contract":"JumpRateModelV2","time":0}]}

@@ -1,0 +1,1 @@
+{"time":4,"results":[{"type":"constant-restrict-modification  ","before":"address public governance = address(0xFEB4acf3df3cDEA7399794D0869ef76A6EfAff52);","after":"address public constant governance = address(0xFEB4acf3df3cDEA7399794D0869ef76A6EfAff52);","contract":"StrategyGUSDRescue","time":1}]}

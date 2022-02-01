@@ -1,0 +1,1 @@
+{"time":66,"results":[{"type":"constant-restrict-modification  ","before":"bool public isSaleClockAuction = true;","after":"bool public constant isSaleClockAuction = true;","contract":"SaleClockAuction","time":0},{"type":"immutable-restrict-modification ","before":"uint256 public ownerCut;","after":"uint256 public immutable ownerCut;","contract":"SaleClockAuction","time":0}]}

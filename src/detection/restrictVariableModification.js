@@ -1,4 +1,4 @@
-const {getAllModifier, getAllVariableStates, traceIdentifier} =require( "../services/handleData");
+const {getAllModifier, getAllVariableStates, traceIdentifier} = require("../services/handleData");
 const {addLog, logImmutableStateVariable, logConstantStateModification} = require("../log");
 
 function restrictVariableModification(ast, item, listAllFunction, data) {
@@ -54,10 +54,11 @@ function restrictVariableModification(ast, item, listAllFunction, data) {
         if (el.variables[0].isDeclaredConst === false && el.variables[0].typeName.type === "ElementaryTypeName") {
             if (stateUseds[el.variables[0].name] === undefined)
                 results.push(addLog(item.name, Date.now() - startTime, logConstantStateModification(el.range, data, el.variables[0].name)))
-            else if (stateUseds[el.variables[0].name].position === "constructor")
+            else if (stateUseds[el.variables[0].name].position === "constructor" && el.variables[0].isImmutable === false)
                 results.push(addLog(item.name, Date.now() - startTime, logImmutableStateVariable(el.range, data, el.variables[0].name)))
         }
     })
     return results
 }
+
 module.exports = {restrictVariableModification}

@@ -1,0 +1,1 @@
+{"time":164,"results":[{"type":"immutable-restrict-modification ","before":"string private _name;","after":"string private immutable _name;","contract":"EvnToken","time":1},{"type":"immutable-restrict-modification ","before":"string private _symbol;","after":"string private immutable _symbol;","contract":"EvnToken","time":1}]}

@@ -1,0 +1,1 @@
+{"time":76,"results":[{"type":"constant-restrict-modification  ","before":"string public version = '0.1';","after":"string public constant version = '0.1';","contract":"BancorChanger","time":0},{"type":"constant-restrict-modification  ","before":"string public changerType = 'bancor';","after":"string public constant changerType = 'bancor';","contract":"BancorChanger","time":0}]}

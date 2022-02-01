@@ -42,12 +42,12 @@ async function optimized(data) {
                 let listStructDefinition = item.subNodes.filter(item => item.type === "StructDefinition")
                 for (let struct of listStructDefinition) {
                     result = structDataArrangement(item, struct, data)
+                    if (result !== undefined) results.push(result)
                 }
                 if (listInheritedContract[item.name]) return;
 
-                results.concat(externalFunction(item, listAllFunction, data))
-                results.concat(restrictVariableModification(ast, item, listAllFunction, data))
-
+                results = results.concat(externalFunction(item, listAllFunction, data))
+                results = results.concat(restrictVariableModification(ast, item, listAllFunction, data))
             }
         }
     )

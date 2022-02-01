@@ -1,0 +1,1 @@
+{"time":69,"results":[{"type":"immutable-restrict-modification ","before":"address public AUTHORITY;","after":"address public immutable AUTHORITY;","contract":"DragoRegistry","time":1}]}

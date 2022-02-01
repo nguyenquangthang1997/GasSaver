@@ -1,0 +1,1 @@
+{"time":148,"results":[{"type":"immutable-restrict-modification ","before":"string internal _name;","after":"string internal immutable _name;","contract":"DydxToken","time":1},{"type":"immutable-restrict-modification ","before":"string internal _symbol;","after":"string internal immutable _symbol;","contract":"DydxToken","time":1}]}

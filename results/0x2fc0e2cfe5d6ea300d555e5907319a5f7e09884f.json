@@ -1,0 +1,1 @@
+{"time":111,"results":[{"type":"immutable-restrict-modification ","before":"address public multisig;","after":"address public immutable multisig;","contract":"HoprFarm","time":0}]}

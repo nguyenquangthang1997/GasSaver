@@ -1,0 +1,1 @@
+{"time":243,"results":[{"type":"constant-restrict-modification  ","before":"address private _oldAsset;","after":"address private constant _oldAsset;","contract":"RibbonThetaVault","time":0},{"type":"constant-restrict-modification  ","before":"uint256 private queuedWithdrawShares;","after":"uint256 private constant queuedWithdrawShares;","contract":"RibbonThetaVault","time":0}]}

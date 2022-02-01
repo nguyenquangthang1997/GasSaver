@@ -1,0 +1,1 @@
+{"time":7,"results":[{"type":"immutable-restrict-modification ","before":"address implementation;","after":"address immutable implementation;","contract":"Proxy","time":0}]}

@@ -385,7 +385,7 @@ export class ASTBuilder
                     .parameter()
                     .map((x) => this.visit(x))
                 parameters.forEach(el => {
-                    identifiers.push({...el.identifier, isDeclare: true})
+                    if (el.identifier !== null) identifiers.push({...el.identifier, isDeclare: true})
                 })
                 // error out on incorrect function visibility
                 if (ctx.modifierList().InternalKeyword().length > 0) {
@@ -416,7 +416,7 @@ export class ASTBuilder
                     .map((x) => this.visit(x))
 
                 parameters.forEach(el => {
-                    identifiers.push({...el.identifier, isDeclare: true})
+                    if (el.identifier !== null) identifiers.push({...el.identifier, isDeclare: true})
                 })
 
                 returnParameters =
@@ -901,9 +901,8 @@ export class ASTBuilder
         vulnerabilities.push(...expression.vulnerabilities)
         if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
             identifiers = [...expression.subIdentifier.identifiers, ...identifiers]
-        }
-        if (expression.type === "Identifier") {
-            let c = 1
+        } else {
+            identifiers = [...expression.identifiers, ...identifiers]
         }
         const node: AST.FunctionCall = {
             type: 'FunctionCall',
@@ -1294,7 +1293,7 @@ export class ASTBuilder
                         operator: op as AST.UnaryOp,
                         subExpression: subExpression,
                         isPrefix: false,
-                        identifiers: subExpression.identifiers
+                        identifiers
                     }
                     return this._addMeta(node, ctx, [...subExpression.vulnerabilities])
                 }
@@ -1438,6 +1437,8 @@ export class ASTBuilder
                     let expression = this.visitExpression(ctx.expression(0))
                     if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
                         identifiers = [...expression.subIdentifier.identifiers, ...identifiers]
+                    } else {
+                        identifiers = [...expression.identifiers, ...identifiers]
                     }
                     vulnerabilities.push(...expression.vulnerabilities)
                     if (expression.type === "Identifier" && expression.subIdentifier.type === "Common") {
@@ -2529,17 +2530,32 @@ function isAssignmentOp(op: string): op is AST.AssignmentOp {
 function traceIdentifier(identifier) {
     if (identifier.type === "Identifier") {
         if (identifier.subIdentifier.type === "IndexAccess") {
-            return traceIdentifier(identifier.subIdentifier.base)
+            if (identifier.subIdentifier.base.identifiers.length > 0)
+                return traceIdentifier(identifier.subIdentifier.base.identifiers[0])
         } else if (identifier.subIdentifier.type === "MemberAccess") {
-            return traceIdentifier(identifier.subIdentifier.expression)
+            if (identifier.subIdentifier.expression.identifiers.length > 0)
+                return traceIdentifier(identifier.subIdentifier.expression.identifiers[0])
         } else if (identifier.subIdentifier.type === "IndexRangeAccess") {
-            return traceIdentifier(identifier.subIdentifier.base)
+            if (identifier.subIdentifier.base.identifiers.length > 0)
+                return traceIdentifier(identifier.subIdentifier.base.identifiers[0])
         } else if (identifier.subIdentifier.type === "Common") {
             return identifier.name
         }
     } else {
         console.log(identifier)
         throw Error("Un-handle")
+    }
+}
+
+function getAllIdentifiers(identifier: AST.Identifier) {
+    let identifiers = []
+    if (identifier.subIdentifier.type === "Common") {
+        return [identifier]
+    } else {
+        identifier.identifiers.forEach(item => {
+            identifiers = identifiers.concat(getAllIdentifiers(item))
+        })
+        return identifiers
     }
 }
 
@@ -2555,12 +2571,20 @@ function repeatedCalculate(body: AST.Block, statement: AST.VariableDeclarationSt
     }
     // check whether initialValue, variable are modified or not
     let listVariableDeclarationStatement = []
+
+    let initialVariable = []
     // get declared Variable list
     for (let variable of statement.variables) {
         if (variable !== null) listVariableDeclarationStatement.push(variable.name)
     }
     if (statement.initialValue !== null) {
-        for (let item of statement.initialValue.identifiers) {
+
+        let temVariable = []
+        statement.initialValue.identifiers.forEach(el => {
+            temVariable = temVariable.concat(getAllIdentifiers(el))
+        })
+
+        for (let item of temVariable) {
             for (let iden of idenLoopVariable) {
                 if (item.name === iden.name) {
                     variableContainLoopVariable = true
@@ -2569,16 +2593,17 @@ function repeatedCalculate(body: AST.Block, statement: AST.VariableDeclarationSt
             }
             if (variableContainLoopVariable === true) break
         }
-        listVariableDeclarationStatement.push(...statement.initialValue.identifiers)
-
+        statement.initialValue.identifiers.forEach(el => {
+            initialVariable.push(traceIdentifier(el))
+        })
     }
 
     let variableModifiers = false
-    for (let j = index + 1; j < body.statements.length; j++) {
-        for (let iden of body.statements[index].identifiers) {
+    for (let j = 0; j < index; j++) {
+        for (let iden of body.statements[j].identifiers) {
             if (iden.isWriteOperation === true) {
                 iden = traceIdentifier(iden)
-                for (let variable of listVariableDeclarationStatement) {
+                for (let variable of initialVariable) {
                     if (iden === variable) {
                         variableModifiers = true
                         break
@@ -2587,16 +2612,37 @@ function repeatedCalculate(body: AST.Block, statement: AST.VariableDeclarationSt
                 if (variableModifiers === true) break
             }
         }
-        if (variableModifiers === true) break
     }
-
+    if (variableModifiers === false) {
+        for (let j = index + 1; j < body.statements.length; j++) {
+            for (let iden of body.statements[j].identifiers) {
+                if (iden.isWriteOperation === true) {
+                    iden = traceIdentifier(iden)
+                    for (let variable of listVariableDeclarationStatement) {
+                        if (iden === variable) {
+                            variableModifiers = true
+                            break
+                        }
+                    }
+                    for (let variable of initialVariable) {
+                        if (iden === variable) {
+                            variableModifiers = true
+                            break
+                        }
+                    }
+                    if (variableModifiers === true) break
+                }
+            }
+            if (variableModifiers === true) break
+        }
+    }
     if (variableModifiers === false && variableContainLoopVariable === false) {
         vulnerability = {
             type: "repeated-calculate",
             range: statement.range,
             loc: statement.loc
         }
-        if (statement.initialValue.type === "FunctionCall" && statement.initialValue.expression.type === "Identifier") {
+        if (statement.initialValue !== null && statement.initialValue.type === "FunctionCall" && statement.initialValue.expression.type === "Identifier") {
             vulnerability.functionCall = statement.initialValue.expression.name
         }
 

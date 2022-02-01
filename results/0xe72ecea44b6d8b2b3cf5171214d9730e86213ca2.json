@@ -1,0 +1,1 @@
+{"time":33,"results":[{"type":"immutable-restrict-modification ","before":"address public paymentProxy;","after":"address public immutable paymentProxy;","contract":"ERC20ConversionProxy","time":0}]}

@@ -1,0 +1,1 @@
+{"time":166,"results":[{"type":"struct-data-arrangement ","before":"\naddress teamAddr\nuint256 stakedAmount\nuint256 countOfRewardedMonth\nbool isNFTDistributed","after":"uint256 stakedAmount\nuint256 countOfRewardedMonth\naddress teamAddr\nbool isNFTDistributed\n","contract":"ILiquidityMining","time":0}]}

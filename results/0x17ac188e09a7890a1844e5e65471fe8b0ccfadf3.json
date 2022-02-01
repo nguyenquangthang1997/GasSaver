@@ -1,0 +1,1 @@
+{"time":79,"results":[{"type":"constant-restrict-modification  ","before":"address internal _implementation;","after":"address internal constant _implementation;","contract":"ManyToOneImplementationHolder","time":0}]}

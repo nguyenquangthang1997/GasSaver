@@ -1,0 +1,1 @@
+{"time":50,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public maxInvocationsTimePeriod = 1 days;","after":"uint256 public constant maxInvocationsTimePeriod = 1 days;","contract":"SelfServiceEditionCurationV2","time":0}]}

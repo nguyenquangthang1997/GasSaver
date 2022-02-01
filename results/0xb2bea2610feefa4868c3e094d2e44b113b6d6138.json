@@ -1,0 +1,1 @@
+{"time":394,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public sharePrice;","after":"uint256 public constant sharePrice;","contract":"IPool","time":0}]}

@@ -1,0 +1,1 @@
+{"time":119,"results":[{"type":"struct-data-arrangement ","before":"\naddress component\naddress module\nint256 unit\nuint8 positionState\nbytes data","after":"int256 unit\nbytes data\naddress component\naddress module\nuint8 positionState\n","contract":"ISetToken","time":0}]}

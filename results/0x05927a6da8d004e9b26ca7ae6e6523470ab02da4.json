@@ -1,0 +1,1 @@
+{"time":55,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public start = 1614556800;","after":"uint256 public constant start = 1614556800;","contract":"Vesting","time":0},{"type":"constant-restrict-modification  ","before":"uint256 public end = 1646092800;","after":"uint256 public constant end = 1646092800;","contract":"Vesting","time":0}]}

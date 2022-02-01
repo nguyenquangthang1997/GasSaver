@@ -1,0 +1,1 @@
+{"time":17,"results":[{"type":"immutable-restrict-modification ","before":"address creator;","after":"address immutable creator;","contract":"PixelMap","time":0}]}

@@ -1,0 +1,1 @@
+{"time":30,"results":[{"type":"struct-data-arrangement ","before":"\naddress contractAddress\nuint256 nameIndex\nbool isSet","after":"uint256 nameIndex\naddress contractAddress\nbool isSet\n","contract":"ContractRegistry","time":0}]}

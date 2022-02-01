@@ -1,0 +1,1 @@
+{"time":242,"results":[{"type":"struct-data-arrangement ","before":"\naddress collateralAsset\nuint256 collateralAmount\nuint256 rateMode\nPermitSignature permitSignature\nbool useEthPath","after":"uint256 collateralAmount\nuint256 rateMode\nPermitSignature permitSignature\naddress collateralAsset\nbool useEthPath\n","contract":"UniswapRepayAdapter","time":0}]}

@@ -1,0 +1,1 @@
+{"time":150,"results":[{"type":"constant-restrict-modification  ","before":"address private defaultAdmin = 0x82Ab0c69b6548e6Fd61365FeCc3256BcF70dc448;","after":"address private constant defaultAdmin = 0x82Ab0c69b6548e6Fd61365FeCc3256BcF70dc448;","contract":"Staking","time":0}]}

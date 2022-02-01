@@ -1,0 +1,1 @@
+{"time":32,"results":[{"type":"immutable-restrict-modification ","before":"address owner;","after":"address immutable owner;","contract":"EtherRock","time":0}]}

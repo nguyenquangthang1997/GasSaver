@@ -36039,7 +36039,8 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
       case "constructor":
         parameters = ctx.parameterList().parameter().map((x) => this.visit(x));
         parameters.forEach((el) => {
-          identifiers.push(__spreadProps(__spreadValues({}, el.identifier), {isDeclare: true}));
+          if (el.identifier !== null)
+            identifiers.push(__spreadProps(__spreadValues({}, el.identifier), {isDeclare: true}));
         });
         if (ctx.modifierList().InternalKeyword().length > 0) {
           visibility = "internal";
@@ -36063,7 +36064,8 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
         name = identifier !== void 0 ? ASTBuilder._toText(identifier) : "";
         parameters = ctx.parameterList().parameter().map((x) => this.visit(x));
         parameters.forEach((el) => {
-          identifiers.push(__spreadProps(__spreadValues({}, el.identifier), {isDeclare: true}));
+          if (el.identifier !== null)
+            identifiers.push(__spreadProps(__spreadValues({}, el.identifier), {isDeclare: true}));
         });
         returnParameters = ctxReturnParameters !== void 0 ? this.visitReturnParameters(ctxReturnParameters) : null;
         if (ctx.modifierList().ExternalKeyword().length > 0) {
@@ -36432,9 +36434,8 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
     vulnerabilities.push(...expression.vulnerabilities);
     if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
       identifiers = [...expression.subIdentifier.identifiers, ...identifiers];
-    }
-    if (expression.type === "Identifier") {
-      let c = 1;
+    } else {
+      identifiers = [...expression.identifiers, ...identifiers];
     }
     const node = {
       type: "FunctionCall",
@@ -36732,7 +36733,7 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
             operator: op,
             subExpression,
             isPrefix: false,
-            identifiers: subExpression.identifiers
+            identifiers
           };
           return this._addMeta(node, ctx, [...subExpression.vulnerabilities]);
         }
@@ -36855,6 +36856,8 @@ var ASTBuilder = class extends import_AbstractParseTreeVisitor.AbstractParseTree
           let expression = this.visitExpression(ctx.expression(0));
           if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
             identifiers = [...expression.subIdentifier.identifiers, ...identifiers];
+          } else {
+            identifiers = [...expression.identifiers, ...identifiers];
           }
           vulnerabilities.push(...expression.vulnerabilities);
           if (expression.type === "Identifier" && expression.subIdentifier.type === "Common") {
@@ -37672,17 +37675,31 @@ function isAssignmentOp(op) {
 function traceIdentifier(identifier) {
   if (identifier.type === "Identifier") {
     if (identifier.subIdentifier.type === "IndexAccess") {
-      return traceIdentifier(identifier.subIdentifier.base);
+      if (identifier.subIdentifier.base.identifiers.length > 0)
+        return traceIdentifier(identifier.subIdentifier.base.identifiers[0]);
     } else if (identifier.subIdentifier.type === "MemberAccess") {
-      return traceIdentifier(identifier.subIdentifier.expression);
+      if (identifier.subIdentifier.expression.identifiers.length > 0)
+        return traceIdentifier(identifier.subIdentifier.expression.identifiers[0]);
     } else if (identifier.subIdentifier.type === "IndexRangeAccess") {
-      return traceIdentifier(identifier.subIdentifier.base);
+      if (identifier.subIdentifier.base.identifiers.length > 0)
+        return traceIdentifier(identifier.subIdentifier.base.identifiers[0]);
     } else if (identifier.subIdentifier.type === "Common") {
       return identifier.name;
     }
   } else {
     console.log(identifier);
     throw Error("Un-handle");
+  }
+}
+function getAllIdentifiers(identifier) {
+  let identifiers = [];
+  if (identifier.subIdentifier.type === "Common") {
+    return [identifier];
+  } else {
+    identifier.identifiers.forEach((item) => {
+      identifiers = identifiers.concat(getAllIdentifiers(item));
+    });
+    return identifiers;
   }
 }
 function repeatedCalculate(body, statement, loopExpression, index) {
@@ -37695,12 +37712,17 @@ function repeatedCalculate(body, statement, loopExpression, index) {
     idenLoopVariable = loopExpression.identifiers.filter((item) => item.isWriteOperation === true);
   }
   let listVariableDeclarationStatement = [];
+  let initialVariable = [];
   for (let variable of statement.variables) {
     if (variable !== null)
       listVariableDeclarationStatement.push(variable.name);
   }
   if (statement.initialValue !== null) {
-    for (let item of statement.initialValue.identifiers) {
+    let temVariable = [];
+    statement.initialValue.identifiers.forEach((el) => {
+      temVariable = temVariable.concat(getAllIdentifiers(el));
+    });
+    for (let item of temVariable) {
       for (let iden of idenLoopVariable) {
         if (item.name === iden.name) {
           variableContainLoopVariable = true;
@@ -37710,14 +37732,16 @@ function repeatedCalculate(body, statement, loopExpression, index) {
       if (variableContainLoopVariable === true)
         break;
     }
-    listVariableDeclarationStatement.push(...statement.initialValue.identifiers);
+    statement.initialValue.identifiers.forEach((el) => {
+      initialVariable.push(traceIdentifier(el));
+    });
   }
   let variableModifiers = false;
-  for (let j = index + 1; j < body.statements.length; j++) {
-    for (let iden of body.statements[index].identifiers) {
+  for (let j = 0; j < index; j++) {
+    for (let iden of body.statements[j].identifiers) {
       if (iden.isWriteOperation === true) {
         iden = traceIdentifier(iden);
-        for (let variable of listVariableDeclarationStatement) {
+        for (let variable of initialVariable) {
           if (iden === variable) {
             variableModifiers = true;
             break;
@@ -37727,8 +37751,31 @@ function repeatedCalculate(body, statement, loopExpression, index) {
           break;
       }
     }
-    if (variableModifiers === true)
-      break;
+  }
+  if (variableModifiers === false) {
+    for (let j = index + 1; j < body.statements.length; j++) {
+      for (let iden of body.statements[j].identifiers) {
+        if (iden.isWriteOperation === true) {
+          iden = traceIdentifier(iden);
+          for (let variable of listVariableDeclarationStatement) {
+            if (iden === variable) {
+              variableModifiers = true;
+              break;
+            }
+          }
+          for (let variable of initialVariable) {
+            if (iden === variable) {
+              variableModifiers = true;
+              break;
+            }
+          }
+          if (variableModifiers === true)
+            break;
+        }
+      }
+      if (variableModifiers === true)
+        break;
+    }
   }
   if (variableModifiers === false && variableContainLoopVariable === false) {
     vulnerability = {
@@ -37736,7 +37783,7 @@ function repeatedCalculate(body, statement, loopExpression, index) {
       range: statement.range,
       loc: statement.loc
     };
-    if (statement.initialValue.type === "FunctionCall" && statement.initialValue.expression.type === "Identifier") {
+    if (statement.initialValue !== null && statement.initialValue.type === "FunctionCall" && statement.initialValue.expression.type === "Identifier") {
       vulnerability.functionCall = statement.initialValue.expression.name;
     }
   }

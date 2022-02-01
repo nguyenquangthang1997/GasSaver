@@ -1,0 +1,1 @@
+{"time":90,"results":[{"type":"constant-restrict-modification  ","before":"uint256 referralPercentage = 1 * 10 ** 16;","after":"uint256 constant referralPercentage = 1 * 10 ** 16;","contract":"ReferralRewards","time":0}]}

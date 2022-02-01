@@ -1,0 +1,1 @@
+{"time":293,"results":[{"type":"constant-restrict-modification  ","before":"utable masterContract;\n\n","after":"utable masterContract;\n\n","contract":"CauldronMediumRiskV1","time":0}]}

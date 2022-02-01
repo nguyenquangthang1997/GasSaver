@@ -1,0 +1,1 @@
+{"time":149,"results":[{"type":"constant-restrict-modification  ","before":"address public currentContract;","after":"address public constant currentContract;","contract":"LANDRegistry","time":1},{"type":"constant-restrict-modification  ","before":"address public proxyOwner;","after":"address public constant proxyOwner;","contract":"LANDRegistry","time":1}]}

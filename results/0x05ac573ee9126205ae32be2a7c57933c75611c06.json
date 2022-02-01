@@ -1,0 +1,1 @@
+{"time":28,"results":[{"type":"constant-restrict-modification  ","before":"bytes internal empty;","after":"bytes internal constant empty;","contract":"FundProxy","time":0}]}

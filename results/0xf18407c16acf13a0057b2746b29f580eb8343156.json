@@ -1,0 +1,1 @@
+{"time":23,"results":[{"type":"immutable-restrict-modification ","before":"address public donationAddress;","after":"address public immutable donationAddress;","contract":"SmokeSignal","time":0}]}

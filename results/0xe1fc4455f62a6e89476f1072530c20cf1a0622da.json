@@ -1,0 +1,1 @@
+{"time":255,"results":[{"type":"immutable-restrict-modification ","before":"string private _name;","after":"string private immutable _name;","contract":"PHTR","time":1},{"type":"immutable-restrict-modification ","before":"string private _symbol;","after":"string private immutable _symbol;","contract":"PHTR","time":1}]}

@@ -1,0 +1,1 @@
+{"time":7,"results":[{"type":"struct-data-arrangement ","before":"\naddress owner\naddress spender\nuint256 value\nuint256 deadline\nuint8 v\nbytes32 r\nbytes32 s","after":"uint256 value\nuint256 deadline\nbytes32 r\nbytes32 s\naddress owner\naddress spender\nuint8 v\n","contract":"UsdcVaultPermitDeposit","time":0}]}

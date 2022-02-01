@@ -1,0 +1,1 @@
+{"time":212,"results":[{"type":"immutable-restrict-modification ","before":"address payable public target;","after":"address payable public immutable target;","contract":"EthPCVDripper","time":0},{"type":"immutable-restrict-modification ","before":"uint256 public amountToDrip;","after":"uint256 public immutable amountToDrip;","contract":"EthPCVDripper","time":0}]}

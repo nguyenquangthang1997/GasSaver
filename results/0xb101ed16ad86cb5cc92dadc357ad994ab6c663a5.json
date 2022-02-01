@@ -1,0 +1,1 @@
+{"time":115,"results":[{"type":"immutable-restrict-modification ","before":"address self;","after":"address immutable self;","contract":"Tranche","time":0}]}

@@ -1,0 +1,1 @@
+{"time":224,"results":[{"type":"struct-data-arrangement ","before":"\naddress destination\nuint value\nbytes data\nuint nonce\nbool executed","after":"uint value\nbytes data\nuint nonce\naddress destination\nbool executed\n","contract":"MultiSigWallet","time":0}]}

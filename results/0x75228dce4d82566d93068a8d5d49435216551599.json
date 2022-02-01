@@ -1,0 +1,1 @@
+{"time":177,"results":[{"type":"immutable-restrict-modification ","before":"bytes32 public controllerLookupName;","after":"bytes32 public immutable controllerLookupName;","contract":"Delegator","time":0}]}

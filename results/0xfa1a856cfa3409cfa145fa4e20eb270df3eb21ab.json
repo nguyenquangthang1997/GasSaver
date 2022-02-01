@@ -1,0 +1,1 @@
+{"time":26,"results":[{"type":"constant-restrict-modification  ","before":"uint public totalSupply = 21 * 10 ** 27;","after":"uint public constant totalSupply = 21 * 10 ** 27;","contract":"IOSToken","time":0},{"type":"constant-restrict-modification  ","before":"uint public totalSupply;","after":"uint public constant totalSupply;","contract":"IOSToken","time":0}]}

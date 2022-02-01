@@ -1,0 +1,1 @@
+{"time":48,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public exchangeRate;","after":"uint256 public constant exchangeRate;","contract":"ISavingsContract","time":0}]}

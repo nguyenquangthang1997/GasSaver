@@ -1,0 +1,1 @@
+{"time":232,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public totalSupply;","after":"uint256 public constant totalSupply;","contract":"ERC20","time":0}]}

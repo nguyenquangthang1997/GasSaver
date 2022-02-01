@@ -1,0 +1,1 @@
+{"time":53,"results":[{"type":"immutable-restrict-modification ","before":"bytes32 public DOMAIN_SEPARATOR;","after":"bytes32 public immutable DOMAIN_SEPARATOR;","contract":"Dai","time":0}]}

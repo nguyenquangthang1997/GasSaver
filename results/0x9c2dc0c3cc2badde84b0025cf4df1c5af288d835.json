@@ -1,0 +1,1 @@
+{"time":112,"results":[{"type":"immutable-restrict-modification ","before":"address public admin;","after":"address public immutable admin;","contract":"CORToken","time":0}]}

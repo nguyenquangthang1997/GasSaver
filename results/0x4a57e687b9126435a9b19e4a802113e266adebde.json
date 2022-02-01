@@ -1,0 +1,1 @@
+{"time":66,"results":[{"type":"constant-restrict-modification  ","before":"uint public originalSupply;","after":"uint public constant originalSupply;","contract":"UpgradeAgent","time":0}]}

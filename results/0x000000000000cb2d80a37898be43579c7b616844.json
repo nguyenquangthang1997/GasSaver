@@ -1,0 +1,1 @@
+{"time":225,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public totalReduxBurned;","after":"uint256 public constant totalReduxBurned;","contract":"ReduxToken","time":0}]}

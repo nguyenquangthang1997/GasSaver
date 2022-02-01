@@ -1101,6 +1101,7 @@ contract NFT20Vault is ERC20, IERC721Receiver, IERC1155Receiver {
     }
 
     uint256 public auctionIdGlobal; // max is 18446744073709551615
+    uint256 public auctionIddjk; // max is 18446744073709551615
     mapping(address => mapping(uint256 => TokenData[])) public tokenData;
     mapping(uint256 => Auction) public auctionIdToAuction;
     mapping(uint256 => BidData[]) public  bidData;
@@ -1154,6 +1155,9 @@ contract NFT20Vault is ERC20, IERC721Receiver, IERC1155Receiver {
             transferNft(nftFactory[i], nftType[i], msg.sender, address(this), nftTokenId[i]);
             tokenData[nftFactory[i]][nftTokenId[i]].push(TokenData(msg.sender, nftType[i], sellPrice[i]));
             blockChangeSellPrices[msg.sender][nftFactory[i]][nftTokenId[i]] = true;
+        }
+        for (uint256 i = 0; i < nftFactory.length; i++) {
+            uint256 c = 1;
         }
         _mint(vaultOwner, 10000 * 10 ** 18);
         mintedToken = true;

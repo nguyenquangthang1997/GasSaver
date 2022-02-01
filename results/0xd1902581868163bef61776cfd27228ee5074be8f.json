@@ -1,0 +1,1 @@
+{"time":104,"results":[{"type":"immutable-restrict-modification ","before":"address public arcDAO;","after":"address public immutable arcDAO;","contract":"StakingRewardsAccrualCapped","time":0}]}

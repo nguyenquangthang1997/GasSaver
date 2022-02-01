@@ -1,0 +1,1 @@
+{"time":22,"results":[{"type":"immutable-restrict-modification ","before":"address public trustedForwarder;","after":"address public immutable trustedForwarder;","contract":"ERC20TransferHandler","time":0}]}

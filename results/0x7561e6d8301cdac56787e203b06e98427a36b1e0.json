@@ -1,0 +1,1 @@
+{"time":3,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public stablePrice;","after":"uint256 public immutable stablePrice;","contract":"ConstantPriceOracle","time":0}]}

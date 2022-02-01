@@ -2,7 +2,7 @@ const {addLog, logLoopCalculation} = require("../log");
 
  function loopCalculation(listAllFunction, vul, item, data) {
     let startTime = Date.now()
-    if (vul.functionCall.length !== 0) {
+    if (vul.functionCall !== undefined) {
         for (let func of listAllFunction) {
             if (vul.functionCall === func.name) {
                 let isVul = func.stateMutability === "pure"

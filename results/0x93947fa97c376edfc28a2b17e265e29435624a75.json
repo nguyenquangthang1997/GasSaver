@@ -1,0 +1,1 @@
+{"time":162,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public bonusEndTime;","after":"uint256 public immutable bonusEndTime;","contract":"MasterChef","time":1},{"type":"immutable-restrict-modification ","before":"uint256 public startTime;","after":"uint256 public immutable startTime;","contract":"MasterChef","time":1}]}

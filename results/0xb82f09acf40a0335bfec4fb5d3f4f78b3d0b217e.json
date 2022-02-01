@@ -1,0 +1,1 @@
+{"time":31,"results":[{"type":"immutable-restrict-modification ","before":"string public dataDescription;","after":"string public immutable dataDescription;","contract":"MovingAverageOracleV2","time":0}]}

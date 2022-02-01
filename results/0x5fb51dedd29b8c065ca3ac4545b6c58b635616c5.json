@@ -1,0 +1,1 @@
+{"time":200,"results":[{"type":"immutable-restrict-modification ","before":"address public override factory;","after":"address public override immutable factory;","contract":"IntegralPair","time":0}]}

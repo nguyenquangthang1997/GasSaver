@@ -1,0 +1,1 @@
+{"time":3,"results":[{"type":"immutable-restrict-modification ","before":"address public masterCopy;","after":"address public immutable masterCopy;","contract":"DutchExchangeProxy","time":0}]}

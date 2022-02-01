@@ -1,0 +1,1 @@
+{"time":47,"results":[{"type":"constant-restrict-modification  ","before":"address public oneProto = address(0x50FDA034C0Ce7a8f7EFDAebDA7Aa7cA21CC1267e);","after":"address public constant oneProto = address(0x50FDA034C0Ce7a8f7EFDAebDA7Aa7cA21CC1267e);","contract":"Toolkit","time":0}]}

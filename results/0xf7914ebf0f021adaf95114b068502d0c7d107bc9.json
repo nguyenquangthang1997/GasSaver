@@ -1,0 +1,1 @@
+{"time":369,"results":[{"type":"loop-calculation","before":"TellorStorage.Dispute storage disp2 = self.disputesById[_id];","after":"// move outside for loop\nTellorStorage.Dispute storage disp2 = self.disputesById[_id];","loc":{"start":{"line":1207,"column":16},"end":{"line":1207,"column":76}},"contract":"TellorDispute","time":0}]}

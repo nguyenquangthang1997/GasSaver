@@ -1,0 +1,1 @@
+{"time":44,"results":[{"type":"immutable-restrict-modification ","before":"bytes4 private _instanceType;","after":"bytes4 private immutable _instanceType;","contract":"Erasure_Escrows","time":1}]}

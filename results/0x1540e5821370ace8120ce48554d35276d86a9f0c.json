@@ -1,0 +1,1 @@
+{"time":170,"results":[{"type":"constant-restrict-modification  ","before":"address public implementation;","after":"address public constant implementation;","contract":"KUSDMinter","time":0},{"type":"constant-restrict-modification  ","before":"address public implementation;","after":"address public constant implementation;","contract":"KUSDMinter","time":0}]}

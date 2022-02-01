@@ -1,0 +1,1 @@
+{"time":45,"results":[{"type":"immutable-restrict-modification ","before":"address depositContract;","after":"address immutable depositContract;","contract":"BatchDeposit","time":0}]}

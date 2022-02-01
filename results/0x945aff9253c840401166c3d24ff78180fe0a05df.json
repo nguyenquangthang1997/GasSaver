@@ -1,0 +1,1 @@
+{"time":116,"results":[{"type":"immutable-restrict-modification ","before":"string private _name;","after":"string private immutable _name;","contract":"ERC721","time":0},{"type":"immutable-restrict-modification ","before":"string private _symbol;","after":"string private immutable _symbol;","contract":"ERC721","time":0}]}

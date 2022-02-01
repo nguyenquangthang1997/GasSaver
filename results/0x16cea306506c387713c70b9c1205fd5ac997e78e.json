@@ -1,0 +1,1 @@
+{"time":4,"results":[{"type":"immutable-restrict-modification ","before":"address internal masterCopy;","after":"address internal immutable masterCopy;","contract":"Proxy","time":0}]}

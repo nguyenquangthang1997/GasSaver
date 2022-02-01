@@ -1,0 +1,1 @@
+{"time":69,"results":[{"type":"immutable-restrict-modification ","before":"string private _name;","after":"string private immutable _name;","contract":"IQERC20","time":0},{"type":"immutable-restrict-modification ","before":"string private _symbol;","after":"string private immutable _symbol;","contract":"IQERC20","time":0}]}

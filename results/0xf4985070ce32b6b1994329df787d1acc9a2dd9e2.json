@@ -1,0 +1,1 @@
+{"time":55,"results":[{"type":"immutable-restrict-modification ","before":" uint256 public ownerCut","after":" uint256 public immutable ownerCut","contract":"AxieClockAuction","time":0}]}

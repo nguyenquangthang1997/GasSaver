@@ -1,0 +1,1 @@
+{"time":26,"results":[{"type":"immutable-restrict-modification ","before":"address public DRAGOREGISTRYADDRESS;","after":"address public immutable DRAGOREGISTRYADDRESS;","contract":"Network","time":0}]}

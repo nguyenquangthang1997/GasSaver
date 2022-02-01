@@ -1,0 +1,1 @@
+{"time":191,"results":[{"type":"immutable-restrict-modification ","before":"string public name;","after":"string public immutable name;","contract":"HexelErc20Token","time":0},{"type":"immutable-restrict-modification ","before":"string public symbol;","after":"string public immutable symbol;","contract":"HexelErc20Token","time":0}]}

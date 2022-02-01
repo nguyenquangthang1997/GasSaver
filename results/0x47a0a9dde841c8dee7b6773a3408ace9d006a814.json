@@ -1,0 +1,1 @@
+{"time":151,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public totalWritedowns;","after":"uint256 public constant totalWritedowns;","contract":"ICreditDesk","time":0},{"type":"constant-restrict-modification  ","before":"uint256 public totalLoansOutstanding;","after":"uint256 public constant totalLoansOutstanding;","contract":"ICreditDesk","time":0}]}

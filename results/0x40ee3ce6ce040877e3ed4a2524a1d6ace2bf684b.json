@@ -1,0 +1,1 @@
+{"time":8,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public priceMultiplier;","after":"uint256 public immutable priceMultiplier;","contract":"ChainlinkOracleAdapterV2","time":0}]}

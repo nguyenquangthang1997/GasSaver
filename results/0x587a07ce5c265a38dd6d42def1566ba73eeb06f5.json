@@ -1,0 +1,1 @@
+{"time":86,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public starttime = 1597172400;","after":"uint256 public constant starttime = 1597172400;","contract":"YAMETHPool","time":1}]}

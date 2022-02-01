@@ -1,0 +1,1 @@
+{"time":98,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public created;","after":"uint256 public immutable created;","contract":"DAI_Compound_Adapter","time":0}]}

@@ -1,16 +1,20 @@
 function traceIdentifier(identifier) {
     if (identifier.type === "Identifier") {
         if (identifier.subIdentifier.type === "IndexAccess") {
-            return traceIdentifier(identifier.subIdentifier.base)
+            if (identifier.subIdentifier.base.identifiers.length > 0)
+                return traceIdentifier(identifier.subIdentifier.base.identifiers[0])
         } else if (identifier.subIdentifier.type === "MemberAccess") {
-            return traceIdentifier(identifier.subIdentifier.expression)
+            if (identifier.subIdentifier.expression.identifiers.length > 0)
+                return traceIdentifier(identifier.subIdentifier.expression.identifiers[0])
         } else if (identifier.subIdentifier.type === "IndexRangeAccess") {
-            return traceIdentifier(identifier.subIdentifier.base)
+            if (identifier.subIdentifier.base.identifiers.length > 0)
+                return traceIdentifier(identifier.subIdentifier.base.identifiers[0])
         } else if (identifier.subIdentifier.type === "Common") {
             return identifier.name
         }
     } else {
-        // console.log("Un-handle", identifier)
+        console.log("Un-handle", identifier)
+        throw  Error("Un-handle")
     }
 }
 

@@ -1,0 +1,1 @@
+{"time":52,"results":[{"type":"immutable-restrict-modification ","before":"address public ethToken;","after":"address public immutable ethToken;","contract":"DutchXPriceOracle","time":1}]}

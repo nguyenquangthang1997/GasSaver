@@ -1,0 +1,1 @@
+{"time":222,"results":[{"type":"constant-restrict-modification  ","before":"address wethTokenAddress = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;","after":"address constant wethTokenAddress = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;","contract":"UniswapV2_ZapIn","time":1}]}

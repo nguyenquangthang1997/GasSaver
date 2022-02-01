@@ -1,0 +1,1 @@
+{"time":22,"results":[{"type":"immutable-restrict-modification ","before":"string public rootName;","after":"string public immutable rootName;","contract":"MirrorENSRegistrar","time":0}]}

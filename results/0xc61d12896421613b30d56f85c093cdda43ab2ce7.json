@@ -1,0 +1,1 @@
+{"time":96,"results":[{"type":"immutable-restrict-modification ","before":"address public dollar;","after":"address public immutable dollar;","contract":"Migrator","time":0}]}

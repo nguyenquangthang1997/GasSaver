@@ -1,0 +1,1 @@
+{"time":125,"results":[{"type":"immutable-restrict-modification ","before":"address public weth9;","after":"address public immutable weth9;","contract":"FeeManager","time":0}]}

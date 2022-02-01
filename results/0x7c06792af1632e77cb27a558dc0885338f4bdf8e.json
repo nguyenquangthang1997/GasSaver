@@ -1,0 +1,1 @@
+{"time":53,"results":[{"type":"immutable-restrict-modification ","before":"address public addressBook;","after":"address public immutable addressBook;","contract":"OtokenFactory","time":0}]}

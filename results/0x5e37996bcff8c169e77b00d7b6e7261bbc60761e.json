@@ -1,0 +1,1 @@
+{"time":23,"results":[{"type":"immutable-restrict-modification ","before":"address deployer;","after":"address immutable deployer;","contract":"MerkleDistributor","time":1}]}

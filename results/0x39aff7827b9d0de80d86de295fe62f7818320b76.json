@@ -1,0 +1,1 @@
+{"time":150,"results":[{"type":"immutable-restrict-modification ","before":"uint public cdpId;","after":"uint public immutable cdpId;","contract":"StrategyMKRVaultDAIDelegate","time":0}]}

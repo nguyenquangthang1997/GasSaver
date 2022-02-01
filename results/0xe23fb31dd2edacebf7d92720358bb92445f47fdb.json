@@ -1,0 +1,1 @@
+{"time":52,"results":[{"type":"immutable-restrict-modification ","before":" address public core","after":" address public immutable core","contract":"RebalanceAuctionModule","time":0},{"type":"immutable-restrict-modification ","before":" address public vault","after":" address public immutable vault","contract":"RebalanceAuctionModule","time":0}]}

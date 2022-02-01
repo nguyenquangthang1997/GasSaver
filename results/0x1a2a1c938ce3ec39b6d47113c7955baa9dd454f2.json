@@ -1,0 +1,1 @@
+{"time":65,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public depositCount;","after":"uint256 public constant depositCount;","contract":"MainchainGatewayProxy","time":0}]}

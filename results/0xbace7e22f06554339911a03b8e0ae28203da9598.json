@@ -1,0 +1,1 @@
+{"time":96,"results":[{"type":"immutable-restrict-modification ","before":"string internal name_;","after":"string internal immutable name_;","contract":"CryptoArte","time":1},{"type":"immutable-restrict-modification ","before":"string internal symbol_;","after":"string internal immutable symbol_;","contract":"CryptoArte","time":1}]}

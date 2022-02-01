@@ -1,0 +1,1 @@
+{"time":545,"results":[{"type":"immutable-restrict-modification ","before":"address liquidityPool;","after":"address immutable liquidityPool;","contract":"BorrowerProxy","time":1}]}
