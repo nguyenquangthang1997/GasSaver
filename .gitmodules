@@ -1,3 +1,6 @@
 [submodule "verified-contracts-ethereum"]
 	path = verified-contracts-ethereum
 	url = git@github.com:nguyenquangthang1997/verified-contracts-ethereum.git
+[submodule "gas_saver_visualization"]
+	path = gas_saver_visualization
+	url = git@github.com:nguyenquangthang1997/gas_saver_visualization.git
