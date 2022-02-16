@@ -2,8 +2,6 @@ const {traceIdentifier} = require("../services/handleData");
 const {addLog, logExternalFunction} = require("../log");
 
 function externalFunction(item, listAllFunction, data) {
-    if(item.name ==="NFT1155V0"){
-    let c = 1}
     let listCallFunction = {}
     listAllFunction.forEach(el => {
         if (el.type === "FunctionDefinition") {
@@ -35,7 +33,7 @@ function externalFunction(item, listAllFunction, data) {
             }
         }
 
-        if (changTypeDataRanges.length > 0 && listCallFunction[el.name] !== true && el.body.statements.length > 0)
+        if (changTypeDataRanges.length > 0 && listCallFunction[el.name] !== true && el.body.statements.length > 0 && el.stateMutability !== "view" && el.stateMutability !== "pure")
             results.push(addLog(item.name, Date.now() - startTime, logExternalFunction(el.range, el.parameters[el.parameters.length - 1].range[1], changTypeDataRanges.length, data, item.visibility)))
     })
     return results

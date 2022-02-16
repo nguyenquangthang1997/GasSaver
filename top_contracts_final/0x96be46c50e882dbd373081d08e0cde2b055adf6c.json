@@ -1,0 +1,1 @@
+{"time":157,"results":[{"type":"immutable-restrict-modification ","before":"\n  address private _sign","after":"\n  address private _sign","contract":"ASMAIFAAllStarsCharacter","time":0}]}

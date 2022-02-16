@@ -1,0 +1,1 @@
+{"time":144,"results":[{"type":"constant-restrict-modification  ","before":"uint256 max_supply = 1000;","after":"uint256 constant max_supply = 1000;","contract":"Memes","time":0}]}

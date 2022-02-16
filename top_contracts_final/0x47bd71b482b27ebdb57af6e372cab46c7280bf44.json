@@ -1,0 +1,1 @@
+{"time":142,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public maxSupply = 11111;","after":"uint256 public constant maxSupply = 11111;","contract":"Blockchain_Miners_Club","time":0}]}

@@ -1,0 +1,1 @@
+{"time":100,"results":[{"type":"external-function ","before":"t(msg.sender, mintIndex);\n        }\n    }\n\n    function currentPrice() public view returns (uint256) {","after":"t(msg.sender, mintIndex);\n        }\n    }\n\n    function currentPrice() public view returns (uint256) {","contract":"NounPhunks","time":0}]}

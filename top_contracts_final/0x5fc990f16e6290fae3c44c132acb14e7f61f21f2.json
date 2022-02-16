@@ -1,0 +1,1 @@
+{"time":30,"results":[{"type":"constant-restrict-modification  ","before":"address public defaultSweeper = address(new DefaultSweeper(this));","after":"address public constant defaultSweeper = address(new DefaultSweeper(this));","contract":"Controller","time":1}]}

@@ -1,0 +1,1 @@
+{"time":77,"results":[{"type":"constant-restrict-modification  ","before":"uint256 Q112 = 2**112;","after":"uint256 constant Q112 = 2**112;","contract":"UniswapTWAPOracle","time":0},{"type":"constant-restrict-modification  ","before":"uint256 e10 = 10**18;","after":"uint256 constant e10 = 10**18;","contract":"UniswapTWAPOracle","time":0}]}

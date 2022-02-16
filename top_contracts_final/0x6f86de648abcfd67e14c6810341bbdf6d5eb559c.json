@@ -1,0 +1,1 @@
+{"time":104,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public unstakingFee = 15;","after":"uint256 public constant unstakingFee = 15;","contract":"CryptoCartPool","time":1}]}

@@ -1,0 +1,1 @@
+{"time":309,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public remoteGasAllowance = 500000;","after":"uint256 public constant remoteGasAllowance = 500000;","contract":"DummyOnDemandSPV","time":1}]}

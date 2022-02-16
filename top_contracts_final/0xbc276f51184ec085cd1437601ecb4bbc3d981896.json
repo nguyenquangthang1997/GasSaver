@@ -1,0 +1,1 @@
+{"time":178,"results":[{"type":"de-morgan-condition ","before":"!_blacklist[to] && !_blacklist[from]","after":"!(_blacklist[to] && _blacklist[from])","loc":{"start":{"line":1128,"column":16},"end":{"line":1128,"column":51}},"contract":"SHIBTAMA","time":0}]}

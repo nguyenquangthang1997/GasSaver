@@ -1,0 +1,1 @@
+{"time":47,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public initialSupply = 10000000 * (10 ** uint256(decimals));","after":"uint256 public constant initialSupply = 10000000 * (10 ** uint256(decimals));","contract":"YomerToken","time":0}]}

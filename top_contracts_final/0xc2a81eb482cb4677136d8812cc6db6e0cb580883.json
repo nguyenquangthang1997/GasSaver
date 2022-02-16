@@ -1,0 +1,1 @@
+{"time":56,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public cap = 2500000000 * (10 ** 18);","after":"uint256 public constant cap = 2500000000 * (10 ** 18);","contract":"TFSToken","time":0}]}

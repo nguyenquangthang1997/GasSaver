@@ -1,0 +1,1 @@
+{"time":46,"results":[{"type":"constant-restrict-modification  ","before":"uint public DELAY_PERIOD = 2 weeks;","after":"uint public constant DELAY_PERIOD = 2 weeks;","contract":"ProxyRegistry","time":0},{"type":"constant-restrict-modification  ","before":"bool initialized = false;","after":"bool constant initialized = false;","contract":"AuthenticatedProxyFix","time":0}]}

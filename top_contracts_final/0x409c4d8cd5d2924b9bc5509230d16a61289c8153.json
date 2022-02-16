@@ -1,0 +1,1 @@
+{"time":94,"results":[{"type":"immutable-restrict-modification ","before":"bytes32 public override DOMAIN_SEPARATOR;","after":"bytes32 public override immutable DOMAIN_SEPARATOR;","contract":"TOS","time":0}]}

@@ -1,0 +1,1 @@
+{"time":159,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseURIPrefix) external onlyOwner {\r\n        _baseURIPrefix = baseURIPrefix;\r\n    }","after":"function setBaseURI(string calldata baseURIPrefix) external onlyOwner {\r\n        _baseURIPrefix = baseURIPrefix;\r\n    }","contract":"NFT","time":0}]}

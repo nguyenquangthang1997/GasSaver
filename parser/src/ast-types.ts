@@ -36,11 +36,11 @@ export interface ListFunctionCall {
 
 export interface MergeLoop {
     type: "merge-loop",
-    range: [number, number][],
-    initExpressionRange: [number, number][],
-    conditionExpressionRange: [number, number][],
-    loopExpressionRange: [number, number][],
-    loc: Location[]
+    range: [[number, number], [number, number]],
+    initExpressionRange: [[number, number], [number, number]],
+    conditionExpressionRange: [[number, number], [number, number]],
+    loopExpressionRange: [[number, number], [number, number]],
+    loc: [Location, Location]
 }
 
 export interface BaseASTNode {

@@ -1,0 +1,1 @@
+{"time":165,"results":[{"type":"struct-data-arrangement ","before":"\naddress owner\nuint x\nuint y\nuint width\nuint height\nstring link\nstring image\nstring title\nbool NSFW\nbool forceNSFW","after":"uint x\nuint y\nuint width\nuint height\nstring link\nstring image\nstring title\naddress owner\nbool NSFW\nbool forceNSFW\n","contract":"IKetherHomepage","time":0}]}

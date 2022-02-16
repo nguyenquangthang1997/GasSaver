@@ -1,0 +1,1 @@
+{"time":160,"results":[{"type":"external-function ","before":"function setProvenanceHash(string memory provenanceHash) public onlyOwner {\n        PROVENANCE_HASH = provenanceHash;\n    }","after":"function setProvenanceHash(string calldata provenanceHash) public onlyOwner {\n        PROVENANCE_HASH = provenanceHash;\n    }","contract":"TheColors","time":0}]}

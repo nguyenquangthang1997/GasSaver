@@ -1,0 +1,1 @@
+{"time":96,"results":[{"type":"struct-data-arrangement ","before":"\nstring name\nuint8 size\nuint256 gen\nuint8 unique\nuint256 growthStartTime\nuint256 sellPrice\nuint8 hungry","after":"string name\nuint256 gen\nuint256 growthStartTime\nuint256 sellPrice\nuint8 size\nuint8 unique\nuint8 hungry\n","contract":"EthPiranha","time":0}]}

@@ -1,0 +1,1 @@
+{"time":98,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public saleStartTimestamp = 1633122000;","after":"uint256 public constant saleStartTimestamp = 1633122000;","contract":"EtherGhostsNFT","time":0}]}

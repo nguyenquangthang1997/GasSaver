@@ -1,0 +1,1 @@
+{"time":40,"results":[{"type":"constant-restrict-modification  ","before":"bool private stopped = false;","after":"bool private constant stopped = false;","contract":"UniSwap_SNX_DAI_ZAP","time":0}]}

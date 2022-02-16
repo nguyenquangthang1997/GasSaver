@@ -1,0 +1,1 @@
+{"time":172,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseURI_) external onlyOwner() {\r\n            _baseURIextended = baseURI_;\r\n        }","after":"function setBaseURI(string calldata baseURI_) external onlyOwner() {\r\n            _baseURIextended = baseURI_;\r\n        }","contract":"RugstoreIO","time":0}]}

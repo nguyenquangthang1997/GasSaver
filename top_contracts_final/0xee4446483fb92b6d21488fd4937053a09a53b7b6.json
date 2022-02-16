@@ -1,0 +1,1 @@
+{"time":174,"results":[{"type":"external-function ","before":"function setBaseURI(string memory newBaseURI) external onlyOwner {\n        _baseUri = newBaseURI;\n    }","after":"function setBaseURI(string calldata newBaseURI) external onlyOwner {\n        _baseUri = newBaseURI;\n    }","contract":"SkullTroopers","time":0}]}

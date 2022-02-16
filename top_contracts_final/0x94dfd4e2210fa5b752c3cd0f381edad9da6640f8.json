@@ -1,0 +1,1 @@
+{"time":198,"results":[{"type":"immutable-restrict-modification ","before":"uint8 private _decimals;","after":"uint8 private immutable _decimals;","contract":"SphynxToken","time":0}]}

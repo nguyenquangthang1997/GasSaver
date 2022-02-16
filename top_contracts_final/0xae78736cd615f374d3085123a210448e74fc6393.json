@@ -1,0 +1,1 @@
+{"time":113,"results":[{"type":"immutable-restrict-modification ","before":"uint8 public version;","after":"uint8 public immutable version;","contract":"RocketTokenRETH","time":0}]}

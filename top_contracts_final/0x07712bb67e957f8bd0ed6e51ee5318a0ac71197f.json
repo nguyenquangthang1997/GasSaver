@@ -1,0 +1,1 @@
+{"time":106,"results":[{"type":"external-function ","before":"function setBaseURI(string memory _URI) public onlyOwner {\r\n        baseURI = _URI;\r\n\r\n        emit BaseURI(baseURI);\r\n    }","after":"function setBaseURI(string calldata _URI) public onlyOwner {\r\n        baseURI = _URI;\r\n\r\n        emit BaseURI(baseURI);\r\n    }","contract":"CoolDoods","time":0}]}

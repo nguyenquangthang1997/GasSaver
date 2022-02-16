@@ -1,0 +1,1 @@
+{"time":42,"results":[{"type":"constant-restrict-modification  ","before":"*\n * 基础代币合约\n */","after":"*\n * 基础代币合约\n */","contract":"MyAdvancedToken","time":1}]}

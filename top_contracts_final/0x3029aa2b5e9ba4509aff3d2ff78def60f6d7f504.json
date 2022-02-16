@@ -1,0 +1,1 @@
+{"time":99,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public stakeDurationSeconds = 3 days;","after":"uint256 public immutable stakeDurationSeconds = 3 days;","contract":"EDDARewardsPool","time":0}]}

@@ -1,0 +1,1 @@
+{"time":218,"results":[{"type":"external-function ","before":"function setProvenanceHash(string memory provenanceHash) public onlyOwner {\n        PROVENANCE = provenanceHash;\n    }","after":"function setProvenanceHash(string calldata provenanceHash) public onlyOwner {\n        PROVENANCE = provenanceHash;\n    }","contract":"RockGods","time":0}]}

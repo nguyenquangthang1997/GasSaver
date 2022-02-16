@@ -1,0 +1,1 @@
+{"time":90,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseURI) public onlyOwner {\n    uri = baseURI;\n  }","after":"function setBaseURI(string calldata baseURI) public onlyOwner {\n    uri = baseURI;\n  }","contract":"Blox","time":0}]}

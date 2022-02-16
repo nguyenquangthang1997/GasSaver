@@ -1,0 +1,1 @@
+{"time":37,"results":[{"type":"constant-restrict-modification  ","before":"uint public INITIAL_SUPPLY = 10000000000000000000000000000;","after":"uint public constant INITIAL_SUPPLY = 10000000000000000000000000000;","contract":"KCT","time":0}]}

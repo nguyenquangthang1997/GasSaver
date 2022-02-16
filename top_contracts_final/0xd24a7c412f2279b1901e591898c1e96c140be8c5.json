@@ -1,0 +1,1 @@
+{"time":101,"results":[{"type":"external-function ","before":"function setBaseUrl(string memory url) external onlyOwner {\n        _baseUrl = url;\n    }","after":"function setBaseUrl(string calldata url) external onlyOwner {\n        _baseUrl = url;\n    }","contract":"PatchworkKingdoms","time":0}]}

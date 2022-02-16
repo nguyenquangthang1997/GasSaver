@@ -1,0 +1,1 @@
+{"time":67,"results":[{"type":"immutable-restrict-modification ","before":"address public _DODO_ZOO_;","after":"address public immutable _DODO_ZOO_;","contract":"DODOEthProxy","time":0},{"type":"immutable-restrict-modification ","before":"address payable public _WETH_;","after":"address payable public immutable _WETH_;","contract":"DODOEthProxy","time":0}]}

@@ -1,0 +1,1 @@
+{"time":144,"results":[{"type":"immutable-restrict-modification ","before":"address private _proxyRegistryAddress;","after":"address private immutable _proxyRegistryAddress;","contract":"PrometheusPass","time":1}]}

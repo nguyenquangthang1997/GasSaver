@@ -1,0 +1,1 @@
+{"time":156,"results":[{"type":"constant-restrict-modification  ","before":"uint public MAX_INVESTORS = 10;","after":"uint public constant MAX_INVESTORS = 10;","contract":"Swaps","time":0}]}

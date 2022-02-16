@@ -1,0 +1,1 @@
+{"time":58,"results":[{"type":"immutable-restrict-modification ","before":"   bytes32 internal domainSeparat","after":"   bytes32 internal domainSeparat","contract":"BicoClaimNew","time":0},{"type":"immutable-restrict-modification ","before":"   address public tokenAddre","after":"   address public tokenAddre","contract":"BicoClaimNew","time":0}]}

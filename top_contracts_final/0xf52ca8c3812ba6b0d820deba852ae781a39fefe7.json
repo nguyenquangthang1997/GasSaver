@@ -1,0 +1,1 @@
+{"time":141,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public epoch1Start;","after":"uint256 public immutable epoch1Start;","contract":"Staking","time":0},{"type":"immutable-restrict-modification ","before":"uint256 public epochDuration;","after":"uint256 public immutable epochDuration;","contract":"Staking","time":0}]}

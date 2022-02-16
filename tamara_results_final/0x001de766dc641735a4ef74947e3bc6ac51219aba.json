@@ -1,0 +1,1 @@
+{"time":94,"results":[{"type":"constant-restrict-modification  ","before":"uint public basisPointsRate = 0;","after":"uint public constant basisPointsRate = 0;","contract":"UpgradedStandardToken","time":0},{"type":"constant-restrict-modification  ","before":"uint public maximumFee = 0;","after":"uint public constant maximumFee = 0;","contract":"UpgradedStandardToken","time":0}]}

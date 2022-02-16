@@ -1,0 +1,1 @@
+{"time":60,"results":[{"type":"struct-data-arrangement ","before":"\naddress investor\nuint256 amount\nuint256 freezeEndAt\nbool claimed","after":"uint256 amount\nuint256 freezeEndAt\naddress investor\nbool claimed\n","contract":"CgaTokenLock","time":0}]}

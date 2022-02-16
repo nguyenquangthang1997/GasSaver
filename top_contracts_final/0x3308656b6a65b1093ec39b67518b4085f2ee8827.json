@@ -1,0 +1,1 @@
+{"time":71,"results":[{"type":"immutable-restrict-modification ","before":"address payable private _feeAddrWallet1;","after":"address payable private immutable _feeAddrWallet1;","contract":"catdog","time":0}]}

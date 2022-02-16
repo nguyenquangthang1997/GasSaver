@@ -1,0 +1,1 @@
+{"time":47,"results":[{"type":"constant-restrict-modification  ","before":"bool public mintingFinished = false;","after":"bool public constant mintingFinished = false;","contract":"GuardiansCoin","time":0}]}

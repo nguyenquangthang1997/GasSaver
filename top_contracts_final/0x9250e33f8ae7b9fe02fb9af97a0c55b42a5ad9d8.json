@@ -1,0 +1,1 @@
+{"time":129,"results":[{"type":"de-morgan-condition ","before":"!_isBlackListedBot[to] && !_isBlackListedBot[from]","after":"!(_isBlackListedBot[to] && _isBlackListedBot[from])","loc":{"start":{"line":329,"column":16},"end":{"line":329,"column":65}},"contract":"Cinogames","time":0}]}

@@ -1,0 +1,1 @@
+{"time":68,"results":[{"type":"constant-restrict-modification  ","before":"address burnAddress = 0x000000000000000000000000000000000000dEaD;","after":"address constant burnAddress = 0x000000000000000000000000000000000000dEaD;","contract":"ERC721_Minimal","time":1}]}

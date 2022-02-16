@@ -1,0 +1,1 @@
+{"time":67,"results":[{"type":"immutable-restrict-modification ","before":"address  payable private owner;","after":"address  payable private immutable owner;","contract":"CosmicToken","time":0}]}

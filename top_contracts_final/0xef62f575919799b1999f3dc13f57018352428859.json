@@ -1,0 +1,1 @@
+{"time":92,"results":[{"type":"immutable-restrict-modification ","before":"uint public emissionsStart;","after":"uint public immutable emissionsStart;","contract":"EmissionsSplitter","time":1}]}

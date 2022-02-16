@@ -1,0 +1,1 @@
+{"time":80,"results":[{"type":"constant-restrict-modification  ","before":"uint256 DECIMAL = 10 ** 18;","after":"uint256 constant DECIMAL = 10 ** 18;","contract":"APROracle","time":1}]}

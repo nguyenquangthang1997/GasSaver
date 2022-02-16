@@ -1,0 +1,1 @@
+{"time":103,"results":[{"type":"constant-restrict-modification  ","before":"uint256 CLIFF = 180 days;","after":"uint256 constant CLIFF = 180 days;","contract":"InbestDistribution","time":0},{"type":"constant-restrict-modification  ","before":"uint256 VESTING = 365 days;","after":"uint256 constant VESTING = 365 days;","contract":"InbestDistribution","time":0}]}

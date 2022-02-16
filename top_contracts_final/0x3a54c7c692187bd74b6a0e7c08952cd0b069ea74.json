@@ -1,0 +1,1 @@
+{"time":152,"results":[{"type":"struct-data-arrangement ","before":"\nuint8 col\nuint8 row\nuint amount\naddress bidder","after":"uint amount\naddress bidder\nuint8 col\nuint8 row\n","contract":"BlockplotsGlobalMarket","time":0}]}

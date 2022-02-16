@@ -1,0 +1,1 @@
+{"time":114,"results":[{"type":"external-function ","before":"function setBaseURI(string memory newBaseURI)public onlyOwner{\n        baseURI = newBaseURI;\n    }","after":"function setBaseURI(string calldata newBaseURI)public onlyOwner{\n        baseURI = newBaseURI;\n    }","contract":"pxMAYC","time":0}]}

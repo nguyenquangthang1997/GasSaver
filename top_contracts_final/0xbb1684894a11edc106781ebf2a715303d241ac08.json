@@ -1,0 +1,1 @@
+{"time":134,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public FEMVERSE_FREE_PRICE = 0 ether;","after":"uint256 public constant FEMVERSE_FREE_PRICE = 0 ether;","contract":"Femverse","time":0}]}

@@ -1,0 +1,1 @@
+{"time":160,"results":[{"type":"external-function ","before":"\n  function setProvenanceHash(string memory provenanceHash) external onlyOwner {\n    provenance = provenanceHash;\n","after":"\n  function setProvenanceHash(string calldata provenanceHash) external onlyOwner {\n    provenance = provenanceHash;\n","contract":"PointlessPigeons","time":0}]}

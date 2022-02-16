@@ -1,0 +1,1 @@
+{"time":67,"results":[{"type":"constant-restrict-modification  ","before":"uint256 lock_time = 7884000;","after":"uint256 constant lock_time = 7884000;","contract":"TokenVesting","time":0}]}

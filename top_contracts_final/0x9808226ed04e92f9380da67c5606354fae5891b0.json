@@ -1,0 +1,1 @@
+{"time":185,"results":[{"type":"constant-restrict-modification  ","before":"uint8 public STRIPPER = 0;","after":"uint8 public constant STRIPPER = 0;","contract":"StripperVille","time":0},{"type":"constant-restrict-modification  ","before":"uint8 public CLUB = 1;","after":"uint8 public constant CLUB = 1;","contract":"StripperVille","time":0}]}

@@ -1,0 +1,1 @@
+{"time":579,"results":[{"type":"immutable-restrict-modification ","before":"address public chainRunnersAddress;","after":"address public immutable chainRunnersAddress;","contract":"AntiRunners","time":1}]}

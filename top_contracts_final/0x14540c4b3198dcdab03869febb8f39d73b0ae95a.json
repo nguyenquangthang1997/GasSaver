@@ -1,0 +1,1 @@
+{"time":109,"results":[{"type":"constant-restrict-modification  ","before":"Ownable {\r\n\r\n\r\n    bool publi","after":"Ownable {\r\n\r\n\r\n    bool publi","contract":"b","time":0}]}

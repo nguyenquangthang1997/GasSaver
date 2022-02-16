@@ -1,0 +1,1 @@
+{"time":391,"results":[{"type":"immutable-restrict-modification ","before":"address public owner;","after":"address public immutable owner;","contract":"Migrations","time":0}]}

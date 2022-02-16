@@ -1,0 +1,1 @@
+{"time":202,"results":[{"type":"immutable-restrict-modification ","before":"address public emergencyRecipient;","after":"address public immutable emergencyRecipient;","contract":"Lon","time":1}]}

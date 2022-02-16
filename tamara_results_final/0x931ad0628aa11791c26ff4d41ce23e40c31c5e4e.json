@@ -1,0 +1,1 @@
+{"time":46,"results":[{"type":"constant-restrict-modification  ","before":"string public name = \"Pegasus\";","after":"string public constant name = \"Pegasus\";","contract":"Pegasus","time":0},{"type":"constant-restrict-modification  ","before":"string public symbol = \"PGS\";","after":"string public constant symbol = \"PGS\";","contract":"Pegasus","time":0}]}

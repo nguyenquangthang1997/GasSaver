@@ -1,0 +1,1 @@
+{"time":85,"results":[{"type":"constant-restrict-modification  ","before":"uint noOfTokens = 10_000_000_000;","after":"uint constant noOfTokens = 10_000_000_000;","contract":"DotrCoin","time":1}]}

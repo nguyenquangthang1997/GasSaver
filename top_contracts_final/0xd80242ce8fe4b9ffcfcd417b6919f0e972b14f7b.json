@@ -1,0 +1,1 @@
+{"time":166,"results":[{"type":"constant-restrict-modification  ","before":"uint256 private MAX_FREE = 1000;","after":"uint256 private constant MAX_FREE = 1000;","contract":"DollFaceNFT","time":0}]}

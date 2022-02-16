@@ -1,0 +1,1 @@
+{"time":30,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public _totalSupply = 1000000000*(10 ** 18);","after":"uint256 public constant _totalSupply = 1000000000*(10 ** 18);","contract":"SDAAC","time":0}]}

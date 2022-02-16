@@ -1,0 +1,1 @@
+{"time":126,"results":[{"type":"immutable-restrict-modification ","before":"uint256 private _cap;","after":"uint256 private immutable _cap;","contract":"BlackPoolToken","time":1},{"type":"immutable-restrict-modification ","before":"uint256 public startBlock;","after":"uint256 public immutable startBlock;","contract":"MasterChef","time":0}]}

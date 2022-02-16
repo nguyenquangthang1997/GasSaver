@@ -1,0 +1,22 @@
+{
+  "time": 96,
+  "results": [
+    {
+      "type": "loop-calculation",
+      "before": "string memory thisQuote;",
+      "after": "// move outside for loop\nstring memory thisQuote;",
+      "loc": {
+        "start": {
+          "line": 50,
+          "column": 12
+        },
+        "end": {
+          "line": 50,
+          "column": 35
+        }
+      },
+      "contract": "OffChainOrFeedPriceFeed",
+      "time": 0
+    }
+  ]
+}

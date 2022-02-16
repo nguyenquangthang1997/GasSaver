@@ -1,0 +1,1 @@
+{"time":22,"results":[{"type":"constant-restrict-modification  ","before":"uint public totalSupply = 1000000000000000000000000000;","after":"uint public constant totalSupply = 1000000000000000000000000000;","contract":"FtInvestToken","time":0}]}

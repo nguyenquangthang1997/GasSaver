@@ -1,0 +1,1 @@
+{"time":60,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public INITIAL_SUPPLY = 0;","after":"uint256 public constant INITIAL_SUPPLY = 0;","contract":"BONDToken","time":1}]}

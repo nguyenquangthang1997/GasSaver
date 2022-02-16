@@ -1,0 +1,1 @@
+{"time":316,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public maxSupply = 4096;","after":"uint256 public constant maxSupply = 4096;","contract":"Flowers","time":1}]}

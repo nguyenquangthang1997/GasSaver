@@ -1,0 +1,1 @@
+{"time":24,"results":[{"type":"loop-calculation","before":"bool counting = true;","after":"// move outside for loop\nbool counting = true;","loc":{"start":{"line":60,"column":12},"end":{"line":60,"column":32}},"contract":"TokensView","time":0}]}

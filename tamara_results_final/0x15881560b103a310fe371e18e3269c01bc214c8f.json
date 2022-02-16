@@ -1,0 +1,1 @@
+{"time":45,"results":[{"type":"constant-restrict-modification  ","before":"uint value = 10000000000e18;","after":"uint constant value = 10000000000e18;","contract":"Token","time":0}]}

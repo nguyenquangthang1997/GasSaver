@@ -1,0 +1,1 @@
+{"time":149,"results":[{"type":"constant-restrict-modification  ","before":"\n  uint256 public maxAmountPerTx =","after":"\n  uint256 public constant maxAmountPerTx =","contract":"ASMAIFAAllStarsBoxSet","time":1}]}

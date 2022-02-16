@@ -1,0 +1,1 @@
+{"time":168,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public nameChangePrice;","after":"uint256 public immutable nameChangePrice;","contract":"DoomCat","time":0},{"type":"immutable-restrict-modification ","before":"address public proxyRegistryAddress;","after":"address public immutable proxyRegistryAddress;","contract":"DoomCat","time":1}]}

@@ -1,0 +1,1 @@
+{"time":41,"results":[{"type":"immutable-restrict-modification ","before":"address public ownerOfNewTokens;","after":"address public immutable ownerOfNewTokens;","contract":"INXTswap","time":0}]}

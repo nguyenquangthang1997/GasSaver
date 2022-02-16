@@ -1,0 +1,1 @@
+{"time":158,"results":[{"type":"external-function ","before":"function setBaseURI(string memory _baseTokenURI) public onlyOwner {\n        _setBaseURI(_baseTokenURI);\n    }","after":"function setBaseURI(string calldata _baseTokenURI) public onlyOwner {\n        _setBaseURI(_baseTokenURI);\n    }","contract":"MysticBetsJersey","time":0}]}

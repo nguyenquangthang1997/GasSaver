@@ -1,0 +1,1 @@
+{"time":139,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public maxGasmasksPurchase = 20;","after":"uint256 public constant maxGasmasksPurchase = 20;","contract":"Moonfighter","time":0}]}

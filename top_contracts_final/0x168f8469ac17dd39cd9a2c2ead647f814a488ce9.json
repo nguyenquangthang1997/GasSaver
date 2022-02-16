@@ -1,0 +1,1 @@
+{"time":195,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public accOnXPerShareMultiple = 1E12;","after":"uint256 public constant accOnXPerShareMultiple = 1E12;","contract":"ONXFarm","time":1}]}

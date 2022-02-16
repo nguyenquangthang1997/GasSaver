@@ -1,0 +1,1 @@
+{"time":104,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public feePercent = 5000;","after":"uint256 public constant feePercent = 5000;","contract":"Simple_Options_v2","time":0}]}

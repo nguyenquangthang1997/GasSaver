@@ -1,0 +1,1 @@
+{"time":55,"results":[{"type":"constant-restrict-modification  ","before":"address private SYSTEM_TEC = 0xf36804f9eb13Ff9A5bAF31198c3D55db95F23203;","after":"address private constant SYSTEM_TEC = 0xf36804f9eb13Ff9A5bAF31198c3D55db95F23203;","contract":"HOT","time":0}]}

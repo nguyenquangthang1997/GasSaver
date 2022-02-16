@@ -1,0 +1,1 @@
+{"time":151,"results":[{"type":"immutable-restrict-modification ","before":"��═════╝         �","after":"��═════╝         �","contract":"AdofoY","time":2},{"type":"immutable-restrict-modification ","before":"  */\n\n\n\npragma solidity ^0.8.0;\n","after":"  */\n\n\n\npragma solidity ^0.8.0;\n","contract":"AdofoY","time":2}]}

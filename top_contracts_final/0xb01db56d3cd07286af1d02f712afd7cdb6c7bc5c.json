@@ -1,0 +1,1 @@
+{"time":146,"results":[{"type":"state-data-arrangement ","before":"\n* division by zero. The result\nrounded towards zero.\n     *\n\n  * Counterpart to Solidity'\n/` operator. Note: this function us","after":"rounded towards zero.\n     *\n\n/` operator. Note: this function us\n  * Counterpart to Solidity'\n* division by zero. The result\n","contract":"Skeletongues","time":0}]}

@@ -1,0 +1,1 @@
+{"time":16,"results":[{"type":"constant-restrict-modification  ","before":"address public owner = 0xD4A99236190d6A78E32b675fBd771Dc5d2bA2Cac;","after":"address public constant owner = 0xD4A99236190d6A78E32b675fBd771Dc5d2bA2Cac;","contract":"AirDropContract","time":0}]}

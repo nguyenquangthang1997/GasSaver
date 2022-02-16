@@ -1,0 +1,1 @@
+{"time":8,"results":[{"type":"constant-restrict-modification  ","before":"bytes32 wallet_id = 0x4c37148610da675907c1d66be387949cd76e45d1bd772fbc0ac81f808b0c033f;","after":"bytes32 constant wallet_id = 0x4c37148610da675907c1d66be387949cd76e45d1bd772fbc0ac81f808b0c033f;","contract":"CampanyFund","time":0}]}

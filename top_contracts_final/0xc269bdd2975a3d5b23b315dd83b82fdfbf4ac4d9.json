@@ -1,0 +1,1 @@
+{"time":151,"results":[{"type":"constant-restrict-modification  ","before":"bool public hasSaleStarted = false;","after":"bool public constant hasSaleStarted = false;","contract":"WolfGangV2","time":1}]}

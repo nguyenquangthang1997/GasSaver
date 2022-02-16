@@ -1,0 +1,1 @@
+{"time":9,"results":[{"type":"external-function ","before":"function publishEvent(bytes memory data) public onlyOwner {\n        emit IglooEvent(data);\n    }","after":"function publishEvent(bytes calldata data) public onlyOwner {\n        emit IglooEvent(data);\n    }","contract":"EventRecorder","time":0}]}

@@ -1,0 +1,1 @@
+{"time":9,"results":[{"type":"external-function ","before":"function registerFile(string memory _fileHash) public onlyOwner {\n        emit FileRegistered(_fileHash);\n    }","after":"function registerFile(string calldata _fileHash) public onlyOwner {\n        emit FileRegistered(_fileHash);\n    }","contract":"iColabRegistry","time":0}]}

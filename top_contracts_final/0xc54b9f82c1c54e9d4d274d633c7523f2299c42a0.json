@@ -1,0 +1,1 @@
+{"time":101,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public rewardsDuration = 135 days;","after":"uint256 public constant rewardsDuration = 135 days;","contract":"StakingRewards","time":0}]}

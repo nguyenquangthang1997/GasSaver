@@ -1,0 +1,1 @@
+{"time":204,"results":[{"type":"constant-restrict-modification  ","before":"uint256 saleStart = 1632510000;","after":"uint256 constant saleStart = 1632510000;","contract":"SanjayRobots","time":1},{"type":"constant-restrict-modification  ","before":"uint256 maximumRobotID = 10000;","after":"uint256 constant maximumRobotID = 10000;","contract":"SanjayRobots","time":1}]}

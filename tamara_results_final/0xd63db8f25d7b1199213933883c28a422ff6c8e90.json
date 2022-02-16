@@ -1,0 +1,1 @@
+{"time":21,"results":[{"type":"struct-data-arrangement ","before":"\nuint256 amount\naddress payable claimAddress\naddress payable refundAddress\nuint256 timelock\nbool pending","after":"uint256 amount\nuint256 timelock\naddress payable claimAddress\naddress payable refundAddress\nbool pending\n","contract":"EtherSwap","time":0}]}

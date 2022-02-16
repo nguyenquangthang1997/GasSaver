@@ -1,0 +1,1 @@
+{"time":18,"results":[{"type":"constant-restrict-modification  ","before":"string private _version = '0.1.0';","after":"string private constant _version = '0.1.0';","contract":"GotchuWallet","time":0}]}

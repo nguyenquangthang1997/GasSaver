@@ -1,0 +1,1 @@
+{"time":138,"results":[{"type":"constant-restrict-modification  ","before":"uint BASE_CREDIT_VALUE = 250;","after":"uint constant BASE_CREDIT_VALUE = 250;","contract":"boughtIdentity","time":0},{"type":"immutable-restrict-modification ","before":"uint256 startingIndex;","after":"uint256 immutable startingIndex;","contract":"boughtIdentity","time":0}]}

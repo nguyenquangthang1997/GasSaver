@@ -1,0 +1,1 @@
+{"time":59,"results":[{"type":"constant-restrict-modification  ","before":"uint public initialSupply = 9000000000 * 10 ** uint256(decimals);","after":"uint public constant initialSupply = 9000000000 * 10 ** uint256(decimals);","contract":"NewCOSBALLToken","time":0}]}

@@ -1,0 +1,1 @@
+{"time":122,"results":[{"type":"external-function ","before":"function addMinter(address[] memory account) public onlyMinter {\n        _addMinter(account);\n    }","after":"function addMinter(address[] calldata account) public onlyMinter {\n        _addMinter(account);\n    }","contract":"xVEMPBEP20Token","time":0}]}

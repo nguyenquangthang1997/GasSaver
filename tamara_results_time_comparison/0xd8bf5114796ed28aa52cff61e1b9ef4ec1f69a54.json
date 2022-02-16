@@ -1,0 +1,1 @@
+{"time":69,"results":[{"type":"de-morgan-condition ","before":"(!round.hasPaid[requester] || !round.hasPaid[respondent","after":"!((round.hasPaid[requester] || round.hasPaid[respondent)","loc":{"start":{"line":323,"column":12},"end":{"line":323,"column":66}},"contract":"BinaryArbitrableProxy","time":0}]}

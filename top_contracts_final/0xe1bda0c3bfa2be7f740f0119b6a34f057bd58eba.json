@@ -1,0 +1,1 @@
+{"time":65,"results":[{"type":"immutable-restrict-modification ","before":"   uint256 private _c","after":"   uint256 private _c","contract":"Winkies","time":0}]}

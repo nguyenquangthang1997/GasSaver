@@ -1,0 +1,1 @@
+{"time":83,"results":[{"type":"de-morgan-condition ","before":"!_released && !isAdmin(from)","after":"!(_released && isAdmin(from))","loc":{"start":{"line":342,"column":12},"end":{"line":342,"column":39}},"contract":"LockableToken","time":0}]}

@@ -1,0 +1,1 @@
+{"time":88,"results":[{"type":"constant-restrict-modification  ","before":"uint private INITIAL_SUPPLY = 100e16;","after":"uint private constant INITIAL_SUPPLY = 100e16;","contract":"ACH","time":0}]}

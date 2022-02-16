@@ -1,0 +1,1 @@
+{"time":49,"results":[{"type":"constant-restrict-modification  ","before":"    uint8 decimals =","after":"    uint8 constant decimals =","contract":"BEBmining","time":1},{"type":"constant-restrict-modification  ","before":"    uint256 depreciationTime=86","after":"    uint256 constant depreciationTime=86","contract":"BEBmining","time":1}]}

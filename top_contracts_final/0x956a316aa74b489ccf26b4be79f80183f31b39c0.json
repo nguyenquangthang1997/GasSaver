@@ -1,0 +1,1 @@
+{"time":94,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public MAX_TOKENS = 5555;","after":"uint256 public constant MAX_TOKENS = 5555;","contract":"FlowerFriend","time":0},{"type":"constant-restrict-modification  ","before":"uint256 public MAX_FREE = 555;","after":"uint256 public constant MAX_FREE = 555;","contract":"FlowerFriend","time":0}]}

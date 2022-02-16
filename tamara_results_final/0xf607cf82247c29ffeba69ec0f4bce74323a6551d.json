@@ -1,0 +1,1 @@
+{"time":56,"results":[{"type":"constant-restrict-modification  ","before":"uint public totalSupply = 5*10**26;","after":"uint public constant totalSupply = 5*10**26;","contract":"StakeAIToken","time":0}]}

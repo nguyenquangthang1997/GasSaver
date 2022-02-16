@@ -1,0 +1,1 @@
+{"time":53,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public _totalSupply = SafeMath.mul(1000000000, 1 ether);","after":"uint256 public constant _totalSupply = SafeMath.mul(1000000000, 1 ether);","contract":"CrypsterToken","time":0}]}

@@ -1,0 +1,1 @@
+{"time":10,"results":[{"type":"state-data-arrangement ","before":"\nuint8 private clientCount;\nmapping (address => uint) private balances;\naddress public owner;","after":"mapping (address => uint) private balances;\naddress public owner;\nuint8 private clientCount;\n","contract":"MoneyMailer","time":0}]}

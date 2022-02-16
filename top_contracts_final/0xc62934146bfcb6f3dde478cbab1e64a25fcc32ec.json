@@ -1,0 +1,1 @@
+{"time":128,"results":[{"type":"external-function ","before":"function setBaseUri(string memory uri) external onlyOwner {\n        baseUri = uri;\n    }","after":"function setBaseUri(string calldata uri) external onlyOwner {\n        baseUri = uri;\n    }","contract":"Lootpunk","time":0}]}

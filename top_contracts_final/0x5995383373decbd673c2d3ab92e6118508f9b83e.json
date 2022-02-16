@@ -1,0 +1,1 @@
+{"time":118,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public migratorSetterDelay;","after":"uint256 public immutable migratorSetterDelay;","contract":"StakingPools","time":1}]}

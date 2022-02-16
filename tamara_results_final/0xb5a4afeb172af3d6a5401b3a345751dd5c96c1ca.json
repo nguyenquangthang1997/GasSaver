@@ -1,0 +1,1 @@
+{"time":61,"results":[{"type":"state-data-arrangement ","before":"\nuint8 public decimals;\nstring public symbol;\nstring public name;\nbool public locked;","after":"string public symbol;\nstring public name;\nuint8 public decimals;\nbool public locked;\n","contract":"Token","time":0}]}

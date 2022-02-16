@@ -1,0 +1,1 @@
+{"time":85,"results":[{"type":"external-function ","before":"function setBaseURI(string memory newBaseURI) public {\n        require(msg.sender == owner);\n        baseURI = newBaseURI;\n    }","after":"function setBaseURI(string calldata newBaseURI) public {\n        require(msg.sender == owner);\n        baseURI = newBaseURI;\n    }","contract":"WrappedLunar","time":0}]}

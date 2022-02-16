@@ -1,0 +1,1 @@
+{"time":114,"results":[{"type":"constant-restrict-modification  ","before":"address public feeAddress = 0x8B176d1D547aFd831E5c74787e4ec6d184a5078E;","after":"address public constant feeAddress = 0x8B176d1D547aFd831E5c74787e4ec6d184a5078E;","contract":"PLEStaking","time":0}]}

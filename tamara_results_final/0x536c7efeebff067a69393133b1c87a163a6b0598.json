@@ -1,0 +1,1 @@
+{"time":54,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public totalSupply = 10000000000e6;","after":"uint256 public constant totalSupply = 10000000000e6;","contract":"ECM","time":0}]}

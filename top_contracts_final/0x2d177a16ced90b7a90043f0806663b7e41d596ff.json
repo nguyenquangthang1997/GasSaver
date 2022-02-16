@@ -1,0 +1,1 @@
+{"time":98,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public TOTAL_AMOUNT = 3.2 * 10 ** 8 * 10 ** 18;","after":"uint256 public constant TOTAL_AMOUNT = 3.2 * 10 ** 8 * 10 ** 18;","contract":"TokenIssue","time":0}]}

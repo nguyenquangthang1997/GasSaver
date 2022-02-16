@@ -1,0 +1,1 @@
+{"time":93,"results":[{"type":"constant-restrict-modification  ","before":"uint noOfTokens = 10000000000;","after":"uint constant noOfTokens = 10000000000;","contract":"CfoCoin","time":0}]}

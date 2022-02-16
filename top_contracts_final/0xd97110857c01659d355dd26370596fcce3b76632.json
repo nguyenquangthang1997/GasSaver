@@ -1,0 +1,1 @@
+{"time":135,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public TransferFee = 75000000000000000;","after":"uint256 public constant TransferFee = 75000000000000000;","contract":"Apes","time":1}]}

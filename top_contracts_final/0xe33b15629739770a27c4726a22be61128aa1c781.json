@@ -1,0 +1,1 @@
+{"time":124,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public rewardPerBlock;","after":"uint256 public immutable rewardPerBlock;","contract":"Farm","time":1},{"type":"immutable-restrict-modification ","before":"uint256 public startBlock;","after":"uint256 public immutable startBlock;","contract":"Farm","time":1}]}

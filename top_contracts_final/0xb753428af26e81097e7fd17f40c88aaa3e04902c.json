@@ -1,0 +1,1 @@
+{"time":79,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public MAX_TOKENS = 100000 ether;","after":"uint256 public constant MAX_TOKENS = 100000 ether;","contract":"SFI","time":0}]}

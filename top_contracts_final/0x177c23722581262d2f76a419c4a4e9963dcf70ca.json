@@ -1,0 +1,1 @@
+{"time":121,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public maxSupply = 555;","after":"uint256 public constant maxSupply = 555;","contract":"Asset","time":0},{"type":"immutable-restrict-modification ","before":"address public imx;","after":"address public immutable imx;","contract":"Asset","time":0}]}

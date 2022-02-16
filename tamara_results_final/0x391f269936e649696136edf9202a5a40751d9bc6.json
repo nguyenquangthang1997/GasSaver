@@ -1,0 +1,1 @@
+{"time":115,"results":[{"type":"constant-restrict-modification  ","before":"address private ethAddress = address(0);","after":"address private constant ethAddress = address(0);","contract":"SeedDex","time":1}]}

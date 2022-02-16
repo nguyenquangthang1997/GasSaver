@@ -1,0 +1,1 @@
+{"time":37,"results":[{"type":"struct-data-arrangement ","before":"\naddress holder\naddress spender\nuint256 nonce\nuint256 expiry\nbool allowed\nuint8 v\nbytes32 r\nbytes32 s","after":"uint256 nonce\nuint256 expiry\nbytes32 r\nbytes32 s\naddress holder\naddress spender\nbool allowed\nuint8 v\n","contract":"withPermit","time":1}]}

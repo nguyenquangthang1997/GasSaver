@@ -1,0 +1,1 @@
+{"time":43,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public INITIAL_SUPPLY = 21000000 * 1 ether;","after":"uint256 public constant INITIAL_SUPPLY = 21000000 * 1 ether;","contract":"BlockchainToken","time":0}]}

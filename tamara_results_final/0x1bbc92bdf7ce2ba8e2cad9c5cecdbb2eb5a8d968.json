@@ -1,0 +1,1 @@
+{"time":51,"results":[{"type":"struct-data-arrangement ","before":"\nbytes32 name\nuint8 currentDay\nuint lastUpdateTime\nuint lastSettleTime\nbool isFinalDay","after":"bytes32 name\nuint lastUpdateTime\nuint lastSettleTime\nuint8 currentDay\nbool isFinalDay\n","contract":"Oracle","time":0}]}

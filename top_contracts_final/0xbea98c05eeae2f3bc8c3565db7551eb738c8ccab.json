@@ -1,0 +1,1 @@
+{"time":58,"results":[{"type":"constant-restrict-modification  ","before":"uint256 DECIMALS = 18;","after":"uint256 constant DECIMALS = 18;","contract":"GeyserToken","time":0}]}

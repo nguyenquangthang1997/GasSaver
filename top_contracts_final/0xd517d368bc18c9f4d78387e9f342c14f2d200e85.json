@@ -1,0 +1,1 @@
+{"time":123,"results":[{"type":"constant-restrict-modification  ","before":"uint private dayCount = 1 days;","after":"uint private constant dayCount = 1 days;","contract":"ThreeChargeKings","time":1},{"type":"immutable-restrict-modification ","before":"address private owner_;","after":"address private immutable owner_;","contract":"ThreeChargeKings","time":1}]}

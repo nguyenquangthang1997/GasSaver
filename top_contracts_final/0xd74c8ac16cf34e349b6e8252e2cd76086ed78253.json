@@ -1,0 +1,1 @@
+{"time":114,"results":[{"type":"external-function ","before":"function setBaseURI(string memory newUri) public onlyOwner {\n        BASE_URI = newUri;\n    }","after":"function setBaseURI(string calldata newUri) public onlyOwner {\n        BASE_URI = newUri;\n    }","contract":"ProjectKoala","time":0}]}

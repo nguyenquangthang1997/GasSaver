@@ -1,0 +1,1 @@
+{"time":9,"results":[{"type":"constant-restrict-modification  ","before":"bool public ALLOW_BIDDERS = false;","after":"bool public constant ALLOW_BIDDERS = false;","contract":"MembersRegistry","time":0}]}

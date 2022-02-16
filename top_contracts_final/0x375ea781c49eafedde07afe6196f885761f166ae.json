@@ -1,0 +1,1 @@
+{"time":333,"results":[{"type":"immutable-restrict-modification ","before":"bytes32 internal keyHash;","after":"bytes32 internal immutable keyHash;","contract":"CryptoTrunks","time":1},{"type":"immutable-restrict-modification ","before":"uint256 internal vrfFee;","after":"uint256 internal immutable vrfFee;","contract":"CryptoTrunks","time":1}]}

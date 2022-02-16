@@ -1,0 +1,1 @@
+{"time":20,"results":[{"type":"immutable-restrict-modification ","before":"address payable owner;","after":"address payable immutable owner;","contract":"LQBR","time":0}]}

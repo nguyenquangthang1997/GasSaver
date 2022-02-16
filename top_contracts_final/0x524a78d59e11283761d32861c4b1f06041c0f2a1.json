@@ -1,0 +1,1 @@
+{"time":41,"results":[{"type":"immutable-restrict-modification ","before":"address public mePunk;","after":"address public immutable mePunk;","contract":"MePunkAuction","time":1}]}

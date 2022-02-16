@@ -1,0 +1,1 @@
+{"time":71,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public BASE_RATE = 10 ether;","after":"uint256 public constant BASE_RATE = 10 ether;","contract":"FloorsCoin","time":0}]}

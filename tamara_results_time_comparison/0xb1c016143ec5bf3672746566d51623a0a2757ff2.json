@@ -1,0 +1,1 @@
+{"time":201,"results":[{"type":"de-morgan-condition ","before":"(!isOpen() && !hasClosed(","after":"!((isOpen() && hasClosed()","loc":{"start":{"line":1241,"column":12},"end":{"line":1241,"column":36}},"contract":"AsureBonusesCrowdsale","time":0}]}

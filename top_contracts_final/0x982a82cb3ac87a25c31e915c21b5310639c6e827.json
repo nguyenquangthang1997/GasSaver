@@ -1,0 +1,1 @@
+{"time":166,"results":[{"type":"immutable-restrict-modification ","before":"address proxyRegistryAddress;","after":"address immutable proxyRegistryAddress;","contract":"HoneyBadgersClub","time":0}]}

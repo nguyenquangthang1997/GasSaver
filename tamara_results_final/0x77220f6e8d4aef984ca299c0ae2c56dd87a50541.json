@@ -1,0 +1,1 @@
+{"time":6,"results":[{"type":"constant-restrict-modification  ","before":"address public template = 0x479c8c19f3fafF21eF173a3BeB9dfC5d29E8AFcB;","after":"address public constant template = 0x479c8c19f3fafF21eF173a3BeB9dfC5d29E8AFcB;","contract":"factory","time":0}]}

@@ -1,0 +1,1 @@
+{"time":136,"results":[{"type":"de-morgan-condition ","before":"!isActive && !presaleIsActive","after":"!(isActive && presaleIsActive)","loc":{"start":{"line":1346,"column":16},"end":{"line":1346,"column":30}},"contract":"LeapNFoundersDeedWorld","time":0}]}

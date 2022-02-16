@@ -1,0 +1,1 @@
+{"time":164,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public decimals;","after":"uint256 public immutable decimals;","contract":"UniStakingSyntheticToken","time":0}]}

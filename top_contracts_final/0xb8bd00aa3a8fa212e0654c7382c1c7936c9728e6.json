@@ -1,0 +1,1 @@
+{"time":121,"results":[{"type":"external-function ","before":"function setBaseURI(string memory uri) public onlyRole(DEFAULT_ADMIN_ROLE) {\n        baseURI = uri;\n    }","after":"function setBaseURI(string calldata uri) public onlyRole(DEFAULT_ADMIN_ROLE) {\n        baseURI = uri;\n    }","contract":"WickedCraniumsXHaylos","time":0}]}

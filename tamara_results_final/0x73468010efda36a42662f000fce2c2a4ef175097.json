@@ -1,0 +1,1 @@
+{"time":29,"results":[{"type":"constant-restrict-modification  ","before":"c symbol;\n    uint8 public ","after":"c symbol;\n    uint8 public ","contract":"TokenERC20","time":0}]}

@@ -1,0 +1,1 @@
+{"time":208,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public maxSupply = 8080;","after":"uint256 public constant maxSupply = 8080;","contract":"MaskBillionaireClub","time":0}]}

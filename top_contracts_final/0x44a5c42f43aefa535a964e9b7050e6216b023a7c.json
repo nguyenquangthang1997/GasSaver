@@ -1,0 +1,1 @@
+{"time":110,"results":[{"type":"external-function ","before":"function setURI(string memory _URI) external onlyOwner {\n        URI = _URI;\n    }","after":"function setURI(string calldata _URI) external onlyOwner {\n        URI = _URI;\n    }","contract":"BitChicks","time":0}]}

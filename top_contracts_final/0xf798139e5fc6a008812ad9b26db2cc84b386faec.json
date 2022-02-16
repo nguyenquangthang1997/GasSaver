@@ -1,0 +1,1 @@
+{"time":90,"results":[{"type":"external-function ","before":"function reveal(string memory _initBaseURI) public onlyOwner {\n\t\trevealed = true;\n\n\t\tsetBaseURI(_initBaseURI);\n\t}","after":"function reveal(string calldata _initBaseURI) public onlyOwner {\n\t\trevealed = true;\n\n\t\tsetBaseURI(_initBaseURI);\n\t}","contract":"CyberAgentsNFT","time":0}]}

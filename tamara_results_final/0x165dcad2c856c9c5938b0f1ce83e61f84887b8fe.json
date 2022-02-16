@@ -1,0 +1,1 @@
+{"time":42,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public initialSupply = 100000000000 * (10 ** uint256(_decimals));","after":"uint256 public constant initialSupply = 100000000000 * (10 ** uint256(_decimals));","contract":"ALIEN","time":0}]}

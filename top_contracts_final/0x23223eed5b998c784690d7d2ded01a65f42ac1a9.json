@@ -1,0 +1,1 @@
+{"time":42,"results":[{"type":"immutable-restrict-modification ","before":"address public v1_token;","after":"address public immutable v1_token;","contract":"KumaMigrate","time":0},{"type":"immutable-restrict-modification ","before":"address public v2_token;","after":"address public immutable v2_token;","contract":"KumaMigrate","time":0}]}

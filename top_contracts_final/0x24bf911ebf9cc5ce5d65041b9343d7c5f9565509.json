@@ -1,0 +1,1 @@
+{"time":147,"results":[{"type":"immutable-restrict-modification ","before":"bytes32 public baseNode;","after":"bytes32 public immutable baseNode;","contract":"BaseRegistrarImplementation","time":0}]}

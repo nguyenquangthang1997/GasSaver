@@ -1,0 +1,1 @@
+{"time":97,"results":[{"type":"constant-restrict-modification  ","before":"uint256 UINT256_MAX = 2**256 - 1;","after":"uint256 constant UINT256_MAX = 2**256 - 1;","contract":"Rebalance","time":0}]}

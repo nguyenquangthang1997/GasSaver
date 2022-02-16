@@ -1,0 +1,1 @@
+{"time":40,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public totalSupply = 50*10**26;","after":"uint256 public constant totalSupply = 50*10**26;","contract":"MSATToken","time":0}]}

@@ -1,0 +1,1 @@
+{"time":24,"results":[{"type":"constant-restrict-modification  ","before":"uint256 totalSupply_ = 1500000000 * 10 ** uint256(decimals);","after":"uint256 constant totalSupply_ = 1500000000 * 10 ** uint256(decimals);","contract":"EthereumJS","time":0}]}

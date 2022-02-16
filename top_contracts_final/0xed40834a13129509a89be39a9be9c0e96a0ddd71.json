@@ -1,0 +1,1 @@
+{"time":82,"results":[{"type":"constant-restrict-modification  ","before":"string public version = \"MMT_0.2\";","after":"string public constant version = \"MMT_0.2\";","contract":"MiniMeToken","time":0}]}

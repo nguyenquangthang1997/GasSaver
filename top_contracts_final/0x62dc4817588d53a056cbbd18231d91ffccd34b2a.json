@@ -1,0 +1,1 @@
+{"time":53,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public cap = 10000000 * 10 ** 18;","after":"uint256 public constant cap = 10000000 * 10 ** 18;","contract":"DHVToken","time":1}]}

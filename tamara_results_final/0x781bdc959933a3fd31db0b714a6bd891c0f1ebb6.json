@@ -1,0 +1,1 @@
+{"time":106,"results":[{"type":"constant-restrict-modification  ","before":" string public name = 'Wrapped NFT'","after":" string public constant name = 'Wrapped NFT'","contract":"WrappedNFT","time":0},{"type":"constant-restrict-modification  ","before":" string public symbol = 'WNFT'","after":" string public constant symbol = 'WNFT'","contract":"WrappedNFT","time":0}]}

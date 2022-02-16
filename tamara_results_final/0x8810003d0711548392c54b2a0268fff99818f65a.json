@@ -1,0 +1,1 @@
+{"time":826,"results":[{"type":"struct-data-arrangement ","before":"\nlatedFeeMap\n struct Escro\n  bool exists;\nool disput\n  bytes32 symbo","after":"  bool exists;\nool disput\n  bytes32 symbo\nlatedFeeMap\n struct Escro\n","contract":"EscrowERC20","time":0}]}

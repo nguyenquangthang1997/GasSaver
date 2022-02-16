@@ -1,0 +1,1 @@
+{"time":42,"results":[{"type":"constant-restrict-modification  ","before":"uint public requiredBlockConfirmations = 8;","after":"uint public constant requiredBlockConfirmations = 8;","contract":"ForeignBridge","time":0}]}

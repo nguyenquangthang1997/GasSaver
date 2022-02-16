@@ -1,0 +1,1 @@
+{"time":149,"results":[{"type":"constant-restrict-modification  ","before":"   uint256 public wagyuStartTime = 16436412","after":"   uint256 public constant wagyuStartTime = 16436412","contract":"GhidorahGodz","time":1}]}

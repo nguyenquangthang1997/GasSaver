@@ -1,0 +1,1 @@
+{"time":98,"results":[{"type":"immutable-restrict-modification ","before":"uint256 private totalAllocPoint = 0;","after":"uint256 private immutable totalAllocPoint = 0;","contract":"StakingPool","time":0}]}

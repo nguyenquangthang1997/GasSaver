@@ -1,0 +1,1 @@
+{"time":98,"results":[{"type":"constant-restrict-modification  ","before":"bool public isExchangeListed = false;","after":"bool public constant isExchangeListed = false;","contract":"PegToken","time":1},{"type":"constant-restrict-modification  ","before":"uint256 totalInPositions =0;","after":"uint256 constant totalInPositions =0;","contract":"PegToken","time":1}]}

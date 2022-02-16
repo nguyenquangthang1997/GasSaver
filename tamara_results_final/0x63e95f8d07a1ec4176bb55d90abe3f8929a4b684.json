@@ -1,0 +1,1 @@
+{"time":32,"results":[{"type":"constant-restrict-modification  ","before":"string public symbol=\"ETJ\";","after":"string public constant symbol=\"ETJ\";","contract":"ETJToken","time":0}]}

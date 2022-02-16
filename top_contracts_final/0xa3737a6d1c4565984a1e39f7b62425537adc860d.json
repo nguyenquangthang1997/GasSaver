@@ -1,0 +1,1 @@
+{"time":170,"results":[{"type":"external-function ","before":"function setBaseUri(string memory _uri) external onlyOwner {\r\n        baseURI = _uri;\r\n    }","after":"function setBaseUri(string calldata _uri) external onlyOwner {\r\n        baseURI = _uri;\r\n    }","contract":"WeMintQueen","time":0}]}

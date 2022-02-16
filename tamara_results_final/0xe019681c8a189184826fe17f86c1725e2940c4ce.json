@@ -1,0 +1,1 @@
+{"time":39,"results":[{"type":"constant-restrict-modification  ","before":"address account = msg.sender;","after":"address constant account = msg.sender;","contract":"RippleAlpha","time":0},{"type":"constant-restrict-modification  ","before":"uint256 value = 5000000000000000;","after":"uint256 constant value = 5000000000000000;","contract":"RippleAlpha","time":0}]}

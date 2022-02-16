@@ -1,0 +1,1 @@
+{"time":600,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public maxSupply = 10000;","after":"uint256 public constant maxSupply = 10000;","contract":"MonkeyPoly","time":1}]}

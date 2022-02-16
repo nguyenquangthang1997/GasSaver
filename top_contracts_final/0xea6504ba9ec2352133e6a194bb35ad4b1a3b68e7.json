@@ -1,0 +1,1 @@
+{"time":120,"results":[{"type":"external-function ","before":"function setBaseURI(string memory _newURI) public onlyOwner {\n        _uri = _newURI;\n    }","after":"function setBaseURI(string calldata _newURI) public onlyOwner {\n        _uri = _newURI;\n    }","contract":"FusionApe","time":0}]}

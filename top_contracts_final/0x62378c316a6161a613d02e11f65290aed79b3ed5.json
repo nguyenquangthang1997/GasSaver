@@ -1,0 +1,1 @@
+{"time":160,"results":[{"type":"immutable-restrict-modification ","before":"bool public doPartialAction;","after":"bool public immutable doPartialAction;","contract":"CollateralizationOracleKeeper","time":1}]}

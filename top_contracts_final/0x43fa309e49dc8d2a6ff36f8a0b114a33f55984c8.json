@@ -1,0 +1,1 @@
+{"time":63,"results":[{"type":"immutable-restrict-modification ","before":"address public sueiBianDAOAddress;","after":"address public immutable sueiBianDAOAddress;","contract":"SueiBianDispenser","time":0}]}

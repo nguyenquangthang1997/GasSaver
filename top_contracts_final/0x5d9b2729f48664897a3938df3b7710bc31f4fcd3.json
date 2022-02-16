@@ -1,0 +1,1 @@
+{"time":176,"results":[{"type":"constant-restrict-modification  ","before":"uint256 private manualBurnFrequency = 30 minutes;","after":"uint256 private constant manualBurnFrequency = 30 minutes;","contract":"ShibarateInu","time":0}]}

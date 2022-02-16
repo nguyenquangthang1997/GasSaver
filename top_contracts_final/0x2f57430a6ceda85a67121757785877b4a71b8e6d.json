@@ -1,0 +1,1 @@
+{"time":117,"results":[{"type":"immutable-restrict-modification ","before":"address public founder;","after":"address public immutable founder;","contract":"DFPgov","time":0}]}

@@ -1,0 +1,1 @@
+{"time":187,"results":[{"type":"immutable-restrict-modification ","before":"  uint128 public numOfThisBlockchai","after":"  uint128 public numOfThisBlockchai","contract":"MainContract","time":0}]}

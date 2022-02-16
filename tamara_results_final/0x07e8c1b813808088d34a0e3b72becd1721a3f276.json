@@ -1,0 +1,1 @@
+{"time":75,"results":[{"type":"struct-data-arrangement ","before":"\nuint disputeID\naddress arbitrator\nbytes32 tokenID\nbool inAppealPeriod","after":"uint disputeID\nbytes32 tokenID\naddress arbitrator\nbool inAppealPeriod\n","contract":"ArbitrableTCRView","time":0}]}

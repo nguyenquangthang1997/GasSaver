@@ -1,0 +1,1 @@
+{"time":95,"results":[{"type":"constant-restrict-modification  ","before":"uint8 public total = 250;","after":"uint8 public constant total = 250;","contract":"SuperHiBasicSponsor","time":1},{"type":"immutable-restrict-modification ","before":"address public safeAddress;","after":"address public immutable safeAddress;","contract":"SuperHiBasicSponsor","time":1}]}

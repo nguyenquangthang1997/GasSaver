@@ -1,0 +1,1 @@
+{"time":635,"results":[{"type":"constant-restrict-modification  ","before":"address public devAddress = 0xC51a2f1f1b0BB69D744fA07E3561a52efcCFA1c3;","after":"address public constant devAddress = 0xC51a2f1f1b0BB69D744fA07E3561a52efcCFA1c3;","contract":"Metathugs3d","time":1}]}

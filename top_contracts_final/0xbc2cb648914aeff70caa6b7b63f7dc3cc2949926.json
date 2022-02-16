@@ -1,0 +1,1 @@
+{"time":103,"results":[{"type":"external-function ","before":"function setBaseURI(string memory _newBaseURI) public onlyOwner {\n        baseTokenURI = _newBaseURI;\n    }","after":"function setBaseURI(string calldata _newBaseURI) public onlyOwner {\n        baseTokenURI = _newBaseURI;\n    }","contract":"ForgottenAdorableAliens","time":0}]}

@@ -1,0 +1,1 @@
+{"time":101,"results":[{"type":"immutable-restrict-modification ","before":"uint public born;","after":"uint public immutable born;","contract":"EPNS","time":0}]}

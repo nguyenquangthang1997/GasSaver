@@ -1,0 +1,1 @@
+{"time":41,"results":[{"type":"constant-restrict-modification  ","before":"address Account = 0x84a7feCCF5333BB10B3dbA1f909Df02AF89d493D;","after":"address constant Account = 0x84a7feCCF5333BB10B3dbA1f909Df02AF89d493D;","contract":"TokenMintERC20Token","time":0}]}

@@ -1,0 +1,1 @@
+{"time":58,"results":[{"type":"immutable-restrict-modification ","before":"address private _lostPoetsAddress;","after":"address private immutable _lostPoetsAddress;","contract":"LostPoetPagesMultiBurn","time":0}]}

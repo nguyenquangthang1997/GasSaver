@@ -1,0 +1,1 @@
+{"time":315,"results":[{"type":"constant-restrict-modification  ","before":"uint256 private tokenPrice = 30000000000000000;","after":"uint256 private constant tokenPrice = 30000000000000000;","contract":"OnChainSeasides","time":0}]}

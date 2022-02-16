@@ -1,0 +1,1 @@
+{"time":17,"results":[{"type":"constant-restrict-modification  ","before":"uint public MinSum = 1 ether;","after":"uint public constant MinSum = 1 ether;","contract":"Piggy_bank","time":0}]}

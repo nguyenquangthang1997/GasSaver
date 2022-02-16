@@ -1,0 +1,1 @@
+{"time":207,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public maxTotalSupply = 2400;","after":"uint256 public constant maxTotalSupply = 2400;","contract":"Cryptock","time":0},{"type":"constant-restrict-modification  ","before":"uint256 public maxGiftSupply = 100;","after":"uint256 public constant maxGiftSupply = 100;","contract":"Cryptock","time":0}]}

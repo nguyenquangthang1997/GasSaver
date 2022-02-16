@@ -1,0 +1,1 @@
+{"time":48,"results":[{"type":"constant-restrict-modification  ","before":"uint256 internal fee = 1;","after":"uint256 internal constant fee = 1;","contract":"PyramidionCryptocurrency","time":0}]}

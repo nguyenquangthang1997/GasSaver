@@ -1,0 +1,1 @@
+{"time":45,"results":[{"type":"constant-restrict-modification  ","before":"address public multiSigAdd = 0x03872114a6581E035Da8387159B00197EDe5D0cb;","after":"address public constant multiSigAdd = 0x03872114a6581E035Da8387159B00197EDe5D0cb;","contract":"AGV","time":0}]}

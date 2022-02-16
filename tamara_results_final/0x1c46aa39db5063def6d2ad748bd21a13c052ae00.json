@@ -1,0 +1,1 @@
+{"time":25,"results":[{"type":"constant-restrict-modification  ","before":"bytes32 public name = \"Authority\";","after":"bytes32 public constant name = \"Authority\";","contract":"CdcAuthority","time":0}]}

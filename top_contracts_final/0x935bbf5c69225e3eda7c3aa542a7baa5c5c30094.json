@@ -1,0 +1,1 @@
+{"time":126,"results":[{"type":"constant-restrict-modification  ","before":"address public ETHER_ADDRESS = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;","after":"address public constant ETHER_ADDRESS = 0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE;","contract":"Swapper","time":0}]}

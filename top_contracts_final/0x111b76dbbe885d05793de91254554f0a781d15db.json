@@ -1,0 +1,1 @@
+{"time":123,"results":[{"type":"constant-restrict-modification  ","before":"string public name = \"EtheriaExchangeXL\";","after":"string public constant name = \"EtheriaExchangeXL\";","contract":"EtheriaExchangeXL","time":0}]}

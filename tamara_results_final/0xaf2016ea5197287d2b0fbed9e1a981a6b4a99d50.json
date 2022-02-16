@@ -1,0 +1,1 @@
+{"time":3,"results":[{"type":"external-function ","before":"function set(string memory x) public{\n    hash = abi.encode(keccak256(abi.encode(x)));\n  }","after":"function set(string calldata x) public{\n    hash = abi.encode(keccak256(abi.encode(x)));\n  }","contract":"HashStorage","time":0}]}

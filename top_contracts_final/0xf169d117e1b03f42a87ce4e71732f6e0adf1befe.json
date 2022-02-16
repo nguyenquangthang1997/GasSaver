@@ -1,0 +1,1 @@
+{"time":125,"results":[{"type":"external-function ","before":"function setContractURI(string memory newContractURI) external onlyOwner {\n        contractURI = newContractURI;\n    }","after":"function setContractURI(string calldata newContractURI) external onlyOwner {\n        contractURI = newContractURI;\n    }","contract":"JollyElves","time":0}]}

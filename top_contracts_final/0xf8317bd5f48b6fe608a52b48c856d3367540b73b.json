@@ -1,0 +1,1 @@
+{"time":756,"results":[{"type":"immutable-restrict-modification ","before":"address public weth;","after":"address public immutable weth;","contract":"AlchemistEth","time":1}]}

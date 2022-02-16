@@ -1,0 +1,1 @@
+{"time":45,"results":[{"type":"constant-restrict-modification  ","before":"uint256 INITIAL_SUPPLY = 20643435050000000000000000;","after":"uint256 constant INITIAL_SUPPLY = 20643435050000000000000000;","contract":"Xenium","time":0}]}

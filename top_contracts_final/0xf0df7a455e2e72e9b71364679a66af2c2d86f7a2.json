@@ -1,0 +1,1 @@
+{"time":201,"results":[{"type":"immutable-restrict-modification ","before":"address private _uniswapV2PairAddress;","after":"address private immutable _uniswapV2PairAddress;","contract":"MetaVault","time":1}]}

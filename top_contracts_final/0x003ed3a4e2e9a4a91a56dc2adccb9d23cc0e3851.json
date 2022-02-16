@@ -1,0 +1,1 @@
+{"time":118,"results":[{"type":"external-function ","before":"function setBaseURI(string memory uri) external {\n        _apiURI = uri;\n    }","after":"function setBaseURI(string calldata uri) external {\n        _apiURI = uri;\n    }","contract":"GHGHouse","time":0}]}

@@ -1,0 +1,1 @@
+{"time":58,"results":[{"type":"de-morgan-condition ","before":"!saleHardCapReached() && !tokenSaleClosed","after":"!(saleHardCapReached() && tokenSaleClosed)","loc":{"start":{"line":274,"column":15},"end":{"line":274,"column":41}},"contract":"FiduciaToken","time":0}]}

@@ -1,0 +1,1 @@
+{"time":122,"results":[{"type":"external-function ","before":"function setBaseURI(string memory _newBaseURI) public onlyOwner {\n        baseURI = _newBaseURI;\n    }","after":"function setBaseURI(string calldata _newBaseURI) public onlyOwner {\n        baseURI = _newBaseURI;\n    }","contract":"MutantFloki","time":0}]}

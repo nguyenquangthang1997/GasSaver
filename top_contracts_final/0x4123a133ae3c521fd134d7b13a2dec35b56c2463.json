@@ -1,0 +1,1 @@
+{"time":66,"results":[{"type":"immutable-restrict-modification ","before":"uint256 private _totalSupply;","after":"uint256 private immutable _totalSupply;","contract":"QredoToken","time":1}]}

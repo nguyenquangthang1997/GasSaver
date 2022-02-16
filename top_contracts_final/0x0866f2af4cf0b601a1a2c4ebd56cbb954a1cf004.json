@@ -1,0 +1,1 @@
+{"time":257,"results":[{"type":"immutable-restrict-modification ","before":"address private _nftAddr;","after":"address private immutable _nftAddr;","contract":"LeedoNftVault","time":0}]}

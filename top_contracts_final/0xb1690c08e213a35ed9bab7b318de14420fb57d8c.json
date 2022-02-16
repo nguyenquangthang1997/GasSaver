@@ -1,0 +1,1 @@
+{"time":58,"results":[{"type":"constant-restrict-modification  ","before":"bool public isSaleClockAuction = true;","after":"bool public constant isSaleClockAuction = true;","contract":"SaleClockAuction","time":0}]}

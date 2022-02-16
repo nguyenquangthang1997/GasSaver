@@ -1,0 +1,1 @@
+{"time":72,"results":[{"type":"constant-restrict-modification  ","before":"string public version = 'MMT_0.1';","after":"string public constant version = 'MMT_0.1';","contract":"CND","time":0}]}

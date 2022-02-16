@@ -1,0 +1,1 @@
+{"time":173,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseURI) external onlyOwner {\n        baseTokenURI = baseURI;\n    }","after":"function setBaseURI(string calldata baseURI) external onlyOwner {\n        baseTokenURI = baseURI;\n    }","contract":"MOONaLisa","time":0}]}

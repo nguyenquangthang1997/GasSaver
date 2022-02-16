@@ -1,0 +1,1 @@
+{"time":46,"results":[{"type":"constant-restrict-modification  ","before":"string public name = \"Lafite Token\";","after":"string public constant name = \"Lafite Token\";","contract":"Lafite","time":0},{"type":"constant-restrict-modification  ","before":"string public symbol = \"LPP\";","after":"string public constant symbol = \"LPP\";","contract":"Lafite","time":0}]}

@@ -1,0 +1,1 @@
+{"time":70,"results":[{"type":"struct-data-arrangement ","before":"\naddress sender\nuint value\nbytes data\nbytes4 sig","after":"uint value\nbytes data\naddress sender\nbytes4 sig\n","contract":"ContractReceiver","time":0}]}

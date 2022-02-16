@@ -1,0 +1,1 @@
+{"time":129,"results":[{"type":"external-function ","before":"\n\n\tfunction updateURI(string memory newURI) public onlyOwner {\n\t\t_setBaseURI(newURI);","after":"\n\n\tfunction updateURI(string calldata newURI) public onlyOwner {\n\t\t_setBaseURI(newURI);","contract":"Badge","time":0}]}

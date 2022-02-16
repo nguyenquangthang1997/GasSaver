@@ -1,0 +1,1 @@
+{"time":109,"results":[{"type":"constant-restrict-modification  ","before":"uint256  public  decimals = 18;","after":"uint256  public  constant decimals = 18;","contract":"DSToken","time":0}]}

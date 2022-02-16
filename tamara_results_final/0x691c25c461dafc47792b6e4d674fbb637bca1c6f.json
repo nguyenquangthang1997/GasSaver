@@ -1,0 +1,1 @@
+{"time":53,"results":[{"type":"constant-restrict-modification  ","before":"e {\n    string public version ","after":"e {\n    string public constant version ","contract":"iBlockchainBankAndTrustToken","time":0}]}

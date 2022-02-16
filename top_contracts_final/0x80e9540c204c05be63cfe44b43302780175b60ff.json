@@ -1,0 +1,1 @@
+{"time":161,"results":[{"type":"constant-restrict-modification  ","before":"uint public PERIOD_LENGTH = 60 days;","after":"uint public constant PERIOD_LENGTH = 60 days;","contract":"OpenAlexalO","time":0},{"type":"constant-restrict-modification  ","before":"uint referrer1Limit = 2;","after":"uint constant referrer1Limit = 2;","contract":"OpenAlexalO","time":0}]}

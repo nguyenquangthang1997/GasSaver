@@ -1,0 +1,1 @@
+{"time":30,"results":[{"type":"constant-restrict-modification  ","before":"uint public totalTokenSupply = 10**27;","after":"uint public constant totalTokenSupply = 10**27;","contract":"SesameOpenToken","time":0}]}

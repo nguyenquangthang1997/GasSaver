@@ -1,0 +1,1 @@
+{"time":119,"results":[{"type":"constant-restrict-modification  ","before":" string public name = \"Ephimera\"","after":" string public constant name = \"Ephimera\"","contract":"EphimeraToken","time":1},{"type":"constant-restrict-modification  ","before":" string public symbol = \"EPH\"","after":" string public constant symbol = \"EPH\"","contract":"EphimeraToken","time":1}]}

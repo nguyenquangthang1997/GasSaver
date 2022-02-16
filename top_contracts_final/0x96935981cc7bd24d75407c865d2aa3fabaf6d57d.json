@@ -1,0 +1,1 @@
+{"time":182,"results":[{"type":"immutable-restrict-modification ","before":"address payable private _servicesContractImpl;","after":"address payable private immutable _servicesContractImpl;","contract":"StakefishServicesContractFactory","time":0}]}

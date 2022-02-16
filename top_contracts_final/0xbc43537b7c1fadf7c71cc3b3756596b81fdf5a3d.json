@@ -1,0 +1,1 @@
+{"time":35,"results":[{"type":"immutable-restrict-modification ","before":"uint256 private _decimals;","after":"uint256 private immutable _decimals;","contract":"Aonesquaretoken","time":0}]}

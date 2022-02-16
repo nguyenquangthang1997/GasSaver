@@ -1,0 +1,1 @@
+{"time":132,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseURI) public onlyOwner {\n        _baseTokenURI = baseURI;\n    }","after":"function setBaseURI(string calldata baseURI) public onlyOwner {\n        _baseTokenURI = baseURI;\n    }","contract":"Animathereum","time":0}]}

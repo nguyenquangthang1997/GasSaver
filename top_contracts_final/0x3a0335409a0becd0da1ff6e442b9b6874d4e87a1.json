@@ -1,0 +1,1 @@
+{"time":161,"results":[{"type":"external-function ","before":"function setTokenExtension(string memory extension) public onlyOwner {\n    _baseTokenExtension = extension;\n  }","after":"function setTokenExtension(string calldata extension) public onlyOwner {\n    _baseTokenExtension = extension;\n  }","contract":"Template","time":0}]}

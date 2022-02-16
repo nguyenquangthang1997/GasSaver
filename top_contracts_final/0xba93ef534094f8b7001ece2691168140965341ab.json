@@ -1,0 +1,1 @@
+{"time":60,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public totalSupply =  5000000000*10**uint256(decimals);","after":"uint256 public constant totalSupply =  5000000000*10**uint256(decimals);","contract":"CustomToken","time":0}]}

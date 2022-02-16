@@ -1,0 +1,1 @@
+{"time":29,"results":[{"type":"constant-restrict-modification  ","before":"uint public totalSupply = 1000*10**26;","after":"uint public constant totalSupply = 1000*10**26;","contract":"CBCToken","time":0}]}

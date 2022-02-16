@@ -1,0 +1,1 @@
+{"time":241,"results":[{"type":"struct-data-arrangement ","before":"\n  uint32 ledger\n  address accou\n  address ass\n  uint quanti\n  uint32 non\n  uint32 designatedGblo\n  bytes32 ha","after":"  uint quanti\n  bytes32 ha\n  address accou\n  address ass\n  uint32 ledger\n  uint32 non\n  uint32 designatedGblo\n","contract":"WithDepositCommitmentRecord","time":0}]}

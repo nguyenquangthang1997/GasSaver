@@ -1,0 +1,1 @@
+{"time":111,"results":[{"type":"constant-restrict-modification  ","before":"uint public maxPerTransaction = 25;","after":"uint public constant maxPerTransaction = 25;","contract":"CoolPixels","time":1},{"type":"constant-restrict-modification  ","before":"uint public freeSupplyLimit = 1000;","after":"uint public constant freeSupplyLimit = 1000;","contract":"CoolPixels","time":1}]}

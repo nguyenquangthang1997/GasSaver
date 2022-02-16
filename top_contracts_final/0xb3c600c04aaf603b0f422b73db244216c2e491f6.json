@@ -1,0 +1,1 @@
+{"time":46,"results":[{"type":"immutable-restrict-modification ","before":"address public converter;","after":"address public immutable converter;","contract":"LinearVesting","time":0}]}

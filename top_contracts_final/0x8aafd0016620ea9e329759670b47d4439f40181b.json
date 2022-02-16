@@ -1,0 +1,1 @@
+{"time":39,"results":[{"type":"immutable-restrict-modification ","before":"address owner;","after":"address immutable owner;","contract":"kaibaklaim","time":0}]}

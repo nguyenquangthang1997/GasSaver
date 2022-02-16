@@ -1,0 +1,1 @@
+{"time":110,"results":[{"type":"constant-restrict-modification  ","before":"bool publicSale = true;","after":"bool constant publicSale = true;","contract":"TheWhiteLady","time":0}]}

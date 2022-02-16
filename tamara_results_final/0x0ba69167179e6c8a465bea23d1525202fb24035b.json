@@ -1,0 +1,1 @@
+{"time":160,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public REFERRAL_BONUS = 100000000000000000000;","after":"uint256 public constant REFERRAL_BONUS = 100000000000000000000;","contract":"ReferralTracker","time":0}]}

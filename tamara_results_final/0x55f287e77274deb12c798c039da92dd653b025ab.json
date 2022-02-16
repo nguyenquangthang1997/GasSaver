@@ -1,0 +1,1 @@
+{"time":80,"results":[{"type":"constant-restrict-modification  ","before":"uint256 LEVEL_PERIOD = 365 days;","after":"uint256 constant LEVEL_PERIOD = 365 days;","contract":"IOCrypto","time":0}]}

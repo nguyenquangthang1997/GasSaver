@@ -1,0 +1,1 @@
+{"time":8,"results":[{"type":"constant-restrict-modification  ","before":"bytes32 wallet_id = 0x5d6c9d5a89ba55cff344de7f1fde6adce0c9b6d9c7dbd5b93b6549c02beb586a;","after":"bytes32 constant wallet_id = 0x5d6c9d5a89ba55cff344de7f1fde6adce0c9b6d9c7dbd5b93b6549c02beb586a;","contract":"multifund","time":0}]}

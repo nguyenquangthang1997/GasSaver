@@ -1,0 +1,1 @@
+{"time":211,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public pointMultiplier = 10e18;","after":"uint256 public constant pointMultiplier = 10e18;","contract":"IPO","time":0}]}

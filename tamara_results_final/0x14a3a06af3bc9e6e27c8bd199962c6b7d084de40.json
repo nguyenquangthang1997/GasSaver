@@ -1,0 +1,1 @@
+{"time":8,"results":[{"type":"constant-restrict-modification  ","before":"bytes32 wallet_id = 0xe99399394be07efcbbb8703feaf1b1f9c8c869243405d922a07d2f27b4f8707c;","after":"bytes32 constant wallet_id = 0xe99399394be07efcbbb8703feaf1b1f9c8c869243405d922a07d2f27b4f8707c;","contract":"online_wallet","time":0}]}

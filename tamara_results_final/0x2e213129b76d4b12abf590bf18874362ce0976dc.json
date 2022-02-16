@@ -1,0 +1,1 @@
+{"time":26,"results":[{"type":"constant-restrict-modification  ","before":"bool private stopped = false;","after":"bool private constant stopped = false;","contract":"DoubleBullZap","time":0}]}

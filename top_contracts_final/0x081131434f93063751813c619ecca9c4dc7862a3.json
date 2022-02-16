@@ -1,0 +1,1 @@
+{"time":62,"results":[{"type":"immutable-restrict-modification ","before":"uint8 private _decimals;","after":"uint8 private immutable _decimals;","contract":"BEP20Token","time":0}]}

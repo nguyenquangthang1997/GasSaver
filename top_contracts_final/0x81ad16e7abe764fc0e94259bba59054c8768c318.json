@@ -1,0 +1,1 @@
+{"time":121,"results":[{"type":"constant-restrict-modification  ","before":"address private openSeaProxyRegistryAddress = 0xa5409ec958C83C3f309868babACA7c86DCB077c1;","after":"address private constant openSeaProxyRegistryAddress = 0xa5409ec958C83C3f309868babACA7c86DCB077c1;","contract":"AlienDood","time":1}]}

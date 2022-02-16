@@ -1,0 +1,1 @@
+{"time":122,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public immutable MAX_CLAIMS = 2;","after":"uint256 public immutable constant MAX_CLAIMS = 2;","contract":"Cityverse","time":0}]}

@@ -1,0 +1,1 @@
+{"time":46,"results":[{"type":"immutable-restrict-modification ","before":"address ERC721contract;","after":"address immutable ERC721contract;","contract":"DMT_ERC20","time":0}]}

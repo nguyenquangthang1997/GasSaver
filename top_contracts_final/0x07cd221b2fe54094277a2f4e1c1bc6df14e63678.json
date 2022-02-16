@@ -1,0 +1,1 @@
+{"time":147,"results":[{"type":"immutable-restrict-modification ","before":"address ownerAccountAddress;","after":"address immutable ownerAccountAddress;","contract":"Cryptorastas","time":0}]}

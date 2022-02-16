@@ -1,0 +1,1 @@
+{"time":154,"results":[{"type":"constant-restrict-modification  ","before":"string public baseExtension = \".json\";","after":"string public constant baseExtension = \".json\";","contract":"LarvaFrens","time":0}]}

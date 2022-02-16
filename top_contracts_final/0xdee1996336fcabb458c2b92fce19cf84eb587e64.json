@@ -1,0 +1,1 @@
+{"time":139,"results":[{"type":"external-function ","before":"function updateBaseURI(string memory newbaseURI) public onlyOwner {\n        _baseTokenURI = newbaseURI;\n    }","after":"function updateBaseURI(string calldata newbaseURI) public onlyOwner {\n        _baseTokenURI = newbaseURI;\n    }","contract":"Thr33zi3s","time":0}]}

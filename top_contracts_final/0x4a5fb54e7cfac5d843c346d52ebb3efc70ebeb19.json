@@ -1,0 +1,1 @@
+{"time":118,"results":[{"type":"external-function ","before":"function setBaseURL(string memory arg) public onlyOwner {\n        _base_url = arg;\n    }","after":"function setBaseURL(string calldata arg) public onlyOwner {\n        _base_url = arg;\n    }","contract":"DoodlePups","time":0}]}

@@ -1,0 +1,1 @@
+{"time":175,"results":[{"type":"external-function ","before":"function updateAddress(string memory _id, address _new) public onlyOwner() {\n    team[_id] = _new;\n  }","after":"function updateAddress(string calldata _id, address _new) public onlyOwner() {\n    team[_id] = _new;\n  }","contract":"PineapplesDayOut","time":0}]}

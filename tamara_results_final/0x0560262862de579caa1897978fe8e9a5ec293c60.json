@@ -1,0 +1,1 @@
+{"time":53,"results":[{"type":"constant-restrict-modification  ","before":"uint256 private basePercent = 200;","after":"uint256 private constant basePercent = 200;","contract":"Staking","time":0}]}

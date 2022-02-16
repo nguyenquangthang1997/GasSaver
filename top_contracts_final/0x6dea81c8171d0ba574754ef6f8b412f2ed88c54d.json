@@ -1,0 +1,1 @@
+{"time":757,"results":[{"type":"constant-restrict-modification  ","before":"uint internal _1_MILLION = 1e24;","after":"uint internal constant _1_MILLION = 1e24;","contract":"LQTYToken","time":0}]}

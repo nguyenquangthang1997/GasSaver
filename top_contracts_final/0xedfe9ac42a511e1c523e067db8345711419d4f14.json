@@ -1,0 +1,1 @@
+{"time":165,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public limit = 10000 ether;","after":"uint256 public constant limit = 10000 ether;","contract":"Farm","time":0},{"type":"constant-restrict-modification  ","before":"uint256 public limit = 10000 ether;","after":"uint256 public constant limit = 10000 ether;","contract":"FarmV2","time":0}]}

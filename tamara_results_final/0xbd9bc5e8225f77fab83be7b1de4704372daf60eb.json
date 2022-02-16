@@ -1,0 +1,1 @@
+{"time":53,"results":[{"type":"constant-restrict-modification  ","before":"uint idleTime = 7776000;","after":"uint constant idleTime = 7776000;","contract":"MyJobBot","time":0}]}

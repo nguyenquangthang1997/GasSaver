@@ -1,0 +1,1 @@
+{"time":300,"results":[{"type":"immutable-restrict-modification ","before":"address public escapeContract;","after":"address public immutable escapeContract;","contract":"ClipperPool","time":0}]}

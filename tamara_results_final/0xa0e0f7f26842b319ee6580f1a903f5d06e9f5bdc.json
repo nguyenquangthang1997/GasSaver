@@ -1,0 +1,1 @@
+{"time":2,"results":[{"type":"external-function ","before":"function store(string memory data) public {\n        emit Data(msg.sender, data);\n    }","after":"function store(string calldata data) public {\n        emit Data(msg.sender, data);\n    }","contract":"Storage","time":0}]}

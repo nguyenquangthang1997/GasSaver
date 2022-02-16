@@ -1,0 +1,1 @@
+{"time":94,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public maxRewardPerBlock;","after":"uint256 public immutable maxRewardPerBlock;","contract":"BentMasterChef","time":0},{"type":"immutable-restrict-modification ","before":"uint256 public startBlock;","after":"uint256 public immutable startBlock;","contract":"BentMasterChef","time":0}]}

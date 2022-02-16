@@ -1,0 +1,1 @@
+{"time":115,"results":[{"type":"immutable-restrict-modification ","before":"address private withdrawalWallet;","after":"address private immutable withdrawalWallet;","contract":"Discodogs","time":1}]}

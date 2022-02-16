@@ -1,0 +1,1 @@
+{"time":114,"results":[{"type":"external-function ","before":" // increment id counter\n      _tokenIds.increment();\n    }\n  }\n\n  function teamClaim() public onlyOwner {\n    require(t","after":" // increment id counter\n      _tokenIds.increment();\n    }\n  }\n\n  function teamClaim() public onlyOwner {\n    require(t","contract":"ShaqGivesBack","time":0}]}

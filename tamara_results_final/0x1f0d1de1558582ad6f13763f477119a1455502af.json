@@ -1,0 +1,1 @@
+{"time":133,"results":[{"type":"constant-restrict-modification  ","before":"address private etherAddress = 0x0;","after":"address private constant etherAddress = 0x0;","contract":"Exchange","time":1}]}

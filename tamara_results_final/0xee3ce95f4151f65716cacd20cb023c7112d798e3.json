@@ -1,0 +1,1 @@
+{"time":63,"results":[{"type":"constant-restrict-modification  ","before":"uint256 MONTH = 2592000;","after":"uint256 constant MONTH = 2592000;","contract":"INMGToken","time":0}]}

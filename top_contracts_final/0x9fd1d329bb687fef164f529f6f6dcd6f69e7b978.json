@@ -1,0 +1,1 @@
+{"time":53,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public lockTime = 23 hours;","after":"uint256 public constant lockTime = 23 hours;","contract":"PlasmaStaking","time":0}]}

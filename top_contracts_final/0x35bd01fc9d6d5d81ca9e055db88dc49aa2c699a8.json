@@ -1,0 +1,1 @@
+{"time":42,"results":[{"type":"immutable-restrict-modification ","before":"address public dao_admin;","after":"address public immutable dao_admin;","contract":"FriendsWithBenefits","time":1}]}

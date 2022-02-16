@@ -1,0 +1,1 @@
+{"time":89,"results":[{"type":"struct-data-arrangement ","before":"\nbool valid\nuint256 amount\nuint8 lockupPeriod\nbool compound\nuint256 timestamp\nuint256 rewards","after":"uint256 amount\nuint256 timestamp\nuint256 rewards\nbool valid\nuint8 lockupPeriod\nbool compound\n","contract":"LitionPool","time":0}]}

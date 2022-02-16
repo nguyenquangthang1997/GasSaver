@@ -1,0 +1,1 @@
+{"time":158,"results":[{"type":"constant-restrict-modification  ","before":"uint REFERRER_1_STAR_LIMIT = 3;","after":"uint constant REFERRER_1_STAR_LIMIT = 3;","contract":"ETHGain","time":0}]}

@@ -1,0 +1,1 @@
+{"time":222,"results":[{"type":"struct-data-arrangement ","before":"\ns;\n\n    str\n {\n        bo\n\n        b\ned;\n        uin","after":"\n        b\ned;\n        uin\ns;\n\n    str\n {\n        bo\n","contract":"EscrowETH","time":1}]}

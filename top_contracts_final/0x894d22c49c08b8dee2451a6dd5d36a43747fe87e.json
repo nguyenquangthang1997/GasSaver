@@ -1,0 +1,1 @@
+{"time":536,"results":[{"type":"immutable-restrict-modification ","before":"address public strp;","after":"address public immutable strp;","contract":"Vesting","time":0}]}

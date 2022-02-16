@@ -1,0 +1,1 @@
+{"time":64,"results":[{"type":"constant-restrict-modification  ","before":"uint public totalSupply = 1*10**23;","after":"uint public constant totalSupply = 1*10**23;","contract":"T3Token","time":0}]}

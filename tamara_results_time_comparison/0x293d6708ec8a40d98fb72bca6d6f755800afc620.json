@@ -1,0 +1,1 @@
+{"time":107,"results":[{"type":"de-morgan-condition ","before":"!_isStringEmpty(avatar.options.face) &&\n            !_isStringEmpty(avatar.options.eyes)","after":"!(_isStringEmpty(avatar.options.face) &&\n            _isStringEmpty(avatar.options.eyes))","loc":{"start":{"line":959,"column":12},"end":{"line":960,"column":47}},"contract":"Avatars","time":0}]}

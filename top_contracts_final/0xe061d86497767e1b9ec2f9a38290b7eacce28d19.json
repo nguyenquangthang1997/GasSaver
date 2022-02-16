@@ -1,0 +1,1 @@
+{"time":116,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public maxSupply = 3333;","after":"uint256 public constant maxSupply = 3333;","contract":"NFT","time":0}]}

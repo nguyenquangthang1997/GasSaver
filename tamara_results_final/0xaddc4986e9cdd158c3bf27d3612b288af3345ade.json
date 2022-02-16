@@ -1,0 +1,1 @@
+{"time":97,"results":[{"type":"constant-restrict-modification  ","before":" address public wizardGuildAddress = 0x0d8c864DA1985525e0af0acBEEF6562881827bd5","after":" address public constant wizardGuildAddress = 0x0d8c864DA1985525e0af0acBEEF6562881827bd5","contract":"CheezyExchange","time":1}]}

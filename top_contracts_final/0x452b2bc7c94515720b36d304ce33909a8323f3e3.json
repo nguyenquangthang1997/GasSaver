@@ -1,0 +1,1 @@
+{"time":111,"results":[{"type":"constant-restrict-modification  ","before":"uint256 internal _totalColors = 16777216;","after":"uint256 internal constant _totalColors = 16777216;","contract":"Hedgie","time":0}]}

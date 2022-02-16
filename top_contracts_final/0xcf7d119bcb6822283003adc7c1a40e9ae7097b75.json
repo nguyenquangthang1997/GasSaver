@@ -1,0 +1,1 @@
+{"time":105,"results":[{"type":"constant-restrict-modification  ","before":"string public builtOn = \"https://vittominacori.github.io/erc20-generator\";","after":"string public constant builtOn = \"https://vittominacori.github.io/erc20-generator\";","contract":"ERC20Token","time":0}]}

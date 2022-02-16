@@ -1,0 +1,1 @@
+{"time":117,"results":[{"type":"immutable-restrict-modification ","before":"uint8 internal _decimals;","after":"uint8 internal immutable _decimals;","contract":"gOHM","time":1}]}

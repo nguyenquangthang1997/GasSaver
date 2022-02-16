@@ -1,0 +1,1 @@
+{"time":60,"results":[{"type":"constant-restrict-modification  ","before":"uint8 private _decimals = 18;","after":"uint8 private constant _decimals = 18;","contract":"ERC20","time":0}]}

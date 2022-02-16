@@ -1,0 +1,1 @@
+{"time":100,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public auctionCounter = 0;","after":"uint256 public constant auctionCounter = 0;","contract":"AxonsAuctionHouse","time":0}]}

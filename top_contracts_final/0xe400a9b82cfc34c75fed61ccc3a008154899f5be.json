@@ -1,0 +1,1 @@
+{"time":135,"results":[{"type":"immutable-restrict-modification ","before":"address public comp;","after":"address public immutable comp;","contract":"CompoundRewardToken","time":1},{"type":"immutable-restrict-modification ","before":"address public override underlying;","after":"address public override immutable underlying;","contract":"CompoundRewardToken","time":1}]}

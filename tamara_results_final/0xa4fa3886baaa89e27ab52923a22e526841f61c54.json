@@ -1,0 +1,1 @@
+{"time":82,"results":[{"type":"constant-restrict-modification  ","before":"uint public offerDAIFactor = 700;","after":"uint public constant offerDAIFactor = 700;","contract":"ShowEth2DAI","time":0}]}

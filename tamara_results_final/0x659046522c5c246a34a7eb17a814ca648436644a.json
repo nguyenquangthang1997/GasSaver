@@ -1,0 +1,1 @@
+{"time":79,"results":[{"type":"constant-restrict-modification  ","before":" address public chainFaceCoreAddress = 0x91047Abf3cAb8da5A9515c8750Ab33B4f1560a7A","after":" address public constant chainFaceCoreAddress = 0x91047Abf3cAb8da5A9515c8750Ab33B4f1560a7A","contract":"WrappedCF","time":1}]}

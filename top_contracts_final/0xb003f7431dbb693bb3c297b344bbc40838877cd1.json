@@ -1,0 +1,1 @@
+{"time":121,"results":[{"type":"immutable-restrict-modification ","before":"address wrappedNative;","after":"address immutable wrappedNative;","contract":"OKLGDividendDistributor","time":0}]}

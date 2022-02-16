@@ -1,0 +1,1 @@
+{"time":94,"results":[{"type":"external-function ","before":"function setBaseURI(string memory _baseUri) external onlyOwner {\n        baseUri = _baseUri;\n    }","after":"function setBaseURI(string calldata _baseUri) external onlyOwner {\n        baseUri = _baseUri;\n    }","contract":"StickDix","time":0}]}

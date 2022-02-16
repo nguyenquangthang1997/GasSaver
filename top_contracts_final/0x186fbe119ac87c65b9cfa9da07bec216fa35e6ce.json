@@ -1,0 +1,1 @@
+{"time":70,"results":[{"type":"immutable-restrict-modification ","before":"address public superRareV2Contract;","after":"address public immutable superRareV2Contract;","contract":"SuperRareAdmin","time":0}]}

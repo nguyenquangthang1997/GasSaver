@@ -1,0 +1,1 @@
+{"time":109,"results":[{"type":"constant-restrict-modification  ","before":"uint256 private _maxMint = 30;","after":"uint256 private constant _maxMint = 30;","contract":"FlyFrogs","time":0},{"type":"constant-restrict-modification  ","before":"uint256 private _price = 22 * 10**15;","after":"uint256 private constant _price = 22 * 10**15;","contract":"FlyFrogs","time":0}]}

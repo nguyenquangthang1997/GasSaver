@@ -1,0 +1,1 @@
+{"time":103,"results":[{"type":"constant-restrict-modification  ","before":"uint value = 100000000e18;","after":"uint constant value = 100000000e18;","contract":"JPYC","time":0}]}

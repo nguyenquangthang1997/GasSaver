@@ -1,0 +1,1 @@
+{"time":223,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public manualMintLimit = 1000000e18;","after":"uint256 public constant manualMintLimit = 1000000e18;","contract":"BaoToken","time":0}]}

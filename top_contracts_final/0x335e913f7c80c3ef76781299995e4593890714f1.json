@@ -1,0 +1,1 @@
+{"time":35,"results":[{"type":"constant-restrict-modification  ","before":"uint256 STELLAR_KEY_ID = 38;","after":"uint256 constant STELLAR_KEY_ID = 38;","contract":"KeyUpgrade","time":0},{"type":"constant-restrict-modification  ","before":"uint256 DATA_KEY_ID = 36;","after":"uint256 constant DATA_KEY_ID = 36;","contract":"KeyUpgrade","time":0}]}

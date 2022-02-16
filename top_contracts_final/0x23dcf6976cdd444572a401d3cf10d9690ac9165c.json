@@ -1,0 +1,1 @@
+{"time":199,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public deployedAt;","after":"uint256 public immutable deployedAt;","contract":"StakePoolSimpleCombined","time":1}]}

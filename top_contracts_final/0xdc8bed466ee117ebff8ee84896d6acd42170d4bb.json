@@ -1,0 +1,1 @@
+{"time":145,"results":[{"type":"external-function ","before":"function setBaseURI(string memory URI) public onlyOwner {\n        baseURI = URI;\n    }","after":"function setBaseURI(string calldata URI) public onlyOwner {\n        baseURI = URI;\n    }","contract":"NonFungibleSoup","time":0}]}

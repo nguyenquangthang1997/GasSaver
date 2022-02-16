@@ -1,0 +1,1 @@
+{"time":108,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public maxMint;","after":"uint256 public immutable maxMint;","contract":"SOS","time":1}]}

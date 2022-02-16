@@ -1,0 +1,1 @@
+{"time":152,"results":[{"type":"external-function ","before":"function setTokenBaseURI(string memory _tokenBaseURI) public onlyOwner {\n        tokenBaseURI = _tokenBaseURI;\n    }","after":"function setTokenBaseURI(string calldata _tokenBaseURI) public onlyOwner {\n        tokenBaseURI = _tokenBaseURI;\n    }","contract":"Shroomz","time":0}]}

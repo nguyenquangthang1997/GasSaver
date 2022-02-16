@@ -1,0 +1,1 @@
+{"time":57,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public lockDuration = 7 days;","after":"uint256 public constant lockDuration = 7 days;","contract":"GALStaking","time":0}]}

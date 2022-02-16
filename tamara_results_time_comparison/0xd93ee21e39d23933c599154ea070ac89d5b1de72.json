@@ -1,0 +1,1 @@
+{"time":68,"results":[{"type":"de-morgan-condition ","before":"!isRegistered(_addr) || !ended","after":"!(isRegistered(_addr) || ended)","loc":{"start":{"line":245,"column":12},"end":{"line":245,"column":37}},"contract":"AbstractConference","time":0}]}

@@ -1,0 +1,1 @@
+{"time":137,"results":[{"type":"external-function ","before":"function setBaseURI(string memory _newbaseTokenURI) public onlyOwner {\n        _baseTokenURI = _newbaseTokenURI;\n    }","after":"function setBaseURI(string calldata _newbaseTokenURI) public onlyOwner {\n        _baseTokenURI = _newbaseTokenURI;\n    }","contract":"MoonwalkerFMNFT","time":0}]}

@@ -1,0 +1,1 @@
+{"time":44,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public initialSupply = 10000000 * (10 ** decimals);","after":"uint256 public constant initialSupply = 10000000 * (10 ** decimals);","contract":"CCASH","time":0}]}

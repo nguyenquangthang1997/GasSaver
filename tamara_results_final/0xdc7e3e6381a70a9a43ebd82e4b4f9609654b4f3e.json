@@ -1,0 +1,1 @@
+{"time":96,"results":[{"type":"constant-restrict-modification  ","before":"uint256 buffPeriod = 1 days;","after":"uint256 constant buffPeriod = 1 days;","contract":"KGCMortage","time":0}]}

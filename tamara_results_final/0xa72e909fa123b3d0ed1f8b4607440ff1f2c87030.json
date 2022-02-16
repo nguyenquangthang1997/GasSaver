@@ -1,0 +1,1 @@
+{"time":86,"results":[{"type":"constant-restrict-modification  ","before":" address private _wallet = 0x8EbCE038Dc6851655e230A6D2d088c70d584A92A","after":" address private constant _wallet = 0x8EbCE038Dc6851655e230A6D2d088c70d584A92A","contract":"DncToken","time":0}]}

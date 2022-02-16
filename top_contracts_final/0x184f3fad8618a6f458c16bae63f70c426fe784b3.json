@@ -1,0 +1,1 @@
+{"time":132,"results":[{"type":"constant-restrict-modification  ","before":"string UNAUTHORIZED = \"UNAUTHORIZED\";","after":"string constant UNAUTHORIZED = \"UNAUTHORIZED\";","contract":"OlympusTokenMigrator","time":0}]}

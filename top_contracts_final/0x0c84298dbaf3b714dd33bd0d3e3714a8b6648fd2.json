@@ -1,0 +1,1 @@
+{"time":103,"results":[{"type":"external-function ","before":"function setBaseURI(string memory _baseTokenURI) public onlyOwner {\r\n        baseURI = _baseTokenURI;\r\n    }","after":"function setBaseURI(string calldata _baseTokenURI) public onlyOwner {\r\n        baseURI = _baseTokenURI;\r\n    }","contract":"EllaDAO","time":0}]}

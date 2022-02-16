@@ -1,0 +1,1 @@
+{"time":49,"results":[{"type":"immutable-restrict-modification ","before":"address public messenger;","after":"address public immutable messenger;","contract":"L1DAITokenBridge","time":0}]}

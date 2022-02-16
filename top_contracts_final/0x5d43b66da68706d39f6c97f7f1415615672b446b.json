@@ -1,0 +1,1 @@
+{"time":75,"results":[{"type":"immutable-restrict-modification ","before":"uint256 internal _cap;","after":"uint256 internal immutable _cap;","contract":"ROG","time":0}]}

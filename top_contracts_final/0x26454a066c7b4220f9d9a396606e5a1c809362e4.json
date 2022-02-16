@@ -1,0 +1,1 @@
+{"time":119,"results":[{"type":"constant-restrict-modification  ","before":"uint public maxSupply = 100;","after":"uint public constant maxSupply = 100;","contract":"Shitties","time":1}]}

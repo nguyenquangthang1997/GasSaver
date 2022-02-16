@@ -1,0 +1,1 @@
+{"time":215,"results":[{"type":"constant-restrict-modification  ","before":"address ddddToken = address(0x8cA9a0fbd8DB501F013F2e9e33a1B9dC129A48E0);","after":"address constant ddddToken = address(0x8cA9a0fbd8DB501F013F2e9e33a1B9dC129A48E0);","contract":"pLoot","time":1}]}

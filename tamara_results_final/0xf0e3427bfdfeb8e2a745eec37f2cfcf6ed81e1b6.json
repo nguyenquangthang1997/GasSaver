@@ -1,0 +1,1 @@
+{"time":24,"results":[{"type":"constant-restrict-modification  ","before":"dev ERC20 transferFrom, modified su","after":"dev ERC20 transferFrom, modified su","contract":"AcidsToken","time":0}]}

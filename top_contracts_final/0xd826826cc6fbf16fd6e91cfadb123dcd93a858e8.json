@@ -1,0 +1,1 @@
+{"time":100,"results":[{"type":"external-function ","before":"function setBaseURI(string memory _newBaseURI) external onlyOwner {\n        baseURI = _newBaseURI;\n    }","after":"function setBaseURI(string calldata _newBaseURI) external onlyOwner {\n        baseURI = _newBaseURI;\n    }","contract":"coca","time":0}]}

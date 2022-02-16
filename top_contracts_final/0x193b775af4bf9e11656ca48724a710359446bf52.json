@@ -1,0 +1,1 @@
+{"time":124,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public duration = 730 days;","after":"uint256 public constant duration = 730 days;","contract":"Vesting","time":0}]}

@@ -1,0 +1,1 @@
+{"time":37,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public TotalSupply = 10 ** (8 + 18);","after":"uint256 public constant TotalSupply = 10 ** (8 + 18);","contract":"Coinstantine","time":0}]}

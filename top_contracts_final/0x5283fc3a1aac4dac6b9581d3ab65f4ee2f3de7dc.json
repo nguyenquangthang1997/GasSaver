@@ -1,0 +1,1 @@
+{"time":146,"results":[{"type":"constant-restrict-modification  ","before":" not own\");\n    require(to != address(0","after":" not own\");\n    require(to != address(0","contract":"AsciiPunks","time":1},{"type":"constant-restrict-modification  ","before":"\"ERC721: transfer to the zero addr","after":"\"ERC721: transfer to the zero addr","contract":"AsciiPunks","time":1}]}

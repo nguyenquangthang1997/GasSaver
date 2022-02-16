@@ -1,0 +1,1 @@
+{"time":86,"results":[{"type":"struct-data-arrangement ","before":"\nbool isActive\nbool wasRevoked\nuint32 startDay\nuint256 amount\naddress vestingLocation\nuint256 claimedAmount","after":"uint256 amount\nuint256 claimedAmount\naddress vestingLocation\nuint32 startDay\nbool isActive\nbool wasRevoked\n","contract":"TokenVestingInterface","time":0}]}

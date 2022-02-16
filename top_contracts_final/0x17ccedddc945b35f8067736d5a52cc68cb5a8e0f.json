@@ -1,0 +1,1 @@
+{"time":119,"results":[{"type":"immutable-restrict-modification ","before":"address public timelock;","after":"address public immutable timelock;","contract":"DropFactory","time":0},{"type":"immutable-restrict-modification ","before":"address public factory;","after":"address public immutable factory;","contract":"Drop","time":0}]}

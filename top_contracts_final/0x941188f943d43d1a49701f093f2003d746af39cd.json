@@ -1,0 +1,1 @@
+{"time":124,"results":[{"type":"external-function ","before":"function setbaseURI(string memory baseURI_) external onlyOwner() {\n    baseURI = baseURI_;\n  }","after":"function setbaseURI(string calldata baseURI_) external onlyOwner() {\n    baseURI = baseURI_;\n  }","contract":"Betman","time":0}]}

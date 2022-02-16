@@ -1,0 +1,1 @@
+{"time":173,"results":[{"type":"constant-restrict-modification  ","before":"uint256 mintDeadline = block.timestamp + 24 hours;","after":"uint256 constant mintDeadline = block.timestamp + 24 hours;","contract":"Loogies","time":0}]}

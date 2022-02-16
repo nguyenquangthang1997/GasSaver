@@ -1,0 +1,1 @@
+{"time":133,"results":[{"type":"struct-data-arrangement ","before":"\nuint8 modulo\nuint8 choice\nuint amount\nuint winAmount\nuint placeBlockNumber\nuint randomNumber\nbool isActive\naddress player","after":"uint amount\nuint winAmount\nuint placeBlockNumber\nuint randomNumber\naddress player\nuint8 modulo\nuint8 choice\nbool isActive\n","contract":"RandomWorld","time":0}]}

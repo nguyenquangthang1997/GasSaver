@@ -1,0 +1,1 @@
+{"time":218,"results":[{"type":"external-function ","before":"       emit RolledOver(presaleIsActive);\n    }\n\n    function flipSaleState() public onlyOwner {\n ","after":"       emit RolledOver(presaleIsActive);\n    }\n\n    function flipSaleState() public onlyOwner {\n ","contract":"DoodleGutterCats","time":0}]}

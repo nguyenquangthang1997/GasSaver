@@ -1,0 +1,1 @@
+{"time":135,"results":[{"type":"immutable-restrict-modification ","before":"address private receiveFunds;","after":"address private immutable receiveFunds;","contract":"CoriteNFT","time":0}]}

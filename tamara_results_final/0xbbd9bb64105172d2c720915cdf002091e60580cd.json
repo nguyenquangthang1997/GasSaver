@@ -1,0 +1,1 @@
+{"time":158,"results":[{"type":"constant-restrict-modification  ","before":"uint public decimals = 18;","after":"uint public constant decimals = 18;","contract":"PickFlixToken","time":0}]}

@@ -1,0 +1,1 @@
+{"time":262,"results":[{"type":"de-morgan-condition ","before":"!tokenBlacklist[signerToken] && !tokenBlacklist[senderToken]","after":"!(tokenBlacklist[signerToken] && tokenBlacklist[senderToken])","loc":{"start":{"line":1459,"column":12},"end":{"line":1459,"column":71}},"contract":"Indexer","time":0}]}

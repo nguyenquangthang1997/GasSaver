@@ -1,0 +1,1 @@
+{"time":71,"results":[{"type":"constant-restrict-modification  ","before":"address public burnAddress = 0x000000000000000000000000000000000000dEaD;","after":"address public constant burnAddress = 0x000000000000000000000000000000000000dEaD;","contract":"SVC001Exchange","time":0}]}

@@ -1,0 +1,1 @@
+{"time":86,"results":[{"type":"constant-restrict-modification  ","before":"bool canUpgrade_ = true;","after":"bool constant canUpgrade_ = true;","contract":"Jobchain","time":0}]}

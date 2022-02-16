@@ -1,7 +1,7 @@
 const {getAllModifier, getAllVariableStates, traceIdentifier} = require("../services/handleData");
 const {addLog, logImmutableStateVariable, logConstantStateModification} = require("../log");
 
-function restrictVariableModification(ast, item, listAllFunction, data) {
+function restrictVariableModification(ast, item, listAllFunction, data, checkImmutable) {
     let startTime = Date.now()
     let stateUseds = {}
     // get all function include inheritance
@@ -51,13 +51,14 @@ function restrictVariableModification(ast, item, listAllFunction, data) {
     // get all state include inheritance
     let stateVariableDeclaration = getAllVariableStates(ast, item.name)
     stateVariableDeclaration.forEach((el, index) => {
-        if (el.variables[0].isDeclaredConst === false && el.variables[0].typeName.type === "ElementaryTypeName") {
-            if (stateUseds[el.variables[0].name] === undefined)
-                results.push(addLog(item.name, Date.now() - startTime, logConstantStateModification(el.range, data, el.variables[0].name)))
-            else if (stateUseds[el.variables[0].name].position === "constructor" && el.variables[0].isImmutable === false)
-                results.push(addLog(item.name, Date.now() - startTime, logImmutableStateVariable(el.range, data, el.variables[0].name)))
+            if (el.variables[0].isDeclaredConst === false && el.variables[0].typeName.type === "ElementaryTypeName") {
+                if (stateUseds[el.variables[0].name] === undefined) {
+                    if (el.initialValue !== null) results.push(addLog(item.name, Date.now() - startTime, logConstantStateModification(el.range, data, el.variables[0].name)))
+                } else if (stateUseds[el.variables[0].name].position === "constructor" && el.variables[0].isImmutable === false && checkImmutable === true && el.variables[0].typeName.name !== "string")
+                    results.push(addLog(item.name, Date.now() - startTime, logImmutableStateVariable(el.range, data, el.variables[0].name)))
+            }
         }
-    })
+    )
     return results
 }
 

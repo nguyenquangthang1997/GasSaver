@@ -1,0 +1,1 @@
+{"time":56,"results":[{"type":"struct-data-arrangement ","before":"\nuint8 v\nbytes32 r\nbytes32 s\nuint8 revocationReasonId\nbool isValue","after":"bytes32 r\nbytes32 s\nuint8 v\nuint8 revocationReasonId\nbool isValue\n","contract":"TrueProfileStorage","time":0}]}

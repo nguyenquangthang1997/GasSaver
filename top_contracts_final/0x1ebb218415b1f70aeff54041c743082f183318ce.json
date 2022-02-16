@@ -1,0 +1,1 @@
+{"time":284,"results":[{"type":"struct-data-arrangement ","before":"\naddress owner\naddress approved\nbytes32 seed\nbool isWhale","after":"bytes32 seed\naddress owner\naddress approved\nbool isWhale\n","contract":"WhalesGame","time":0}]}

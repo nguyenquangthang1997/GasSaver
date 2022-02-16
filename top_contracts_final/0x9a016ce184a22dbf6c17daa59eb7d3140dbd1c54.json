@@ -1,0 +1,1 @@
+{"time":188,"results":[{"type":"immutable-restrict-modification ","before":"uint64 public counterpartChainId;","after":"uint64 public immutable counterpartChainId;","contract":"LockProxy","time":0}]}

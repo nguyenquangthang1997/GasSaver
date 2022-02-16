@@ -1,0 +1,1 @@
+{"time":121,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public startBlock;","after":"uint256 public immutable startBlock;","contract":"MasterChefMana","time":1}]}

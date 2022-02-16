@@ -1,0 +1,1 @@
+{"time":140,"results":[{"type":"external-function ","before":"function setBaseURI(string memory uri) external onlyOwner {\n        baseURI = uri;\n    }","after":"function setBaseURI(string calldata uri) external onlyOwner {\n        baseURI = uri;\n    }","contract":"SpookyBoysCountryClub","time":0}]}

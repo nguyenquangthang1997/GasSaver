@@ -1,0 +1,1 @@
+{"time":159,"results":[{"type":"struct-data-arrangement ","before":"\nuint64 UnlockTime\nuint256 Amount\naddress Owner\naddress Token\nmapping(address => uint) Allowance","after":"uint256 Amount\nmapping(address => uint) Allowance\naddress Owner\naddress Token\nuint64 UnlockTime\n","contract":"LockedPoolz","time":0}]}

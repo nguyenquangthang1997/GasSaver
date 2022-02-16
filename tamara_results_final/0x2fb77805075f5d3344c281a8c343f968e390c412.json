@@ -1,0 +1,1 @@
+{"time":52,"results":[{"type":"constant-restrict-modification  ","before":"string public padding = \"0x0909090909\";","after":"string public constant padding = \"0x0909090909\";","contract":"LockAndHold","time":0}]}

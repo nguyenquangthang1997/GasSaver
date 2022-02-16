@@ -1,0 +1,1 @@
+{"time":38,"results":[{"type":"immutable-restrict-modification ","before":"uint256 private _decimals;","after":"uint256 private immutable _decimals;","contract":"Apexprotocoltoken","time":0}]}

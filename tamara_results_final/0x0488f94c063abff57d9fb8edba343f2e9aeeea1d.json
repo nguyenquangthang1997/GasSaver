@@ -1,0 +1,1 @@
+{"time":140,"results":[{"type":"constant-restrict-modification  ","before":"uint private ticketPrice = 0.00001 ether;","after":"uint private constant ticketPrice = 0.00001 ether;","contract":"Funds","time":1}]}

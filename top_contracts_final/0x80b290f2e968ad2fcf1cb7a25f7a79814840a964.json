@@ -1,0 +1,1 @@
+{"time":115,"results":[{"type":"constant-restrict-modification  ","before":"address public immutable signer =\n        address(0xBf1B0912F22bc74C23Da8bC3A297C7251536c1D5);","after":"address public immutable constant signer =\n        address(0xBf1B0912F22bc74C23Da8bC3A297C7251536c1D5);","contract":"MonClaim","time":0}]}

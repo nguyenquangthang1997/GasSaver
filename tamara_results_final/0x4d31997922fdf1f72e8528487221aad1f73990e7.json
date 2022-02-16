@@ -1,0 +1,1 @@
+{"time":112,"results":[{"type":"constant-restrict-modification  ","before":"string public builtOn = \"https://www.hermeseducoin.com/\";","after":"string public constant builtOn = \"https://www.hermeseducoin.com/\";","contract":"ERC20Token","time":0}]}

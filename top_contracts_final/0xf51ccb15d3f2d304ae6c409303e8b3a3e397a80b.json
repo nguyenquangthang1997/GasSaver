@@ -1,0 +1,1 @@
+{"time":81,"results":[{"type":"state-data-arrangement ","before":"\nuint8 constant MAX_BURN = 3;\naddress[MAX_BURN] public chkBurnerList;\nmapping(address => bool) public burners;\naddress owner;","after":"address[MAX_BURN] public chkBurnerList;\nmapping(address => bool) public burners;\naddress owner;\nuint8 constant MAX_BURN = 3;\n","contract":"Ownable","time":0}]}

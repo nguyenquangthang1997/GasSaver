@@ -1,0 +1,1 @@
+{"time":122,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseURI) external onlyOwner {\n        _baseTokenURI = baseURI;\n    }","after":"function setBaseURI(string calldata baseURI) external onlyOwner {\n        _baseTokenURI = baseURI;\n    }","contract":"RecklessWhales","time":0}]}

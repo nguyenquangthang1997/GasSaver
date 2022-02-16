@@ -1,0 +1,1 @@
+{"time":366,"results":[{"type":"constant-restrict-modification  ","before":"\n  uint256 DECIMALS = 10000000000000000","after":"\n  uint256 constant DECIMALS = 10000000000000000","contract":"minterests","time":1}]}

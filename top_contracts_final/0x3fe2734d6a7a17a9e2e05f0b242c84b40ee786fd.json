@@ -1,0 +1,1 @@
+{"time":124,"results":[{"type":"constant-restrict-modification  ","before":"uint public immutable olympusFee = 33300;","after":"uint public immutable constant olympusFee = 33300;","contract":"ParallelBondingContract","time":0}]}

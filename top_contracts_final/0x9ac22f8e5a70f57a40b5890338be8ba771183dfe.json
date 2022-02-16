@@ -1,0 +1,1 @@
+{"time":246,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public devtxfee = 1;","after":"uint256 public constant devtxfee = 1;","contract":"GoldFarmFaaS","time":0},{"type":"constant-restrict-modification  ","before":"uint256 public devtxfee = 1;","after":"uint256 public constant devtxfee = 1;","contract":"GoldFarmFaaSForOne","time":1}]}

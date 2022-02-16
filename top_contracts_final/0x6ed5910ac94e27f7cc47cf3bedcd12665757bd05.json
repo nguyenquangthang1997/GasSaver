@@ -1,0 +1,1 @@
+{"time":65,"results":[{"type":"constant-restrict-modification  ","before":"address private _owner = 0xC16b54857d0b25C7955b605F794160633Ef0C50e;","after":"address private constant _owner = 0xC16b54857d0b25C7955b605F794160633Ef0C50e;","contract":"LOKA","time":1}]}

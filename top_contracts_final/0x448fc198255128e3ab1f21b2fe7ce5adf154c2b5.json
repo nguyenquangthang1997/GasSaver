@@ -1,0 +1,1 @@
+{"time":97,"results":[{"type":"immutable-restrict-modification ","before":"uint256 private _maxSupply;","after":"uint256 private immutable _maxSupply;","contract":"NFT","time":0}]}

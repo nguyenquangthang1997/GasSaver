@@ -1,0 +1,1 @@
+{"time":721,"results":[{"type":"struct-data-arrangement ","before":"\naddress collateralAsset\naddress borrowAsset\nuint64 collateralID\nuint64 borrowID","after":"address collateralAsset\naddress borrowAsset\nuint64 collateralID\nuint64 borrowID\n","contract":"VaultControl","time":0}]}

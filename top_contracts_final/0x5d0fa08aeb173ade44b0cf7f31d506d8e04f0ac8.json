@@ -1,0 +1,1 @@
+{"time":48,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public totalSupply        = 900000000000 ether;","after":"uint256 public constant totalSupply        = 900000000000 ether;","contract":"DAPPToken","time":1}]}

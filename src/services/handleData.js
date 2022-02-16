@@ -94,4 +94,11 @@ function getAllVariableStates(ast, contract) {
     return Object.values(listStates)
 }
 
-module.exports = {traceIdentifier, getAllFunction, getAllModifier, getAllVariableStates}
+function isGreater(first, second) {
+    first = first.split(".")
+    second = second.split(".")
+    if (first[1] === second[1]) return parseInt(first[2]) > parseInt(second[2])
+    else return parseInt(first[1]) > parseInt(second[1])
+}
+
+module.exports = {traceIdentifier, getAllFunction, getAllModifier, getAllVariableStates, isGreater}

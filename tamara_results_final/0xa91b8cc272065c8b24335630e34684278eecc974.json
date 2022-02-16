@@ -1,0 +1,1 @@
+{"time":213,"results":[{"type":"constant-restrict-modification  ","before":"uint ETH = 1 ether;","after":"uint constant ETH = 1 ether;","contract":"Fast2Win","time":0},{"type":"constant-restrict-modification  ","before":"uint ETH = 1 ether;","after":"uint constant ETH = 1 ether;","contract":"Fast2Win","time":0}]}

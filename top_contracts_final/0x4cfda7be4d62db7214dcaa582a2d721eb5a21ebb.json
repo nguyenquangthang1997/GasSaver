@@ -1,0 +1,1 @@
+{"time":141,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public MAX_ITEMS = 20000;","after":"uint256 public constant MAX_ITEMS = 20000;","contract":"ApemaniaSocialClub","time":0}]}

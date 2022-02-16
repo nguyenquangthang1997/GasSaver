@@ -1,0 +1,1 @@
+{"time":22,"results":[{"type":"de-morgan-condition ","before":"!_isAccountFrozen(from) && !_isAccountFrozen(to)","after":"!(_isAccountFrozen(from) && _isAccountFrozen(to))","loc":{"start":{"line":308,"column":15},"end":{"line":308,"column":62}},"contract":"Featured","time":0}]}

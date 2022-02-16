@@ -1,0 +1,1 @@
+{"time":107,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public withdrawPenalty;","after":"uint256 public immutable withdrawPenalty;","contract":"StakingRewards","time":0},{"type":"immutable-restrict-modification ","before":"address public owner;","after":"address public immutable owner;","contract":"StakingRewards","time":0}]}

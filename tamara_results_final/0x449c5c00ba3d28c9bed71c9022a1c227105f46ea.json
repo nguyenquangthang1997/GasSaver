@@ -1,0 +1,1 @@
+{"time":57,"results":[{"type":"constant-restrict-modification  ","before":"string public name = \"EBitcoin\";","after":"string public constant name = \"EBitcoin\";","contract":"EBitcoin","time":1},{"type":"constant-restrict-modification  ","before":"string public symbol = \"EBTC\";","after":"string public constant symbol = \"EBTC\";","contract":"EBitcoin","time":1}]}

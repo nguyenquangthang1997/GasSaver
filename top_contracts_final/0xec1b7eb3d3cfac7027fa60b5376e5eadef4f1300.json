@@ -1,0 +1,1 @@
+{"time":51,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public totalSupply = 10 * (10**10) * 10**8 ;","after":"uint256 public constant totalSupply = 10 * (10**10) * 10**8 ;","contract":"HZMCOIN","time":0}]}

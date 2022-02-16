@@ -1,0 +1,1 @@
+{"time":259,"results":[{"type":"struct-data-arrangement ","before":"\nbool bound\nbool ready\nuint index\nuint96 denorm\nuint256 balance","after":"uint index\nuint256 balance\nuint96 denorm\nbool bound\nbool ready\n","contract":"IDynaset","time":0}]}

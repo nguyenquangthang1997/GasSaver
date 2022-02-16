@@ -1,0 +1,1 @@
+{"time":104,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public price_ = 0.05 ether;","after":"uint256 public constant price_ = 0.05 ether;","contract":"WealthyApeSocialClub","time":1}]}

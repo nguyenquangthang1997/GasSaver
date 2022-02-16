@@ -1,0 +1,1 @@
+{"time":125,"results":[{"type":"constant-restrict-modification  ","before":"uint256 pricePer = 0.02 ether;","after":"uint256 constant pricePer = 0.02 ether;","contract":"BossBaes","time":1}]}

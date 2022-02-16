@@ -1,0 +1,1 @@
+{"time":143,"results":[{"type":"constant-restrict-modification  ","before":"uint public MAX_SOCTOS = 8001;","after":"uint public constant MAX_SOCTOS = 8001;","contract":"OctoHedzV2","time":1},{"type":"constant-restrict-modification  ","before":"uint256 private _price = 0.08 ether;","after":"uint256 private constant _price = 0.08 ether;","contract":"OctoHedzV2","time":1}]}

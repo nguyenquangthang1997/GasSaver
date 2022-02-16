@@ -1,0 +1,1 @@
+{"time":8,"results":[{"type":"struct-data-arrangement ","before":"\naddress sender\nstring nickname\nuint timestamp\nbool AllowUpdated\nstring content\nuint like\nuint reward","after":"string nickname\nuint timestamp\nstring content\nuint like\nuint reward\naddress sender\nbool AllowUpdated\n","contract":"EtherShareQuery","time":0}]}

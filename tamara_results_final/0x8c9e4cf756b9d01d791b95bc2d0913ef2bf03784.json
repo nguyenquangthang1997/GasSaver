@@ -1,0 +1,1 @@
+{"time":54,"results":[{"type":"constant-restrict-modification  ","before":"uint256 internal extras = 100;","after":"uint256 internal constant extras = 100;","contract":"Inflationary","time":0},{"type":"constant-restrict-modification  ","before":"uint private count=1;","after":"uint private constant count=1;","contract":"Inflationary","time":0}]}

@@ -1,0 +1,1 @@
+{"time":130,"results":[{"type":"immutable-restrict-modification ","before":"address payable public pixel_vault;","after":"address payable public immutable pixel_vault;","contract":"ComicMinter","time":0}]}

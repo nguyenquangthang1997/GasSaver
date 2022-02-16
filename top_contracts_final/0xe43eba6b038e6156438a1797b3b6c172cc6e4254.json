@@ -1,0 +1,1 @@
+{"time":161,"results":[{"type":"external-function ","before":"function updateBaseURI(string memory uri) public onlyOwner {\n        baseURI = uri;\n    }","after":"function updateBaseURI(string calldata uri) public onlyOwner {\n        baseURI = uri;\n    }","contract":"GOBLand","time":0}]}

@@ -1,0 +1,1 @@
+{"time":41,"results":[{"type":"struct-data-arrangement ","before":"\naddress token\nstring name\nstring symbol\nuint8 decimals\nbytes ipfsHash\nbytes swarmHash","after":"string name\nstring symbol\nbytes ipfsHash\nbytes swarmHash\naddress token\nuint8 decimals\n","contract":"TokenRegistry","time":0}]}

@@ -1,0 +1,1 @@
+{"time":135,"results":[{"type":"external-function ","before":"function setBaseURI(string memory _baseURI) public onlyOwner {\n        baseURI = _baseURI;\n    }","after":"function setBaseURI(string calldata _baseURI) public onlyOwner {\n        baseURI = _baseURI;\n    }","contract":"GalacticApes","time":0}]}

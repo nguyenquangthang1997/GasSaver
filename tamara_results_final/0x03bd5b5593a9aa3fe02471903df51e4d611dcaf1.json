@@ -1,0 +1,1 @@
+{"time":77,"results":[{"type":"struct-data-arrangement ","before":"\nuint256 amount\naddress erc20Token\naddress claimAddress\naddress refundAddress\nuint256 timelock\nbool pending","after":"uint256 amount\nuint256 timelock\naddress erc20Token\naddress claimAddress\naddress refundAddress\nbool pending\n","contract":"ERC20Swap","time":0}]}

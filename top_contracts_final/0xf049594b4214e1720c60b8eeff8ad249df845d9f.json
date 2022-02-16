@@ -1,0 +1,1 @@
+{"time":122,"results":[{"type":"constant-restrict-modification  ","before":"    bool public isPublicSaleActive = fa","after":"    bool public constant isPublicSaleActive = fa","contract":"TakeHeartCollection","time":0}]}

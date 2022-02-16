@@ -1,0 +1,1 @@
+{"time":64,"results":[{"type":"immutable-restrict-modification ","before":"address public owner;","after":"address public immutable owner;","contract":"StakedMuse","time":0}]}

@@ -1,0 +1,1 @@
+{"time":307,"results":[{"type":"immutable-restrict-modification ","before":"address public override factory;","after":"address public override immutable factory;","contract":"SoneSwapRouter","time":1},{"type":"immutable-restrict-modification ","before":"address public override WETH;","after":"address public override immutable WETH;","contract":"SoneSwapRouter","time":1}]}

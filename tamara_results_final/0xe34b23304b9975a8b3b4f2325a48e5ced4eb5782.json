@@ -1,0 +1,1 @@
+{"time":32,"results":[{"type":"struct-data-arrangement ","before":"\naddress initiator\nuint amount\nuint validated\nbool completed","after":"uint amount\nuint validated\naddress initiator\nbool completed\n","contract":"ChargBridge","time":0}]}

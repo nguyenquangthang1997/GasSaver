@@ -1,0 +1,1 @@
+{"time":34,"results":[{"type":"constant-restrict-modification  ","before":"uint256 MinDeposit = 1 ether;","after":"uint256 constant MinDeposit = 1 ether;","contract":"CaptureTheFlag","time":0},{"type":"constant-restrict-modification  ","before":"uint256 minInvestment = 1 ether;","after":"uint256 constant minInvestment = 1 ether;","contract":"CaptureTheFlag","time":0}]}

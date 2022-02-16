@@ -1,0 +1,1 @@
+{"time":168,"results":[{"type":"constant-restrict-modification  ","before":" address public kittyCoreAddress = 0x06012c8cf97BEaD5deAe237070F9587f8E7A266d","after":" address public constant kittyCoreAddress = 0x06012c8cf97BEaD5deAe237070F9587f8E7A266d","contract":"KittyBounties","time":1}]}

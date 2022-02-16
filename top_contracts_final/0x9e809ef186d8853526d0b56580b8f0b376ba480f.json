@@ -1,0 +1,1 @@
+{"time":48,"results":[{"type":"external-function ","before":"function setPrices(uint[] memory newPrices) external onlyRole(ADMIN_ROLE) {\n        prices = newPrices;\n    }","after":"function setPrices(uint[] calldata newPrices) external onlyRole(ADMIN_ROLE) {\n        prices = newPrices;\n    }","contract":"FeudalzVault","time":0}]}

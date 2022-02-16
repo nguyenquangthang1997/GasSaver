@@ -1,0 +1,1 @@
+{"time":134,"results":[{"type":"constant-restrict-modification  ","before":"uint public MAX_CLK = 250;","after":"uint public constant MAX_CLK = 250;","contract":"NuclkGenesis","time":0},{"type":"constant-restrict-modification  ","before":"uint256 private _price = 0.07 ether;","after":"uint256 private constant _price = 0.07 ether;","contract":"NuclkGenesis","time":0}]}

@@ -1,0 +1,1 @@
+{"time":131,"results":[{"type":"constant-restrict-modification  ","before":"string public builtOn = \"https://gitlab.com/zolbayar/karvuon-erc20\";","after":"string public constant builtOn = \"https://gitlab.com/zolbayar/karvuon-erc20\";","contract":"Karvuon","time":1}]}

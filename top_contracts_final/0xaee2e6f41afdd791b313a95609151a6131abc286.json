@@ -1,0 +1,1 @@
+{"time":128,"results":[{"type":"immutable-restrict-modification ","before":"address public DEPO_JUNGLE_FACTORY;","after":"address public immutable DEPO_JUNGLE_FACTORY;","contract":"DepoJungleInitializable","time":0}]}

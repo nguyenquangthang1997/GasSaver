@@ -1,0 +1,1 @@
+{"time":122,"results":[{"type":"immutable-restrict-modification ","before":"address public SMART_CHEF_FACTORY;","after":"address public immutable SMART_CHEF_FACTORY;","contract":"StandardVault","time":0}]}

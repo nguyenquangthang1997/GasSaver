@@ -1,0 +1,1 @@
+{"time":177,"results":[{"type":"external-function ","before":"function setBaseTokenURI(string memory baseTokenURI_) external onlyOwner {\n        baseTokenURI = baseTokenURI_;\n    }","after":"function setBaseTokenURI(string calldata baseTokenURI_) external onlyOwner {\n        baseTokenURI = baseTokenURI_;\n    }","contract":"PROOFCollective","time":0}]}

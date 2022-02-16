@@ -1,0 +1,1 @@
+{"time":64,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public tokenUnit = uint256(10)**decimals;","after":"uint256 public constant tokenUnit = uint256(10)**decimals;","contract":"PNR","time":0}]}

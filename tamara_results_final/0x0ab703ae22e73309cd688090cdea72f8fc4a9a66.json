@@ -1,0 +1,1 @@
+{"time":49,"results":[{"type":"constant-restrict-modification  ","before":"uint8 public decimals = 8;","after":"uint8 public constant decimals = 8;","contract":"MyAdvancedToken","time":0}]}

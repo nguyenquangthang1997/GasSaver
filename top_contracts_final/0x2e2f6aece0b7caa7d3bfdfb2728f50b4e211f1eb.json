@@ -1,0 +1,1 @@
+{"time":193,"results":[{"type":"struct-data-arrangement ","before":"\naddress user\nuint256 pricePerVote\nuint16 minPerc\nuint16 maxPerc","after":"uint256 pricePerVote\naddress user\nuint16 minPerc\nuint16 maxPerc\n","contract":"Warden","time":0}]}

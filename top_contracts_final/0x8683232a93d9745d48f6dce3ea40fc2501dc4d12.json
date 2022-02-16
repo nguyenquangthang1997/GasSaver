@@ -1,0 +1,1 @@
+{"time":19,"results":[{"type":"external-function ","before":"function setPrices(uint[] memory newPrices) external onlyOwner {\n        prices = newPrices;\n    }","after":"function setPrices(uint[] calldata newPrices) external onlyOwner {\n        prices = newPrices;\n    }","contract":"PooEvolution","time":0}]}

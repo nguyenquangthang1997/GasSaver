@@ -1,0 +1,1 @@
+{"time":629,"results":[{"type":"constant-restrict-modification  ","before":"address public devAddress = 0xe754be98baa42E2D1f03db6284f82eDdbC4B350F;","after":"address public constant devAddress = 0xe754be98baa42E2D1f03db6284f82eDdbC4B350F;","contract":"TheF8Club","time":0}]}

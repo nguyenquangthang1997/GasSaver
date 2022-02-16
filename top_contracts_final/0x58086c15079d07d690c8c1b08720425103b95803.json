@@ -1,0 +1,1 @@
+{"time":65,"results":[{"type":"external-function ","before":"function changeBaseURI(string memory newURI) external onlyAdmin {\n    _baseURI = newURI;\n  }","after":"function changeBaseURI(string calldata newURI) external onlyAdmin {\n    _baseURI = newURI;\n  }","contract":"FanEpackCollection","time":0}]}

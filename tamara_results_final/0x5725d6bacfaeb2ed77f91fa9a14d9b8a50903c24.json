@@ -1,0 +1,1 @@
+{"time":88,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public INITIAL_SUPPLY = 4000000000;","after":"uint256 public constant INITIAL_SUPPLY = 4000000000;","contract":"MBA","time":0}]}

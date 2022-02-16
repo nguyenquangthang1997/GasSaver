@@ -1,0 +1,1 @@
+{"time":28,"results":[{"type":"constant-restrict-modification  ","before":"uint public totalSupply = 3.69*10**26;","after":"uint public constant totalSupply = 3.69*10**26;","contract":"GoldPoolToken","time":0}]}

@@ -1,0 +1,1 @@
+{"time":71,"results":[{"type":"constant-restrict-modification  ","before":"string public name = 'Code the World';","after":"string public constant name = 'Code the World';","contract":"JACToken","time":0},{"type":"constant-restrict-modification  ","before":"string public _symbol = 'CODE';","after":"string public constant _symbol = 'CODE';","contract":"JACToken","time":0}]}

@@ -1,0 +1,1 @@
+{"time":62,"results":[{"type":"constant-restrict-modification  ","before":"uint private INITIAL_SUPPLY = 1000000000e2;","after":"uint private constant INITIAL_SUPPLY = 1000000000e2;","contract":"BlockbidLiquidity","time":0}]}

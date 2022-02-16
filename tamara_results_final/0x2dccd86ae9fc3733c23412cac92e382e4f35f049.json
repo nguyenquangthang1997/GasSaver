@@ -1,0 +1,1 @@
+{"time":47,"results":[{"type":"constant-restrict-modification  ","before":"uint256 initialSupply = 10000000000e18;","after":"uint256 constant initialSupply = 10000000000e18;","contract":"NibiruGovernanceToken","time":0}]}

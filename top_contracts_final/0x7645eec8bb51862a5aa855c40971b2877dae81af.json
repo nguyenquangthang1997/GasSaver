@@ -1,0 +1,1 @@
+{"time":138,"results":[{"type":"external-function ","before":"function setBaseMetadataURI(string memory _baseMetadataURI) public onlyOwner {\n      baseMetadataURI = _baseMetadataURI;\n    }","after":"function setBaseMetadataURI(string calldata _baseMetadataURI) public onlyOwner {\n      baseMetadataURI = _baseMetadataURI;\n    }","contract":"LondonGift","time":0}]}

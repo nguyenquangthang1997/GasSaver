@@ -1,0 +1,1 @@
+{"time":121,"results":[{"type":"constant-restrict-modification  ","before":"address SOULCOPS_WALLET = 0x71D54d6Dd26339B4d69C5cd922C4846aC6fb5E95;","after":"address constant SOULCOPS_WALLET = 0x71D54d6Dd26339B4d69C5cd922C4846aC6fb5E95;","contract":"SoulcopsCompanion","time":0}]}

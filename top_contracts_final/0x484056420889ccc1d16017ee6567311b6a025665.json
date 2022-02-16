@@ -1,0 +1,1 @@
+{"time":131,"results":[{"type":"constant-restrict-modification  ","before":"0;\r\n    uint256 public maxMintPerWal","after":"0;\r\n    uint256 public maxMintPerWal","contract":"Zoo_CNY","time":0},{"type":"immutable-restrict-modification ","before":"\r\n\r\n    bytes32 public DOMAIN_SE","after":"\r\n\r\n    bytes32 public DOMAIN_SE","contract":"Zoo_CNY","time":0}]}

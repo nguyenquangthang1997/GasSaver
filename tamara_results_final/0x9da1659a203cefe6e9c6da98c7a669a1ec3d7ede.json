@@ -1,0 +1,1 @@
+{"time":78,"results":[{"type":"constant-restrict-modification  ","before":"uint256 private _initialSupply = 665000000;","after":"uint256 private constant _initialSupply = 665000000;","contract":"Pngcoin","time":1}]}

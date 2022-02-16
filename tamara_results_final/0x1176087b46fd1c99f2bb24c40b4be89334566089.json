@@ -1,0 +1,1 @@
+{"time":38,"results":[{"type":"constant-restrict-modification  ","before":"bool private stopped = false;","after":"bool private constant stopped = false;","contract":"SuperSaverZapV2","time":0}]}

@@ -1,0 +1,1 @@
+{"time":97,"results":[{"type":"external-function ","before":"function setBaseURI(string memory nftURI) public onlyOwner {\n        _nftURI = nftURI;\n    }","after":"function setBaseURI(string calldata nftURI) public onlyOwner {\n        _nftURI = nftURI;\n    }","contract":"KManuS88NFT","time":0}]}

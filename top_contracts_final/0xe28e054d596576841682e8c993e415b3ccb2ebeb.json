@@ -1,0 +1,1 @@
+{"time":80,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public modulo = 100_00000;","after":"uint256 public constant modulo = 100_00000;","contract":"CollabRoyaltiesRegistry","time":0}]}

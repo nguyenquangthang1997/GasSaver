@@ -1,0 +1,1 @@
+{"time":137,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public presaleDate = 1642042800;","after":"uint256 public constant presaleDate = 1642042800;","contract":"Traveler","time":1}]}

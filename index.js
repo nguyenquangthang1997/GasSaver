@@ -19,4 +19,4 @@ async function main(path) {
     }
 }
 
-main("./contracts/vault.sol")
+main("./contracts/test.sol")

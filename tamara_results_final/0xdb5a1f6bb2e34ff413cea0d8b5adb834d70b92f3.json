@@ -1,0 +1,1 @@
+{"time":45,"results":[{"type":"constant-restrict-modification  ","before":"string public name = \"Q7Bitcoin\";","after":"string public constant name = \"Q7Bitcoin\";","contract":"Q7Bitcoin","time":0},{"type":"constant-restrict-modification  ","before":"string public symbol = \"Q7\";","after":"string public constant symbol = \"Q7\";","contract":"Q7Bitcoin","time":0}]}

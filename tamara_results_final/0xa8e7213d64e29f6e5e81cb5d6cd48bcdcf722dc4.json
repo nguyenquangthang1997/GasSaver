@@ -1,0 +1,1 @@
+{"time":450,"results":[{"type":"de-morgan-condition ","before":"!submittedWhitelistAddition && !submittedWhitelistRemoval","after":"!(submittedWhitelistAddition && submittedWhitelistRemoval)","loc":{"start":{"line":2306,"column":16},"end":{"line":2306,"column":48}},"contract":"AddressWhitelist","time":0}]}

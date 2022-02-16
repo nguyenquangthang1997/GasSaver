@@ -1,0 +1,1 @@
+{"time":153,"results":[{"type":"immutable-restrict-modification ","before":"address public emitted_token_address;","after":"address public immutable emitted_token_address;","contract":"HiIQRewards","time":1}]}

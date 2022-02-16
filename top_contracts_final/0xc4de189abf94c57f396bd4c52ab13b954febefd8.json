@@ -1,0 +1,1 @@
+{"time":69,"results":[{"type":"immutable-restrict-modification ","before":"uint256 private _cap;","after":"uint256 private immutable _cap;","contract":"B20","time":0}]}

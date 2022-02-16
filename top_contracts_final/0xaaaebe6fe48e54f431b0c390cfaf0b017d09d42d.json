@@ -1,0 +1,1 @@
+{"time":42,"results":[{"type":"state-data-arrangement ","before":"\n  */\n  address private\n  */\n  uint256 toke\n  */\n  bool frozen =","after":"  */\n  uint256 toke\n  */\n  address private\n  */\n  bool frozen =\n","contract":"CelsiusToken","time":0}]}

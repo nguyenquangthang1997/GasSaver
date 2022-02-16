@@ -1,0 +1,1 @@
+{"time":339,"results":[{"type":"immutable-restrict-modification ","before":"uint256 rewardHarvestingInterval;","after":"uint256 immutable rewardHarvestingInterval;","contract":"KoroFarms","time":1}]}

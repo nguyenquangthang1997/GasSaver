@@ -1,0 +1,1 @@
+{"time":97,"results":[{"type":"external-function ","before":"function setBaseUri(string memory _baseURIArg) public onlyOwner {\r\n        BASE_URI = _baseURIArg;\r\n    }","after":"function setBaseUri(string calldata _baseURIArg) public onlyOwner {\r\n        BASE_URI = _baseURIArg;\r\n    }","contract":"Ph0n1Phorce","time":0}]}

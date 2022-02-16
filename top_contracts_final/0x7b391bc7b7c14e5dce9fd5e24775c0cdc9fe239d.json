@@ -1,0 +1,1 @@
+{"time":88,"results":[{"type":"external-function ","before":"function setBaseURI(string memory uriString) public onlyOwner {\n        baseURI = uriString;\n    }","after":"function setBaseURI(string calldata uriString) public onlyOwner {\n        baseURI = uriString;\n    }","contract":"ShittyFuckingToken","time":0}]}

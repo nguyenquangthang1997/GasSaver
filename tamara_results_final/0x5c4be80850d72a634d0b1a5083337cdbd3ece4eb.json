@@ -1,0 +1,1 @@
+{"time":46,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public _totalSupply = 3 * 10 ** 14;","after":"uint256 public constant _totalSupply = 3 * 10 ** 14;","contract":"Beowulf","time":1}]}

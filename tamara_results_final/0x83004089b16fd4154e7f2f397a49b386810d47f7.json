@@ -1,0 +1,1 @@
+{"time":49,"results":[{"type":"constant-restrict-modification  ","before":"bool public mintingFinished = false;","after":"bool public constant mintingFinished = false;","contract":"StopSexism","time":0}]}

@@ -1,0 +1,1 @@
+{"time":140,"results":[{"type":"constant-restrict-modification  ","before":"address private _devAddress = 0xbB61A5398EeF5707fa662F42B7fC1Ca32e76e747;","after":"address private constant _devAddress = 0xbB61A5398EeF5707fa662F42B7fC1Ca32e76e747;","contract":"GymBros","time":0}]}

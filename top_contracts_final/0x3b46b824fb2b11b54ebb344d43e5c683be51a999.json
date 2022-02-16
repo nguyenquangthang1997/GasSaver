@@ -1,0 +1,1 @@
+{"time":87,"results":[{"type":"de-morgan-condition ","before":"!is_auth[msg.sender] && !isFree[msg.sender]","after":"!(is_auth[msg.sender] && isFree[msg.sender])","loc":{"start":{"line":1187,"column":8},"end":{"line":1187,"column":50}},"contract":"KaibaNFT","time":0}]}

@@ -1,0 +1,1 @@
+{"time":200,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseURIPrefix) external onlyOwner {\n        _baseURIPrefix = baseURIPrefix;\n    }","after":"function setBaseURI(string calldata baseURIPrefix) external onlyOwner {\n        _baseURIPrefix = baseURIPrefix;\n    }","contract":"SnapMintPass","time":0}]}

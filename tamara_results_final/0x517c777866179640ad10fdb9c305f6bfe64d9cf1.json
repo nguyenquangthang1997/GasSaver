@@ -1,0 +1,1 @@
+{"time":66,"results":[{"type":"constant-restrict-modification  ","before":"c constant decimals = 18;\n    s","after":"c constant decimals = 18;\n    s","contract":"CJHJToken","time":0}]}

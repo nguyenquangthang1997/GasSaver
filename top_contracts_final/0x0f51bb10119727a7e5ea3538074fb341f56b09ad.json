@@ -1,0 +1,1 @@
+{"time":52,"results":[{"type":"external-function ","before":"function changeName(string memory name) public onlyOwner{\n        _name = name;\n        emit NameChanged(name, msg.sender);\n    }","after":"function changeName(string calldata name) public onlyOwner{\n        _name = name;\n        emit NameChanged(name, msg.sender);\n    }","contract":"Token","time":0}]}

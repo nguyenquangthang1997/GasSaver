@@ -1,0 +1,1 @@
+{"time":64,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public startTimestamp;","after":"uint256 public immutable startTimestamp;","contract":"CWaste","time":0}]}

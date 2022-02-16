@@ -1,0 +1,1 @@
+{"time":126,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseURI) external onlyOwner {\n        _setBaseURI(baseURI);\n    }","after":"function setBaseURI(string calldata baseURI) external onlyOwner {\n        _setBaseURI(baseURI);\n    }","contract":"SHARKBOYFIGHTCLUB","time":0}]}

@@ -1,0 +1,1 @@
+{"time":406,"results":[{"type":"constant-restrict-modification  ","before":"   bytes32 private immutable _PERMIT_TYPEHASH = 0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126","after":"   bytes32 private immutable constant _PERMIT_TYPEHASH = 0x6e71edae12b1b97f4d1f60370fef10105fa2faae0126114a169c64845d6126","contract":"PopsicleV3Optimizer","time":0}]}

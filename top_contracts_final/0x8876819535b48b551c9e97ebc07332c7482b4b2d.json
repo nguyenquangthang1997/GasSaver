@@ -1,0 +1,1 @@
+{"time":328,"results":[{"type":"constant-restrict-modification  ","before":"string public symbol = \"DLP\";","after":"string public constant symbol = \"DLP\";","contract":"DODOLpToken","time":0},{"type":"immutable-restrict-modification ","before":"address public originToken;","after":"address public immutable originToken;","contract":"DODOLpToken","time":0}]}

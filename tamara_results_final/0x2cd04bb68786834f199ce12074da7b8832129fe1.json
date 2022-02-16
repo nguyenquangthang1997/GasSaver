@@ -1,0 +1,1 @@
+{"time":190,"results":[{"type":"constant-restrict-modification  ","before":"address public TRANSFER_PROXY_V2 = 0x95E6F48254609A6ee006F7D493c8e5fB97094ceF;","after":"address public constant TRANSFER_PROXY_V2 = 0x95E6F48254609A6ee006F7D493c8e5fB97094ceF;","contract":"WrapperDai","time":0}]}

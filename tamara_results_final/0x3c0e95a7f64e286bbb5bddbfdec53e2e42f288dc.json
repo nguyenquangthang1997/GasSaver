@@ -1,0 +1,1 @@
+{"time":65,"results":[{"type":"constant-restrict-modification  ","before":"string public name = \"ClassToken\";","after":"string public constant name = \"ClassToken\";","contract":"ClassToken","time":0},{"type":"constant-restrict-modification  ","before":"string public symbol = \"CTK\";","after":"string public constant symbol = \"CTK\";","contract":"ClassToken","time":0}]}

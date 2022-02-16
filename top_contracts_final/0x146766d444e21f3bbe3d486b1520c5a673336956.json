@@ -1,0 +1,1 @@
+{"time":111,"results":[{"type":"constant-restrict-modification  ","before":"uint256 DPR_UNIT = 10 ** 18;","after":"uint256 constant DPR_UNIT = 10 ** 18;","contract":"DPRStaking","time":1},{"type":"constant-restrict-modification  ","before":"uint256 public staking_time = 270 days;","after":"uint256 public constant staking_time = 270 days;","contract":"DPRStaking","time":1}]}

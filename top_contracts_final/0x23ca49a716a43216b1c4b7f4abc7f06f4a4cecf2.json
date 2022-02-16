@@ -1,0 +1,1 @@
+{"time":108,"results":[{"type":"external-function ","before":"function setBaseUri(string memory baseUri_) external onlyOwner {\n    baseUri = baseUri_;\n  }","after":"function setBaseUri(string calldata baseUri_) external onlyOwner {\n    baseUri = baseUri_;\n  }","contract":"LawlessLemmings","time":0}]}

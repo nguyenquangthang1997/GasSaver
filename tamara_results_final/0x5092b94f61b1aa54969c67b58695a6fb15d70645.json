@@ -1,0 +1,1 @@
+{"time":61,"results":[{"type":"constant-restrict-modification  ","before":"address public mkrAddr = 0x39755357759cE0d7f32dC8dC45414CCa409AE24e;","after":"address public constant mkrAddr = 0x39755357759cE0d7f32dC8dC45414CCa409AE24e;","contract":"McdResolver","time":0}]}

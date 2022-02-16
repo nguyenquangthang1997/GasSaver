@@ -1,0 +1,1 @@
+{"time":174,"results":[{"type":"external-function ","before":"function setTokenURI(string memory tokenUriBase_) public onlyOwner {\n        _tokenUriBase = tokenUriBase_;\n    }","after":"function setTokenURI(string calldata tokenUriBase_) public onlyOwner {\n        _tokenUriBase = tokenUriBase_;\n    }","contract":"PartyBears","time":0}]}

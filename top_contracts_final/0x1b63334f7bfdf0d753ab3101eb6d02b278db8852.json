@@ -1,0 +1,1 @@
+{"time":321,"results":[{"type":"struct-data-arrangement ","before":"\naddress feePayer\nuint64 maturity\nint128 strike64x64\nint128 spot64x64\nuint256 contractSize\nbool isCall","after":"uint256 contractSize\naddress feePayer\nint128 strike64x64\nint128 spot64x64\nuint64 maturity\nbool isCall\n","contract":"PoolStorage","time":1}]}

@@ -1,0 +1,1 @@
+{"time":94,"results":[{"type":"constant-restrict-modification  ","before":"bytes32 immutable private OPERATOR_ROLE = keccak256(\"OPERATOR\");","after":"bytes32 immutable private constant OPERATOR_ROLE = keccak256(\"OPERATOR\");","contract":"Bridge","time":1}]}

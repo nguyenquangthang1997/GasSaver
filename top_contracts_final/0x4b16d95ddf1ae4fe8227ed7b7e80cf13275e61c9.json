@@ -1,0 +1,1 @@
+{"time":87,"results":[{"type":"constant-restrict-modification  ","before":"uint public immutable realINDEX = 23158417847463239084714197001737581570653996933128112807891516 * 1e9;","after":"uint public immutable constant realINDEX = 23158417847463239084714197001737581570653996933128112807891516 * 1e9;","contract":"wxBTRFLY","time":0}]}

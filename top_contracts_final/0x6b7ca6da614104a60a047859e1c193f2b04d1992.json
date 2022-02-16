@@ -1,0 +1,1 @@
+{"time":116,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public maxSupply = 512;","after":"uint256 public constant maxSupply = 512;","contract":"ZHUGE_NFT","time":0}]}

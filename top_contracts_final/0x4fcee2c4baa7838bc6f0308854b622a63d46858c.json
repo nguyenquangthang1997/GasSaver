@@ -1,0 +1,1 @@
+{"time":67,"results":[{"type":"immutable-restrict-modification ","before":"address _TOKEN_;","after":"address immutable _TOKEN_;","contract":"LockedTokenVault","time":0}]}

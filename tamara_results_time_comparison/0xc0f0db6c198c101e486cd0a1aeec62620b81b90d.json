@@ -1,0 +1,1 @@
+{"time":273,"results":[{"type":"de-morgan-condition ","before":"!marginDetails.isOpen && !marginDetails.isLong","after":"!(marginDetails.isOpen && marginDetails.isLong)","loc":{"start":{"line":1252,"column":15},"end":{"line":1252,"column":55}},"contract":"MarginRingSubmitterWrapper","time":0}]}

@@ -1,0 +1,1 @@
+{"time":4,"results":[{"type":"constant-restrict-modification  ","before":"address private burnTokenAddress =\n        0x3737373737373737373737373737373737373737;","after":"address private constant burnTokenAddress =\n        0x3737373737373737373737373737373737373737;","contract":"PdexMigrate","time":0}]}

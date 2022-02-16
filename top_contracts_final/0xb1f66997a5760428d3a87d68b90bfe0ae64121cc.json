@@ -1,0 +1,1 @@
+{"time":126,"results":[{"type":"constant-restrict-modification  ","before":"uint256 private _cap = 500000000e18;","after":"uint256 private constant _cap = 500000000e18;","contract":"LuaToken","time":1}]}

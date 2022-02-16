@@ -1,0 +1,1 @@
+{"time":21,"results":[{"type":"constant-restrict-modification  ","before":"uint256 totalSupply_ = 500 * 10 ** uint256(decimals);","after":"uint256 constant totalSupply_ = 500 * 10 ** uint256(decimals);","contract":"SignalPartner","time":0}]}

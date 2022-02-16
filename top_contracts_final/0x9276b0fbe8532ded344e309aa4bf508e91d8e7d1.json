@@ -1,0 +1,1 @@
+{"time":164,"results":[{"type":"constant-restrict-modification  ","before":"uint256 private _maxTokensAtOnce = 50;","after":"uint256 private constant _maxTokensAtOnce = 50;","contract":"FlippedApesToken","time":2}]}

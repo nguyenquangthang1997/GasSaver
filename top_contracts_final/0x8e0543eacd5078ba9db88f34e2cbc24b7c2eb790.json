@@ -1,0 +1,1 @@
+{"time":121,"results":[{"type":"external-function ","before":"function setBaseTokenURI(string memory URI) public onlyOwner {\n    currentBaseTokenURI = URI;\n  }","after":"function setBaseTokenURI(string calldata URI) public onlyOwner {\n    currentBaseTokenURI = URI;\n  }","contract":"PandaDynasty","time":0}]}

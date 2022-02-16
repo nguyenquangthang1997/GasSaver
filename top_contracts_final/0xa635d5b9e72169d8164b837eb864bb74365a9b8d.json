@@ -1,0 +1,1 @@
+{"time":156,"results":[{"type":"de-morgan-condition ","before":"!setupState.rewards || !setupState.staking","after":"!(setupState.rewards || setupState.staking)","loc":{"start":{"line":1206,"column":12},"end":{"line":1206,"column":47}},"contract":"PreStakingContract","time":0}]}

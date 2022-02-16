@@ -1,0 +1,1 @@
+{"time":48,"results":[{"type":"immutable-restrict-modification ","before":"uint256 timeToStake;","after":"uint256 immutable timeToStake;","contract":"StakingImpl","time":0},{"type":"immutable-restrict-modification ","before":"uint256 timeToRelease;","after":"uint256 immutable timeToRelease;","contract":"StakingImpl","time":0}]}

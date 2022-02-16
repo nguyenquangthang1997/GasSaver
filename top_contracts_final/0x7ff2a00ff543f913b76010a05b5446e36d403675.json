@@ -1,0 +1,1 @@
+{"time":246,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public maxPixels;","after":"uint256 public immutable maxPixels;","contract":"ThePixels","time":1}]}

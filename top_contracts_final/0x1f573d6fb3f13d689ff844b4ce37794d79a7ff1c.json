@@ -1,0 +1,1 @@
+{"time":57,"results":[{"type":"constant-restrict-modification  ","before":"string public version = '0.2';","after":"string public constant version = '0.2';","contract":"SmartToken","time":0},{"type":"constant-restrict-modification  ","before":"string public standard = 'Token 0.1';","after":"string public constant standard = 'Token 0.1';","contract":"SmartToken","time":0}]}

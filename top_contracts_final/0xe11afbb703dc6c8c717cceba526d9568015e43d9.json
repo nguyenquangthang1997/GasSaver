@@ -1,0 +1,1 @@
+{"time":112,"results":[{"type":"constant-restrict-modification  ","before":"address t1 = 0xeed0f861c97a181Cb1f91e39C500652e08e87955;","after":"address constant t1 = 0xeed0f861c97a181Cb1f91e39C500652e08e87955;","contract":"KARMA","time":0}]}

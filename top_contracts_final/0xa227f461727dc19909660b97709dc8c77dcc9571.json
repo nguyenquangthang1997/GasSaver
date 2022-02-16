@@ -1,0 +1,1 @@
+{"time":142,"results":[{"type":"external-function ","before":"function setBaseURI(string memory uri) public onlyOwner {\r\n        baseURI = uri;\r\n    }","after":"function setBaseURI(string calldata uri) public onlyOwner {\r\n        baseURI = uri;\r\n    }","contract":"TheVoxelUniverse","time":0}]}

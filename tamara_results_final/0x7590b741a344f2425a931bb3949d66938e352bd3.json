@@ -1,0 +1,1 @@
+{"time":41,"results":[{"type":"constant-restrict-modification  ","before":"uint256 private oneWeek = 1 weeks;","after":"uint256 private constant oneWeek = 1 weeks;","contract":"GiveTogether","time":0}]}

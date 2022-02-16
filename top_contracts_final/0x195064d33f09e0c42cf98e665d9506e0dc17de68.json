@@ -1,0 +1,1 @@
+{"time":14,"results":[{"type":"immutable-restrict-modification ","before":"address _staking_token;","after":"address immutable _staking_token;","contract":"Vega_Staking_Bridge","time":0}]}

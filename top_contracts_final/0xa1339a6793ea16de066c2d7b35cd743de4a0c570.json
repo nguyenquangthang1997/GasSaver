@@ -1,0 +1,1 @@
+{"time":116,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public MAX_POOL_COUNT = 10;","after":"uint256 public constant MAX_POOL_COUNT = 10;","contract":"LiquidityMiningManager","time":0}]}

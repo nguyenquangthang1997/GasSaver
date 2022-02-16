@@ -1,0 +1,1 @@
+{"time":141,"results":[{"type":"external-function ","before":"function setProvenanceHash(string memory hash_) public onlyOwner {\r\n    \tLEGIT_DERPY_HASH = hash_;\r\n    }","after":"function setProvenanceHash(string calldata hash_) public onlyOwner {\r\n    \tLEGIT_DERPY_HASH = hash_;\r\n    }","contract":"Derpys","time":0}]}

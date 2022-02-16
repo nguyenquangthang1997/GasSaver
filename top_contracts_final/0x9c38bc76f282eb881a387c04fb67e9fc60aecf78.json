@@ -1,0 +1,1 @@
+{"time":133,"results":[{"type":"external-function ","before":"function setBaseTokenURI(string memory baseURI) public onlyOwner {\n        _baseTokenURI = baseURI;\n    }","after":"function setBaseTokenURI(string calldata baseURI) public onlyOwner {\n        _baseTokenURI = baseURI;\n    }","contract":"Coodles","time":0}]}

@@ -1,0 +1,1 @@
+{"time":63,"results":[{"type":"immutable-restrict-modification ","before":"address public vestingBeneficial;","after":"address public immutable vestingBeneficial;","contract":"DEPAY","time":0}]}

@@ -1,0 +1,1 @@
+{"time":195,"results":[{"type":"external-function ","before":"function setKingURI(string memory _newKingURI) public onlyOwner {\n        kingUri = _newKingURI;\n    }","after":"function setKingURI(string calldata _newKingURI) public onlyOwner {\n        kingUri = _newKingURI;\n    }","contract":"CryptoWolvesClub","time":0}]}

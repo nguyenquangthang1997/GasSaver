@@ -1,0 +1,1 @@
+{"time":2,"results":[{"type":"external-function ","before":"function tokenFallback(address from, uint value, bytes memory data) public {\n        emit Log(from, value, data);\n    }","after":"function tokenFallback(address from, uint value, bytes calldata data) public {\n        emit Log(from, value, data);\n    }","contract":"TestERC223","time":0}]}

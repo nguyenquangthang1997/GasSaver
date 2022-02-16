@@ -1,0 +1,1 @@
+{"time":30,"results":[{"type":"immutable-restrict-modification ","before":"address public polcTokenAddress;","after":"address public immutable polcTokenAddress;","contract":"POLCBridgeTransfers","time":0}]}

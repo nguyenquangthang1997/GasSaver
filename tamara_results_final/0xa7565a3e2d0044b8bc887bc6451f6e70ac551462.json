@@ -1,0 +1,1 @@
+{"time":29,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public feePercent = 2500;","after":"uint256 public constant feePercent = 2500;","contract":"Simple_FOMO_Round_2","time":0}]}

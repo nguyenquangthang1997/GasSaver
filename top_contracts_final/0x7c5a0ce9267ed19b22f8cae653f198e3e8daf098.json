@@ -1,0 +1,1 @@
+{"time":50,"results":[{"type":"constant-restrict-modification  ","before":"address CROWDSALE_MINTER = 0xDa2Cf810c5718135247628689D84F94c61B41d6A;","after":"address constant CROWDSALE_MINTER = 0xDa2Cf810c5718135247628689D84F94c61B41d6A;","contract":"SAN","time":0}]}

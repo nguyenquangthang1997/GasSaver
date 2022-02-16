@@ -1,0 +1,1 @@
+{"time":59,"results":[{"type":"constant-restrict-modification  ","before":"uint public baseMultiplier = 40;","after":"uint public constant baseMultiplier = 40;","contract":"DaiSwap","time":0},{"type":"constant-restrict-modification  ","before":"uint fee = 997;","after":"uint constant fee = 997;","contract":"DaiSwap","time":0}]}

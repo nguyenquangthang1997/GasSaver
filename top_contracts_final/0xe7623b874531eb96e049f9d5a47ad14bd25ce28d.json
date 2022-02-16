@@ -1,0 +1,1 @@
+{"time":102,"results":[{"type":"external-function ","before":"function setBaseURI(string memory __baseURI) public onlyOwner {\n        baseURI = __baseURI;\n    }","after":"function setBaseURI(string calldata __baseURI) public onlyOwner {\n        baseURI = __baseURI;\n    }","contract":"RAKUZA","time":0}]}

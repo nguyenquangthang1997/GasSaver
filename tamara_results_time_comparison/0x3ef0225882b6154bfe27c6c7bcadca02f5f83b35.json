@@ -1,0 +1,1 @@
+{"time":448,"results":[{"type":"de-morgan-condition ","before":"!nested && !bech32","after":"!(nested && bech32)","loc":{"start":{"line":2093,"column":20},"end":{"line":2093,"column":32}},"contract":"UTXOClaimValidation","time":0}]}

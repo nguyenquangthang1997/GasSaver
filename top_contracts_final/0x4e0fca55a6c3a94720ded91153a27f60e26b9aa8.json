@@ -1,0 +1,1 @@
+{"time":236,"results":[{"type":"de-morgan-condition ","before":"!_isExcluded[sender] && !_isExcluded[recipient]","after":"!(_isExcluded[sender] && _isExcluded[recipient])","loc":{"start":{"line":957,"column":23},"end":{"line":957,"column":69}},"contract":"BoostToken","time":0}]}

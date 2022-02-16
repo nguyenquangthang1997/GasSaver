@@ -1,0 +1,1 @@
+{"time":194,"results":[{"type":"external-function ","before":"function setURI(string memory newURI) external onlyOwner {\n        _setBaseURI(newURI);\n    }","after":"function setURI(string calldata newURI) external onlyOwner {\n        _setBaseURI(newURI);\n    }","contract":"StarNFT721","time":0}]}

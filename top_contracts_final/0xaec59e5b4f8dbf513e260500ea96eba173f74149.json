@@ -1,0 +1,1 @@
+{"time":60,"results":[{"type":"immutable-restrict-modification ","before":"uint8 public _decimals;","after":"uint8 public immutable _decimals;","contract":"AURA","time":0}]}

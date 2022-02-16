@@ -1,0 +1,1 @@
+{"time":152,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public maxSupply = 6969;","after":"uint256 public constant maxSupply = 6969;","contract":"Kongzilla","time":1}]}

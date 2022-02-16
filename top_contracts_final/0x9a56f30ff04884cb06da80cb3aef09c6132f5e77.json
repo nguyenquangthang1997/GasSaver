@@ -1,0 +1,1 @@
+{"time":279,"results":[{"type":"immutable-restrict-modification ","before":"bytes32 public domainSeparator;","after":"bytes32 public immutable domainSeparator;","contract":"DMMPool","time":0}]}

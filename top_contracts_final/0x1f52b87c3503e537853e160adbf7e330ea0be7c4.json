@@ -1,0 +1,1 @@
+{"time":63,"results":[{"type":"struct-data-arrangement ","before":"\naddress nftAddress\naddress seller\nuint128 startingPrice\nuint128 endingPrice\nuint64 duration\nuint64 startedAt","after":"address nftAddress\naddress seller\nuint128 startingPrice\nuint128 endingPrice\nuint64 duration\nuint64 startedAt\n","contract":"ClockAuctionBase","time":0}]}

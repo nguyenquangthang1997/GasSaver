@@ -1,0 +1,1 @@
+{"time":39,"results":[{"type":"immutable-restrict-modification ","before":"address public bit2me;","after":"address public immutable bit2me;","contract":"Token","time":0},{"type":"constant-restrict-modification  ","before":"uint256 public maxSupply = 5000000000 ether;","after":"uint256 public constant maxSupply = 5000000000 ether;","contract":"Token","time":0}]}

@@ -1,0 +1,1 @@
+{"time":96,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public START;","after":"uint256 public immutable START;","contract":"PixelERC20","time":0}]}

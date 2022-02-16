@@ -1,0 +1,1 @@
+{"time":72,"results":[{"type":"constant-restrict-modification  ","before":"uint128 public increasePeriod = 6000;","after":"uint128 public constant increasePeriod = 6000;","contract":"TulipCore","time":1}]}

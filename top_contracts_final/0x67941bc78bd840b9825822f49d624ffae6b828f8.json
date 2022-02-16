@@ -1,0 +1,1 @@
+{"time":80,"results":[{"type":"immutable-restrict-modification ","before":"uint256 private _intTotalSupply;","after":"uint256 private immutable _intTotalSupply;","contract":"SaibaInu","time":0},{"type":"immutable-restrict-modification ","before":"uint8 private _decimals;","after":"uint8 private immutable _decimals;","contract":"SaibaInu","time":0}]}

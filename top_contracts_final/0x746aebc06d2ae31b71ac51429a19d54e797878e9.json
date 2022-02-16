@@ -1,0 +1,1 @@
+{"time":170,"results":[{"type":"external-function ","before":"function setRates(Rate[] memory _rates) external onlyGovernance {\n    _setRates(_rates);\n  }","after":"function setRates(Rate[] calldata _rates) external onlyGovernance {\n    _setRates(_rates);\n  }","contract":"Miner","time":0}]}

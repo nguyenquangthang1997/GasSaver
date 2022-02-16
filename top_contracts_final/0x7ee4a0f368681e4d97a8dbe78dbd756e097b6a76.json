@@ -1,0 +1,1 @@
+{"time":109,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public rewardsDuration;","after":"uint256 public immutable rewardsDuration;","contract":"StakingRewards","time":0}]}

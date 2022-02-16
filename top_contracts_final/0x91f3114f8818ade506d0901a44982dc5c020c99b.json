@@ -1,0 +1,1 @@
+{"time":162,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseURI) public onlyOwner {\n        _setBaseURI(baseURI);\n    }","after":"function setBaseURI(string calldata baseURI) public onlyOwner {\n        _setBaseURI(baseURI);\n    }","contract":"RabbitCollegeClub","time":0}]}

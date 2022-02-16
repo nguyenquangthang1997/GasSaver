@@ -109,14 +109,24 @@ const typeRepresentation = {
 function packDataArrangement(params) {
 
     let all256Bit = true;
-    let paramsData = params.map(param => {
+    let paramsData = []
+    for (let param of params) {
         let temp = {}
+        if (param.typeName.type === "UserDefinedTypeName") return {status: false}
         temp.type = param.typeName.type !== "ElementaryTypeName" ? "default" : param.typeName.name;
         temp.value = typeRepresentation[temp.type];
         temp.range = [param.typeName.range[0], param.range[1]]
         if (typeRepresentation[temp.type] !== 256) all256Bit = false;
-        return temp;
-    })
+        paramsData.push(temp)
+    }
+    // let paramsData = params.map(param => {
+    //     let temp = {}
+    //     temp.type = param.typeName.type !== "ElementaryTypeName" ? "default" : param.typeName.name;
+    //     temp.value = typeRepresentation[temp.type];
+    //     temp.range = [param.typeName.range[0], param.range[1]]
+    //     if (typeRepresentation[temp.type] !== 256) all256Bit = false;
+    //     return temp;
+    // })
 
     if (all256Bit === true) return {status: false};
     let result = {}

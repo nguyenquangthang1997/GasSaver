@@ -1,0 +1,1 @@
+{"time":47,"results":[{"type":"immutable-restrict-modification ","before":"uint public startRewardsTime;","after":"uint public immutable startRewardsTime;","contract":"PathRewards","time":0}]}

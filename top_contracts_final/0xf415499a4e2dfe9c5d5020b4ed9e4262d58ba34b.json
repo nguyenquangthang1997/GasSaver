@@ -1,0 +1,1 @@
+{"time":123,"results":[{"type":"constant-restrict-modification  ","before":"address private dev = 0xb250E36EcCF09c454f8AEb8a65265E6B26FF938F;","after":"address private constant dev = 0xb250E36EcCF09c454f8AEb8a65265E6B26FF938F;","contract":"BlockchainDevs","time":1}]}

@@ -1,0 +1,1 @@
+{"time":386,"results":[{"type":"de-morgan-condition ","before":"!m_isInvestor[msg.sender] && !m_referrals[msg.sender].notZero()","after":"!(m_isInvestor[msg.sender] && m_referrals[msg.sender].notZero())","loc":{"start":{"line":1157,"column":13},"end":{"line":1157,"column":75}},"contract":"_200eth","time":0}]}

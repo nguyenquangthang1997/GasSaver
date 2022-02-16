@@ -1,0 +1,1 @@
+{"time":50,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public initialSupply = 6000000000 * (10 ** decimals);","after":"uint256 public constant initialSupply = 6000000000 * (10 ** decimals);","contract":"Tritecoin","time":0}]}

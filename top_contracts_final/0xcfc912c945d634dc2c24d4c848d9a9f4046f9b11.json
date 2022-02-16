@@ -1,0 +1,1 @@
+{"time":109,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public PRECISION_FACTOR;","after":"uint256 public immutable PRECISION_FACTOR;","contract":"StakingContract","time":0}]}

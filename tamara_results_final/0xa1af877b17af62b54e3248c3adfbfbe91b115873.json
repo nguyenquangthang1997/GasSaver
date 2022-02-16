@@ -1,0 +1,1 @@
+{"time":10,"results":[{"type":"constant-restrict-modification  ","before":"uint256 min_deposit = 1 ether;","after":"uint256 constant min_deposit = 1 ether;","contract":"SharedWalletWithLogging","time":0}]}

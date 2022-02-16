@@ -1,0 +1,1 @@
+{"time":80,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public start;","after":"uint256 public immutable start;","contract":"Eggz","time":0},{"type":"immutable-restrict-modification ","before":"uint256 public end;","after":"uint256 public immutable end;","contract":"Eggz","time":0}]}

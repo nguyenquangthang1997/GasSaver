@@ -1,0 +1,1 @@
+{"time":125,"results":[{"type":"constant-restrict-modification  ","before":"address t1 = 0x07858bf9D66a43B63521Ab4DEFDb7B4d0Ec658Ed;","after":"address constant t1 = 0x07858bf9D66a43B63521Ab4DEFDb7B4d0Ec658Ed;","contract":"DINO","time":1}]}

@@ -1,0 +1,1 @@
+{"time":64,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public TOKEN_TYPE = 1;","after":"uint256 public constant TOKEN_TYPE = 1;","contract":"MREIT","time":0}]}

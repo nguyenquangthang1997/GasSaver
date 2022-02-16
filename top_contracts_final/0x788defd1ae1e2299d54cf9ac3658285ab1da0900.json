@@ -1,0 +1,1 @@
+{"time":169,"results":[{"type":"constant-restrict-modification  ","before":"bool public saleIsActive = true;","after":"bool public constant saleIsActive = true;","contract":"TinyKingdoms","time":1}]}

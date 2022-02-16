@@ -1,0 +1,1 @@
+{"time":72,"results":[{"type":"constant-restrict-modification  ","before":"uint ethWei = 1 ether;","after":"uint constant ethWei = 1 ether;","contract":"AOQFund","time":0}]}

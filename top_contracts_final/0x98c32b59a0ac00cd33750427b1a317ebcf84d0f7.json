@@ -1,0 +1,1 @@
+{"time":217,"results":[{"type":"immutable-restrict-modification ","before":"  address public sharedVaul","after":"  address public sharedVaul","contract":"SigMasterChef","time":0},{"type":"immutable-restrict-modification ","before":"  uint256 public startBloc","after":"  uint256 public startBloc","contract":"SigMasterChef","time":0}]}

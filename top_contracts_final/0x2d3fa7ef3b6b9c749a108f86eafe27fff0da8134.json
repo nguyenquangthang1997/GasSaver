@@ -1,0 +1,1 @@
+{"time":138,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public price = 60000000000000000;","after":"uint256 public constant price = 60000000000000000;","contract":"KandiKids","time":0}]}

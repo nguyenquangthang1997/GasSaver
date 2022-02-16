@@ -1,0 +1,1 @@
+{"time":242,"results":[{"type":"de-morgan-condition ","before":"!(a == - 2**255 && b == -1) && !(b == - 2**255 && a == -1)","after":"!((a == - 2**255 && b == -1) && (b == - 2**255 && a == -1))","loc":{"start":{"line":54,"column":11},"end":{"line":54,"column":68}},"contract":"SafeMathInt","time":0}]}

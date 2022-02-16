@@ -1,0 +1,1 @@
+{"time":55,"results":[{"type":"constant-restrict-modification  ","before":"bool public miningFinished = false;","after":"bool public constant miningFinished = false;","contract":"CehhCoin","time":0}]}

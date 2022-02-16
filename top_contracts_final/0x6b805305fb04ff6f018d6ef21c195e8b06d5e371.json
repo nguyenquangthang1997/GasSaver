@@ -1,0 +1,1 @@
+{"time":7,"results":[{"type":"constant-restrict-modification  ","before":"bytes32 ETH_A = 0x4554482d41000000000000000000000000000000000000000000000000000000;","after":"bytes32 constant ETH_A = 0x4554482d41000000000000000000000000000000000000000000000000000000;","contract":"PingerBundledCall","time":0}]}

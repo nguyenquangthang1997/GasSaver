@@ -1,0 +1,1 @@
+{"time":150,"results":[{"type":"external-function ","before":"function setBaseURI(string memory newBaseURI) external onlyOwner notLocked {\n        baseURI = newBaseURI;\n    }","after":"function setBaseURI(string calldata newBaseURI) external onlyOwner notLocked {\n        baseURI = newBaseURI;\n    }","contract":"BonesClubCompanions","time":0}]}

@@ -1,0 +1,1 @@
+{"time":105,"results":[{"type":"immutable-restrict-modification ","before":"address public uniswapV2Pair;","after":"address public immutable uniswapV2Pair;","contract":"Accel","time":0}]}

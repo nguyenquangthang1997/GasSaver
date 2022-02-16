@@ -1,0 +1,1 @@
+{"time":22,"results":[{"type":"constant-restrict-modification  ","before":"uint public totalSupply = 1*10**27;","after":"uint public constant totalSupply = 1*10**27;","contract":"LogisticsToken","time":0}]}

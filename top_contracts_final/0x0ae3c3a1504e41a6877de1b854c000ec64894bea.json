@@ -1,0 +1,1 @@
+{"time":119,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public NFT_PRICE = 44000000000000000;","after":"uint256 public constant NFT_PRICE = 44000000000000000;","contract":"Circleorzo","time":0}]}

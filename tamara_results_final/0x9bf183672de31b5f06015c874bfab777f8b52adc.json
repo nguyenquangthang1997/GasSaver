@@ -1,0 +1,1 @@
+{"time":19,"results":[{"type":"constant-restrict-modification  ","before":"string public version = 'H0.1';","after":"string public constant version = 'H0.1';","contract":"HumanStandardToken","time":0}]}

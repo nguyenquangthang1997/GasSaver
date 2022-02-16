@@ -1,0 +1,1 @@
+{"time":50,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public _freezeTimestamp = 1577836800;","after":"uint256 public constant _freezeTimestamp = 1577836800;","contract":"EBKToken","time":0}]}

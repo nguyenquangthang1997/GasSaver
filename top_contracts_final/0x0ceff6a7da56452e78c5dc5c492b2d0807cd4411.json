@@ -1,0 +1,1 @@
+{"time":166,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseUri) public onlyOwner {\r\n    _metadataBaseURI = baseUri;\r\n  }","after":"function setBaseURI(string calldata baseUri) public onlyOwner {\r\n    _metadataBaseURI = baseUri;\r\n  }","contract":"GenerativeCollection","time":0}]}

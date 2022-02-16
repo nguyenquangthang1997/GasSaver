@@ -1,0 +1,1 @@
+{"time":92,"results":[{"type":"external-function ","before":"function setBaseURI(string memory uri) public onlyOwner {\n        _baseTokenURI = uri;\n    }","after":"function setBaseURI(string calldata uri) public onlyOwner {\n        _baseTokenURI = uri;\n    }","contract":"LITProjectTwoFlux","time":0}]}

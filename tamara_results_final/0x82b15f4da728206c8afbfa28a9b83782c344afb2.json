@@ -1,0 +1,1 @@
+{"time":40,"results":[{"type":"constant-restrict-modification  ","before":"string public version = \"1.0\";","after":"string public constant version = \"1.0\";","contract":"GooglierToken","time":0}]}

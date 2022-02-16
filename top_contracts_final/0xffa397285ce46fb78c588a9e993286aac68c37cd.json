@@ -1,0 +1,1 @@
+{"time":31,"results":[{"type":"immutable-restrict-modification ","before":"address public implementationAddress;","after":"address public immutable implementationAddress;","contract":"ForwarderFactory","time":0}]}

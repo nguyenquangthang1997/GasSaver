@@ -1,0 +1,1 @@
+{"time":51,"results":[{"type":"immutable-restrict-modification ","before":"address internal deployer;","after":"address internal immutable deployer;","contract":"GeneratedToken","time":0}]}

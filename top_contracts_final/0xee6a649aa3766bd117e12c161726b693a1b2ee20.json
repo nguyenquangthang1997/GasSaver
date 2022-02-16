@@ -1,0 +1,1 @@
+{"time":116,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public immutable DEPLOY_TIME = block.timestamp;","after":"uint256 public immutable constant DEPLOY_TIME = block.timestamp;","contract":"Staking","time":0}]}

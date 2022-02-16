@@ -1,0 +1,1 @@
+{"time":163,"results":[{"type":"external-function ","before":"function setProvenanceHash(string memory _hash) public onlyOwner {\n        METADATA_PROVENANCE_HASH = _hash;\n    }","after":"function setProvenanceHash(string calldata _hash) public onlyOwner {\n        METADATA_PROVENANCE_HASH = _hash;\n    }","contract":"ForgottenRunesWizardsCult","time":0}]}

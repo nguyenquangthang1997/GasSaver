@@ -1,0 +1,1 @@
+{"time":53,"results":[{"type":"constant-restrict-modification  ","before":"uint REFERRALS_LIMIT = 3;","after":"uint constant REFERRALS_LIMIT = 3;","contract":"DaYingJia","time":0},{"type":"constant-restrict-modification  ","before":"uint STAGE_DURATION = 365 days;","after":"uint constant STAGE_DURATION = 365 days;","contract":"DaYingJia","time":0}]}

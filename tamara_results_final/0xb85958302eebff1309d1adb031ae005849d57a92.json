@@ -1,0 +1,1 @@
+{"time":79,"results":[{"type":"constant-restrict-modification  ","before":"uint256 internal decimals_ = 18;","after":"uint256 internal constant decimals_ = 18;","contract":"Market","time":0}]}

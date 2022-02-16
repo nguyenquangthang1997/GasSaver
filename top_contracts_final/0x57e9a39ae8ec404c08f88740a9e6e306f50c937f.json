@@ -1,0 +1,1 @@
+{"time":168,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseURI_) public onlyOwner {\n        _baseURI = baseURI_;\n    }","after":"function setBaseURI(string calldata baseURI_) public onlyOwner {\n        _baseURI = baseURI_;\n    }","contract":"ERC721","time":0}]}

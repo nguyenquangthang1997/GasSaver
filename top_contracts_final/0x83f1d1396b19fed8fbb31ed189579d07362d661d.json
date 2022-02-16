@@ -1,0 +1,1 @@
+{"time":172,"results":[{"type":"constant-restrict-modification  ","before":"address public lootContractAddress =\n        0xFF9C1b15B16263C61d017ee9F65C50e4AE0113D7;","after":"address public constant lootContractAddress =\n        0xFF9C1b15B16263C61d017ee9F65C50e4AE0113D7;","contract":"LootHymns","time":0}]}

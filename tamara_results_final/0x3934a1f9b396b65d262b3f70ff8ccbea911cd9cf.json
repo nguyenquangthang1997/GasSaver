@@ -1,0 +1,1 @@
+{"time":12,"results":[{"type":"constant-restrict-modification  ","before":"address owner = msg.sender;","after":"address constant owner = msg.sender;","contract":"ReceiverPays","time":0}]}

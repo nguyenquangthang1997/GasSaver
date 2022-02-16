@@ -1,0 +1,1 @@
+{"time":21,"results":[{"type":"struct-data-arrangement ","before":"\n  bool initializ\n  string na\n  address reputation_passpo\n  string websi","after":"  string na\n  string websi\n  address reputation_passpo\n  bool initializ\n","contract":"FactProviderRegistry","time":0}]}

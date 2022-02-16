@@ -1,0 +1,1 @@
+{"time":48,"results":[{"type":"external-function ","before":"function redeem(uint256[] memory _baseTokens) public {\n    redeemTo(msg.sender, _baseTokens);\n  }","after":"function redeem(uint256[] calldata _baseTokens) public {\n    redeemTo(msg.sender, _baseTokens);\n  }","contract":"RedeemableGiveaway","time":0}]}

@@ -1,0 +1,1 @@
+{"time":116,"results":[{"type":"external-function ","before":"function setBaseTokenURI(string memory __baseTokenURI) public onlyOwner {\n    _baseTokenURI = __baseTokenURI;\n  }","after":"function setBaseTokenURI(string calldata __baseTokenURI) public onlyOwner {\n    _baseTokenURI = __baseTokenURI;\n  }","contract":"NounsJump","time":0}]}

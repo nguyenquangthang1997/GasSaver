@@ -1,0 +1,1 @@
+{"time":171,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public manualBurnFrequency = 30 minutes;","after":"uint256 public constant manualBurnFrequency = 30 minutes;","contract":"ButtHoleINU","time":1}]}

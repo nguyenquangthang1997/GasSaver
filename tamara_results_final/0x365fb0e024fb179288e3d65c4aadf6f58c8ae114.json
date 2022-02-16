@@ -1,0 +1,1 @@
+{"time":13,"results":[{"type":"state-data-arrangement ","before":"\naddress public whom;\nuint256 public mana;\nbytes   public data;\nbool    public done;","after":"uint256 public mana;\nbytes   public data;\naddress public whom;\nbool    public done;\n","contract":"DSSpell","time":1}]}

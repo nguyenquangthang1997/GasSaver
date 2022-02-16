@@ -1,0 +1,1 @@
+{"time":109,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public MAX_FREN_PASS = 2000;","after":"uint256 public constant MAX_FREN_PASS = 2000;","contract":"FrenPass","time":0}]}

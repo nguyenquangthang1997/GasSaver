@@ -1,0 +1,1 @@
+{"time":128,"results":[{"type":"immutable-restrict-modification ","before":"bytes32 public DOMAIN_SEPARATOR;","after":"bytes32 public immutable DOMAIN_SEPARATOR;","contract":"ManifestERC20Token","time":0},{"type":"immutable-restrict-modification ","before":"uint8 internal _decimals;","after":"uint8 internal immutable _decimals;","contract":"ManifestERC20Token","time":0}]}

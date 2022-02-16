@@ -1,0 +1,1 @@
+{"time":140,"results":[{"type":"immutable-restrict-modification ","before":"uint256 private releaseTime_;","after":"uint256 private immutable releaseTime_;","contract":"WBrickken","time":0}]}

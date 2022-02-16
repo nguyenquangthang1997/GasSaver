@@ -1,0 +1,1 @@
+{"time":114,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public _tTotal = 10**10 * 10**9;","after":"uint256 public constant _tTotal = 10**10 * 10**9;","contract":"COOL","time":1},{"type":"immutable-restrict-modification ","before":"address public uniswapV2Pair;","after":"address public immutable uniswapV2Pair;","contract":"COOL","time":1}]}

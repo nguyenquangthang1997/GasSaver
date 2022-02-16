@@ -1,0 +1,1 @@
+{"time":183,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseURI_) external onlyOwner {\n        baseURI = baseURI_;\n    }","after":"function setBaseURI(string calldata baseURI_) external onlyOwner {\n        baseURI = baseURI_;\n    }","contract":"SuperGeisha","time":0}]}

@@ -1,0 +1,1 @@
+{"time":92,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseURI_) public onlyOwner {\n        baseURI = baseURI_;\n    }","after":"function setBaseURI(string calldata baseURI_) public onlyOwner {\n        baseURI = baseURI_;\n    }","contract":"LilMutant","time":0}]}

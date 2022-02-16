@@ -1,0 +1,1 @@
+{"time":158,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public maxSupply = 3890;","after":"uint256 public constant maxSupply = 3890;","contract":"PixelBillionaire","time":0}]}

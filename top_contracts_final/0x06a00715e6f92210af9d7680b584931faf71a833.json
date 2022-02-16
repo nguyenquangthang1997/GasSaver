@@ -1,0 +1,1 @@
+{"time":105,"results":[{"type":"constant-restrict-modification  ","before":"uint public INITIAL_SUPPLY = 100000000 * (uint(10) ** 18);","after":"uint public constant INITIAL_SUPPLY = 100000000 * (uint(10) ** 18);","contract":"XNLToken","time":0}]}

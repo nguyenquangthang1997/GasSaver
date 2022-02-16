@@ -1,0 +1,1 @@
+{"time":108,"results":[{"type":"external-function ","before":"function setNewMetadataBaseURI(string memory _newMetadataURI) external onlyOwner {\n        metadataBaseURI = _newMetadataURI;\n    }","after":"function setNewMetadataBaseURI(string calldata _newMetadataURI) external onlyOwner {\n        metadataBaseURI = _newMetadataURI;\n    }","contract":"Spookle","time":0}]}

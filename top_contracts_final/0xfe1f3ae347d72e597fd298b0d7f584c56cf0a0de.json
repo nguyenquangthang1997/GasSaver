@@ -1,0 +1,1 @@
+{"time":91,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public MAX_TOKENS = 5000;","after":"uint256 public constant MAX_TOKENS = 5000;","contract":"Rewind","time":0},{"type":"constant-restrict-modification  ","before":"uint256 public MAX_FREE = 3000;","after":"uint256 public constant MAX_FREE = 3000;","contract":"Rewind","time":0}]}

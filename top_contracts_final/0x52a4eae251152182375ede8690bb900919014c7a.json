@@ -1,0 +1,1 @@
+{"time":168,"results":[{"type":"immutable-restrict-modification ","before":"address payable private _quantumTreasury;","after":"address payable private immutable _quantumTreasury;","contract":"SalePlatform","time":1}]}

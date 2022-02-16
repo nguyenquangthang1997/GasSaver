@@ -1,0 +1,1 @@
+{"time":45,"results":[{"type":"immutable-restrict-modification ","before":"uint8 public override decimals;","after":"uint8 public override immutable decimals;","contract":"DSToken","time":0}]}

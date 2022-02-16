@@ -1,0 +1,1 @@
+{"time":57,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public minBid = 0.02 ether;","after":"uint256 public constant minBid = 0.02 ether;","contract":"TwistedSisterAuction","time":1}]}

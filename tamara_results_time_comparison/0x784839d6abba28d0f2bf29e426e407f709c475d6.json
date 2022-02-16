@@ -1,0 +1,1 @@
+{"time":563,"results":[{"type":"de-morgan-condition ","before":" !isInMaintenance(S) && !isShutdown(S","after":"!( isInMaintenance(S) && isShutdown(S)","loc":{"start":{"line":2097,"column":15},"end":{"line":2097,"column":51}},"contract":"ExchangeMode","time":0}]}

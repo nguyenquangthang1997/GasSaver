@@ -1,0 +1,1 @@
+{"time":143,"results":[{"type":"external-function ","before":"function changeFaction(string memory _factionName) public onlyOwner(){\n        faction = _factionName;\n    }","after":"function changeFaction(string calldata _factionName) public onlyOwner(){\n        faction = _factionName;\n    }","contract":"NFT4Play","time":0}]}

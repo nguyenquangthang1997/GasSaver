@@ -1,0 +1,1 @@
+{"time":165,"results":[{"type":"external-function ","before":"function setBaseURI (string memory _uri) public onlyOwner {\r\n        m_baseURI = _uri;\r\n    }","after":"function setBaseURI (string calldata _uri) public onlyOwner {\r\n        m_baseURI = _uri;\r\n    }","contract":"BYOLand","time":0}]}

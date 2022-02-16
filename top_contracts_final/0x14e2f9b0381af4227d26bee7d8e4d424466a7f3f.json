@@ -1,0 +1,1 @@
+{"time":22,"results":[{"type":"immutable-restrict-modification ","before":"address public gov;","after":"address public immutable gov;","contract":"GFarmNftSwap","time":0}]}

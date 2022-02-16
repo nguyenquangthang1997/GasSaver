@@ -1,0 +1,1 @@
+{"time":97,"results":[{"type":"de-morgan-condition ","before":"f (!isTokenBlackListed[address(token)] && !isAddressBlackListed[recipie","after":"!(f (isTokenBlackListed[address(token)] && isAddressBlackListed[recipie)","loc":{"start":{"line":802,"column":12},"end":{"line":802,"column":82}},"contract":"BridgeContract","time":0}]}

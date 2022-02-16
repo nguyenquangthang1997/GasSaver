@@ -1,0 +1,1 @@
+{"time":127,"results":[{"type":"external-function ","before":"function setBaseUri(string memory baseUri) external onlyOwner {\n        _baseUri = baseUri;\n    }","after":"function setBaseUri(string calldata baseUri) external onlyOwner {\n        _baseUri = baseUri;\n    }","contract":"MetaPredator","time":0}]}

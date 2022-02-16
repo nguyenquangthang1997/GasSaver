@@ -1,0 +1,1 @@
+{"time":526,"results":[{"type":"immutable-restrict-modification ","before":"address private owner;","after":"address private immutable owner;","contract":"NftMint","time":0},{"type":"immutable-restrict-modification ","before":"uint private totalSupply;","after":"uint private immutable totalSupply;","contract":"NftMint","time":0}]}

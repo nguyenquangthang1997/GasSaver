@@ -1,0 +1,1 @@
+{"time":111,"results":[{"type":"constant-restrict-modification  ","before":"    uint public decimals ","after":"    uint public constant decimals ","contract":"DwarfGem","time":0}]}

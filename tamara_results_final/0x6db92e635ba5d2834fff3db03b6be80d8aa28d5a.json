@@ -1,0 +1,1 @@
+{"time":8,"results":[{"type":"constant-restrict-modification  ","before":"address mOwner = msg.sender;","after":"address constant mOwner = msg.sender;","contract":"TokenBaseAsset","time":0}]}

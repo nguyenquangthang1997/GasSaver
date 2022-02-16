@@ -1,0 +1,1 @@
+{"time":146,"results":[{"type":"struct-data-arrangement ","before":"\naddress owner\nuint80 startTimestamp\nuint16[] tokenIds\nuint16 speed","after":"uint16[] tokenIds\naddress owner\nuint80 startTimestamp\nuint16 speed\n","contract":"GHGSail","time":0}]}

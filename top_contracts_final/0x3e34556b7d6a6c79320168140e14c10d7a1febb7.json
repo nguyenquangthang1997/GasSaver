@@ -1,0 +1,1 @@
+{"time":131,"results":[{"type":"external-function ","before":"function setNiftyName(string memory nifty_name) onlyValidSender public {\n        _setNiftyTypeName(niftyType, nifty_name);\n    }","after":"function setNiftyName(string calldata nifty_name) onlyValidSender public {\n        _setNiftyTypeName(niftyType, nifty_name);\n    }","contract":"NiftyBuilderInstance","time":0}]}

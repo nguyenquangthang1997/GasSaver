@@ -1,0 +1,1 @@
+{"time":154,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public frequency = 1 hours;","after":"uint256 public constant frequency = 1 hours;","contract":"Rebaser","time":0}]}

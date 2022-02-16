@@ -1,0 +1,1 @@
+{"time":192,"results":[{"type":"constant-restrict-modification  ","before":"uint public WHALE_WALLET = 15;","after":"uint public constant WHALE_WALLET = 15;","contract":"FishyFam","time":1}]}

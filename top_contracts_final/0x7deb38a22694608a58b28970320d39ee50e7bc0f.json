@@ -1,0 +1,1 @@
+{"time":179,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public price = 40000000000000000;","after":"uint256 public constant price = 40000000000000000;","contract":"TINY83","time":0},{"type":"constant-restrict-modification  ","before":"uint256 public MAX_SUPPLY = 5555;","after":"uint256 public constant MAX_SUPPLY = 5555;","contract":"TINY83","time":0}]}

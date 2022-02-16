@@ -1,0 +1,1 @@
+{"time":151,"results":[{"type":"constant-restrict-modification  ","before":"uint public maxOrder   = 20;","after":"uint public constant maxOrder   = 20;","contract":"DualWorldFusion","time":0}]}

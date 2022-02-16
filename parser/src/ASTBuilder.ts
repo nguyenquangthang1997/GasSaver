@@ -282,28 +282,34 @@ export class ASTBuilder
         let statements = ctx.statement().map((x) => this.visitStatement(x));
         let identifiers = []
         let vulnerabilities = []
-        let mergeLoopVulnerability = {
-            type: "merge-loop",
-            range: [],
-            initExpressionRange: [],
-            conditionExpressionRange: [],
-            loopExpressionRange: [],
-            loc: []
-        }
-        statements.forEach(el => {
-            if (el.type === "ForStatement") {
-                mergeLoopVulnerability.loc.push(el.loc)
-                mergeLoopVulnerability.range.push(el.range)
-                if (el.initExpression !== null) mergeLoopVulnerability.initExpressionRange.push(el.initExpression.range)
-                if (el.conditionExpression !== null) mergeLoopVulnerability.conditionExpressionRange.push(el.conditionExpression.range)
-                mergeLoopVulnerability.loopExpressionRange.push(el.loopExpression.range)
+        for (let i = 0; i < statements.length; i++) {
+            if (statements[i].type === "ForStatement" && i < statements.length - 1 && statements[i + 1].type === "ForStatement") {
+                let mergeLoopVulnerability = {
+                    type: "merge-loop",
+                    range: [statements[i].range, statements[i + 1].range],
+                    initExpressionRange: [],
+                    conditionExpressionRange: [],
+                    // @ts-ignore
+                    loopExpressionRange: [statements[i].loopExpression.range, statements[i + 1].loopExpression.range],
+                    loc: [statements[i].loc, statements[i + 1].loc]
+                }
+
+                // @ts-ignore
+                if (statements[i].initExpression === null || statements[i + 1].initExpression === null) continue;
+                // @ts-ignore
+                if (statements[i].initExpression !== null && statements[i + 1].initExpression !== null)
+                    // @ts-ignore
+                    mergeLoopVulnerability.initExpressionRange = [statements[i].initExpression.range, statements[i + 1].initExpression.range]
+
+                // @ts-ignore
+                if (statements[i].conditionExpression !== null && statements[i + 1].conditionExpression !== null)
+                    // @ts-ignore
+                    mergeLoopVulnerability.conditionExpressionRange = [statements[i].conditionExpression.range, statements[i + 1].conditionExpression.range]
+                vulnerabilities.push(mergeLoopVulnerability)
 
             }
-            identifiers.push(...el.identifiers)
-            vulnerabilities.push(...el.vulnerabilities)
-        })
-        if (mergeLoopVulnerability.range.length > 1) {
-            vulnerabilities.push(mergeLoopVulnerability)
+            identifiers.push(...statements[i].identifiers)
+            vulnerabilities.push(...statements[i].vulnerabilities)
         }
         const node: AST.Block = {
             type: 'Block',
@@ -363,7 +369,6 @@ export class ASTBuilder
         if (ctxBlock !== undefined) {
             block = this.visitBlock(ctxBlock)
         }
-
         const modifiers = ctx
             .modifierList()
             .modifierInvocation()
@@ -1231,7 +1236,6 @@ export class ASTBuilder
                 // prefix operators
                 if (AST.unaryOpValues.includes(op as AST.UnaryOp)) {
                     let identifiers = []
-
                     if (subExpression.type !== "Identifier") {
                         subExpression.identifiers.forEach(id => {
                             if (['++', '--', 'delete',].includes(op as AST.UnaryOp)) {
@@ -1240,6 +1244,8 @@ export class ASTBuilder
                                     isReadOperation: false,
                                     isWriteOperation: true
                                 })
+                            } else {
+                                identifiers.push(...subExpression.identifiers)
                             }
                         })
                     } else {
@@ -1249,6 +1255,8 @@ export class ASTBuilder
                                 isReadOperation: false,
                                 isWriteOperation: true
                             })
+                        } else {
+                            identifiers.push(...subExpression.identifiers)
                         }
                     }
                     const node: AST.UnaryOperation = {
@@ -1277,6 +1285,8 @@ export class ASTBuilder
                                     isReadOperation: false,
                                     isWriteOperation: true
                                 })
+                            } else {
+                                identifiers.push(...subExpression.identifiers)
                             }
                         })
                     } else {
@@ -1286,6 +1296,8 @@ export class ASTBuilder
                                 isReadOperation: false,
                                 isWriteOperation: true
                             })
+                        } else {
+                            identifiers.push(...subExpression.identifiers)
                         }
                     }
                     const node: AST.UnaryOperation = {
@@ -1353,6 +1365,10 @@ export class ASTBuilder
                     if (isAssignmentOp(op)) {
                         if (left.type === "Identifier") {
                             identifiers.push({...left, isReadOperation: false, isWriteOperation: true})
+                        } else if (left.type === "TupleExpression") {
+                            left.identifiers.forEach(id => {
+                                identifiers.push({...id, isReadOperation: false, isWriteOperation: true})
+                            })
                         } else {
                             left.identifiers.forEach(id => {
                                 identifiers.push(id)
@@ -1436,7 +1452,15 @@ export class ASTBuilder
                     }
                     let expression = this.visitExpression(ctx.expression(0))
                     if (expression.type === "Identifier" && expression.subIdentifier.type === "MemberAccess") {
-                        identifiers = [...expression.subIdentifier.identifiers, ...identifiers]
+                        if (expression.subIdentifier.memberName === "pop" || expression.subIdentifier.memberName === "push") {
+                            let identifiers_temp = []
+                            expression.subIdentifier.identifiers.forEach(el => {
+                                el.isWriteOperation = true
+                                identifiers_temp.push(el)
+                            })
+                            identifiers = [...identifiers_temp, ...identifiers]
+
+                        } else identifiers = [...expression.subIdentifier.identifiers, ...identifiers]
                     } else {
                         identifiers = [...expression.identifiers, ...identifiers]
                     }
@@ -1736,7 +1760,6 @@ export class ASTBuilder
         }
         let body = this.visitStatement(ctx.statement());
         if (body.type === "Block") {
-
             for (let i = 0; i < body.statements.length; i++) {
                 let statement = body.statements[i]
                 if (statement.type === "VariableDeclarationStatement") {
@@ -1744,6 +1767,7 @@ export class ASTBuilder
                     if (vulnerability !== null) vulnerabilities.push(vulnerability)
                 }
             }
+
         }
         vulnerabilities.push(...body.vulnerabilities)
 
@@ -1860,7 +1884,7 @@ export class ASTBuilder
                     type: 'UserDefinedTypeName',
                     namePath: node.name,
                 }
-                identifiers.push(node)
+                // identifiers.push(node)
             } else if (node.type == 'TypeNameExpression') {
                 node = node.typeName
             } else {
@@ -2560,6 +2584,7 @@ function getAllIdentifiers(identifier: AST.Identifier) {
 }
 
 function repeatedCalculate(body: AST.Block, statement: AST.VariableDeclarationStatement, loopExpression: AST.Expression, index): AST.Vulnerability[] {
+    if (statement.initialValue !== null && statement.initialValue.identifiers.length > 0) return null
     let vulnerability = null
     // check whether initialValue contain loop variable or not
     let variableContainLoopVariable = false
@@ -2578,7 +2603,6 @@ function repeatedCalculate(body: AST.Block, statement: AST.VariableDeclarationSt
         if (variable !== null) listVariableDeclarationStatement.push(variable.name)
     }
     if (statement.initialValue !== null) {
-
         let temVariable = []
         statement.initialValue.identifiers.forEach(el => {
             temVariable = temVariable.concat(getAllIdentifiers(el))
@@ -2594,7 +2618,7 @@ function repeatedCalculate(body: AST.Block, statement: AST.VariableDeclarationSt
             if (variableContainLoopVariable === true) break
         }
         statement.initialValue.identifiers.forEach(el => {
-            initialVariable.push(traceIdentifier(el))
+            initialVariable = initialVariable.concat(getAllIdentifiers(el))
         })
     }
 
@@ -2604,7 +2628,7 @@ function repeatedCalculate(body: AST.Block, statement: AST.VariableDeclarationSt
             if (iden.isWriteOperation === true) {
                 iden = traceIdentifier(iden)
                 for (let variable of initialVariable) {
-                    if (iden === variable) {
+                    if (iden === traceIdentifier(variable)) {
                         variableModifiers = true
                         break
                     }
@@ -2625,7 +2649,7 @@ function repeatedCalculate(body: AST.Block, statement: AST.VariableDeclarationSt
                         }
                     }
                     for (let variable of initialVariable) {
-                        if (iden === variable) {
+                        if (iden === traceIdentifier(variable)) {
                             variableModifiers = true
                             break
                         }
@@ -2636,6 +2660,7 @@ function repeatedCalculate(body: AST.Block, statement: AST.VariableDeclarationSt
             if (variableModifiers === true) break
         }
     }
+    if (variableModifiers === false && statement.initialValue === null) return null
     if (variableModifiers === false && variableContainLoopVariable === false) {
         vulnerability = {
             type: "repeated-calculate",

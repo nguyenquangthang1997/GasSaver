@@ -1,0 +1,1 @@
+{"time":132,"results":[{"type":"immutable-restrict-modification ","before":"uint16 public totalSupply;","after":"uint16 public immutable totalSupply;","contract":"CyberpunkApeExecutives","time":0}]}

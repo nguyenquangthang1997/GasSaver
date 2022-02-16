@@ -1,0 +1,1 @@
+{"time":223,"results":[{"type":"immutable-restrict-modification ","before":"uint256 public SEED_BATCH_SIZE;","after":"uint256 public immutable SEED_BATCH_SIZE;","contract":"VampireGame","time":1}]}

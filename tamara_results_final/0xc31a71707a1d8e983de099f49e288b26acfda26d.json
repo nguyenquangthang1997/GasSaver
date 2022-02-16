@@ -1,0 +1,1 @@
+{"time":93,"results":[{"type":"constant-restrict-modification  ","before":"string public builtOn = \"https://www.agrevo.world/\";","after":"string public constant builtOn = \"https://www.agrevo.world/\";","contract":"ERC20Token","time":1}]}

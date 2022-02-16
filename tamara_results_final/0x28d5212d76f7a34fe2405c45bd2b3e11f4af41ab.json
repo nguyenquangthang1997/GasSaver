@@ -1,0 +1,1 @@
+{"time":48,"results":[{"type":"constant-restrict-modification  ","before":"bool public isExchangeListed = false;","after":"bool public constant isExchangeListed = false;","contract":"PegToken","time":0}]}

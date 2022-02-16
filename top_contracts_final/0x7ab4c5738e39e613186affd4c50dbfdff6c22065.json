@@ -1,0 +1,1 @@
+{"time":92,"results":[{"type":"constant-restrict-modification  ","before":"   uint public scale = 1","after":"   uint public constant scale = 1","contract":"DeusBridge","time":1}]}

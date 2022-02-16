@@ -1,0 +1,1 @@
+{"time":562,"results":[{"type":"immutable-restrict-modification ","before":"address public contractAddress;","after":"address public immutable contractAddress;","contract":"FudFarmsStaking","time":0}]}

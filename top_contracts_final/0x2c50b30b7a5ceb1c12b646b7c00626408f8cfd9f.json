@@ -1,0 +1,1 @@
+{"time":107,"results":[{"type":"immutable-restrict-modification ","before":"address public compboxAddress;","after":"address public immutable compboxAddress;","contract":"CompanionFarm","time":0},{"type":"immutable-restrict-modification ","before":"address public compshipAddress;","after":"address public immutable compshipAddress;","contract":"CompanionFarm","time":0}]}

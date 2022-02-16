@@ -1,0 +1,1 @@
+{"time":133,"results":[{"type":"immutable-restrict-modification ","before":"address payable private _owner;","after":"address payable private immutable _owner;","contract":"Nftrees","time":0}]}

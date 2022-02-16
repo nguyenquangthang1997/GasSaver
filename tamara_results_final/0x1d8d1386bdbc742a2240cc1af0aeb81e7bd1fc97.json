@@ -1,0 +1,1 @@
+{"time":53,"results":[{"type":"state-data-arrangement ","before":"\nstring public name;\nuint8 public decimals;\nstring public symbol;\naddress public owner;","after":"string public name;\nstring public symbol;\naddress public owner;\nuint8 public decimals;\n","contract":"SaromsaryCoin","time":0}]}

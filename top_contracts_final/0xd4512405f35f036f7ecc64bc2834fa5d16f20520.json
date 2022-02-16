@@ -1,0 +1,1 @@
+{"time":181,"results":[{"type":"constant-restrict-modification  ","before":"uint _price = 169000000000000000;","after":"uint constant _price = 169000000000000000;","contract":"BrwsNFT","time":1}]}

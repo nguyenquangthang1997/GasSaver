@@ -1,0 +1,1 @@
+{"time":130,"results":[{"type":"external-function ","before":"  require(_mintedSupply() + teamClaimAmount <= maxSupply, \"Quantity requested exceeds max supply.\");\n    require(!team","after":"  require(_mintedSupply() + teamClaimAmount <= maxSupply, \"Quantity requested exceeds max supply.\");\n    require(!team","contract":"Cribbo","time":0}]}

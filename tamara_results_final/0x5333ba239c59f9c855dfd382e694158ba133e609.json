@@ -1,0 +1,1 @@
+{"time":50,"results":[{"type":"struct-data-arrangement ","before":"\n��限があ�\n�\n    addr\nstrator = 0x0;\n��金情報�\n�る構造�","after":"strator = 0x0;\n��金情報�\n��限があ�\n�\n    addr\n�る構造�\n","contract":"TokenExpress","time":0}]}

@@ -1,0 +1,1 @@
+{"time":59,"results":[{"type":"constant-restrict-modification  ","before":"= 18;\n    string  public versio","after":"= 18;\n    string  public versio","contract":"QPCToken","time":0}]}

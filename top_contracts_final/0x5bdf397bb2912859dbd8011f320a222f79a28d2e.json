@@ -1,0 +1,1 @@
+{"time":244,"results":[{"type":"external-function ","before":"function setDescription(string memory desc) public onlyOwner {\n        description = desc;\n    }","after":"function setDescription(string calldata desc) public onlyOwner {\n        description = desc;\n    }","contract":"CorruptionsMetadata","time":0}]}

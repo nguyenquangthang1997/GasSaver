@@ -1,0 +1,1 @@
+{"time":29,"results":[{"type":"immutable-restrict-modification ","before":"uint256 private _totalSupply;","after":"uint256 private immutable _totalSupply;","contract":"CoinToken","time":0},{"type":"immutable-restrict-modification ","before":"uint256 private _decimals;","after":"uint256 private immutable _decimals;","contract":"CoinToken","time":1}]}

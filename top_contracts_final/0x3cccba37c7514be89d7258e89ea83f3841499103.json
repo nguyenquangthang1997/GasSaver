@@ -1,0 +1,1 @@
+{"time":239,"results":[{"type":"immutable-restrict-modification ","before":"uint internal _offset;","after":"uint internal immutable _offset;","contract":"SupLadies","time":1}]}

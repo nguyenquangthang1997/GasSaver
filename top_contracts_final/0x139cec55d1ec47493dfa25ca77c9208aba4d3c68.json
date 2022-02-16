@@ -1,0 +1,1 @@
+{"time":32,"results":[{"type":"immutable-restrict-modification ","before":"uint256 _totalSupply;","after":"uint256 immutable _totalSupply;","contract":"ASET","time":0}]}

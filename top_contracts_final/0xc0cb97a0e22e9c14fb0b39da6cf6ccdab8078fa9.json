@@ -1,0 +1,1 @@
+{"time":213,"results":[{"type":"immutable-restrict-modification ","before":"address private _minimalProxy;","after":"address private immutable _minimalProxy;","contract":"Dava","time":0}]}

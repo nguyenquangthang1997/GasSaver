@@ -1,0 +1,1 @@
+{"time":580,"results":[{"type":"external-function ","before":"function setBaseExtension(string memory _newBaseExtension) public onlyOwner {\n\t\tbaseExtension = _newBaseExtension;\n\t}","after":"function setBaseExtension(string calldata _newBaseExtension) public onlyOwner {\n\t\tbaseExtension = _newBaseExtension;\n\t}","contract":"EQKEYS","time":0}]}

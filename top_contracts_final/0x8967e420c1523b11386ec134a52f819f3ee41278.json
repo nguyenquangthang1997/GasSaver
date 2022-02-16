@@ -1,0 +1,1 @@
+{"time":57,"results":[{"type":"constant-restrict-modification  ","before":"string public name = \"Decentral Life\";","after":"string public constant name = \"Decentral Life\";","contract":"WDLF","time":0},{"type":"constant-restrict-modification  ","before":"string public symbol = \"WDLF\";","after":"string public constant symbol = \"WDLF\";","contract":"WDLF","time":0}]}

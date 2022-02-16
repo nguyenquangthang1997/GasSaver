@@ -1,0 +1,1 @@
+{"time":128,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public mintPrice = 0.01 ether;","after":"uint256 public constant mintPrice = 0.01 ether;","contract":"SimpDAO","time":0}]}

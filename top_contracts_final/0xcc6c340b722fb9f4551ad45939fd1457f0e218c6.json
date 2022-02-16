@@ -1,0 +1,1 @@
+{"time":117,"results":[{"type":"immutable-restrict-modification ","before":"address private _owner;","after":"address private immutable _owner;","contract":"YieldToken","time":0}]}

@@ -1,0 +1,1 @@
+{"time":146,"results":[{"type":"immutable-restrict-modification ","before":"uint8 private decimal;","after":"uint8 private immutable decimal;","contract":"ReltimeContract","time":0}]}

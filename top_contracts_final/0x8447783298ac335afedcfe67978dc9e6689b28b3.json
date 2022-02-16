@@ -1,0 +1,1 @@
+{"time":73,"results":[{"type":"constant-restrict-modification  ","before":"uint256 private immutable _cap = 365336530 ether;","after":"uint256 private immutable constant _cap = 365336530 ether;","contract":"RewardToken","time":0}]}

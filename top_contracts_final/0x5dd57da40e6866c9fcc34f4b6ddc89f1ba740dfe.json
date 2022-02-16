@@ -1,0 +1,1 @@
+{"time":45,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public created = block.timestamp;","after":"uint256 public constant created = block.timestamp;","contract":"BrightToken","time":0}]}

@@ -1,0 +1,1 @@
+{"time":89,"results":[{"type":"external-function ","before":"function setBaseURI(string memory _baseURIArg) external onlyController {\n        baseURI = _baseURIArg;\n    }","after":"function setBaseURI(string calldata _baseURIArg) external onlyController {\n        baseURI = _baseURIArg;\n    }","contract":"TinyPaws2D","time":0}]}

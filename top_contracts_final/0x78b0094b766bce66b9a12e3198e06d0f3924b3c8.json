@@ -1,0 +1,1 @@
+{"time":121,"results":[{"type":"external-function ","before":"function setBaseUrl(string memory url) public onlyOwner {\n        baseUrl = url;\n    }","after":"function setBaseUrl(string calldata url) public onlyOwner {\n        baseUrl = url;\n    }","contract":"Shifters","time":0}]}

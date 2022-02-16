@@ -1,0 +1,1 @@
+{"time":79,"results":[{"type":"immutable-restrict-modification ","before":"uint8 private _decimals;","after":"uint8 private immutable _decimals;","contract":"ERC20Detailed","time":0}]}

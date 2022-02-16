@@ -1,0 +1,1 @@
+{"time":77,"results":[{"type":"immutable-restrict-modification ","before":"address public Ichi;","after":"address public immutable Ichi;","contract":"IchiStake","time":1}]}

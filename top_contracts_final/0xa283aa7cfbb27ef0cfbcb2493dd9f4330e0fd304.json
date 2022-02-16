@@ -1,0 +1,1 @@
+{"time":77,"results":[{"type":"constant-restrict-modification  ","before":"uint256 private _cap = 721704 * (10 ** 18);","after":"uint256 private constant _cap = 721704 * (10 ** 18);","contract":"MMToken","time":0}]}

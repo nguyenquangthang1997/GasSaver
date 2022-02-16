@@ -1,0 +1,1 @@
+{"time":18,"results":[{"type":"constant-restrict-modification  ","before":"uint8 public decimals = 0;","after":"uint8 public constant decimals = 0;","contract":"TokenERC20","time":0}]}

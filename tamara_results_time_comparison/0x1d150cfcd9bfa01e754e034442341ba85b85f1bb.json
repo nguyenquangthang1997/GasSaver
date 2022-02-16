@@ -1,0 +1,1 @@
+{"time":85,"results":[{"type":"de-morgan-condition ","before":"!isOrdered(order.maker, hash) && !SignatureValidator.isValidSignature(hash, order.maker, signature)","after":"!(isOrdered(order.maker, hash) && SignatureValidator.isValidSignature(hash, order.maker, signature))","loc":{"start":{"line":488,"column":16},"end":{"line":488,"column":114}},"contract":"Exchange","time":0}]}

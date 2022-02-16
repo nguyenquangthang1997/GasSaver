@@ -1,0 +1,1 @@
+{"time":22,"results":[{"type":"constant-restrict-modification  ","before":"uint256 private totalSupply_ = 200000000 * 10**8;","after":"uint256 private constant totalSupply_ = 200000000 * 10**8;","contract":"YustemCoin","time":0}]}

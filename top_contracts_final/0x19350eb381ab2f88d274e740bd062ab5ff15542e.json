@@ -1,0 +1,1 @@
+{"time":136,"results":[{"type":"constant-restrict-modification  ","before":"uint256 public PASS_GIFT = 50;","after":"uint256 public constant PASS_GIFT = 50;","contract":"SkuxxVersePass","time":0}]}

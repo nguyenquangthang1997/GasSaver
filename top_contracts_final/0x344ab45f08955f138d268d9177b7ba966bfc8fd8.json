@@ -1,0 +1,1 @@
+{"time":159,"results":[{"type":"immutable-restrict-modification ","before":"address public nil;","after":"address public immutable nil;","contract":"MultiMerkleDistributor","time":0},{"type":"immutable-restrict-modification ","before":"address public vnil;","after":"address public immutable vnil;","contract":"MultiMerkleDistributor","time":0}]}

@@ -1,0 +1,1 @@
+{"time":124,"results":[{"type":"external-function ","before":"function setBaseURI(string memory baseURI) public onlyOwner {\n        baseTokenURI = baseURI;\n    }","after":"function setBaseURI(string calldata baseURI) public onlyOwner {\n        baseTokenURI = baseURI;\n    }","contract":"CryptoMoms","time":0}]}

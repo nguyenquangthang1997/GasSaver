@@ -1,0 +1,1 @@
+{"time":91,"results":[{"type":"immutable-restrict-modification ","before":"uint256 private totalTokens;","after":"uint256 private immutable totalTokens;","contract":"KEEYToken","time":0}]}

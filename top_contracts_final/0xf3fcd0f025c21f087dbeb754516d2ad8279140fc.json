@@ -1,0 +1,1 @@
+{"time":267,"results":[{"type":"external-function ","before":"function setVibeURI(string memory uri) public onlyOwner {\n        baseVibeURI = uri;\n    }","after":"function setVibeURI(string calldata uri) public onlyOwner {\n        baseVibeURI = uri;\n    }","contract":"OpenVibes","time":0}]}

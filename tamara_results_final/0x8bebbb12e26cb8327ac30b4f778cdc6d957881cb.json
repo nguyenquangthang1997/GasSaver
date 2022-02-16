@@ -1,0 +1,1 @@
+{"time":78,"results":[{"type":"state-data-arrangement ","before":"\nuint8 public constant decimals = 18;\nuint256 public maxTokenSupply;\nbool public mintingFinished = false;","after":"uint256 public maxTokenSupply;\nuint8 public constant decimals = 18;\nbool public mintingFinished = false;\n","contract":"MintableAndPausableToken","time":0}]}

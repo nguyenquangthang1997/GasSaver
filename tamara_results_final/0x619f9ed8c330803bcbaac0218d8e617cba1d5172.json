@@ -1,0 +1,1 @@
+{"time":46,"results":[{"type":"constant-restrict-modification  ","before":"string public name = \"Flas Token\";","after":"string public constant name = \"Flas Token\";","contract":"FlasToken","time":1},{"type":"constant-restrict-modification  ","before":"string public symbol = \"FTC\";","after":"string public constant symbol = \"FTC\";","contract":"FlasToken","time":1}]}

@@ -1,0 +1,1 @@
+{"time":12,"results":[{"type":"struct-data-arrangement ","before":"\nuint32 payment_time\nstring payment_msg\nuint32 delivery_time\nstring delivery_msg","after":"string payment_msg\nstring delivery_msg\nuint32 payment_time\nuint32 delivery_time\n","contract":"ChaFund","time":0}]}

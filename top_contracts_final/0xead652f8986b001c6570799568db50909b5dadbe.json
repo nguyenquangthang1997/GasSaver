@@ -1,0 +1,1 @@
+{"time":86,"results":[{"type":"constant-restrict-modification  ","before":"uint public price = 0.01 ether;","after":"uint public constant price = 0.01 ether;","contract":"KnightsGold","time":0},{"type":"constant-restrict-modification  ","before":"uint public maxFreeMintPerWallet = 1;","after":"uint public constant maxFreeMintPerWallet = 1;","contract":"KnightsGold","time":0}]}

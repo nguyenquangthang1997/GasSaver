@@ -1,0 +1,1 @@
+{"time":68,"results":[{"type":"immutable-restrict-modification ","before":"uint public blockTime;","after":"uint public immutable blockTime;","contract":"LotteryTwo","time":0}]}

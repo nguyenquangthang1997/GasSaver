@@ -1,0 +1,1 @@
+{"time":128,"results":[{"type":"constant-restrict-modification  ","before":"uint256 pricePer = 0.01 ether;","after":"uint256 constant pricePer = 0.01 ether;","contract":"SommerRayDAO","time":0}]}

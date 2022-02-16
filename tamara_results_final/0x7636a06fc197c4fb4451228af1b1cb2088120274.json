@@ -1,0 +1,1 @@
+{"time":3,"results":[{"type":"external-function ","before":"function setStore(string memory _value) public {\n        data = _value;\n    }","after":"function setStore(string calldata _value) public {\n        data = _value;\n    }","contract":"Trusti","time":0}]}

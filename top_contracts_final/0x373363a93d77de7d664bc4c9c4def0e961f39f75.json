@@ -1,0 +1,1 @@
+{"time":158,"results":[{"type":"external-function ","before":"function setBaseTokenURI(string memory _baseTokenURI) public {\n        baseURI = _baseTokenURI;\n    }","after":"function setBaseTokenURI(string calldata _baseTokenURI) public {\n        baseURI = _baseTokenURI;\n    }","contract":"novaTiger","time":0}]}

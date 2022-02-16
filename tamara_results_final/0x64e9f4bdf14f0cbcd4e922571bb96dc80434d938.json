@@ -1,0 +1,1 @@
+{"time":9,"results":[{"type":"constant-restrict-modification  ","before":"string public hashHead = \"2019localelection\";","after":"string public constant hashHead = \"2019localelection\";","contract":"electionList","time":0}]}

@@ -1,0 +1,1 @@
+{"time":148,"results":[{"type":"de-morgan-condition ","before":"!presaleOnlyActive && !paused","after":"!(presaleOnlyActive && paused)","loc":{"start":{"line":1341,"column":16},"end":{"line":1341,"column":39}},"contract":"ReconRams","time":0}]}

@@ -1,0 +1,1 @@
+{"time":40,"results":[{"type":"constant-restrict-modification  ","before":"mport \"@openzeppelin/contrac","after":"mport \"@openzeppelin/contrac","contract":"HarvestArt","time":0},{"type":"constant-restrict-modification  ","before":"cess/Ownable.sol\";\nimport \"@o","after":"cess/Ownable.sol\";\nimport \"@o","contract":"HarvestArt","time":0}]}
