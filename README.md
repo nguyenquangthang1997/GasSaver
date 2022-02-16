@@ -1,6 +1,6 @@
-# solidity-optimizer
+# GasSaver
 
-An automated Solidity-code optimizer based on the diploma thesis "Optimizing Solidity Smart Contracts".
+An automatical tool in detecting wasted gas in Solidity and suggesting solution .
 
 [![License: GPL v3][license-badge]][license-badge-url]
 
